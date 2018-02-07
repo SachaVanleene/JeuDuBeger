@@ -9,9 +9,25 @@ namespace Assets.Script.Traps
 {
     class MudTrap :Trap
     {
-        public override IEnumerator Activate()
+        public void Start()
         {
-            throw new NotImplementedException();
+            Level = 0;
+            Damages = new List<int>() {40, 50, 60};
+            Debug.Log(Damages.Count);
+
+        }
+
+        public override IEnumerator Activate(GameObject go)
+        {
+            var rb = go.GetComponent<Rigidbody>();
+            if (Damages.Count > Level) rb.velocity = rb.velocity*(Damages[Level]/100f);
+            yield break;
+        }
+
+        public void OnTriggerExit(Collider collider)
+        {
+            var rb = collider.gameObject.GetComponent<Rigidbody>();
+            if (Damages.Count > Level) rb.velocity = rb.velocity * (100f/ Damages[Level]);
         }
 
         public override void Upgrade()

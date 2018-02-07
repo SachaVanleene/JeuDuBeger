@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 namespace Assets.Script.Traps
@@ -8,14 +9,18 @@ namespace Assets.Script.Traps
         {
         }
 
-        public override IEnumerator Activate()
+        public override IEnumerator Activate(GameObject go)
         {
             TrapPrefab.GetComponent<Animation>().Play();
             IsActive = true;
+            foreach (var superTarget in Physics.OverlapBox(GetComponent<BoxCollider>().center, GetComponent<BoxCollider>().size/2).
+                Where(T => T.gameObject.tag == "wolf") )
+            {
+                //implement dealt damage
+                Debug.Log("lol");
+            }
             yield return new WaitForSeconds(2f);
             IsActive = false;
-            Debug.Log(System.Reflection.Assembly.GetExecutingAssembly().GetName().Name
-            );
         }
         
         public override void Upgrade()

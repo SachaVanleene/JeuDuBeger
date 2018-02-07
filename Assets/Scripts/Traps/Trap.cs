@@ -14,14 +14,16 @@ namespace Assets.Script.Traps
         public GameObject TrapPrefab;
         public List<int> UpgradeCosts, Damages;
         public Boolean IsActive = false;
+
+        private int _level;
         public int Level
         {
-            get { return Level; }
+            get { return this._level; }
             set
             {
                 if (value <= 3)
                 {
-                    Level = value;
+                    _level = value;
                     Durability = DurabilityMax;
                 }
                 else
@@ -31,7 +33,7 @@ namespace Assets.Script.Traps
             }
         }
 
-        public abstract IEnumerator Activate();
+        public abstract IEnumerator Activate(GameObject go);
         public abstract void Upgrade();
         private int i = 0;
 
@@ -50,7 +52,7 @@ namespace Assets.Script.Traps
         {
             Debug.Log("bim");
             if(!IsActive)
-                StartCoroutine(Activate());
+                StartCoroutine(Activate(collider.gameObject));
         }
 
         public void LevelUp()
@@ -65,8 +67,6 @@ namespace Assets.Script.Traps
         NeedleTrap,
         BaitTrap,
         MudTrap,
-        LandmineTrap,
-    
-        
+        LandmineTrap 
     }
 }

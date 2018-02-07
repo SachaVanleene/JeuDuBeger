@@ -22,7 +22,7 @@ namespace Assets.Script.Traps
 
 
         }
-        public override IEnumerator Activate()
+        public override IEnumerator Activate(GameObject go)
         {
             GameObject boom = CFX_SpawnSystem.GetNextObject(TrapPrefab);
             boom.transform.position = gameObject.transform.position;
