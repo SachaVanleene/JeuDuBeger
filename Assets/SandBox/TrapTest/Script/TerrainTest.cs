@@ -36,6 +36,22 @@ namespace Assets.Script
                 TrapFactory.ActualTrap.transform.position = mousePosition;
                 if (Input.GetMouseButtonDown(1))
                     CreateTrap();
+                if (Input.GetKey("1"))
+                {
+                    TrapFactory.SelectedTrapType = TrapTypes.NeedleTrap;
+                }
+                if (Input.GetKey("2"))
+                {
+                    TrapFactory.SelectedTrapType = TrapTypes.BaitTrap;
+                }
+                if (Input.GetKey("3"))
+                {
+                    TrapFactory.SelectedTrapType = TrapTypes.MudTrap;
+                }
+                if (Input.GetKey("4"))
+                {
+                    TrapFactory.SelectedTrapType = TrapTypes.LandmineTrap;
+                }
             }
         }
 
@@ -57,6 +73,7 @@ namespace Assets.Script
             var normalizedPos = new Vector2(Mathf.InverseLerp(0f, Terrain.terrainData.size.x,mousePosition.x),
                 Mathf.InverseLerp(0, Terrain.terrainData.size.z, mousePosition.z));
             trap.transform.rotation = Quaternion.LookRotation(Terrain.terrainData.GetInterpolatedNormal(normalizedPos.x, normalizedPos.y), Terrain.terrainData.GetInterpolatedNormal(normalizedPos.x, normalizedPos.y));
+
             trap.transform.position = TrapFactory.GetMousePosition();
         }
 
