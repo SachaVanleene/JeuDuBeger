@@ -1,0 +1,271 @@
+fileFormatVersion: 2
+guid: 3df4887bcb8f6a74bafca8f931c636cc
+timeCreated: 1456944729
+licenseType: Store
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Armature
+    100002: body
+    100004: Bone.001
+    100006: Bone.001_end
+    100008: Bone.002
+    100010: Bone.003
+    100012: Bone.003_end
+    100014: Bone.004
+    100016: Bone.004_end
+    100018: Bone.005
+    100020: Bone.005_end
+    100022: Bone.006
+    100024: Bone.006_end
+    100026: Bone.007
+    100028: Bone.007_end
+    100030: Camera
+    100032: Camera.001
+    100034: Camera.002
+    100036: Circle
+    100038: Circle.001
+    100040: Circle.002
+    100042: Circle.003
+    100044: Circle.004
+    100046: Circle.005
+    100048: Cube.000
+    100050: Cube.006
+    100052: Cube.032
+    100054: Eye.IK_L
+    100056: Eye.IK_L_end
+    100058: Eye.IK_R
+    100060: Eye.IK_R_end
+    100062: Eye_L
+    100064: Eye_L_end
+    100066: Eye_R
+    100068: Eye_R_end
+    100070: general
+    100072: general_end
+    100074: Head
+    100076: Head.001
+    100078: L1
+    100080: L2
+    100082: L3
+    100084: L3_end
+    100086: legs_L
+    100088: legs_L.001
+    100090: legs_L.001_end
+    100092: legs_L_end
+    100094: legs_R
+    100096: legs_R.001
+    100098: legs_R.001_end
+    100100: legs_R_end
+    100102: sheep
+    100104: //RootNode
+    400000: Armature
+    400002: body
+    400004: Bone.001
+    400006: Bone.001_end
+    400008: Bone.002
+    400010: Bone.003
+    400012: Bone.003_end
+    400014: Bone.004
+    400016: Bone.004_end
+    400018: Bone.005
+    400020: Bone.005_end
+    400022: Bone.006
+    400024: Bone.006_end
+    400026: Bone.007
+    400028: Bone.007_end
+    400030: Camera
+    400032: Camera.001
+    400034: Camera.002
+    400036: Circle
+    400038: Circle.001
+    400040: Circle.002
+    400042: Circle.003
+    400044: Circle.004
+    400046: Circle.005
+    400048: Cube.000
+    400050: Cube.006
+    400052: Cube.032
+    400054: Eye.IK_L
+    400056: Eye.IK_L_end
+    400058: Eye.IK_R
+    400060: Eye.IK_R_end
+    400062: Eye_L
+    400064: Eye_L_end
+    400066: Eye_R
+    400068: Eye_R_end
+    400070: general
+    400072: general_end
+    400074: Head
+    400076: Head.001
+    400078: L1
+    400080: L2
+    400082: L3
+    400084: L3_end
+    400086: legs_L
+    400088: legs_L.001
+    400090: legs_L.001_end
+    400092: legs_L_end
+    400094: legs_R
+    400096: legs_R.001
+    400098: legs_R.001_end
+    400100: legs_R_end
+    400102: //RootNode
+    400104: sheep
+    2300000: Circle
+    2300002: Circle.001
+    2300004: Circle.002
+    2300006: Circle.003
+    2300008: Circle.004
+    2300010: Circle.005
+    2300012: Cube.006
+    2300014: Cube.032
+    3300000: Circle
+    3300002: Circle.001
+    3300004: Circle.002
+    3300006: Circle.003
+    3300008: Circle.004
+    3300010: Circle.005
+    3300012: Cube.006
+    3300014: Cube.032
+    4300000: Circle.005
+    4300002: Circle.004
+    4300004: Circle.003
+    4300006: Circle.002
+    4300008: Circle.001
+    4300010: Circle
+    4300012: Cube.032
+    4300014: Cube.000
+    4300016: sheep
+    4300018: Cube.006
+    7400000: Armature|ArmatureAction
+    9500000: //RootNode
+    13700000: Cube.000
+    13700002: sheep
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.001
+    second: {fileID: 2100000, guid: 0969fcb8996c0fc44968b1b9ae7c8928, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.003
+    second: {fileID: 2100000, guid: 7e7d9358c0b198047b14685b112d8b39, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.006
+    second: {fileID: 2100000, guid: d762afeac8a037545ac2d88d9fb8cfa2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sheep
+    second: {fileID: 2100000, guid: c106dfb3e6c17474aa147eb9192ae387, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: sheep
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Armature|ArmatureAction
+      takeName: Armature|ArmatureAction
+      firstFrame: 0
+      lastFrame: 23
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.2
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 0
+    importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
