@@ -1,7 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 711a3fabd8db92f44b331979947935b6
 folderAsset: yes
 timeCreated: 1518021449
+=======
+guid: cda451cfd4350464992c93ed56ed387c
+folderAsset: yes
+timeCreated: 1517797056
+>>>>>>> Traps
 licenseType: Free
 DefaultImporter:
   userData: 

@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 7002885050346b04d8ac07af93aa664c
 timeCreated: 1518021452
+=======
+guid: caab652e65767964b8e967e7ec69e311
+timeCreated: 1517795108
+>>>>>>> Traps
 licenseType: Free
 TextScriptImporter:
   userData: 
