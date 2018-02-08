@@ -1,11 +1,22 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 
 namespace Assets.Script.Traps
 {
-    class BaitTrap
+    public class BaitTrap : Trap
     {
+        public override IEnumerator Activate(GameObject go)
+        {
+            yield break;
+        }
+
+        public override void Upgrade()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

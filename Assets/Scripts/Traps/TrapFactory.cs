@@ -10,7 +10,7 @@ namespace Assets.Script.Factory
 {
     static class TrapFactory 
     {
-        public static TrapTypes SelectedTrapType = TrapTypes.NeedleTrap;
+        public static TrapTypes SelectedTrapType = TrapTypes.MudTrap;
         public static Boolean IsInTrapCreationMode = true;
         public static GameObject ActualTrap;
 

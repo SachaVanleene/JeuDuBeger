@@ -10,7 +10,7 @@ namespace Assets.Script
 {
     public class TerrainTest : MonoBehaviour
     {
-        public List<GameObject> Traps;
+        public List<Trap> Traps;
         public TrapTypes ActualSelectedTrapTypes;
         public Terrain Terrain;
         public void Start()
@@ -57,24 +57,33 @@ namespace Assets.Script
 
         public void CreateTrapPrevu()
         {
-            GameObject trap = Traps[(int)TrapFactory.SelectedTrapType];
-            trap.transform.position = TrapFactory.GetMousePosition();
-            TrapFactory.ActualTrap = Instantiate(trap);
-            foreach (var rend in TrapFactory.ActualTrap.GetComponentsInChildren<Renderer>())
-            {
-                rend.material.color = new Color(10, 205, 0, 0.02f);
-            }
-
+            Trap trap = Traps[(int) TrapFactory.SelectedTrapType];
+            trap.IsInPreviewMode = true;
+            GameObject trapGameObject = trap.TrapPrefab;
+            trapGameObject.transform.position = TrapFactory.GetMousePosition();
+            TrapFactory.ActualTrap = Instantiate(trapGameObject);
         }
         public void CreateTrap()
         {
-            GameObject trap = Instantiate(Traps[(int)TrapFactory.SelectedTrapType]);
-            Vector3 mousePosition = TrapFactory.GetMousePosition();
-            var normalizedPos = new Vector2(Mathf.InverseLerp(0f, Terrain.terrainData.size.x,mousePosition.x),
-                Mathf.InverseLerp(0, Terrain.terrainData.size.z, mousePosition.z));
-            trap.transform.rotation = Quaternion.LookRotation(Terrain.terrainData.GetInterpolatedNormal(normalizedPos.x, normalizedPos.y), Terrain.terrainData.GetInterpolatedNormal(normalizedPos.x, normalizedPos.y));
-
-            trap.transform.position = TrapFactory.GetMousePosition();
+            if (Math.Abs(TrapFactory.ActualTrap.GetComponentInChildren<Renderer>().material.color.r - 205) > 0.1)
+            {
+                Trap t = Traps[(int) TrapFactory.SelectedTrapType];
+                GameObject trap = Instantiate(t.TrapPrefab);
+                ((Trap) trap.GetComponentInChildren(typeof(Trap))).IsInPreviewMode = false;
+                foreach (var rend in trap.GetComponentsInChildren<Renderer>())
+                {
+                    var newMaterial = new Material(rend.material);
+                    newMaterial.color = Color.white;
+                    rend.material = newMaterial;
+                }
+                Vector3 mousePosition = TrapFactory.GetMousePosition();
+                var normalizedPos = new Vector2(Mathf.InverseLerp(0f, Terrain.terrainData.size.x, mousePosition.x),
+                    Mathf.InverseLerp(0, Terrain.terrainData.size.z, mousePosition.z));
+                trap.transform.rotation =
+                    Quaternion.LookRotation(Terrain.terrainData.GetInterpolatedNormal(normalizedPos.x, normalizedPos.y),
+                        Terrain.terrainData.GetInterpolatedNormal(normalizedPos.x, normalizedPos.y));
+                trap.transform.position = TrapFactory.GetMousePosition();
+            }
         }
 
     }

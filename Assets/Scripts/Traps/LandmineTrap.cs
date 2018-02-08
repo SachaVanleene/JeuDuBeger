@@ -10,6 +10,7 @@ namespace Assets.Script.Traps
     class LandmineTrap : Trap
 
     {
+        public GameObject ExplosionEffect;
         public LandmineTrap()
         {
             DurabilityMax = 1;
@@ -24,10 +25,15 @@ namespace Assets.Script.Traps
         }
         public override IEnumerator Activate(GameObject go)
         {
-            GameObject boom = CFX_SpawnSystem.GetNextObject(TrapPrefab);
-            boom.transform.position = gameObject.transform.position;
-            Destroy(gameObject);
-            yield break;
+            if (!IsInPreviewMode)
+            {
+                Debug.Log(go);
+                GameObject boom = CFX_SpawnSystem.GetNextObject(ExplosionEffect);
+                boom.transform.position = gameObject.transform.position;
+                Destroy(gameObject);
+                yield break;
+            }
+            
         }
 
 
