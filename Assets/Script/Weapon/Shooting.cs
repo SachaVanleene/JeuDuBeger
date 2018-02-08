@@ -46,21 +46,23 @@ public class Shooting : MonoBehaviour {
         // Enable the light.
         gunLight.enabled = true;
         // Enable the line renderer and set it's first position to be the end of the gun.
-        gunLine.enabled = true;
+        //gunLine.enabled = true;
         gunLine.SetPosition(0, transform.position);
+        shootRay.origin = transform.position;
 
         muzzleFlash.Play();
 
         gunAudio.Play();
 
-        shootRay.direction = crosshair.transform.position;
+
+        shootRay.direction = crosshair.transform.position - transform.position;
         //Debug.LogError(crosshair.transform.position);
         //Debug.LogError(camera.transform.localEulerAngles.x);
         //shootRay = camera.ScreenPointToRay(new Vector2(Screen.width/2 , Screen.height/2 * Mathf.Cos(Mathf.Deg2Rad * camera.transform.localEulerAngles.x)));
         //shootRay.direction = crosshair.GetComponent<RectTransform>().localPosition;
         //Vector3 vec = new Vector3(0.5f, 0.5f, 0);
         //shootRay = Camera.main.ViewportPointToRay(vec);
-
+        Debug.DrawRay(transform.position, shootRay.direction * gunRange, Color.green);
         // Perform the raycast against gameobjects on the shootable layer and if it hits something...
         if (Physics.Raycast(shootRay, out shootHit, gunRange, shootableMask))
         {
@@ -73,7 +75,7 @@ public class Shooting : MonoBehaviour {
                 wolfStats.takeDamage(damage);
 
                 // Set the second position of the line renderer to the point the raycast hit.
-                gunLine.SetPosition(1, shootHit.point);
+                //gunLine.SetPosition(1, shootHit.point);
             }
             else
             {
@@ -87,6 +89,7 @@ public class Shooting : MonoBehaviour {
         {
             // ... set the second position of the line renderer to the fullest extent of the gun's range.
             gunLine.SetPosition(1, shootRay.origin + shootRay.direction * gunRange);
+            
         }
     }
 
