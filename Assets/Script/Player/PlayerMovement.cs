@@ -18,14 +18,14 @@ public class PlayerMovement : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		
-	}
+        dead = !GetComponent<Player>().alive;
+    }
     void Awake()
     {
         anim = GetComponent<Animator>();
         playerRigidbody = GetComponent<Rigidbody>();
         speed = 3f;
-        dead = !GetComponent<Player>().alive;
+        
         canJump = true;
         timeBetweenJump = 1.5f;
         direction = 0;
@@ -46,8 +46,10 @@ public class PlayerMovement : MonoBehaviour {
     void Move(float h, float v)
     {
         if (dead)
+        {
+            Debug.LogError("Mort");
             return;
-
+        }
         movment.Set(h, 0f, v);
         movment = movment.normalized * speed * Time.deltaTime;
         transform.Translate(movment);
