@@ -28,8 +28,8 @@ public class CycleManager : MonoBehaviour
     private void Awake()
     {
         sunScript = Sun.GetComponent<intensity>();
-        sunScript.RotateSpeed = 0;
-        NextCycle(10);
+        sunScript.RotateSpeed = 1;
+        //NextCycle(10);
     }
 
     private void changeCycle()

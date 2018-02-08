@@ -5,7 +5,7 @@ using UnityEngine;
 public class intensity : MonoBehaviour {
 public Gradient nightDayColor;
 
-    public float maxIntensity = 3f;
+    public float maxIntensity = 1.2f;
     public float minIntensity = 0f;
     public float minPoint = -0.2f;
 
