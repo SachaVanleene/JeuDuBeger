@@ -27,6 +27,7 @@ public class PlayerShooting : MonoBehaviour {
         shoting_layer = 1;
         gun = getChildGameObject(this.gameObject, "gun_end");
         gun_script = gun.GetComponent<Shooting>();
+        Debug.Log(gun.transform.position);
         nextFire = 1.2f;
         anim_time = .30f;
 
@@ -34,7 +35,6 @@ public class PlayerShooting : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-
         timer += Time.deltaTime;
         bool attack = Input.GetButtonDown("Fire1");
         /*if (!attack)
