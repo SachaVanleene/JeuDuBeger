@@ -11,7 +11,7 @@ namespace Assets.Script.Factory
     static class TrapFactory 
     {
         public static TrapTypes SelectedTrapType = TrapTypes.NeedleTrap;
-        public static Boolean IsInTrapCreationMode = true;
+        public static Boolean IsInTrapCreationMode = false;
         public static GameObject ActualTrap;
 
         public static Vector3 GetMousePosition()

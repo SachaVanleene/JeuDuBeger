@@ -106,6 +106,7 @@ namespace Assets.Script.Traps
         NeedleTrap,
         BaitTrap,
         MudTrap,
-        LandmineTrap 
+        LandmineTrap,
+        None
     }
 }
