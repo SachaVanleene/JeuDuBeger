@@ -22,4 +22,16 @@ public class Player : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    public void takeDamage(int damage)
+    {
+        health -= damage;
+        if (health < 0)
+        {
+            Debug.Log("Player Dead");
+            Destroy(gameObject);
+        }
+
+    }
 }
+
