@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.09432498, g: 0.022474533, b: 0.0017475042, a: 1}
+  m_IndirectSpecularColor: {r: 0.4363283, g: 0.47471088, b: 0.5147126, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -1013,6 +1013,14 @@ Prefab:
         type: 2}
       propertyPath: m_AngularDrag
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1878124830385526, guid: 1bd111e88aab2a2449478daa14ec650a, type: 2}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 1677691290393010, guid: 1bd111e88aab2a2449478daa14ec650a, type: 2}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1bd111e88aab2a2449478daa14ec650a, type: 2}

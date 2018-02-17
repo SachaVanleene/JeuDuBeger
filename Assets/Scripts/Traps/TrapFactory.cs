@@ -13,13 +13,30 @@ namespace Assets.Script.Factory
         public static TrapTypes SelectedTrapType = TrapTypes.NeedleTrap;
         public static Boolean IsInTrapCreationMode = false;
         public static GameObject ActualTrap;
+        public static int ActionRange = 15;
 
         public static Vector3 GetMousePosition()
         {
             RaycastHit hitInfo;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             Physics.Raycast(ray, out hitInfo, Mathf.Infinity, LayerMask.GetMask("Terrain"));
-            return hitInfo.point;
+            float distance = Vector3.Distance(hitInfo.point, TerrainTest.PlayerGameObject.transform.position);
+            if (distance <= ActionRange && hitInfo.point != Vector3.zero)
+            {
+                return hitInfo.point;
+            }
+            if (hitInfo.point != Vector3.zero)
+            {
+                Vector3 positionAtRange = ray.direction * ActionRange + TerrainTest.PlayerGameObject.transform.position;
+                return  new Vector3(positionAtRange.x, TerrainTest.Terrain.SampleHeight(positionAtRange),positionAtRange.z);
+            }
+            else
+            {
+
+                Vector3 positionAtRange = ray.direction * ActionRange + TerrainTest.PlayerGameObject.transform.position;
+                return new Vector3(positionAtRange.x, TerrainTest.Terrain.SampleHeight(positionAtRange), positionAtRange.z);
+            }
+              
         }
 
 

@@ -12,9 +12,15 @@ namespace Assets.Script
     {
         public List<Trap> Traps;
         public TrapTypes ActualSelectedTrapTypes;
-        public Terrain Terrain;
+        public static Terrain Terrain;
+        public static GameObject PlayerGameObject;
+
+
+
         public void Start()
         {
+            PlayerGameObject = GameObject.FindWithTag("Player");
+            Terrain = Terrain.activeTerrain;
             ActualSelectedTrapTypes = TrapTypes.None;
         }
 
