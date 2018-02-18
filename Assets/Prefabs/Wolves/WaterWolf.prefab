@@ -188,6 +188,7 @@ GameObject:
   - component: {fileID: 4104715563060010}
   - component: {fileID: 198847344268229876}
   - component: {fileID: 199671919812711010}
+  - component: {fileID: 114531252539173116}
   m_Layer: 0
   m_Name: WaterShower
   m_TagString: Untagged
@@ -338,7 +339,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &1365301043986246
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
@@ -759,7 +760,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1305097166461230}
   m_LocalRotation: {x: -0, y: -0.9218574, z: -0, w: 0.3875294}
-  m_LocalPosition: {x: 78.73, y: 0, z: 37.69}
+  m_LocalPosition: {x: 86.01, y: 0, z: 44.82}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 4914353915195642}
@@ -767,7 +768,6 @@ Transform:
   - {fileID: 4240803190033794}
   - {fileID: 4607455803269238}
   - {fileID: 4104715563060010}
-  - {fileID: 4407583608999904}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -134.39801, z: 0}
@@ -989,15 +989,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1365301043986246}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.775, z: 0.868}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_LocalRotation: {x: -0.21953526, y: -0.00490664, z: 0.01486609, w: 0.97547895}
+  m_LocalPosition: {x: 0.0065808427, y: -0.0954034, z: 0.09662413}
+  m_LocalScale: {x: 0.60000116, y: 0.6, z: 0.6000011}
   m_Children:
   - {fileID: 4125018282377780}
   - {fileID: 4621246183778558}
   - {fileID: 4440994149642878}
-  m_Father: {fileID: 4068601413596620}
-  m_RootOrder: 5
+  m_Father: {fileID: 4588957941708024}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4421023363866168
 Transform:
@@ -1158,6 +1158,7 @@ Transform:
   m_Children:
   - {fileID: 4443096060744396}
   - {fileID: 4506842279150742}
+  - {fileID: 4407583608999904}
   m_Father: {fileID: 4995746085637956}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1532,6 +1533,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d1b276b286db87e41a14dbb2a1c64569, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114531252539173116
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1226368695543126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d50ec41ca8e0a247a0611a2635f9ec7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114569873741514616
@@ -5060,7 +5072,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -998198173
+  randomSeed: -428409115
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -8385,7 +8397,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 822549267
+  randomSeed: 1176062122
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -8421,7 +8433,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 16.679134
+      scalar: 13.162099
       minScalar: 40
       maxCurve:
         serializedVersion: 2
@@ -8781,7 +8793,7 @@ ParticleSystem:
     serializedVersion: 5
     enabled: 1
     type: 4
-    angle: 11.8097725
+    angle: 5.472891
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
@@ -10692,7 +10704,7 @@ ParticleSystem:
     colliderForce: 0
     multiplyColliderForceByParticleSize: 0
     multiplyColliderForceByParticleSpeed: 0
-    multiplyColliderForceByCollisionAngle: 1
+    multiplyColliderForceByCollisionAngle: 0
     plane0: {fileID: 0}
     plane1: {fileID: 0}
     plane2: {fileID: 0}
@@ -10827,15 +10839,15 @@ ParticleSystem:
     radiusScale: 0.01
     collidesWith:
       serializedVersion: 2
-      m_Bits: 4294966783
+      m_Bits: 1280
     maxCollisionShapes: 256
-    quality: 1
+    quality: 0
     voxelSize: 0.5
-    collisionMessages: 0
+    collisionMessages: 1
     collidesWithDynamic: 1
     interiorCollisions: 0
   TriggerModule:
-    enabled: 0
+    enabled: 1
     collisionShape0: {fileID: 0}
     collisionShape1: {fileID: 0}
     collisionShape2: {fileID: 0}
@@ -11698,7 +11710,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -1574810268
+  randomSeed: -785973885
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -15041,7 +15053,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 2076849304
+  randomSeed: -1606806656
   InitialModule:
     serializedVersion: 3
     enabled: 1

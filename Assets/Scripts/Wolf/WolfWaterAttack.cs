@@ -8,11 +8,13 @@ public class WolfWaterAttack : MonoBehaviour {
 
     private ParticleSystem waterJet;
     private int damage = 1;
+    private Animator anim;
 
 
     // Use this for initialization
     void Start () {
         waterJet = gameObject.GetComponentInChildren<ParticleSystem>();
+        anim = GetComponentInParent<Animator>();
     }
 	
 	// Update is called once per frame
@@ -22,6 +24,7 @@ public class WolfWaterAttack : MonoBehaviour {
         waterJet.Stop();
         if (Input.GetKey(KeyCode.M))
         {
+            anim.SetTrigger("Attack");
             waterJet.Play();
         } 
 
