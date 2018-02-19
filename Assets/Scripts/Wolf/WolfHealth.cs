@@ -11,7 +11,7 @@ public class WolfHealth : MonoBehaviour
 
     private void Awake()
     {
-        health = 100;
+        health = 10;
         anim = GetComponent<Animator>();
         cloud = GetComponentInChildren<ParticleSystem>();
     }
@@ -27,6 +27,16 @@ public class WolfHealth : MonoBehaviour
             Destroy(gameObject, 2.5f);
         }
 
+    }
+
+    public void setHealth(int newHealth)
+    {
+        health = newHealth;
+    }
+
+    public int getHealth()
+    {
+        return health;
     }
 }
 
