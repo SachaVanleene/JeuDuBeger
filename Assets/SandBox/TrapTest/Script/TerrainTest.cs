@@ -88,7 +88,7 @@ namespace Assets.Script
                 foreach (var rend in trap.GetComponentsInChildren<Renderer>())
                 {
                     var newMaterial = new Material(rend.material);
-                    newMaterial.color = Color.white;
+                    newMaterial.color = Color.grey;
                     rend.material = newMaterial;
                 }
                 Vector3 mousePosition = TrapFactory.GetMousePosition();

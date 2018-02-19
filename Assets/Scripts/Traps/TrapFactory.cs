@@ -12,6 +12,7 @@ namespace Assets.Script.Factory
     {
         public static TrapTypes SelectedTrapType = TrapTypes.NeedleTrap;
         public static Boolean IsInTrapCreationMode = false;
+            public static Trap ClosestTrap = null;
         public static GameObject ActualTrap;
         public static int ActionRange = 15;
 

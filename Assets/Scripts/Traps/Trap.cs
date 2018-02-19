@@ -56,16 +56,6 @@ namespace Assets.Script.Traps
         public abstract void Upgrade();
         private int i = 0;
         private int v = 0;
-        public void OnMouseDown()
-        {
-            Destroy(TrapPrefab);
-        }
-
-        public void Create(Vector3 positionVector3)
-        {
-            GameObject trap = Instantiate(TrapPrefab);
-            trap.transform.position = positionVector3;
-        }
 
         public void OnTriggerEnter(Collider collider)
         {
@@ -88,6 +78,36 @@ namespace Assets.Script.Traps
             Level++;
             Upgrade();
         }
+
+        public void Update()
+        {
+            if (gameObject.GetComponent<Renderer>().isVisible)
+            {
+                bool isTheClosest;
+                if (TrapFactory.ClosestTrap != null)
+                {
+                    isTheClosest = Vector3.Distance(TrapFactory.ClosestTrap.transform.position,
+                                       TerrainTest.PlayerGameObject.transform.position) >
+                                   Vector3.Distance(transform.position, TerrainTest.PlayerGameObject.transform.position);
+                }
+                else
+                {
+                    isTheClosest = true;
+                }
+
+                if (!IsInPreviewMode && isTheClosest)
+                {
+                    if (TrapFactory.ClosestTrap != null)
+                        foreach (var rend in TrapFactory.ClosestTrap.transform.parent
+                            .GetComponentsInChildren<Renderer>())
+                        {
+                            rend.material.color = Color.white;
+                        }
+                    TrapFactory.ClosestTrap = this;
+                }
+            }
+        }
+
         public void OnTriggerExit(Collider collider)
         {
             if (collider.tag != "Terrain" && collider.name != "Plane") v--;
@@ -99,7 +119,44 @@ namespace Assets.Script.Traps
                 }
             }
         }
+        public void OnBecameVisible()
+        {
+            bool isTheClosest;
+            if (TrapFactory.ClosestTrap != null)
+            {
+                isTheClosest = Vector3.Distance(TrapFactory.ClosestTrap.transform.position,
+                                   TerrainTest.PlayerGameObject.transform.position) >
+                               Vector3.Distance(transform.position, TerrainTest.PlayerGameObject.transform.position);
+            }
+            else
+            {
+                isTheClosest = true;
+            }
+                
+            if (!IsInPreviewMode && isTheClosest)
+            {
+                if (TrapFactory.ClosestTrap != null)
+                    foreach (var rend in TrapFactory.ClosestTrap.transform.parent.GetComponentsInChildren<Renderer>())
+                    {
+                        rend.material.color = Color.grey;
+                    }
+                TrapFactory.ClosestTrap = this;
+            }
+        }
+        public void OnBecameInvisible()
+        {
+            Debug.Log("yo");
+            if (TrapFactory.ClosestTrap == this)
+            {
+                foreach (var rend in TrapFactory.ClosestTrap.transform.parent.GetComponentsInChildren<Renderer>())
+                {
+                    rend.material.color = Color.grey;
+                }
+                TrapFactory.ClosestTrap = null;
+            }
+        }
     }
+
 
     public enum TrapTypes
     {
