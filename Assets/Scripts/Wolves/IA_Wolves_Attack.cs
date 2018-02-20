@@ -38,8 +38,8 @@ public class IA_Wolves_Attack : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        //float dist = Vector3.Distance(targetTransform.position, transform.position);
-        if (other.gameObject.tag == targetTag )
+        float dist = Vector3.Distance(targetTransform.position, transform.position); // Afin dêtre sur que ce soit le bon enclos
+        if (other.gameObject.tag == targetTag && dist < 5f)
         {
             targetInRange = true;
             onTriggerRange.Invoke();

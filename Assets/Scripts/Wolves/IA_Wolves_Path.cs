@@ -81,7 +81,16 @@ public class IA_Wolves_Path : MonoBehaviour {
         {
             moving = true;
             anim.SetBool("Moving", moving);
-            agent.SetDestination(targetTransform.position);
+            if(targetTag == "Fences")
+            {
+                Vector3 position = targetTransform.position - 0.5f*targetTransform.right; // SInon le pathfinding ne larchera pas car la zone est no walkabme
+                agent.SetDestination(position);
+            }
+            else
+            {
+                agent.SetDestination(targetTransform.position);
+            }
+
         }
         if(targetInRange && moving) //Si proche de destination mais encore entrain de bouger
         {
