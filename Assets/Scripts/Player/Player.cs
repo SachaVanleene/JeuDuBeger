@@ -21,4 +21,15 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
     }
+
+    public void takeDamage(int damage)
+    {
+        health -= damage;
+
+        if (health < 0)
+        {
+            Destroy(gameObject);
+        }
+
+    }
 }
