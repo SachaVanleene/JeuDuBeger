@@ -4,21 +4,29 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 
-    private int health;
     public bool alive;
+
+    public int Gold { get; set; }
+
+    private int health;
+    
 
     private void Awake()
     {
         health = 100;
         alive = true;
+        Gold = 100; 
     }
 
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
 		
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
+
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace Assets.Script.Managers
 {
@@ -16,6 +17,7 @@ namespace Assets.Script.Managers
         public int TotalSheeps { get; set; }
 
         private List<EnclosManager> _paddocks;
+        private Player _player;
         private int _roundNumber = 0;                 // Which round the game is currently on.
         private WaitForSeconds _nightCycleEndingWait;           // Used to have a delay whilst the round or game ends.
         
@@ -48,7 +50,10 @@ namespace Assets.Script.Managers
                 _paddocks.Add(go.GetComponent<EnclosManager>());
             }
 
+            _player = GameObject.Find("Fermier").GetComponent<Player>();
             messageText = GameObject.Find("Canvas/Text").GetComponent<Text>();
+
+
 
             StartCoroutine(GameLoop());
         }
@@ -82,12 +87,15 @@ namespace Assets.Script.Managers
             _roundNumber++;
             messageText.text = "ROUND " + _roundNumber;
 
+
+            _player.Gold += TotalSheeps * 10;
+
             yield return null;
         }
 
         private IEnumerator DayCyclePlaying()
         {
-            //messageText.text = string.Empty;
+            messageText.text = string.Empty;
             float localDayCycleDelay = Time.time + dayCycleDelay;
             
             while (!Input.GetKeyDown(KeyCode.K) ||  Time.time  < localDayCycleDelay)
@@ -124,10 +132,21 @@ namespace Assets.Script.Managers
             if (TotalSheeps <= 0)
             {
                 messageText.text = "GAME OVER \n\n" + "Time to go to sleep after " + _roundNumber + " thrilling nights!";
+                while (!Input.GetKeyDown(KeyCode.KeypadEnter))
+                {
+                    yield return null;
+                }
+                messageText.text = string.Empty;
+                SceneManager.LoadScene("MainMenu");
             }
             else
             {
                 messageText.text = "Total sheeps alive: " + TotalSheeps;
+
+                while (!Input.GetKeyDown(KeyCode.KeypadEnter))
+                {
+                    yield return null;
+                }
             }
 
             yield return null;
