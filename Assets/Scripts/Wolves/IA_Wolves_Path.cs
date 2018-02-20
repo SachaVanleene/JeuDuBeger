@@ -140,6 +140,7 @@ public class IA_Wolves_Path : MonoBehaviour {
             current_enclos = enclos[i];
             if (current_enclos.GetComponent<EnclosManager>().getHealth() > 0)
             {
+                Debug.LogError("ENclos idsponible");
                 current_distance = Vector3.Distance(current_enclos.transform.position, this.gameObject.transform.position);
                 if (current_distance < dist_to_target)
                 {

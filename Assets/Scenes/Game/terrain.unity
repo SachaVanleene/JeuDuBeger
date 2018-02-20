@@ -156,32 +156,6 @@ Prefab:
       propertyPath: m_Name
       value: EnclosMoyen2
       objectReference: {fileID: 0}
-    - target: {fileID: 4087810568446316, guid: 46d569d51941b4a4db103b6fc1cc5489, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 4087810568446316, guid: 46d569d51941b4a4db103b6fc1cc5489, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 4087810568446316, guid: 46d569d51941b4a4db103b6fc1cc5489, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 114031508847626236, guid: 46d569d51941b4a4db103b6fc1cc5489,
-        type: 2}
-      propertyPath: farmer
-      value: 
-      objectReference: {fileID: 2057139167}
-    - target: {fileID: 114031508847626236, guid: 46d569d51941b4a4db103b6fc1cc5489,
-        type: 2}
-      propertyPath: enclos
-      value: 
-      objectReference: {fileID: 1465353962}
-    - target: {fileID: 1524733720052002, guid: 46d569d51941b4a4db103b6fc1cc5489, type: 2}
-      propertyPath: m_TagString
-      value: Enclos
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 46d569d51941b4a4db103b6fc1cc5489, type: 2}
   m_IsPrefabParent: 0
@@ -651,39 +625,13 @@ Prefab:
       propertyPath: m_RootOrder
       value: 16
       objectReference: {fileID: 0}
-    - target: {fileID: 4924019313743612, guid: 842e7b2c2f2b01a4b8e953ebc87adc1d, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 4924019313743612, guid: 842e7b2c2f2b01a4b8e953ebc87adc1d, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 4924019313743612, guid: 842e7b2c2f2b01a4b8e953ebc87adc1d, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 1406634159932788, guid: 842e7b2c2f2b01a4b8e953ebc87adc1d, type: 2}
       propertyPath: m_Name
       value: EnclosLoin3
       objectReference: {fileID: 0}
-    - target: {fileID: 114893237447652998, guid: 842e7b2c2f2b01a4b8e953ebc87adc1d,
-        type: 2}
-      propertyPath: enclos
-      value: 
-      objectReference: {fileID: 1213866488}
-    - target: {fileID: 1406634159932788, guid: 842e7b2c2f2b01a4b8e953ebc87adc1d, type: 2}
-      propertyPath: m_TagString
-      value: Enclos
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 842e7b2c2f2b01a4b8e953ebc87adc1d, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &513313865 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1406634159932788, guid: 842e7b2c2f2b01a4b8e953ebc87adc1d,
-    type: 2}
-  m_PrefabInternal: {fileID: 2134772573}
 --- !u!1 &719723824 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1287924996789720, guid: 1bd111e88aab2a2449478daa14ec650a,
@@ -817,39 +765,13 @@ Prefab:
       propertyPath: m_RootOrder
       value: 15
       objectReference: {fileID: 0}
-    - target: {fileID: 4924019313743612, guid: 842e7b2c2f2b01a4b8e953ebc87adc1d, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 4924019313743612, guid: 842e7b2c2f2b01a4b8e953ebc87adc1d, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 4924019313743612, guid: 842e7b2c2f2b01a4b8e953ebc87adc1d, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 1406634159932788, guid: 842e7b2c2f2b01a4b8e953ebc87adc1d, type: 2}
       propertyPath: m_Name
       value: EnclosLoin2
       objectReference: {fileID: 0}
-    - target: {fileID: 114893237447652998, guid: 842e7b2c2f2b01a4b8e953ebc87adc1d,
-        type: 2}
-      propertyPath: enclos
-      value: 
-      objectReference: {fileID: 1781348565}
-    - target: {fileID: 1406634159932788, guid: 842e7b2c2f2b01a4b8e953ebc87adc1d, type: 2}
-      propertyPath: m_TagString
-      value: Enclos
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 842e7b2c2f2b01a4b8e953ebc87adc1d, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &931506911 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1344421890961646, guid: e9c36aec60517a0429f0cb5585a6576f,
-    type: 2}
-  m_PrefabInternal: {fileID: 1427625366}
 --- !u!1 &939139441
 GameObject:
   m_ObjectHideFlags: 0
@@ -1033,30 +955,9 @@ Prefab:
       propertyPath: m_RootOrder
       value: 12
       objectReference: {fileID: 0}
-    - target: {fileID: 4087810568446316, guid: 46d569d51941b4a4db103b6fc1cc5489, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 4087810568446316, guid: 46d569d51941b4a4db103b6fc1cc5489, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 4087810568446316, guid: 46d569d51941b4a4db103b6fc1cc5489, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 1524733720052002, guid: 46d569d51941b4a4db103b6fc1cc5489, type: 2}
       propertyPath: m_Name
       value: EnclosMoyen1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114031508847626236, guid: 46d569d51941b4a4db103b6fc1cc5489,
-        type: 2}
-      propertyPath: enclos
-      value: 
-      objectReference: {fileID: 1060901426}
-    - target: {fileID: 1524733720052002, guid: 46d569d51941b4a4db103b6fc1cc5489, type: 2}
-      propertyPath: m_TagString
-      value: Enclos
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 46d569d51941b4a4db103b6fc1cc5489, type: 2}
@@ -1352,11 +1253,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1044374433}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1060901426 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1524733720052002, guid: 46d569d51941b4a4db103b6fc1cc5489,
-    type: 2}
-  m_PrefabInternal: {fileID: 980558426}
 --- !u!1 &1079071701
 GameObject:
   m_ObjectHideFlags: 0
@@ -5135,11 +5031,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: adbf69bb7bcdc054c984cf0359f9e65d, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1213866488 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1406634159932788, guid: 842e7b2c2f2b01a4b8e953ebc87adc1d,
-    type: 2}
-  m_PrefabInternal: {fileID: 493467395}
 --- !u!1 &1228557512
 GameObject:
   m_ObjectHideFlags: 0
@@ -5190,11 +5081,6 @@ MonoBehaviour:
   Stars: {fileID: 1079071701}
   Clouds: {fileID: 1636516225}
   Moon: {fileID: 1088421939}
---- !u!1 &1324121842 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1344421890961646, guid: e9c36aec60517a0429f0cb5585a6576f,
-    type: 2}
-  m_PrefabInternal: {fileID: 1886290043}
 --- !u!1 &1402869003
 GameObject:
   m_ObjectHideFlags: 0
@@ -5366,35 +5252,13 @@ Prefab:
       propertyPath: m_Name
       value: EnclosProche2
       objectReference: {fileID: 0}
-    - target: {fileID: 4420754525903628, guid: e9c36aec60517a0429f0cb5585a6576f, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 4420754525903628, guid: e9c36aec60517a0429f0cb5585a6576f, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 4420754525903628, guid: e9c36aec60517a0429f0cb5585a6576f, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 114271843890230038, guid: e9c36aec60517a0429f0cb5585a6576f,
-        type: 2}
-      propertyPath: enclos
-      value: 
-      objectReference: {fileID: 931506911}
     - target: {fileID: 1344421890961646, guid: e9c36aec60517a0429f0cb5585a6576f, type: 2}
-      propertyPath: m_TagString
-      value: Enclos
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e9c36aec60517a0429f0cb5585a6576f, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1465353962 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1524733720052002, guid: 46d569d51941b4a4db103b6fc1cc5489,
-    type: 2}
-  m_PrefabInternal: {fileID: 85375896}
 --- !u!1 &1519540109 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100064, guid: 2f4795f79e920034d94d2cc071b2f898, type: 2}
@@ -5869,11 +5733,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: adbf69bb7bcdc054c984cf0359f9e65d, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1781348565 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1406634159932788, guid: 842e7b2c2f2b01a4b8e953ebc87adc1d,
-    type: 2}
-  m_PrefabInternal: {fileID: 851633100}
 --- !u!1001 &1797315413
 Prefab:
   m_ObjectHideFlags: 0
@@ -5986,32 +5845,6 @@ Prefab:
     - target: {fileID: 1344421890961646, guid: e9c36aec60517a0429f0cb5585a6576f, type: 2}
       propertyPath: m_Name
       value: EnclosProche1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4420754525903628, guid: e9c36aec60517a0429f0cb5585a6576f, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 4420754525903628, guid: e9c36aec60517a0429f0cb5585a6576f, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 4420754525903628, guid: e9c36aec60517a0429f0cb5585a6576f, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 114271843890230038, guid: e9c36aec60517a0429f0cb5585a6576f,
-        type: 2}
-      propertyPath: farmer
-      value: 
-      objectReference: {fileID: 2057139167}
-    - target: {fileID: 114271843890230038, guid: e9c36aec60517a0429f0cb5585a6576f,
-        type: 2}
-      propertyPath: enclos
-      value: 
-      objectReference: {fileID: 1324121842}
-    - target: {fileID: 1344421890961646, guid: e9c36aec60517a0429f0cb5585a6576f, type: 2}
-      propertyPath: m_TagString
-      value: Enclos
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e9c36aec60517a0429f0cb5585a6576f, type: 2}
@@ -6258,11 +6091,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: adbf69bb7bcdc054c984cf0359f9e65d, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &2057139167 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1878124830385526, guid: 1bd111e88aab2a2449478daa14ec650a,
-    type: 2}
-  m_PrefabInternal: {fileID: 1034862789}
 --- !u!1 &2059843645
 GameObject:
   m_ObjectHideFlags: 0
@@ -6688,30 +6516,9 @@ Prefab:
       propertyPath: m_RootOrder
       value: 14
       objectReference: {fileID: 0}
-    - target: {fileID: 4924019313743612, guid: 842e7b2c2f2b01a4b8e953ebc87adc1d, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 4924019313743612, guid: 842e7b2c2f2b01a4b8e953ebc87adc1d, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 4924019313743612, guid: 842e7b2c2f2b01a4b8e953ebc87adc1d, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 1406634159932788, guid: 842e7b2c2f2b01a4b8e953ebc87adc1d, type: 2}
       propertyPath: m_Name
       value: EnclosLoin1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114893237447652998, guid: 842e7b2c2f2b01a4b8e953ebc87adc1d,
-        type: 2}
-      propertyPath: enclos
-      value: 
-      objectReference: {fileID: 513313865}
-    - target: {fileID: 1406634159932788, guid: 842e7b2c2f2b01a4b8e953ebc87adc1d, type: 2}
-      propertyPath: m_TagString
-      value: Enclos
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 842e7b2c2f2b01a4b8e953ebc87adc1d, type: 2}
