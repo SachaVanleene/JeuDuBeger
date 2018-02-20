@@ -10,15 +10,19 @@ public class EnclosManager : MonoBehaviour {
     public ParticleSystem smoke;
 
     private int nbSheep;
-    private float health;
+    private int health;
     private bool activePanel;
     private GameObject[] sheepClone = new GameObject[10];
 
 
     // Use this for initialization
+    private void Awake()
+    {
+        health = 100;
+    }
+
     void Start () {
         nbSheep = -1;
-        health = 0.0f;
         activePanel = false;
     }
 	
@@ -95,7 +99,7 @@ public class EnclosManager : MonoBehaviour {
     //******************************************************************
     //Prise de dégats de l'enclos
     //******************************************************************
-    public void DamageEnclos(float degats) {
+    public void DamageEnclos(int degats) {
         health -= degats;
         if (health < 0) health = 0; //santé min
 
@@ -104,5 +108,10 @@ public class EnclosManager : MonoBehaviour {
         for (int i=0; i < diffSheep; i++) {
             RemoveSheep();
         }
+    }
+
+    public int getHealth()
+    {
+        return health;
     }
 }
