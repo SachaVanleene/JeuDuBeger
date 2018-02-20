@@ -10,6 +10,7 @@ namespace Assets.Script.Managers
     {
 
         public static GameManager instance = null;
+        public float dayCycleStartingDelay = 5f;
         public float dayCycleDelay = 30f;
         public float nightCycleEndingDelay = 5f;
         public Text messageText;
@@ -17,10 +18,10 @@ namespace Assets.Script.Managers
         public int TotalSheeps { get; set; }
 
         private List<EnclosManager> _paddocks;
-        private Player _player;
+        private GameObject _player;
         private int _roundNumber = 0;                 // Which round the game is currently on.
         private WaitForSeconds _nightCycleEndingWait;           // Used to have a delay whilst the round or game ends.
-        
+        private WaitForSeconds _dayCycleStartingWait;
 
         private void Awake()
         {
@@ -38,22 +39,24 @@ namespace Assets.Script.Managers
 
             //Sets this to not be destroyed when reloading scene
             DontDestroyOnLoad(gameObject);
-
-            TotalSheeps = 0;
         }
+
 
         private void Start()
         {
             _paddocks = new List<EnclosManager>();
+
             foreach (GameObject go in GameObject.FindGameObjectsWithTag("Paddock") )
             {
                 _paddocks.Add(go.GetComponent<EnclosManager>());
             }
 
-            _player = GameObject.Find("Fermier").GetComponent<Player>();
+            _player = GameObject.Find("Fermier/Farmer_H_anims_separated");
             messageText = GameObject.Find("Canvas/Text").GetComponent<Text>();
 
+            TotalSheeps = 0;
 
+            _dayCycleStartingWait = new WaitForSeconds(dayCycleStartingDelay);
 
             StartCoroutine(GameLoop());
         }
@@ -87,10 +90,9 @@ namespace Assets.Script.Managers
             _roundNumber++;
             messageText.text = "ROUND " + _roundNumber;
 
-
             _player.Gold += TotalSheeps * 10;
 
-            yield return null;
+            yield return _dayCycleStartingWait;
         }
 
         private IEnumerator DayCyclePlaying()
@@ -117,7 +119,7 @@ namespace Assets.Script.Managers
         }
         private IEnumerator NightCyclePlaying()
         {
-            //TODO: while there are wolves alive or there is one sheep
+            //TODO: while there are wolves alive or there is at least a sheep alive
             while (TotalSheeps > 0)
             {
                 yield return null;
@@ -132,23 +134,23 @@ namespace Assets.Script.Managers
             if (TotalSheeps <= 0)
             {
                 messageText.text = "GAME OVER \n\n" + "Time to go to sleep after " + _roundNumber + " thrilling nights!";
-                while (!Input.GetKeyDown(KeyCode.KeypadEnter))
-                {
-                    yield return null;
-                }
-                messageText.text = string.Empty;
-                SceneManager.LoadScene("MainMenu");
             }
             else
             {
                 messageText.text = "Total sheeps alive: " + TotalSheeps;
-
-                while (!Input.GetKeyDown(KeyCode.KeypadEnter))
-                {
-                    yield return null;
-                }
             }
 
+            while (!Input.GetKeyDown(KeyCode.KeypadEnter))
+            {
+                yield return null;
+            }
+            
+            messageText.text = string.Empty;
+
+            if (TotalSheeps <= 0)
+            {
+                SceneManager.LoadScene("MainMenu");
+            }
             yield return null;
         }
     }
