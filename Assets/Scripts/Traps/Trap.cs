@@ -95,6 +95,7 @@ namespace Assets.Script.Traps
             {
                 foreach (var rend in TrapPrefab.GetComponentsInChildren<Renderer>())
                 {
+                    Debug.Log(rend);
                     rend.sharedMaterial.color = new Color(10, 205, 0, 0.02f);
                 }
             }
