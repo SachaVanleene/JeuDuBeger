@@ -37,10 +37,9 @@ public class EnclosManager : MonoBehaviour {
         _gameManager = Assets.Script.Managers.GameManager.instance;
     }
 	
-
 	// Update is called once per frame
 	void Update () {
-        testInputs(); //pour tester add/remove sheep et degats enclos
+        affichePanel();
 
         if(activePanel) {
             panelEnclos.gameObject.SetActive(true);
@@ -51,17 +50,19 @@ public class EnclosManager : MonoBehaviour {
         }
     }
 
+    //******************************************************************
+    //Affichage du panel de l'enclos
+    //******************************************************************
+    private void affichePanel() {
+        Vector3 distPlayertoEnclos = GameObject.FindWithTag("Player").transform.position - enclos.transform.position;
 
-    //INPUT TEMP pour TESTS
-    private void testInputs() {
-        if (Input.GetKeyDown(KeyCode.E)) activePanel = true;
-        if (Input.GetKeyDown(KeyCode.R)) activePanel = false;
-
-        if (Input.GetKeyDown(KeyCode.Z)) DamageEnclos(3);
+        if(distPlayertoEnclos.magnitude < 25) activePanel = true;
+        else activePanel = false;
     }
 
-
+    //******************************************************************
     //Handle Inputs "+" et "-" le nombre de moutons
+    //******************************************************************
     private void handleInputs() {
         if (Input.GetKeyDown(KeyCode.KeypadPlus)) {
             AddSheep();
@@ -79,8 +80,9 @@ public class EnclosManager : MonoBehaviour {
         }
     }
 
-
+    //******************************************************************
     //Ajouter mouton
+    //******************************************************************
     public void AddSheep() {
         if (nbSheep < 9) {
             nbSheep++;
@@ -94,8 +96,9 @@ public class EnclosManager : MonoBehaviour {
         }
     }
 
-
+    //******************************************************************
     //Supprimer mouton
+    //******************************************************************
     public void RemoveSheep() {
         if (nbSheep >= 0) {
             Instantiate(smoke, sheepClone[nbSheep].transform.position, sheepClone[nbSheep].transform.rotation);
@@ -108,8 +111,9 @@ public class EnclosManager : MonoBehaviour {
         }
     }
 
-
+    //******************************************************************
     //Prise de dégats de l'enclos
+    //******************************************************************
     public void DamageEnclos(float degats) {
         health -= degats;
         if (health < 0) health = 0; //santé min

@@ -15,10 +15,16 @@ public class PlayerMovement : MonoBehaviour {
     private int direction;
     private int old_direction;
     public GameObject crosshair;
+    private Player script_player;
+
+    public delegate void TriggerDead();
+    public TriggerDead function;
 
     // Use this for initialization
     void Start () {
-        dead = !GetComponent<Player>().alive;
+        script_player = GetComponent<Player>();
+        dead = !script_player.alive;
+        function = updateDeadValue;
     }
     void Awake()
     {
@@ -38,18 +44,23 @@ public class PlayerMovement : MonoBehaviour {
             float v = 0f;
             h = Input.GetAxisRaw("Horizontal");
             v = Input.GetAxisRaw("Vertical");
+        if (!dead)
+        {
             Move(h, v);
-            CalculDirection(h,v);
+            CalculDirection(h, v);
             Animating(h, v);
+
+        }
+
     }
 
     void Move(float h, float v)
     {
-        if (dead)
+        /*if (dead)
         {
             Debug.LogError("Mort");
             return;
-        }
+        }*/
         movment.Set(h, 0f, v);
         movment = movment.normalized * speed * Time.deltaTime;
         transform.Translate(movment);
@@ -62,10 +73,10 @@ public class PlayerMovement : MonoBehaviour {
         bool walking = h != 0f || v != 0f;
         //Debug.LogError(walking);
         anim.SetBool("IsMoving", walking);
-        //anim.SetInteger("direction", direction);
+        anim.SetInteger("direction", direction);
         if (!walking)
         {
-            //anim.SetInteger("direction", 0);
+            anim.SetInteger("direction", 0);
         }
     }
 
@@ -117,4 +128,9 @@ public class PlayerMovement : MonoBehaviour {
             canJump = true;
         }
 	}
+
+    void updateDeadValue()
+    {
+        dead =!script_player.alive;
+    }
 }
