@@ -90,7 +90,7 @@ namespace Assets.Script.Managers
             _roundNumber++;
             messageText.text = "ROUND " + _roundNumber;
 
-            _player.Gold += TotalSheeps * 10;
+            _player.GetComponent<Player>().Gold += TotalSheeps * 10;
 
             yield return _dayCycleStartingWait;
         }
