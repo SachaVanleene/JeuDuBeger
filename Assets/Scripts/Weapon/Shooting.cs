@@ -63,15 +63,17 @@ public class Shooting : MonoBehaviour {
         //Vector3 vec = new Vector3(0.5f, 0.5f, 0);
         //shootRay = Camera.main.ViewportPointToRay(vec);
         Debug.DrawRay(transform.position, shootRay.direction * gunRange, Color.green);
+        
         // Perform the raycast against gameobjects on the shootable layer and if it hits something...
         if (Physics.Raycast(shootRay, out shootHit, gunRange, shootableMask))
         {
 
             //Enemmy interaction
             // Try and find an EnemyHealth script on the gameobject hit.
+          
             if (shootHit.collider.CompareTag("Wolf"))
             {
-                Target wolfStats = shootHit.collider.GetComponent<Target>();
+                WolfHealth wolfStats = shootHit.collider.GetComponent<WolfHealth>();
                 wolfStats.takeDamage(damage);
 
                 // Set the second position of the line renderer to the point the raycast hit.
@@ -80,7 +82,7 @@ public class Shooting : MonoBehaviour {
             else
             {
                 gunLine.SetPosition(1, shootHit.point);
-                Debug.LogError(shootHit.point);
+                //Debug.LogError(shootHit.point);
             }
 
         }
