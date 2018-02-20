@@ -10,16 +10,31 @@ public class EnclosManager : MonoBehaviour {
     public ParticleSystem smoke;
 
     private int nbSheep;
+    public int NbSheep
+    {
+        get
+        {
+            return this.nbSheep;
+        }
+        set
+        {
+            this.nbSheep = value;
+        }
+    }
+    
     private float health;
     private bool activePanel;
     private GameObject[] sheepClone = new GameObject[10];
 
+    private Assets.Script.Managers.GameManager _gameManager;
 
     // Use this for initialization
     void Start () {
         nbSheep = -1;
         health = 0.0f;
         activePanel = false;
+
+        _gameManager = Assets.Script.Managers.GameManager.instance;
     }
 	
 
@@ -74,6 +89,8 @@ public class EnclosManager : MonoBehaviour {
             sheepClone[nbSheep] = Instantiate(sheep, enclos.transform); //crée un clone mouton
             sheepClone[nbSheep].transform.rotation = enclos.transform.rotation; //le place dans l'enclos
             sheepClone[nbSheep].transform.Rotate(0, Random.Range(0, 360), 0); //l'oriente d'une façon aléatoire
+
+            _gameManager.TotalSheeps++;
         }
     }
 
@@ -86,6 +103,8 @@ public class EnclosManager : MonoBehaviour {
 
             totalSheep.text = nbSheep.ToString();
             nbSheep--;
+
+            _gameManager.TotalSheeps--;
         }
     }
 

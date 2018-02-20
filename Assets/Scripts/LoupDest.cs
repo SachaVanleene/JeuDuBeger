@@ -11,7 +11,7 @@ public class LoupDest : MonoBehaviour {
     void Start () {
         occuped = false;
         enclosParent = this.transform.parent.gameObject;
-        print(enclosParent);
+        //print(enclosParent);
     }
 	
 	// Update is called once per frame

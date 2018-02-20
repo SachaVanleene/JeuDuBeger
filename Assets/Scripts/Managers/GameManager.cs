@@ -13,8 +13,12 @@ namespace Assets.Script.Managers
         public float nightCycleEndingDelay = 5f;
         public Text messageText;
 
+        public int TotalSheeps { get; set; }
+
+        private List<EnclosManager> _paddocks;
         private int _roundNumber = 0;                 // Which round the game is currently on.
         private WaitForSeconds _nightCycleEndingWait;           // Used to have a delay whilst the round or game ends.
+        
 
         private void Awake()
         {
@@ -33,10 +37,19 @@ namespace Assets.Script.Managers
             //Sets this to not be destroyed when reloading scene
             DontDestroyOnLoad(gameObject);
 
+            TotalSheeps = 0;
         }
 
         private void Start()
         {
+            _paddocks = new List<EnclosManager>();
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Paddock") )
+            {
+                _paddocks.Add(go.GetComponent<EnclosManager>());
+            }
+
+            messageText = GameObject.Find("Canvas/Text").GetComponent<Text>();
+
             StartCoroutine(GameLoop());
         }
 
@@ -74,7 +87,7 @@ namespace Assets.Script.Managers
 
         private IEnumerator DayCyclePlaying()
         {
-            messageText.text = string.Empty;
+            //messageText.text = string.Empty;
             float localDayCycleDelay = Time.time + dayCycleDelay;
             
             while (!Input.GetKeyDown(KeyCode.K) ||  Time.time  < localDayCycleDelay)
@@ -97,15 +110,25 @@ namespace Assets.Script.Managers
         private IEnumerator NightCyclePlaying()
         {
             //TODO: while there are wolves alive or there is one sheep
-
-            yield return null;
+            while (TotalSheeps > 0)
+            {
+                yield return null;
+            }
+            
         }
 
         private IEnumerator NightCycleEnding()
         {
             //TODO: Disable player control
 
-            //TODO: Round recap or game recap if game over.
+            if (TotalSheeps <= 0)
+            {
+                messageText.text = "GAME OVER \n\n" + "Time to go to sleep after " + _roundNumber + " thrilling nights!";
+            }
+            else
+            {
+                messageText.text = "Total sheeps alive: " + TotalSheeps;
+            }
 
             yield return null;
         }
