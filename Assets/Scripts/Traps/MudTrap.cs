@@ -32,10 +32,12 @@ namespace Assets.Script.Traps
 
         public void OnTriggerExit(Collider collider)
         {
-            var rb = collider.gameObject.GetComponent<Rigidbody>();
-            if (Damages.Count > Level) rb.velocity = rb.velocity * (100f/ Damages[Level]);
+            if (collider.gameObject.tag == "Wolf")
+            {
+                var rb = collider.gameObject.GetComponent<Rigidbody>();
+                if (Damages.Count > Level) rb.velocity = rb.velocity * (100f / Damages[Level]);
+            }
             if (collider.gameObject.tag != "Terrain" && collider.gameObject.name != "Plane") j--;
-            Debug.Log(j);
             if (IsInPreviewMode && collider.tag != "Terrain" && j == 0)
             {
                 foreach (var rend in GetComponentsInChildren<Renderer>())

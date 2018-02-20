@@ -62,10 +62,10 @@ public class PlayerMovement : MonoBehaviour {
         bool walking = h != 0f || v != 0f;
         //Debug.LogError(walking);
         anim.SetBool("IsMoving", walking);
-        anim.SetInteger("direction", direction);
+        //anim.SetInteger("direction", direction);
         if (!walking)
         {
-            anim.SetInteger("direction", 0);
+            //anim.SetInteger("direction", 0);
         }
     }
 
