@@ -465,6 +465,7 @@ GameObject:
   - component: {fileID: 124025482874526940}
   - component: {fileID: 81651832883760010}
   - component: {fileID: 114409734777223550}
+  - component: {fileID: 45824699843185002}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -501,7 +502,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1416841203830030
 GameObject:
   m_ObjectHideFlags: 1
@@ -851,7 +852,7 @@ GameObject:
   - component: {fileID: 114557739277787606}
   m_Layer: 0
   m_Name: Farmer_H_anims_separated
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1645,8 +1646,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1878124830385526}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.574967, y: 0.07421422, z: 5.4430895}
+  m_LocalRotation: {x: 0.000000029802326, y: 0.00000007450581, z: -0.000000089406974,
+    w: 1}
+  m_LocalPosition: {x: 265.71732, y: 16.49481, z: 273.01468}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4353935886108318}
@@ -1654,7 +1656,7 @@ Transform:
   - {fileID: 4907781081038006}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
 --- !u!4 &4314669014338790
 Transform:
   m_ObjectHideFlags: 1
@@ -2366,8 +2368,8 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
+  near clip plane: 0.1
+  far clip plane: 500
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -2468,6 +2470,14 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1960057827328882}
   m_Mesh: {fileID: 4300000, guid: ad41f3922e6fa534d905ed246f02ca21, type: 3}
+--- !u!45 &45824699843185002
+Skybox:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1287924996789720}
+  m_Enabled: 1
+  m_CustomSkybox: {fileID: 2100000, guid: e89aa5e27c3d688468db73d74cb9d3a4, type: 2}
 --- !u!54 &54621838483339590
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -2476,12 +2486,12 @@ Rigidbody:
   m_GameObject: {fileID: 1677691290393010}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: Infinity
-  m_AngularDrag: Infinity
+  m_Drag: 0
+  m_AngularDrag: 0.5
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 84
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!65 &65492058439228112
 BoxCollider:
@@ -2647,6 +2657,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alive: 0
+  spawn: {fileID: 0}
 --- !u!114 &114179626509167410
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2695,6 +2706,7 @@ MonoBehaviour:
   camera: {fileID: 20691143150072582}
   muzzleFlash: {fileID: 198736357181717252}
   crosshair: {fileID: 1790509281589426}
+  Farmer: {fileID: 1677691290393010}
   gunLine: {fileID: 0}
   gunLight: {fileID: 0}
   effectsDisplayTime: 0.2

@@ -25,6 +25,9 @@ public class IA_Wolves_Attack : MonoBehaviour {
     private Quaternion lookRotation;
     private Vector3 direction;
 
+    //
+    bool targetAlive;
+
 
     // Use this for initialization
     void Start () {
@@ -109,7 +112,15 @@ public class IA_Wolves_Attack : MonoBehaviour {
             isAttacking = false;
         }
         // si tmeps danimations poche de 99 % is attacking devient false
-        if ((timer >= timeBetweenAttacks) && targetInRange && !isAttacking && targetTag !="Aucune" && targetTransform.parent.gameObject.GetComponent<EnclosManager>().getHealth() > 0)
+        if(targetTag == "Fences")
+        {
+            targetAlive = (targetTransform.parent.gameObject.GetComponent<EnclosManager>().getHealth() > 0);
+        }
+        else
+        {
+            targetAlive = targetTransform.gameObject.GetComponent<Player>().alive;
+        }
+        if ((timer >= timeBetweenAttacks) && targetInRange && !isAttacking && targetTag !="Aucune" && targetAlive )
         {
             anim.SetTrigger("attack");
             isAttacking = true;
