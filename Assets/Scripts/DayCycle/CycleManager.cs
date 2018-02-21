@@ -10,85 +10,53 @@ public class CycleManager : MonoBehaviour
     public GameObject Clouds;
     public GameObject Moon;
 
-    private List<INewCycleListner> cycleListners = new List<INewCycleListner>();
-
     private intensity sunScript;
     private MoveClouds cloudsScript;
 
-    private int currentAngle; // angle of the cycle between 0 and 360 °(0-180 = day; 180-360 = night)    
-    private int nextAngle = 0; // where the cycle must go
-    private float skipSpeed = 0; // speed of the cycle after reaching percent goal
-    private bool goToNextCycle = false; // must check if the cycle is running
+    private int percentCycle;
 
-    private bool paused = false;
-    private float cachedSpeed = 0f;
+    private int nextPercent = 0;
+    private bool goToNextCycle = false;
+    private bool firstFound = false;
+    private bool SecondFound = false;
+
+    private float skipSpeed = 0;
+
+    private int beginNight = 358;
+    private int beginDay = 2;
 
     private void Awake()
     {
         sunScript = Sun.GetComponent<intensity>();
-        sunScript.RotateSpeed = 0;
-        NextCycle(10);
+        sunScript.RotateSpeed = 1;
+        //NextCycle(10);
     }
 
     private void changeCycle()
-    { // mask moon/sun/clouds or stars ?
-        if (IsNight())
-        {
-            foreach(INewCycleListner listner in cycleListners)
-            {
-                listner.NightStart();
-            }
-        }
-        if(IsDay())
-        {
-            foreach (INewCycleListner listner in cycleListners)
-            {
-                listner.DayStart();
-            }
-        }
+    {
+        // mask moon/sun/clouds or stars ?
     }
 
-    private void setAngle()
+    private void setPercent()
     {
-        bool old = currentAngle < 180;
-        if (Sun.GetComponent<Transform>().eulerAngles.x < 100)
-        { // day
-            currentAngle = (int)(Sun.GetComponent<Transform>().eulerAngles.x);
-            // between noon and nightfall
-            if (Mathf.Abs(Sun.GetComponent<Transform>().rotation.x) > 0.71f)
-                currentAngle = 90 + (90 - currentAngle);
-        }
-        else
-        { // night
-            currentAngle = (int)(360 - Sun.GetComponent<Transform>().eulerAngles.x);
-            // between midnight and dawn
-            if (Mathf.Abs(Sun.GetComponent<Transform>().rotation.x) < 0.71f)
-                currentAngle = 90 + (90 - currentAngle);
-            currentAngle = 180 + currentAngle;
-        }
+        percentCycle = (int)(Sun.GetComponent<Transform>().rotation.eulerAngles.x);
+        return;
+    }
 
-        if (old != currentAngle < 180)
-        {
-            changeCycle();
-        }
-    }
-    public void GoToAngle(float speed = 10f, int angle = 185)
-    {
-        paused = false;
-        nextAngle = angle;
-        goToNextCycle = true;
-        sunScript.RotateSpeed = speed;
-        setAngle();
-    }
     public void EndCycle(float speed = 10f)
     {
-        if (nextAngle == currentAngle)
+        if (IsNight())
+            nextPercent = beginNight;
+        else
+            nextPercent = beginDay;
+
+        if (nextPercent == percentCycle)
             return; // already ended
 
-        if (IsNight())
-            GoToAngle(speed, 355);
-        else
-            GoToAngle(speed, 175);
+        goToNextCycle = true;
+        sunScript.RotateSpeed = speed;
+        firstFound = true;
+        SecondFound = true;
     }
     //end the current cycle and launch the second direcly (with différent speed)
     public void SkipCycle(float speed = 1f, float speedEnd = 10f)
@@ -99,77 +67,49 @@ public class CycleManager : MonoBehaviour
     public void NextCycle(float speed = 1f)
     {
         if (IsNight())
-            GoToAngle(speed, 175);
+            nextPercent = beginDay;
         else
-            GoToAngle(speed, 355);
-    }
+            nextPercent = beginNight;
 
-    private bool checkAngleBetween(int lastAngle)
-    { // check if the goal angle has been passed
-        if (currentAngle == nextAngle)
-        {
-            return true;
-        }
-        if (lastAngle < nextAngle && nextAngle <= currentAngle)
-        {
-            return true;
-        }   
-        if(currentAngle < lastAngle)
-        {
-            if (nextAngle > lastAngle || nextAngle < currentAngle)
-                return true;
-        }
-
-        return false;
+        goToNextCycle = true;
+        sunScript.RotateSpeed = speed;
     }
-    public void PauseResume()
-    {
-        paused = !paused;
-        if (paused)
-        {
-            cachedSpeed = sunScript.RotateSpeed;
-            sunScript.RotateSpeed = 0;
-        }
-        else
-        {
-            sunScript.RotateSpeed = cachedSpeed;
-            cachedSpeed = 0;
-        }
-    }
-
+    
     private void Update()
     {
-        if (!paused && goToNextCycle)
+        if (goToNextCycle)
         {
-            int lastAngle = currentAngle;
-            setAngle();
-            if(checkAngleBetween(lastAngle))
+            setPercent();
+            if(percentCycle <= nextPercent + 1 && percentCycle >= nextPercent - 1)
             {
-                goToNextCycle = false;
-                sunScript.RotateSpeed = 0;
-                if (skipSpeed != 0)
+                if (!firstFound)
                 {
-                    NextCycle(skipSpeed);
-                    skipSpeed = 0;
+                    firstFound = true;
                 }
                 else
                 {
-                    foreach (INewCycleListner listner in cycleListners)
+                    if(SecondFound)
                     {
-                        listner.WaitingAt(nextAngle , currentAngle);
+                        goToNextCycle = false;
+                        firstFound = false;
+                        SecondFound = false;
+                        sunScript.RotateSpeed = 0;
+                        if(skipSpeed != 0)
+                        {
+                            NextCycle(skipSpeed);
+                            skipSpeed = 0;
+                        }
                     }
                 }
             }
-        }
-    }
+            else
+            {
+                if (firstFound)
+                    SecondFound = true;
+            }
 
-    public void SubscribCycle(INewCycleListner ncl)
-    {
-        cycleListners.Add(ncl);
-    }
-    public bool isPaused()
-    {
-        return paused;
+
+        }
     }
 
     public bool IsDay()
@@ -178,10 +118,10 @@ public class CycleManager : MonoBehaviour
     }
     public bool IsNight()
     {
-        return (currentAngle >= 180);
+        return (percentCycle > 100); // unity EulerAngle shit
     }
     public int GetPercentCycle()
     {
-        return currentAngle;
+        return percentCycle;
     }
 }

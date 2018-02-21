@@ -9,8 +9,6 @@ TagManager:
   - Sheep
   - Fences
   - Farmer
-  - Wolf
-  - Enclos
   layers:
   - Default
   - TransparentFX

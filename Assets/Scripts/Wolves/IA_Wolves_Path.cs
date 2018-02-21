@@ -8,22 +8,15 @@ public class IA_Wolves_Path : MonoBehaviour {
 
     private Animator anim;
     private NavMeshAgent agent;
-
-
-    public Transform targetTransform; //Wolf target
+    public Transform targetTransform; //the zombie's target
     public string targetTag;
     private bool targetInRange;
     float timer;
-
     float timeBetweenAttacks;
     int damage;
-
     public delegate void TriggerTag();
     public TriggerTag function;
-
     bool moving;
-
-    GameObject[] enclos;
 
 
     public GameObject fakenclos;
@@ -35,7 +28,6 @@ public class IA_Wolves_Path : MonoBehaviour {
         damage = 10;
         targetTransform = null;
         moving = false;
-        enclos = GameObject.FindGameObjectsWithTag("Enclos");
     }
 
 
@@ -44,15 +36,12 @@ public class IA_Wolves_Path : MonoBehaviour {
         function += GetComponent<IA_Wolves_Attack>().updateTarget;
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
-        //updateTarget(fakenclos.transform);
+        updateTarget(fakenclos.transform);
         agent.Warp(this.gameObject.transform.position);
-
-        GetTargetEnclos();
 	}
 
     public void updateTarget(Transform target)
     {
-        RealaseBarrer();
         if (target == null) // Remise en idle
         {
             targetTransform = target;
@@ -77,28 +66,19 @@ public class IA_Wolves_Path : MonoBehaviour {
 
     void moveToTarget()
     {
-        if (targetTransform != null && !targetInRange) //Si a effectivement une cible et qu'elle n'est pas en rnage
+        if (targetTransform != null && !targetInRange)
         {
             moving = true;
             anim.SetBool("Moving", moving);
-            if(targetTag == "Fences")
-            {
-                Vector3 position = targetTransform.position - 0.5f*targetTransform.right; // SInon le pathfinding ne larchera pas car la zone est no walkabme
-                agent.SetDestination(position);
-            }
-            else
-            {
-                agent.SetDestination(targetTransform.position);
-            }
-
+            agent.SetDestination(targetTransform.position);
         }
-        if(targetInRange && moving) //Si proche de destination mais encore entrain de bouger
+        if(targetInRange && moving)
         {
             moving = false;
             anim.SetBool("Moving", moving);
             agent.SetDestination(transform.position);
         }
-        if(targetTag == "Aucune" )// SI aucune target
+        if(targetTag == "Aucune")
         {
             moving = false;
             anim.SetBool("Moving", moving);
@@ -127,71 +107,5 @@ public class IA_Wolves_Path : MonoBehaviour {
     //Script EnclosManager
     // Script 
     }*/ 
-
-    public void GetTargetEnclos()
-    {
-        GameObject closest_enclos = DetectCLosestEnclos();
-
-        GameObject barreer = GetBareerFromEnclos(closest_enclos);
-
-        updateTarget(barreer.transform);
-    }
-
-    public GameObject DetectCLosestEnclos()
-    {
-        GameObject enclos_target = null;
-        float dist_to_target = Mathf.Infinity;
-
-        float current_distance = 0f;
-        GameObject current_enclos = null;
-        for (int i=0; i< enclos.Length; i++) // On parcoure les enclos pour trouver le plus proche
-        {
-            current_enclos = enclos[i];
-            if (current_enclos.GetComponent<EnclosManager>().getHealth() > 0)
-            {
-                Debug.LogError("ENclos idsponible");
-                current_distance = Vector3.Distance(current_enclos.transform.position, this.gameObject.transform.position);
-                if (current_distance < dist_to_target)
-                {
-                    enclos_target = current_enclos;
-                    dist_to_target = current_distance;
-                }
-            }
-        }
-        return enclos_target;
-    }
-
-    public GameObject GetBareerFromEnclos(GameObject enclos)
-    {
-        List<GameObject> all_bareers = new List<GameObject>();
-        List<GameObject> free_bareers = new List<GameObject>();
-        GameObject resu = null;
-        foreach (Transform child in enclos.transform)
-           {
-             if (child.tag == "Fences")
-                     {
-                all_bareers.Add(child.gameObject);
-                if(child.gameObject.GetComponent<LoupDest>().GetStatus())
-                         free_bareers.Add(child.gameObject);
-                     }
-           }
-        if(free_bareers.Count > 0)
-        {
-            resu = free_bareers[Random.Range(0, free_bareers.Count - 1)];
-            resu.GetComponent<LoupDest>().SetStatus(true);
-        } else // Atention si plus de place on essaie quand même 
-        {
-            resu = all_bareers[Random.Range(0, free_bareers.Count - 1)];
-        }
-         return resu;
-    }
-
-    public void RealaseBarrer()
-    {
-        if(targetTag == "Fences")
-        {
-            targetTransform.gameObject.GetComponent<LoupDest>().SetStatus(false);
-        }
-    }
 
 }
