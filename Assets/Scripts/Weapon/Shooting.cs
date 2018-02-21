@@ -33,7 +33,7 @@ public class Shooting : MonoBehaviour {
 
     private void Awake()
     {
-        damage = 10;
+        damage = 100;
         gunRange = 100f;
         fireRate = 0.25f;
         effectsDisplayTime = 0.1f;
@@ -71,7 +71,7 @@ public class Shooting : MonoBehaviour {
             // Try and find an EnemyHealth script on the gameobject hit.
             if (shootHit.collider.CompareTag("Wolf"))
             {
-                Target wolfStats = shootHit.collider.GetComponent<Target>();
+                WolfHealth wolfStats = shootHit.collider.GetComponent<WolfHealth>();
                 wolfStats.takeDamage(damage);
 
                 // Set the second position of the line renderer to the point the raycast hit.

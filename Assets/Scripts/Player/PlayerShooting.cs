@@ -28,7 +28,7 @@ public class PlayerShooting : MonoBehaviour {
         gun = getChildGameObject(this.gameObject, "gun_end");
         gun_script = gun.GetComponent<Shooting>();
         Debug.Log(gun.transform.position);
-        nextFire = 1.2f;
+        nextFire = 1.2f/4;
         anim_time = .30f;
 
     }

@@ -14,6 +14,9 @@ public class EnclosManager : MonoBehaviour {
     private bool activePanel;
     private GameObject[] sheepClone = new GameObject[10];
 
+    public delegate void onDead();
+    public onDead onTriggerDead; //Prévenir touts les loups que je suis mort
+
 
     // Use this for initialization
     private void Awake()
@@ -101,8 +104,13 @@ public class EnclosManager : MonoBehaviour {
     //******************************************************************
     public void DamageEnclos(int degats) {
         health -= degats;
-        if (health < 0) health = 0; //santé min
-
+        if (health <= 0)
+        {
+            health = 0; //santé min
+            Debug.LogError("Enclos Mort");
+            onTriggerDead.Invoke();
+            onTriggerDead = null; //On reset le delegate
+        }
         int diffSheep = (nbSheep + 1) - Mathf.RoundToInt(health / 10.0f);
 
         for (int i=0; i < diffSheep; i++) {
@@ -113,5 +121,10 @@ public class EnclosManager : MonoBehaviour {
     public int getHealth()
     {
         return health;
+    }
+
+    public void addEnnemie( EnclosManager.onDead function)
+    {
+        onTriggerDead += function;
     }
 }

@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-
-public class IA_Wolves_Path : MonoBehaviour {
-
+public class IA_Wolves_Water_Path : MonoBehaviour {
 
     private Animator anim;
     private NavMeshAgent agent;
@@ -18,6 +16,7 @@ public class IA_Wolves_Path : MonoBehaviour {
 
     float timeBetweenAttacks;
     int damage;
+    float range;
 
     public delegate void TriggerTag();
     public TriggerTag function;
@@ -34,6 +33,7 @@ public class IA_Wolves_Path : MonoBehaviour {
         timeBetweenAttacks = 2f;
         timer = 0f;
         damage = 10;
+        range = 10;
         targetTransform = null;
         moving = false;
         enclos = GameObject.FindGameObjectsWithTag("Enclos");
@@ -41,31 +41,27 @@ public class IA_Wolves_Path : MonoBehaviour {
 
 
     // Use this for initialization
-    void Start () {
-        function += GetComponent<IA_Wolves_Attack>().updateTarget;
+    void Start()
+    {
+        function += GetComponent<IA_Wolves_Water_Attack>().updateTarget;
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         //updateTarget(fakenclos.transform);
         agent.Warp(this.gameObject.transform.position);
 
         GetTargetEnclos();
-	}
+    }
 
     public void updateTarget(Transform target)
     {
-        if (target!=null){
-            Debug.LogError("Position target : " + target.position);
-        }
-
         RealaseBarrer();
-        targetInRange = false; // Si nouvelle target supposé qu'elle n'est pas en rnage sinon bug dans les invoke
-        GetComponent<IA_Wolves_Attack>().targetInRange = false;
         if (target == null) // Remise en idle
         {
             targetTransform = target;
             targetTag = "Aucune";
             targetInRange = false;
-        }else
+        }
+        else
         {
             if (targetTransform == null) // Théoriquement en idle
             {
@@ -88,25 +84,24 @@ public class IA_Wolves_Path : MonoBehaviour {
         {
             moving = true;
             anim.SetBool("Moving", moving);
-            if(targetTag == "Fences")
+            if (targetTag == "Fences")
             {
-                Vector3 position = targetTransform.position - 2.3f*targetTransform.right; // SInon le pathfinding ne larchera pas car la zone est no walkabme
+                Vector3 position = targetTransform.position - range * targetTransform.right; // SInon le pathfinding ne larchera pas car la zone est no walkabme
                 agent.SetDestination(position);
             }
             else
             {
-                Debug.LogError("Je reste à la même place");
                 agent.SetDestination(targetTransform.position);
             }
 
         }
-        if(targetInRange && moving) //Si proche de destination mais encore entrain de bouger
+        if (targetInRange && moving) //Si proche de destination mais encore entrain de bouger
         {
             moving = false;
             anim.SetBool("Moving", moving);
             agent.SetDestination(transform.position);
         }
-        if(targetTag == "Aucune" )// SI aucune target
+        if (targetTag == "Aucune")// SI aucune target
         {
             moving = false;
             anim.SetBool("Moving", moving);
@@ -114,7 +109,7 @@ public class IA_Wolves_Path : MonoBehaviour {
         }
     }
 
-   
+
 
 
     void FixedUpdate()
@@ -126,42 +121,38 @@ public class IA_Wolves_Path : MonoBehaviour {
 
     public void updateRange()
     {
-        targetInRange = GetComponent<IA_Wolves_Attack>().targetInRange;
+        targetInRange = GetComponent<IA_Wolves_Water_Attack>().targetInRange;
     }
 
-   /* public Transform detectTarget()
-    {
-    // fences
-    //Script EnclosManager
-    // Script 
-    }*/ 
+    /* public Transform detectTarget()
+     {
+     // fences
+     //Script EnclosManager
+     // Script 
+     }*/
 
     public void GetTargetEnclos()
     {
         GameObject closest_enclos = DetectCLosestEnclos();
 
-        if(closest_enclos != null)
-        {
-            GameObject barreer = GetBareerFromEnclos(closest_enclos);
+        GameObject barreer = GetBareerFromEnclos(closest_enclos);
 
-            updateTarget(barreer.transform);
-        }else
-        {
-            updateTarget(null);
-        }
+        updateTarget(barreer.transform);
     }
 
     public GameObject DetectCLosestEnclos()
     {
         GameObject enclos_target = null;
         float dist_to_target = Mathf.Infinity;
+
         float current_distance = 0f;
         GameObject current_enclos = null;
-        for (int i=0; i< enclos.Length; i++) // On parcoure les enclos pour trouver le plus proche
+        for (int i = 0; i < enclos.Length; i++) // On parcoure les enclos pour trouver le plus proche
         {
             current_enclos = enclos[i];
             if (current_enclos.GetComponent<EnclosManager>().getHealth() > 0)
             {
+                Debug.LogError("ENclos idsponible");
                 current_distance = Vector3.Distance(current_enclos.transform.position, this.gameObject.transform.position);
                 if (current_distance < dist_to_target)
                 {
@@ -169,10 +160,6 @@ public class IA_Wolves_Path : MonoBehaviour {
                     dist_to_target = current_distance;
                 }
             }
-        }
-        if(enclos_target != null)
-        {
-            enclos_target.GetComponent<EnclosManager>().addEnnemie(GetTargetEnclos);
         }
         return enclos_target;
     }
@@ -183,35 +170,31 @@ public class IA_Wolves_Path : MonoBehaviour {
         List<GameObject> free_bareers = new List<GameObject>();
         GameObject resu = null;
         foreach (Transform child in enclos.transform)
-           {
-             if (child.tag == "Fences")
-                     {
+        {
+            if (child.tag == "Fences")
+            {
                 all_bareers.Add(child.gameObject);
-                if(!child.gameObject.GetComponent<LoupDest>().GetStatus())
-                         free_bareers.Add(child.gameObject);
-                     }
-           }
-        Random_List.Shuffle<GameObject>(all_bareers);
-        Random_List.Shuffle<GameObject>(free_bareers);
+                if (child.gameObject.GetComponent<LoupDest>().GetStatus())
+                    free_bareers.Add(child.gameObject);
+            }
+        }
         if (free_bareers.Count > 0)
         {
-            resu = free_bareers[0];
+            resu = free_bareers[Random.Range(0, free_bareers.Count - 1)];
             resu.GetComponent<LoupDest>().SetStatus(true);
-        } else // Atention si plus de place on essaie quand même 
-        {
-            resu = all_bareers[Random.Range(0, all_bareers.Count - 1)];
         }
-         return resu;
+        else // Atention si plus de place on essaie quand même 
+        {
+            resu = all_bareers[Random.Range(0, free_bareers.Count - 1)];
+        }
+        return resu;
     }
 
     public void RealaseBarrer()
     {
-        if(targetTag == "Fences")
+        if (targetTag == "Fences")
         {
             targetTransform.gameObject.GetComponent<LoupDest>().SetStatus(false);
         }
     }
-
-
-
 }
