@@ -8,6 +8,7 @@ public class Shooting : MonoBehaviour {
     public ParticleSystem muzzleFlash;
 
     public GameObject crosshair;
+    public GameObject Farmer;
 
     Ray shootRay;                                   // A ray from the gun end forwards.
     RaycastHit shootHit;                            // A raycast hit to get information about what was hit.
@@ -33,7 +34,7 @@ public class Shooting : MonoBehaviour {
 
     private void Awake()
     {
-        damage = 100;
+        damage = 10;
         gunRange = 100f;
         fireRate = 0.25f;
         effectsDisplayTime = 0.1f;
@@ -73,7 +74,7 @@ public class Shooting : MonoBehaviour {
             {
                 WolfHealth wolfStats = shootHit.collider.GetComponent<WolfHealth>();
                 wolfStats.takeDamage(damage);
-
+                shootHit.collider.GetComponent<IA_Wolves_Path>().updateTarget(Farmer.transform); // Devient la cible du fermier
                 // Set the second position of the line renderer to the point the raycast hit.
                 //gunLine.SetPosition(1, shootHit.point);
             }

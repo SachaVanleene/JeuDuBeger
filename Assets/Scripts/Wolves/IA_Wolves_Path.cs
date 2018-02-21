@@ -54,10 +54,11 @@ public class IA_Wolves_Path : MonoBehaviour {
     public void updateTarget(Transform target)
     {
         if (target!=null){
-            Debug.LogError("Position target : " + target.position);
+           // Debug.LogError("Position target : " + target.position);
         }
 
         RealaseBarrer();
+        RealeaseDlegate();
         targetInRange = false; // Si nouvelle target supposé qu'elle n'est pas en rnage sinon bug dans les invoke
         GetComponent<IA_Wolves_Attack>().targetInRange = false;
         if (target == null) // Remise en idle
@@ -77,6 +78,7 @@ public class IA_Wolves_Path : MonoBehaviour {
                 targetTransform = target;
                 targetTag = target.gameObject.tag;
             }
+            SubscribeDelegate();
         }
         function.Invoke();
 
@@ -90,12 +92,12 @@ public class IA_Wolves_Path : MonoBehaviour {
             anim.SetBool("Moving", moving);
             if(targetTag == "Fences")
             {
+                Debug.LogError("DIrection fences");
                 Vector3 position = targetTransform.position - 2.3f*targetTransform.right; // SInon le pathfinding ne larchera pas car la zone est no walkabme
                 agent.SetDestination(position);
             }
             else
             {
-                Debug.LogError("Je reste à la même place");
                 agent.SetDestination(targetTransform.position);
             }
 
@@ -170,10 +172,10 @@ public class IA_Wolves_Path : MonoBehaviour {
                 }
             }
         }
-        if(enclos_target != null)
+        /*if(enclos_target != null)
         {
-            enclos_target.GetComponent<EnclosManager>().addEnnemie(GetTargetEnclos);
-        }
+            enclos_target.GetComponent<EnclosManager>().addSubscriber(GetTargetEnclos);
+        }*/
         return enclos_target;
     }
 
@@ -206,9 +208,39 @@ public class IA_Wolves_Path : MonoBehaviour {
 
     public void RealaseBarrer()
     {
-        if(targetTag == "Fences")
+        if(targetTag == "Fences" && targetTransform != null)
         {
             targetTransform.gameObject.GetComponent<LoupDest>().SetStatus(false);
+        }
+    }
+
+    public void RealeaseDlegate()
+    {
+        if (targetTransform != null)
+        {
+            if (targetTag == "Player")
+            {
+                targetTransform.gameObject.GetComponent<Player>().RemoveSubscriber(GetTargetEnclos);
+            }
+            else
+            {
+                targetTransform.parent.gameObject.GetComponent<EnclosManager>().RemoveSubscriber(GetTargetEnclos);
+            }
+        }
+    }
+
+    public void SubscribeDelegate()
+    {
+        if (targetTransform != null)
+        {
+            if (targetTag == "Player")
+            {
+                targetTransform.gameObject.GetComponent<Player>().AddSubscriber(GetTargetEnclos);
+            }
+            else
+            {
+                targetTransform.parent.gameObject.GetComponent<EnclosManager>().AddSubscriber(GetTargetEnclos);
+            }
         }
     }
 

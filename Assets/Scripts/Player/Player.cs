@@ -11,6 +11,9 @@ public class Player : MonoBehaviour {
     Animator anim;
     int initHealth;
 
+    public delegate void onDead();
+    public onDead onTriggerDead; //Prévenir touts les loups que je suis mort
+
     private void Awake()
     {
         initHealth = 100;
@@ -25,6 +28,8 @@ public class Player : MonoBehaviour {
         health -= dps;
         if (health< 0)
         {
+            onTriggerDead.Invoke();
+            onTriggerDead = null; //On reset le delegate
             alive = false;
             anim.SetTrigger("dead");
             Debug.LogError("Mort");
@@ -46,6 +51,16 @@ public class Player : MonoBehaviour {
     void Respawn()
     {
         this.gameObject.transform.position = spawn.transform.position;
+    }
+
+    public void AddSubscriber(Player.onDead function)
+    {
+        onTriggerDead += function;
+    }
+
+    public void RemoveSubscriber(Player.onDead function)
+    {
+        onTriggerDead -= function;
     }
     // Use this for initialization
     void Start () {

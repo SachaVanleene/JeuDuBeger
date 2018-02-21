@@ -107,7 +107,7 @@ public class EnclosManager : MonoBehaviour {
         if (health <= 0)
         {
             health = 0; //santé min
-            Debug.LogError("Enclos Mort");
+            //Debug.LogError("Enclos Mort");
             onTriggerDead.Invoke();
             onTriggerDead = null; //On reset le delegate
         }
@@ -123,8 +123,13 @@ public class EnclosManager : MonoBehaviour {
         return health;
     }
 
-    public void addEnnemie( EnclosManager.onDead function)
+    public void AddSubscriber( EnclosManager.onDead function)
     {
         onTriggerDead += function;
+    }
+
+    public void RemoveSubscriber(EnclosManager.onDead function)
+    {
+        onTriggerDead -= function;
     }
 }
