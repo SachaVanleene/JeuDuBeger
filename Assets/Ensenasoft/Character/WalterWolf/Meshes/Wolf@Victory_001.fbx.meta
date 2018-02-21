@@ -1,0 +1,568 @@
+fileFormatVersion: 2
+guid: d2b1884013cf42940b845e4d56b37a3e
+timeCreated: 1452295706
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Coffe_Cup
+    100002: Coffee_Mug_JNT
+    100004: Coffee_Mug_JNT 1
+    100006: Eye_Left
+    100008: Eye_Right
+    100010: Geo_Group
+    100012: Head_JNT
+    100014: Head_TIP
+    100016: Hips_JNT
+    100018: Jaw_JNT
+    100020: Jaw_TIP
+    100022: L_Ankle_JNT
+    100024: L_Ball_JNT
+    100026: L_Clav_JNT
+    100028: L_Ear_01_JNT
+    100030: L_Ear_02_JNT
+    100032: L_Ear_TIP
+    100034: L_Elbow_JNT
+    100036: L_Eye_JNT
+    100038: L_Eye_TIP
+    100040: L_Hand_JNT
+    100042: L_Index_01_JNT
+    100044: L_Index_02_JNT
+    100046: L_Index_03_JNT
+    100048: L_Index_TIP
+    100050: L_Knee_JNT
+    100052: L_Lid_Bttm_JNT
+    100054: L_Lid_Bttm_TIP
+    100056: L_Lid_TIP
+    100058: L_Lid_TOP_JNT
+    100060: L_Middle_01_JNT
+    100062: L_Middle_02_JNT
+    100064: L_Middle_03_JNT
+    100066: L_Middle_TIP
+    100068: L_Mouth_JNT
+    100070: L_Mouth_TIP
+    100072: L_Pinky_01_JNT
+    100074: L_Pinky_02_JNT
+    100076: L_Pinky_03_JNT
+    100078: L_Pinky_TIP
+    100080: L_Shoulder_JNT
+    100082: L_Thight_JNT
+    100084: L_Thumb_01_JNT
+    100086: L_Thumb_02_JNT
+    100088: L_Thumb_03_JNT
+    100090: L_Thumb_TIP
+    100092: L_Toe_TIP
+    100094: Neck_JNT
+    100096: Nose_01_JNT
+    100098: Nose_02_NT
+    100100: Nose_TIP
+    100102: R_Ankle_JNT
+    100104: R_Ball_JNT
+    100106: R_Clav_JNT
+    100108: R_Ear_01_JNT
+    100110: R_Ear_02_JNT
+    100112: R_Ear_TIP
+    100114: R_Elbow_JNT
+    100116: R_Eye_JNT
+    100118: R_Eye_TIP
+    100120: R_Hand_JNT
+    100122: R_Index_01_JNT
+    100124: R_Index_02_JNT
+    100126: R_Index_03_JNT
+    100128: R_Index_TIP
+    100130: R_Knee_JNT
+    100132: R_Lid_Bttm_JNT
+    100134: R_Lid_Bttm_TIP
+    100136: R_Lid_TIP
+    100138: R_Lid_TOP_JNT
+    100140: R_Middle_01_JNT
+    100142: R_Middle_02_JNT
+    100144: R_Middle_03_JNT
+    100146: R_Middle_TIP
+    100148: R_Mouth_JNT
+    100150: R_Mouth_TIP
+    100152: R_Pinky_01_JNT
+    100154: R_Pinky_02_JNT
+    100156: R_Pinky_03_JNT
+    100158: R_Pinky_TIP
+    100160: R_Shoulder_JNT
+    100162: R_Thight_JNT
+    100164: R_Thumb_01_JNT
+    100166: R_Thumb_02_JNT
+    100168: R_Thumb_03_JNT
+    100170: R_Thumb_TIP
+    100172: R_Toe_TIP
+    100174: Root_JNT
+    100176: Spine_01_JNT
+    100178: Spine_02_JNT
+    100180: Spine_03_JNT
+    100182: Tail_01_JNT
+    100184: Tail_02_JNT
+    100186: Tail_03_JNT
+    100188: Tail_04_JNT
+    100190: Tail_05_JNT
+    100192: Tail_TIP
+    100194: Teeth_Lower
+    100196: Teeth_Upper
+    100198: Tie_01_JNT
+    100200: Tie_02_JNT
+    100202: Tie_03_JNT
+    100204: Tie_04_JNT
+    100206: Tie_TIP
+    100208: Tongue
+    100210: Tongue_01_JNT
+    100212: Tongue_02_JNT
+    100214: Tongue_03_JNT
+    100216: Tongue_TIP
+    100218: //RootNode
+    100220: Wolf_Geo
+    100222: World_NODE
+    400000: Coffe_Cup
+    400002: Coffee_Mug_JNT
+    400004: Coffee_Mug_JNT 1
+    400006: Eye_Left
+    400008: Eye_Right
+    400010: Geo_Group
+    400012: Head_JNT
+    400014: Head_TIP
+    400016: Hips_JNT
+    400018: Jaw_JNT
+    400020: Jaw_TIP
+    400022: L_Ankle_JNT
+    400024: L_Ball_JNT
+    400026: L_Clav_JNT
+    400028: L_Ear_01_JNT
+    400030: L_Ear_02_JNT
+    400032: L_Ear_TIP
+    400034: L_Elbow_JNT
+    400036: L_Eye_JNT
+    400038: L_Eye_TIP
+    400040: L_Hand_JNT
+    400042: L_Index_01_JNT
+    400044: L_Index_02_JNT
+    400046: L_Index_03_JNT
+    400048: L_Index_TIP
+    400050: L_Knee_JNT
+    400052: L_Lid_Bttm_JNT
+    400054: L_Lid_Bttm_TIP
+    400056: L_Lid_TIP
+    400058: L_Lid_TOP_JNT
+    400060: L_Middle_01_JNT
+    400062: L_Middle_02_JNT
+    400064: L_Middle_03_JNT
+    400066: L_Middle_TIP
+    400068: L_Mouth_JNT
+    400070: L_Mouth_TIP
+    400072: L_Pinky_01_JNT
+    400074: L_Pinky_02_JNT
+    400076: L_Pinky_03_JNT
+    400078: L_Pinky_TIP
+    400080: L_Shoulder_JNT
+    400082: L_Thight_JNT
+    400084: L_Thumb_01_JNT
+    400086: L_Thumb_02_JNT
+    400088: L_Thumb_03_JNT
+    400090: L_Thumb_TIP
+    400092: L_Toe_TIP
+    400094: Neck_JNT
+    400096: Nose_01_JNT
+    400098: Nose_02_NT
+    400100: Nose_TIP
+    400102: R_Ankle_JNT
+    400104: R_Ball_JNT
+    400106: R_Clav_JNT
+    400108: R_Ear_01_JNT
+    400110: R_Ear_02_JNT
+    400112: R_Ear_TIP
+    400114: R_Elbow_JNT
+    400116: R_Eye_JNT
+    400118: R_Eye_TIP
+    400120: R_Hand_JNT
+    400122: R_Index_01_JNT
+    400124: R_Index_02_JNT
+    400126: R_Index_03_JNT
+    400128: R_Index_TIP
+    400130: R_Knee_JNT
+    400132: R_Lid_Bttm_JNT
+    400134: R_Lid_Bttm_TIP
+    400136: R_Lid_TIP
+    400138: R_Lid_TOP_JNT
+    400140: R_Middle_01_JNT
+    400142: R_Middle_02_JNT
+    400144: R_Middle_03_JNT
+    400146: R_Middle_TIP
+    400148: R_Mouth_JNT
+    400150: R_Mouth_TIP
+    400152: R_Pinky_01_JNT
+    400154: R_Pinky_02_JNT
+    400156: R_Pinky_03_JNT
+    400158: R_Pinky_TIP
+    400160: R_Shoulder_JNT
+    400162: R_Thight_JNT
+    400164: R_Thumb_01_JNT
+    400166: R_Thumb_02_JNT
+    400168: R_Thumb_03_JNT
+    400170: R_Thumb_TIP
+    400172: R_Toe_TIP
+    400174: Root_JNT
+    400176: Spine_01_JNT
+    400178: Spine_02_JNT
+    400180: Spine_03_JNT
+    400182: Tail_01_JNT
+    400184: Tail_02_JNT
+    400186: Tail_03_JNT
+    400188: Tail_04_JNT
+    400190: Tail_05_JNT
+    400192: Tail_TIP
+    400194: Teeth_Lower
+    400196: Teeth_Upper
+    400198: Tie_01_JNT
+    400200: Tie_02_JNT
+    400202: Tie_03_JNT
+    400204: Tie_04_JNT
+    400206: Tie_TIP
+    400208: Tongue
+    400210: Tongue_01_JNT
+    400212: Tongue_02_JNT
+    400214: Tongue_03_JNT
+    400216: Tongue_TIP
+    400218: //RootNode
+    400220: Wolf_Geo
+    400222: World_NODE
+    4300000: Eye_Left
+    4300002: Eye_Right
+    4300004: Teeth_Upper
+    4300006: Teeth_Lower
+    4300008: Wolf_Geo
+    4300010: Tongue
+    4300012: Coffe_Cup
+    7400000: Victory_001
+    9500000: //RootNode
+    11100000: //RootNode
+    13700000: Coffe_Cup
+    13700002: Eye_Left
+    13700004: Eye_Right
+    13700006: Teeth_Lower
+    13700008: Teeth_Upper
+    13700010: Tongue
+    13700012: Wolf_Geo
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Victory_001
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 120
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Geo_Group
+        weight: 1
+      - path: Geo_Group/Coffe_Cup
+        weight: 1
+      - path: Geo_Group/Eye_Left
+        weight: 1
+      - path: Geo_Group/Eye_Right
+        weight: 1
+      - path: Geo_Group/Teeth_Lower
+        weight: 1
+      - path: Geo_Group/Teeth_Upper
+        weight: 1
+      - path: Geo_Group/Tongue
+        weight: 1
+      - path: Geo_Group/Wolf_Geo
+        weight: 1
+      - path: World_NODE
+        weight: 1
+      - path: World_NODE/Coffee_Mug_JNT
+        weight: 1
+      - path: World_NODE/Coffee_Mug_JNT/Coffee_Mug_JNT 1
+        weight: 1
+      - path: World_NODE/Root_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Hips_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Hips_JNT/L_Thight_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Hips_JNT/L_Thight_JNT/L_Knee_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Hips_JNT/L_Thight_JNT/L_Knee_JNT/L_Ankle_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Hips_JNT/L_Thight_JNT/L_Knee_JNT/L_Ankle_JNT/L_Ball_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Hips_JNT/L_Thight_JNT/L_Knee_JNT/L_Ankle_JNT/L_Ball_JNT/L_Toe_TIP
+        weight: 1
+      - path: World_NODE/Root_JNT/Hips_JNT/R_Thight_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Hips_JNT/R_Thight_JNT/R_Knee_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Hips_JNT/R_Thight_JNT/R_Knee_JNT/R_Ankle_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Hips_JNT/R_Thight_JNT/R_Knee_JNT/R_Ankle_JNT/R_Ball_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Hips_JNT/R_Thight_JNT/R_Knee_JNT/R_Ankle_JNT/R_Ball_JNT/R_Toe_TIP
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/L_Clav_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/L_Clav_JNT/L_Shoulder_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/L_Clav_JNT/L_Shoulder_JNT/L_Elbow_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/L_Clav_JNT/L_Shoulder_JNT/L_Elbow_JNT/L_Hand_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/L_Clav_JNT/L_Shoulder_JNT/L_Elbow_JNT/L_Hand_JNT/L_Index_01_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/L_Clav_JNT/L_Shoulder_JNT/L_Elbow_JNT/L_Hand_JNT/L_Index_01_JNT/L_Index_02_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/L_Clav_JNT/L_Shoulder_JNT/L_Elbow_JNT/L_Hand_JNT/L_Index_01_JNT/L_Index_02_JNT/L_Index_03_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/L_Clav_JNT/L_Shoulder_JNT/L_Elbow_JNT/L_Hand_JNT/L_Index_01_JNT/L_Index_02_JNT/L_Index_03_JNT/L_Index_TIP
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/L_Clav_JNT/L_Shoulder_JNT/L_Elbow_JNT/L_Hand_JNT/L_Middle_01_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/L_Clav_JNT/L_Shoulder_JNT/L_Elbow_JNT/L_Hand_JNT/L_Middle_01_JNT/L_Middle_02_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/L_Clav_JNT/L_Shoulder_JNT/L_Elbow_JNT/L_Hand_JNT/L_Middle_01_JNT/L_Middle_02_JNT/L_Middle_03_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/L_Clav_JNT/L_Shoulder_JNT/L_Elbow_JNT/L_Hand_JNT/L_Middle_01_JNT/L_Middle_02_JNT/L_Middle_03_JNT/L_Middle_TIP
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/L_Clav_JNT/L_Shoulder_JNT/L_Elbow_JNT/L_Hand_JNT/L_Pinky_01_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/L_Clav_JNT/L_Shoulder_JNT/L_Elbow_JNT/L_Hand_JNT/L_Pinky_01_JNT/L_Pinky_02_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/L_Clav_JNT/L_Shoulder_JNT/L_Elbow_JNT/L_Hand_JNT/L_Pinky_01_JNT/L_Pinky_02_JNT/L_Pinky_03_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/L_Clav_JNT/L_Shoulder_JNT/L_Elbow_JNT/L_Hand_JNT/L_Pinky_01_JNT/L_Pinky_02_JNT/L_Pinky_03_JNT/L_Pinky_TIP
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/L_Clav_JNT/L_Shoulder_JNT/L_Elbow_JNT/L_Hand_JNT/L_Thumb_01_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/L_Clav_JNT/L_Shoulder_JNT/L_Elbow_JNT/L_Hand_JNT/L_Thumb_01_JNT/L_Thumb_02_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/L_Clav_JNT/L_Shoulder_JNT/L_Elbow_JNT/L_Hand_JNT/L_Thumb_01_JNT/L_Thumb_02_JNT/L_Thumb_03_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/L_Clav_JNT/L_Shoulder_JNT/L_Elbow_JNT/L_Hand_JNT/L_Thumb_01_JNT/L_Thumb_02_JNT/L_Thumb_03_JNT/L_Thumb_TIP
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/Neck_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/Neck_JNT/Head_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/Neck_JNT/Head_JNT/Head_TIP
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/Neck_JNT/Head_JNT/Jaw_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/Neck_JNT/Head_JNT/Jaw_JNT/Jaw_TIP
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/Neck_JNT/Head_JNT/Jaw_JNT/Tongue_01_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/Neck_JNT/Head_JNT/Jaw_JNT/Tongue_01_JNT/Tongue_02_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/Neck_JNT/Head_JNT/Jaw_JNT/Tongue_01_JNT/Tongue_02_JNT/Tongue_03_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/Neck_JNT/Head_JNT/Jaw_JNT/Tongue_01_JNT/Tongue_02_JNT/Tongue_03_JNT/Tongue_TIP
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/Neck_JNT/Head_JNT/L_Ear_01_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/Neck_JNT/Head_JNT/L_Ear_01_JNT/L_Ear_02_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/Neck_JNT/Head_JNT/L_Ear_01_JNT/L_Ear_02_JNT/L_Ear_TIP
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/Neck_JNT/Head_JNT/L_Eye_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/Neck_JNT/Head_JNT/L_Eye_JNT/L_Eye_TIP
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/Neck_JNT/Head_JNT/L_Lid_Bttm_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/Neck_JNT/Head_JNT/L_Lid_Bttm_JNT/L_Lid_Bttm_TIP
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/Neck_JNT/Head_JNT/L_Lid_TOP_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/Neck_JNT/Head_JNT/L_Lid_TOP_JNT/L_Lid_TIP
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/Neck_JNT/Head_JNT/L_Mouth_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/Neck_JNT/Head_JNT/L_Mouth_JNT/L_Mouth_TIP
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/Neck_JNT/Head_JNT/Nose_01_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/Neck_JNT/Head_JNT/Nose_01_JNT/Nose_02_NT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/Neck_JNT/Head_JNT/Nose_01_JNT/Nose_02_NT/Nose_TIP
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/Neck_JNT/Head_JNT/R_Ear_01_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/Neck_JNT/Head_JNT/R_Ear_01_JNT/R_Ear_02_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/Neck_JNT/Head_JNT/R_Ear_01_JNT/R_Ear_02_JNT/R_Ear_TIP
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/Neck_JNT/Head_JNT/R_Eye_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/Neck_JNT/Head_JNT/R_Eye_JNT/R_Eye_TIP
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/Neck_JNT/Head_JNT/R_Lid_Bttm_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/Neck_JNT/Head_JNT/R_Lid_Bttm_JNT/R_Lid_Bttm_TIP
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/Neck_JNT/Head_JNT/R_Lid_TOP_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/Neck_JNT/Head_JNT/R_Lid_TOP_JNT/R_Lid_TIP
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/Neck_JNT/Head_JNT/R_Mouth_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/Neck_JNT/Head_JNT/R_Mouth_JNT/R_Mouth_TIP
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/R_Clav_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/R_Clav_JNT/R_Shoulder_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/R_Clav_JNT/R_Shoulder_JNT/R_Elbow_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/R_Clav_JNT/R_Shoulder_JNT/R_Elbow_JNT/R_Hand_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/R_Clav_JNT/R_Shoulder_JNT/R_Elbow_JNT/R_Hand_JNT/R_Index_01_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/R_Clav_JNT/R_Shoulder_JNT/R_Elbow_JNT/R_Hand_JNT/R_Index_01_JNT/R_Index_02_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/R_Clav_JNT/R_Shoulder_JNT/R_Elbow_JNT/R_Hand_JNT/R_Index_01_JNT/R_Index_02_JNT/R_Index_03_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/R_Clav_JNT/R_Shoulder_JNT/R_Elbow_JNT/R_Hand_JNT/R_Index_01_JNT/R_Index_02_JNT/R_Index_03_JNT/R_Index_TIP
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/R_Clav_JNT/R_Shoulder_JNT/R_Elbow_JNT/R_Hand_JNT/R_Middle_01_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/R_Clav_JNT/R_Shoulder_JNT/R_Elbow_JNT/R_Hand_JNT/R_Middle_01_JNT/R_Middle_02_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/R_Clav_JNT/R_Shoulder_JNT/R_Elbow_JNT/R_Hand_JNT/R_Middle_01_JNT/R_Middle_02_JNT/R_Middle_03_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/R_Clav_JNT/R_Shoulder_JNT/R_Elbow_JNT/R_Hand_JNT/R_Middle_01_JNT/R_Middle_02_JNT/R_Middle_03_JNT/R_Middle_TIP
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/R_Clav_JNT/R_Shoulder_JNT/R_Elbow_JNT/R_Hand_JNT/R_Pinky_01_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/R_Clav_JNT/R_Shoulder_JNT/R_Elbow_JNT/R_Hand_JNT/R_Pinky_01_JNT/R_Pinky_02_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/R_Clav_JNT/R_Shoulder_JNT/R_Elbow_JNT/R_Hand_JNT/R_Pinky_01_JNT/R_Pinky_02_JNT/R_Pinky_03_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/R_Clav_JNT/R_Shoulder_JNT/R_Elbow_JNT/R_Hand_JNT/R_Pinky_01_JNT/R_Pinky_02_JNT/R_Pinky_03_JNT/R_Pinky_TIP
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/R_Clav_JNT/R_Shoulder_JNT/R_Elbow_JNT/R_Hand_JNT/R_Thumb_01_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/R_Clav_JNT/R_Shoulder_JNT/R_Elbow_JNT/R_Hand_JNT/R_Thumb_01_JNT/R_Thumb_02_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/R_Clav_JNT/R_Shoulder_JNT/R_Elbow_JNT/R_Hand_JNT/R_Thumb_01_JNT/R_Thumb_02_JNT/R_Thumb_03_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/R_Clav_JNT/R_Shoulder_JNT/R_Elbow_JNT/R_Hand_JNT/R_Thumb_01_JNT/R_Thumb_02_JNT/R_Thumb_03_JNT/R_Thumb_TIP
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/Tie_01_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/Tie_01_JNT/Tie_02_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/Tie_01_JNT/Tie_02_JNT/Tie_03_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/Tie_01_JNT/Tie_02_JNT/Tie_03_JNT/Tie_04_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Spine_01_JNT/Spine_02_JNT/Spine_03_JNT/Tie_01_JNT/Tie_02_JNT/Tie_03_JNT/Tie_04_JNT/Tie_TIP
+        weight: 1
+      - path: World_NODE/Root_JNT/Tail_01_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Tail_01_JNT/Tail_02_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Tail_01_JNT/Tail_02_JNT/Tail_03_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Tail_01_JNT/Tail_02_JNT/Tail_03_JNT/Tail_04_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Tail_01_JNT/Tail_02_JNT/Tail_03_JNT/Tail_04_JNT/Tail_05_JNT
+        weight: 1
+      - path: World_NODE/Root_JNT/Tail_01_JNT/Tail_02_JNT/Tail_03_JNT/Tail_04_JNT/Tail_05_JNT/Tail_TIP
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

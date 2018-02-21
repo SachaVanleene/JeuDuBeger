@@ -690,7 +690,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f6e999359d202f6408dc1a03aed6dbc3, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f6e999359d202f6408dc1a03aed6dbc3, type: 3}
       propertyPath: m_LocalScale.x
@@ -1234,7 +1234,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1001 &804973916
 Prefab:
@@ -2163,7 +2163,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4311390300680210, guid: 1bd111e88aab2a2449478daa14ec650a, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114060616976091812, guid: 1bd111e88aab2a2449478daa14ec650a,
         type: 2}
@@ -6752,22 +6752,72 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1519540109 stripped
 GameObject:
-  m_PrefabParentObject: {fileID: 100064, guid: 2f4795f79e920034d94d2cc071b2f898, type: 2}
-  m_PrefabInternal: {fileID: 2007107439}
---- !u!65 &1519540112
-BoxCollider:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1519540109}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1503317230}
+  m_Layer: 0
+  m_Name: Mountain_wolf
+  m_TagString: Untagged
+  m_Icon: {fileID: 571167235653111936, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1503317230
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1503317229}
+  m_LocalRotation: {x: 0.35355338, y: -0.35355338, z: 0.1464466, w: 0.8535535}
+  m_LocalPosition: {x: 373.37, y: 83, z: -206.16}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1515683951}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 45, y: -45, z: 0}
+--- !u!1 &1515683949
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1515683951}
+  - component: {fileID: 1515683950}
+  - component: {fileID: 1515683952}
+  m_Layer: 0
+  m_Name: Spawnpoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1515683950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1515683949}
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &1519540113
-Rigidbody:
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fb895e7025a6104888fc90cfaa83c98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy_classic: {fileID: 0}
+  enemy_water: {fileID: 0}
+  enemy_ice: {fileID: 0}
+  spawnPoints:
+  - {fileID: 664107088}
+  - {fileID: 659879422}
+  - {fileID: 1824054590}
+  - {fileID: 1689039667}
+  spawnLac: {fileID: 1652400612}
+  spawnMountain: {fileID: 1503317229}
+--- !u!4 &1515683951
+Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -7628,6 +7678,7 @@ Transform:
   - {fileID: 1044374434}
   - {fileID: 482888074}
   - {fileID: 2023491528}
+  - {fileID: 1342223993}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
