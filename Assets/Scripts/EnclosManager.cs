@@ -8,11 +8,24 @@ public class EnclosManager : MonoBehaviour {
     public GameObject sheep, enclos, panelEnclos;
     public Text totalSheep;
     public ParticleSystem smoke;
+    public float RewardGold = 1.0f;
 
-    private int nbSheep;
+    private int nbSheep = -1;
+    public int NbSheep
+    {
+        get
+        {
+            return this.nbSheep;
+        }
+        set
+        {
+            this.nbSheep = value;
+        }
+    }
     private int health;
     private bool activePanel;
     private GameObject[] sheepClone = new GameObject[10];
+    private Assets.Script.Managers.GameManager _gameManager;
 
     public delegate void onDead();
     public onDead onTriggerDead; //Prévenir touts les loups que je suis mort
@@ -27,6 +40,7 @@ public class EnclosManager : MonoBehaviour {
     void Start () {
         nbSheep = -1;
         activePanel = false;
+        _gameManager = Assets.Script.Managers.GameManager.instance;
     }
 	
 	// Update is called once per frame
@@ -76,27 +90,42 @@ public class EnclosManager : MonoBehaviour {
     //Ajouter mouton
     //******************************************************************
     public void AddSheep() {
-        if (nbSheep < 9) {
+        if (_gameManager.TotalSheeps <= 0)
+            return;
+        if (nbSheep < 9)
+        {
             nbSheep++;
             totalSheep.text = (nbSheep + 1).ToString();
 
             sheepClone[nbSheep] = Instantiate(sheep, enclos.transform); //crée un clone mouton
             sheepClone[nbSheep].transform.rotation = enclos.transform.rotation; //le place dans l'enclos
             sheepClone[nbSheep].transform.Rotate(0, Random.Range(0, 360), 0); //l'oriente d'une façon aléatoire
+
+            _gameManager.PlaceSheep();
         }
     }
 
     //******************************************************************
     //Supprimer mouton
     //******************************************************************
-    public void RemoveSheep() {
-        if (nbSheep >= 0) {
+    public void RemoveSheep(bool kill = false) {
+        if (nbSheep >= 0)
+        {
             Instantiate(smoke, sheepClone[nbSheep].transform.position, sheepClone[nbSheep].transform.rotation);
             Destroy(sheepClone[nbSheep], .5f); //suppression du dernier clone créé
 
             totalSheep.text = nbSheep.ToString();
             nbSheep--;
+
+            if (kill)
+                _gameManager.KillSheep();
+            else
+                _gameManager.TakeSheep();
         }
+    }
+    public void KillSheep()
+    {
+        RemoveSheep(true);
     }
 
     //******************************************************************
@@ -114,7 +143,7 @@ public class EnclosManager : MonoBehaviour {
         int diffSheep = (nbSheep + 1) - Mathf.RoundToInt(health / 10.0f);
 
         for (int i=0; i < diffSheep; i++) {
-            RemoveSheep();
+            KillSheep();
         }
     }
 

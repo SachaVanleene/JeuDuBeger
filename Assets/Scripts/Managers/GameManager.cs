@@ -2,112 +2,167 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace Assets.Script.Managers
 {
-    public class GameManager : MonoBehaviour
+    public class GameManager : MonoBehaviour, INewCycleListner
     {
 
         public static GameManager instance = null;
-        public float dayCycleDelay = 30f;
-        public float nightCycleEndingDelay = 5f;
-        public Text messageText;
+        public Text TextRounds;
+        public Text TextGolds;
+        public Text TextSheeps;
+        public GameObject TextInfo;
+        public int TotalSheeps { get; set; }
+        public List<EnclosManager> Paddocks;
+        public GameObject Player;
+        public GameObject CycleManagerObject;
 
-        private int _roundNumber = 0;                 // Which round the game is currently on.
-        private WaitForSeconds _nightCycleEndingWait;           // Used to have a delay whilst the round or game ends.
+
+        private SoundManager soundManager;
+        private CycleManager cycleManager;
+        private int gold = 0;
+        private int _roundNumber = 0;
 
         private void Awake()
         {
-            //Check if instance already exists
             if (instance == null)
-
-                //if not, set instance to this
                 instance = this;
 
-            //If instance already exists and it's not this:
             else if (instance != this)
-
-                //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
                 Destroy(gameObject);
-
-            //Sets this to not be destroyed when reloading scene
-            DontDestroyOnLoad(gameObject);
-
         }
+
 
         private void Start()
         {
-            StartCoroutine(GameLoop());
+            soundManager = gameObject.GetComponent<SoundManager>();
+            cycleManager = CycleManagerObject.GetComponent<CycleManager>();
+            cycleManager.SubscribCycle(this);
+            cycleManager.GoToAngle(1, 30);
+            TotalSheeps = 15;
+            DayStart();
         }
 
         void Update()
         {
-
         }
-
-        private IEnumerator GameLoop()
+        public void KillSheep()
         {
-            yield return StartCoroutine(DayCycleStarting());
-
-            yield return StartCoroutine(DayCyclePlaying());
-
-            yield return StartCoroutine(DayCycleEnding());
-
-            yield return StartCoroutine(NightCycleStarting());
-
-            yield return StartCoroutine(NightCyclePlaying());
-
-            yield return StartCoroutine(NightCycleEnding());
-
-            StartCoroutine(GameLoop());
+            // achievement
+            displayInfo("A sheep has been eaten", 2);
         }
-
-        private IEnumerator DayCycleStarting()
+        public void TakeSheep()
         {
-            //TODO: Enable traps placement, sheeps interactions, player control. Start day light.
-
-            _roundNumber++;
-            messageText.text = "ROUND " + _roundNumber;
-
-            yield return null;
+            TotalSheeps++;
+            TextSheeps.text = TotalSheeps + " Sheeps in Inventory";
         }
-
-        private IEnumerator DayCyclePlaying()
+        public void PlaceSheep()
         {
-            messageText.text = string.Empty;
-            float localDayCycleDelay = Time.time + dayCycleDelay;
-            
-            while (!Input.GetKeyDown(KeyCode.K) ||  Time.time  < localDayCycleDelay)
+            TotalSheeps--;
+            TextSheeps.text = TotalSheeps + " Sheeps in Inventory";
+        }
+        private void placeSheeps() // place remaining sheeps in paddocks automatically
+        {
+            if (TotalSheeps <= 0)
+                return;
+            displayInfo("Your " + TotalSheeps + " sheeps have been automatically placed", 2);
+            foreach (var p in Paddocks)
             {
-                yield return null;
+                int i = 0;
+                while (TotalSheeps > 0)
+                {
+                    if (i++ >= 9) // can't place more than 10 sheeps
+                        break;
+                    p.AddSheep();
+                }
             }
         }
-
-        private IEnumerator DayCycleEnding()
+        private void removeAllSheeps()
         {
+            foreach (var p in Paddocks)
+            {
+                while (p.NbSheep >= 0)
+                {
+                    p.RemoveSheep();
+                }
+            }
+        }
+        private void getGoldsRound()
+        {
+            foreach (var p in Paddocks)
+            {
+                if (p.NbSheep <= 0)
+                    continue;
+                int toBeAdded = Mathf.RoundToInt(p.NbSheep - (2 * Mathf.Log(p.NbSheep)) * p.RewardGold);
+                if (toBeAdded != (int)(p.NbSheep - (2 * Mathf.Log(p.NbSheep)) * p.RewardGold)) //  round up
+                    toBeAdded++;
+                earnGold(toBeAdded);
+            }
+            TextGolds.text = gold + " gold";
+            removeAllSheeps();
+        }
+
+        private void displayInfo(string msg, int duration)
+        {
+            TextInfo.GetComponent<InfoTextScript>().DisplayInfo(msg, duration);
+        }
+        private void newRound()
+        {
+            _roundNumber++;
+            TextRounds.text = "ROUND " + _roundNumber;
+            displayInfo("Round " + _roundNumber + " begin", 2);
+            // calls achievements nb rounds
+        }
+
+        public void DayStart()
+        {
+            TextSheeps.text = TotalSheeps + " Sheeps in Inventory";
+            soundManager.PlayAmbuanceMusic("day_theme", 0.2f);
+            soundManager.PlaySound("safe_place_to_rest", 1.5f);
+            soundManager.PlaySound("bird", 0.2f);
+
+            //TODO: Enable traps placement, sheeps interactions, player control. Start day light.
+            newRound();
+            getGoldsRound();
+            cycleManager.GoToAngle(10, 181);
+            //cycleManager.GoToAngle(175 / 600, 175); //  takes aprox 5min to end the day
+        }
+
+        public void NightStart()
+        {
+            soundManager.PlayAmbuanceMusic("night_theme", .2f);
+            soundManager.PlaySound("wolf", 0.2f);
+            soundManager.PlaySound("dont_fuck_with_me", 1.5f);
             //TODO: Disable traps placement, sheeps interactions. Start night light.
 
-            yield return null;
+            placeSheeps();
+            cycleManager.GoToAngle(10, 1);
+
+            //cycleManager.GoToAngle(175 / 600, 355); //  takes aprox 5min to end the night
         }
 
-        private IEnumerator NightCycleStarting()
+        public void WaitingAt(int goal, int angle)
         {
-            yield return null;
+            TextRounds.text = "waiting at " + angle + ", while aiming " + goal;
+            // can do some verification, start a new wave, etc.
         }
-        private IEnumerator NightCyclePlaying()
+        private void earnGold(int value)
         {
-            //TODO: while there are wolves alive or there is one sheep
-
-            yield return null;
+            gold += value;
+            TextGolds.text = gold + " gold";
+            // call achievement gold earn
         }
+        public bool SpendGold(int value)
+        { //  allow the player to purchase
+            if (value > gold)
+                return false;
+            gold -= value;
+            TextGolds.text = gold + " gold";
 
-        private IEnumerator NightCycleEnding()
-        {
-            //TODO: Disable player control
-
-            //TODO: Round recap or game recap if game over.
-
-            yield return null;
+            // TODO : call achievement gold spent
+            return true;
         }
     }
 }
