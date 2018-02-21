@@ -10,7 +10,7 @@ public class EnclosManager : MonoBehaviour {
     public ParticleSystem smoke;
     public float RewardGold = 1.0f;
 
-    private int nbSheep;
+    private int nbSheep = -1;
     public int NbSheep
     {
         get
@@ -29,7 +29,6 @@ public class EnclosManager : MonoBehaviour {
 
     private Assets.Script.Managers.GameManager _gameManager;
 
-    // Use this for initialization
     void Start () {
         nbSheep = -1;
         health = 0.0f;
@@ -38,7 +37,6 @@ public class EnclosManager : MonoBehaviour {
         _gameManager = Assets.Script.Managers.GameManager.instance;
     }
 	
-	// Update is called once per frame
 	void Update () {
         affichePanel();
 
@@ -85,6 +83,8 @@ public class EnclosManager : MonoBehaviour {
     //Ajouter mouton
     //******************************************************************
     public void AddSheep() {
+        if (_gameManager.TotalSheeps <= 0)
+            return;
         if (nbSheep < 9) {
             nbSheep++;
             totalSheep.text = (nbSheep + 1).ToString();
@@ -93,7 +93,7 @@ public class EnclosManager : MonoBehaviour {
             sheepClone[nbSheep].transform.rotation = enclos.transform.rotation; //le place dans l'enclos
             sheepClone[nbSheep].transform.Rotate(0, Random.Range(0, 360), 0); //l'oriente d'une façon aléatoire
 
-            _gameManager.TotalSheeps++;
+            _gameManager.PlaceSheep();
         }
     }
 
@@ -108,7 +108,7 @@ public class EnclosManager : MonoBehaviour {
             totalSheep.text = nbSheep.ToString();
             nbSheep--;
 
-            _gameManager.TotalSheeps--;
+            _gameManager.TakeSheep();
         }
     }
 
