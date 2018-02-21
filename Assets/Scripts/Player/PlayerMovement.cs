@@ -64,8 +64,8 @@ public class PlayerMovement : MonoBehaviour {
         movment.Set(h, 0f, v);
         movment = movment.normalized * speed * Time.deltaTime;
         transform.Translate(movment);
-        //crosshair.transform.Translate(movment);
-        //playerRigidbody.MovePosition(transform.position + movment);
+        crosshair.transform.Translate(movment);
+        playerRigidbody.MovePosition(transform.position + movment);
     }
 
     void Animating(float h, float v)
@@ -73,10 +73,10 @@ public class PlayerMovement : MonoBehaviour {
         bool walking = h != 0f || v != 0f;
         //Debug.LogError(walking);
         anim.SetBool("IsMoving", walking);
-        anim.SetInteger("direction", direction);
+        // anim.SetInteger("direction", direction);
         if (!walking)
         {
-            anim.SetInteger("direction", 0);
+            // anim.SetInteger("direction", 0);
         }
     }
 

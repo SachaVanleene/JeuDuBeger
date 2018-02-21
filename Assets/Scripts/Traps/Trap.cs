@@ -58,7 +58,7 @@ namespace Assets.Script.Traps
         private int v = 0;
         public void OnMouseDown()
         {
-            Destroy(TrapPrefab);
+            //Destroy(TrapPrefab);
         }
 
         public void Create(Vector3 positionVector3)
