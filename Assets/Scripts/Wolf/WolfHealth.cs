@@ -19,11 +19,12 @@ public class WolfHealth : MonoBehaviour
     public void takeDamage(int damage)
     {
         health -= damage;
-        anim.SetTrigger("Hit");
+        //anim.SetTrigger("Hit");
 
         if (health < 0)
         {
-            anim.SetTrigger("Die");
+            GetComponent<IA_Wolves_Path>().updateTarget(null);
+            anim.SetTrigger("dead");
             Destroy(gameObject, 2.5f);
         }
 
