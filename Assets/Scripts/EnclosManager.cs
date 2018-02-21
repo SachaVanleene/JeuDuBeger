@@ -8,6 +8,7 @@ public class EnclosManager : MonoBehaviour {
     public GameObject sheep, enclos, panelEnclos;
     public Text totalSheep;
     public ParticleSystem smoke;
+    public float RewardGold = 1.0f;
 
     private int nbSheep;
     public int NbSheep

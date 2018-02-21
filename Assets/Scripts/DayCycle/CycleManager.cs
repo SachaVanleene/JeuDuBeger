@@ -27,7 +27,6 @@ public class CycleManager : MonoBehaviour
     {
         sunScript = Sun.GetComponent<intensity>();
         sunScript.RotateSpeed = 0;
-        NextCycle(10);
     }
 
     private void changeCycle()
