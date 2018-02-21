@@ -38,7 +38,8 @@ public class IA_Wolves_Attack : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == targetTag)
+        float dist = Vector3.Distance(targetTransform.position, transform.position); // Afin dêtre sur que ce soit le bon enclos
+        if (other.gameObject.tag == targetTag && dist < 5f)
         {
             targetInRange = true;
             onTriggerRange.Invoke();
@@ -48,7 +49,8 @@ public class IA_Wolves_Attack : MonoBehaviour {
 
     void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == targetTag)
+        //float dist = Vector3.Distance(targetTransform.position, transform.position);
+        if (other.gameObject.tag == targetTag  )
         {
             targetInRange = false;
             onTriggerRange.Invoke();
@@ -59,7 +61,7 @@ public class IA_Wolves_Attack : MonoBehaviour {
     {
         targetTag = GetComponent<IA_Wolves_Path>().targetTag; 
         targetTransform = GetComponent<IA_Wolves_Path>().targetTransform;
-        Debug.LogError("Invoke fonctionne tag :" + targetTag);
+        //Debug.LogError("Invoke fonctionne tag :" + targetTag);
     }
     // Update is called once per frame
     void Update()
@@ -78,6 +80,12 @@ public class IA_Wolves_Attack : MonoBehaviour {
             isAttacking = true;
             timer = 0f;
         }
+        /*float dist = Vector3.Distance(targetTransform.position, transform.position);
+        if (other.gameObject.tag == targetTag && (dist < 5f))
+        {
+            targetInRange = true;
+            onTriggerRange.Invoke();
+        }*/
     }
 
     void Attack()
@@ -85,15 +93,24 @@ public class IA_Wolves_Attack : MonoBehaviour {
         if (targetTag == "Player")
         {
             targetTransform.gameObject.GetComponent<Player>().takeDamage(damage);
-            Debug.LogError("Attaquue joueur");
+            //Debug.LogError("Attaque joueur");
             if (!targetTransform.gameObject.GetComponent<Player>().alive)
             {
-                script_path.updateTarget(null); // TO DO 
+                targetInRange = false;
+                onTriggerRange.Invoke();
+                script_path.GetTargetEnclos(); // TO DO 
             }
         }
-        else // ENCLOS A FAIRE
+        if (targetTag == "Fences")
         {
-
+            targetTransform.parent.gameObject.GetComponent<EnclosManager>().DamageEnclos(damage);
+            //Debug.LogError("Attaque enclos");
+            if (targetTransform.parent.gameObject.GetComponent<EnclosManager>().getHealth() <= 0)
+            {
+                targetInRange = false;
+                onTriggerRange.Invoke();
+                script_path.GetTargetEnclos(); // TO DO 
+            }
         }
     }
 
