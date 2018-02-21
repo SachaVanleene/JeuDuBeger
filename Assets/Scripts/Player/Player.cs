@@ -59,14 +59,9 @@ public class Player : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-<<<<<<< HEAD
 	void Update ()
     {
 
     }
-=======
-	void Update () {
-		
-	}
->>>>>>> master
+
 }
