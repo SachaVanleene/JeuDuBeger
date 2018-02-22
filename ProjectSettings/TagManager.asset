@@ -11,6 +11,7 @@ TagManager:
   - Farmer
   - Wolf
   - Enclos
+  - MainCanvas
   layers:
   - Default
   - TransparentFX

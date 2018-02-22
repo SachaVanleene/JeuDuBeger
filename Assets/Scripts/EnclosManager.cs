@@ -9,7 +9,7 @@ public class EnclosManager : MonoBehaviour {
     public Text totalSheep;
     public ParticleSystem smoke;
     public float RewardGold = 1.0f;
-
+    public GameObject MainCanvas;
     private int nbSheep = -1;
     public int NbSheep
     {
@@ -37,7 +37,9 @@ public class EnclosManager : MonoBehaviour {
         health = 100;
     }
 
-    void Start () {
+    void Start ()
+    {
+        MainCanvas = GameObject.FindWithTag("MainCanvas");
         nbSheep = -1;
         activePanel = false;
         _gameManager = Assets.Script.Managers.GameManager.instance;
@@ -46,8 +48,8 @@ public class EnclosManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         affichePanel();
-
-        if(activePanel) {
+        if (activePanel)
+        {
             panelEnclos.gameObject.SetActive(true);
             handleInputs();
         }
@@ -95,6 +97,7 @@ public class EnclosManager : MonoBehaviour {
         if (nbSheep < 9)
         {
             nbSheep++;
+            
             totalSheep.text = (nbSheep + 1).ToString();
 
             sheepClone[nbSheep] = Instantiate(sheep, enclos.transform); //crée un clone mouton

@@ -17,7 +17,6 @@ namespace Assets.Script.Traps
         public override IEnumerator Activate(GameObject go)
         {
             //TrapPrefab.GetComponent<Animation>().Play();
-
             if (go.tag == "Wolf")
             {
                 TrapPrefab.GetComponent<Animation>().Play();
@@ -30,12 +29,13 @@ namespace Assets.Script.Traps
                     Debug.Log(wolf.getHealth());
                     wolf.takeDamage(Damages[Level-1]);
                     Debug.Log(wolf.getHealth());
-               // }
-                if (Durability-- == 0)
-                {
-                    Destroy(gameObject);
-                }
+                // }
                 yield return new WaitForSeconds(2f);
+                Durability--;
+                if (Durability == 0)
+                {
+                    Destroy(TrapPrefab);
+                }
                 IsActive = false;
             }
             yield break;

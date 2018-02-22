@@ -41,7 +41,8 @@ namespace Assets.Script.Traps
                 if (Damages.Count > Level) rb.speed = 10f;
             }
             if (collider.gameObject.tag != "Terrain" && collider.gameObject.name != "Plane") j--;
-            if (IsInPreviewMode && collider.tag != "Terrain" && j == 0)
+            Debug.Log(j);
+            if (IsInPreviewMode && collider.tag != "Terrain" && j <= 0)
             {
                 foreach (var rend in GetComponentsInChildren<Renderer>())
                 {

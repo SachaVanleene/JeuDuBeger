@@ -14,7 +14,7 @@ public class IA_Wolves_Boss_Attack : MonoBehaviour {
     public bool targetInRange;
     string targetTag;
     private Transform targetTransform; //the zombie's target
-    IA_Wolves_Path script_path;
+    IA_Wolves_Boss_Path script_path;
     //Variable pour animation
     float timer;
     bool isAttacking;
@@ -30,9 +30,10 @@ public class IA_Wolves_Boss_Attack : MonoBehaviour {
 
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         anim = GetComponent<Animator>();
-        script_path = GetComponent<IA_Wolves_Path>();
+        script_path = GetComponent<IA_Wolves_Boss_Path>();
 
         timeBetweenAttacks = 0.833f; // timing animation
         timer = 0f;
@@ -47,11 +48,15 @@ public class IA_Wolves_Boss_Attack : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        float dist = Vector3.Distance(targetTransform.position, transform.position); // Afin dêtre sur que ce soit le bon enclos
-        if (other.gameObject.tag == targetTag && dist < 5f)
+        if (targetTransform != null)
         {
-            targetInRange = true;
-            onTriggerRange.Invoke();
+            float dist = Vector3.Distance(targetTransform.position, transform.position); // Afin dêtre sur que ce soit le bon enclos
+            if (other.gameObject.tag == targetTag && dist < 5f)
+            {
+                Debug.LogError("InRange");
+                targetInRange = true;
+                onTriggerRange.Invoke();
+            }
         }
     }
 
@@ -72,7 +77,7 @@ public class IA_Wolves_Boss_Attack : MonoBehaviour {
     void OnTriggerExit(Collider other)
     {
         //float dist = Vector3.Distance(targetTransform.position, transform.position);
-        if (other.gameObject.tag == targetTag  )
+        if (other.gameObject.tag == targetTag)
         {
             targetInRange = false;
             onTriggerRange.Invoke();
@@ -81,8 +86,8 @@ public class IA_Wolves_Boss_Attack : MonoBehaviour {
 
     public void updateTarget()
     {
-        targetTag = GetComponent<IA_Wolves_Path>().targetTag; 
-        targetTransform = GetComponent<IA_Wolves_Path>().targetTransform;
+        targetTag = GetComponent<IA_Wolves_Boss_Path>().targetTag;
+        targetTransform = GetComponent<IA_Wolves_Boss_Path>().targetTransform;
         //Debug.LogError("Invoke fonctionne tag :" + targetTag);
     }
     // Update is called once per frame
@@ -90,7 +95,7 @@ public class IA_Wolves_Boss_Attack : MonoBehaviour {
     {
         timer += Time.deltaTime;
 
-        if (true & targetTransform!=null)
+        if (true & targetTransform != null)
         {
             //look at target
             //find the vector pointing from our position to the target
@@ -105,28 +110,29 @@ public class IA_Wolves_Boss_Attack : MonoBehaviour {
 
         }
 
-
-        if (isAttacking && anim.GetCurrentAnimatorStateInfo(0).IsName("Wolf_Layer.Attack Jump") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > anim_time) // attaquer au bon moment de l'naimation
+        if (targetTransform != null)
         {
-            Attack();
-            isAttacking = false;
+            if (isAttacking && anim.GetCurrentAnimatorStateInfo(0).IsName("Wolf_Layer.Attack Jump") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > anim_time) // attaquer au bon moment de l'naimation
+            {
+                Attack();
+                isAttacking = false;
+            }
+            // si tmeps danimations poche de 99 % is attacking devient false
+            if (targetTag == "Fences")
+            {
+                targetAlive = (targetTransform.parent.gameObject.GetComponent<EnclosManager>().getHealth() > 0);
+            }
+            else
+            {
+                targetAlive = targetTransform.gameObject.GetComponent<Player>().alive;
+            }
+            if ((timer >= timeBetweenAttacks) && targetInRange && !isAttacking && targetTag != "Aucune" && targetAlive)
+            {
+                anim.SetTrigger("attack");
+                isAttacking = true;
+                timer = 0f;
+            }
         }
-        // si tmeps danimations poche de 99 % is attacking devient false
-        if(targetTag == "Fences")
-        {
-            targetAlive = (targetTransform.parent.gameObject.GetComponent<EnclosManager>().getHealth() > 0);
-        }
-        else
-        {
-            targetAlive = targetTransform.gameObject.GetComponent<Player>().alive;
-        }
-        if ((timer >= timeBetweenAttacks) && targetInRange && !isAttacking && targetTag !="Aucune" && targetAlive )
-        {
-            anim.SetTrigger("attack");
-            isAttacking = true;
-            timer = 0f;
-        }
-
     }
 
     void Attack()
@@ -134,13 +140,13 @@ public class IA_Wolves_Boss_Attack : MonoBehaviour {
         if (targetTag == "Player")
         {
             targetTransform.gameObject.GetComponent<Player>().takeDamage(damage);
-            //Debug.LogError("Attaque joueur");
-            if (!targetTransform.gameObject.GetComponent<Player>().alive)
+            Debug.LogError("Attaque joueur");
+            /*if (!targetTransform.gameObject.GetComponent<Player>().alive)
             {
                 targetInRange = false;
                 onTriggerRange.Invoke();
                 //script_path.GetTargetEnclos(); // TO DO 
-            }
+            }*/
         }
         if (targetTag == "Fences")
         {

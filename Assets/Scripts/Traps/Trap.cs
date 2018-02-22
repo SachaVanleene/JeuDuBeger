@@ -59,11 +59,7 @@ namespace Assets.Script.Traps
 
         public void OnTriggerEnter(Collider collider)
         {
-
-
-
             if (collider.gameObject.tag != "Terrain" && collider.gameObject.name != "Plane") v++;
-            // Debug.Log(IsInPreviewMode);
             if (IsInPreviewMode && collider.tag != "Terrain")
             {
                 foreach (var rend in TrapPrefab.GetComponentsInChildren<Renderer>())
@@ -71,8 +67,7 @@ namespace Assets.Script.Traps
                     rend.sharedMaterial.color = new Color(205, 0, 0, 0.02f);
                 }
             }
-            if(!IsActive)
-
+            if(!IsActive && !IsInPreviewMode)
                 StartCoroutine(Activate(collider.gameObject));
 
         }

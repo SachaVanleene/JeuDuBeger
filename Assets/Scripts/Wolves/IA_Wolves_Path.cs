@@ -47,16 +47,16 @@ public class IA_Wolves_Path : MonoBehaviour {
         agent = GetComponent<NavMeshAgent>();
         //updateTarget(fakenclos.transform);
         agent.Warp(this.gameObject.transform.position);
-
+        NavMesh.pathfindingIterationsPerFrame = 500;
         GetTargetEnclos();
 	}
 
     public void updateTarget(Transform target)
     {
+        
         if (target!=null){
            // Debug.LogError("Position target : " + target.position);
         }
-
         RealaseBarrer();
         RealeaseDlegate();
         targetInRange = false; // Si nouvelle target supposé qu'elle n'est pas en rnage sinon bug dans les invoke
@@ -68,16 +68,8 @@ public class IA_Wolves_Path : MonoBehaviour {
             targetInRange = false;
         }else
         {
-            if (targetTransform == null) // Théoriquement en idle
-            {
-                targetTransform = target;
-                targetTag = target.gameObject.tag;
-            }
-            else //Attaque ou 
-            {
-                targetTransform = target;
-                targetTag = target.gameObject.tag;
-            }
+            targetTransform = target;
+            targetTag = target.gameObject.tag;
             SubscribeDelegate();
         }
         function.Invoke();
@@ -92,7 +84,6 @@ public class IA_Wolves_Path : MonoBehaviour {
             anim.SetBool("Moving", moving);
             if(targetTag == "Fences")
             {
-                Debug.LogError("DIrection fences");
                 Vector3 position = targetTransform.position - 2.3f*targetTransform.right; // SInon le pathfinding ne larchera pas car la zone est no walkabme
                 agent.SetDestination(position);
             }
@@ -121,8 +112,8 @@ public class IA_Wolves_Path : MonoBehaviour {
 
     void FixedUpdate()
     {
-        //updateTarget(fakenclos.transform);
         moveToTarget();
+
     }
 
 
@@ -131,12 +122,6 @@ public class IA_Wolves_Path : MonoBehaviour {
         targetInRange = GetComponent<IA_Wolves_Attack>().targetInRange;
     }
 
-   /* public Transform detectTarget()
-    {
-    // fences
-    //Script EnclosManager
-    // Script 
-    }*/ 
 
     public void GetTargetEnclos()
     {
@@ -172,10 +157,6 @@ public class IA_Wolves_Path : MonoBehaviour {
                 }
             }
         }
-        /*if(enclos_target != null)
-        {
-            enclos_target.GetComponent<EnclosManager>().addSubscriber(GetTargetEnclos);
-        }*/
         return enclos_target;
     }
 
@@ -203,7 +184,7 @@ public class IA_Wolves_Path : MonoBehaviour {
         {
             resu = all_bareers[Random.Range(0, all_bareers.Count - 1)];
         }
-         return resu;
+        return resu;
     }
 
     public void RealaseBarrer()
