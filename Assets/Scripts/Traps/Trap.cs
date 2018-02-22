@@ -34,7 +34,7 @@ namespace Assets.Script.Traps
             }
         }
 
-        private int _level;
+        private int _level = 1;
         public int Level
         {
             get { return this._level; }
@@ -59,6 +59,9 @@ namespace Assets.Script.Traps
 
         public void OnTriggerEnter(Collider collider)
         {
+
+
+
             if (collider.gameObject.tag != "Terrain" && collider.gameObject.name != "Plane") v++;
             // Debug.Log(IsInPreviewMode);
             if (IsInPreviewMode && collider.tag != "Terrain")
@@ -69,6 +72,7 @@ namespace Assets.Script.Traps
                 }
             }
             if(!IsActive)
+
                 StartCoroutine(Activate(collider.gameObject));
 
         }
@@ -115,7 +119,6 @@ namespace Assets.Script.Traps
             {
                 foreach (var rend in TrapPrefab.GetComponentsInChildren<Renderer>())
                 {
-                    Debug.Log(rend);
                     rend.sharedMaterial.color = new Color(10, 205, 0, 0.02f);
                 }
             }
@@ -146,7 +149,6 @@ namespace Assets.Script.Traps
         }
         public void OnBecameInvisible()
         {
-            Debug.Log("yo");
             if (TrapFactory.ClosestTrap == this)
             {
                 foreach (var rend in TrapFactory.ClosestTrap.transform.parent.GetComponentsInChildren<Renderer>())

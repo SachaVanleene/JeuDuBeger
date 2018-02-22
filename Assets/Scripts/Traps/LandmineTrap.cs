@@ -15,7 +15,7 @@ namespace Assets.Script.Traps
         {
             DurabilityMax = 1;
             Durability = 1;
-            Damages = new List<int>(){100,200,300};
+            Damages = new List<int>(){20,27,35};
             UpgradeCosts = new List<int>() { 100, 200, 300 };
             Height = 10;
             Length = 10;
@@ -25,15 +25,24 @@ namespace Assets.Script.Traps
         }
         public override IEnumerator Activate(GameObject go)
         {
-            if (!IsInPreviewMode)
+            if (!IsInPreviewMode && go.tag == "Wolf")
             {
-                Debug.Log(go);
                 GameObject boom = CFX_SpawnSystem.GetNextObject(ExplosionEffect);
                 boom.transform.position = gameObject.transform.position;
-                Destroy(gameObject);
-                yield break;
+                foreach (var superTarget in Physics
+                    .OverlapSphere(GetComponent<BoxCollider>().center, 2)
+                    .Where(T => T.gameObject.tag == "Wolf"))
+                {
+                    WolfHealth wolf = (WolfHealth)superTarget.GetComponent<WolfHealth>();
+                    wolf.takeDamage(Damages[Level]);
+                }
+                Durability--;
+                if(Durability == 0)
+                {
+                    Destroy(gameObject);
+                }
             }
-            
+            yield break;
         }
 
 
