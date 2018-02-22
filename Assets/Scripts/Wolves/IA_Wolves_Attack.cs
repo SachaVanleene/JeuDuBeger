@@ -8,6 +8,7 @@ public class IA_Wolves_Attack : MonoBehaviour {
     // charactéristique du loup - attaque
     int damage;
     float timeBetweenAttacks;
+    float rotationSpeed;
     float anim_time; // time of anim where it attack
     // variable commune  à tous lesl oups 
     public bool targetInRange;
@@ -20,6 +21,13 @@ public class IA_Wolves_Attack : MonoBehaviour {
     //Delegate pour prévenir le script path
     public delegate void onRange();
     public onRange onTriggerRange;
+    //Variable pour regarder l'objet
+    private Quaternion lookRotation;
+    private Vector3 direction;
+
+    //
+    bool targetAlive;
+
 
     // Use this for initialization
     void Start () {
@@ -30,6 +38,7 @@ public class IA_Wolves_Attack : MonoBehaviour {
         timer = 0f;
         damage = 10;
         anim_time = 0.5f;
+        rotationSpeed = 2f;
 
         isAttacking = false;
 
@@ -38,20 +47,41 @@ public class IA_Wolves_Attack : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == targetTag)
+        if (targetTransform != null)
         {
-            targetInRange = true;
-            onTriggerRange.Invoke();
+            float dist = Vector3.Distance(targetTransform.position, transform.position); // Afin dêtre sur que ce soit le bon enclos
+            if (other.gameObject.tag == targetTag && dist < 5f)
+            {
+                targetInRange = true;
+                onTriggerRange.Invoke();
+            }
         }
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (targetTransform != null)
+        {
+            float dist = Vector3.Distance(targetTransform.position, transform.position); // Afin dêtre sur que ce soit le bon enclos
+            if (other.gameObject.tag == targetTag && dist > 5f)
+            {
+                targetInRange = false;
+                onTriggerRange.Invoke();
+            }
+        }
+    }
 
+    // oncollider stay
     void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == targetTag)
+        if (targetTransform != null)
         {
-            targetInRange = false;
-            onTriggerRange.Invoke();
+            float dist = Vector3.Distance(targetTransform.position, transform.position);
+            if (other.gameObject.tag == targetTag)
+            {
+                targetInRange = false;
+                onTriggerRange.Invoke();
+            }
         }
     }
 
@@ -59,25 +89,52 @@ public class IA_Wolves_Attack : MonoBehaviour {
     {
         targetTag = GetComponent<IA_Wolves_Path>().targetTag; 
         targetTransform = GetComponent<IA_Wolves_Path>().targetTransform;
-        Debug.LogError("Invoke fonctionne tag :" + targetTag);
+        //Debug.LogError("Invoke fonctionne tag :" + targetTag);
     }
     // Update is called once per frame
     void Update()
     {
         timer += Time.deltaTime;
 
-        if (isAttacking && anim.GetCurrentAnimatorStateInfo(0).IsName("Wolf_Layer.Attack Jump") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > anim_time) // attaquer au bon moment de l'naimation
+        if (true & targetTransform!=null)
         {
-            Attack();
-            isAttacking = false;
+            //look at target
+            //find the vector pointing from our position to the target
+            direction = (targetTransform.position - transform.position).normalized;
+
+            //create the rotation we need to be in to look at the target
+            lookRotation = Quaternion.LookRotation(direction);
+
+            //rotate us over time according to speed until we are in the required rotation
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+
+
         }
-        // si tmeps danimations poche de 99 % is attacking devient false
-        if ((timer >= timeBetweenAttacks) && targetInRange && !isAttacking && targetTag !="Aucune")
+
+        if (targetTransform != null)
         {
-            anim.SetTrigger("attack");
-            isAttacking = true;
-            timer = 0f;
+            if (isAttacking && anim.GetCurrentAnimatorStateInfo(0).IsName("Wolf_Layer.Attack Jump") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > anim_time) // attaquer au bon moment de l'naimation
+            {
+                Attack();
+                isAttacking = false;
+            }
+            // si tmeps danimations poche de 99 % is attacking devient false
+            if (targetTag == "Fences")
+            {
+                targetAlive = (targetTransform.parent.gameObject.GetComponent<EnclosManager>().getHealth() > 0);
+            }
+            else
+            {
+                targetAlive = targetTransform.gameObject.GetComponent<Player>().alive;
+            }
+            if ((timer >= timeBetweenAttacks) && targetInRange && !isAttacking && targetTag != "Aucune" && targetAlive)
+            {
+                anim.SetTrigger("attack");
+                isAttacking = true;
+                timer = 0f;
+            }
         }
+
     }
 
     void Attack()
@@ -85,15 +142,10 @@ public class IA_Wolves_Attack : MonoBehaviour {
         if (targetTag == "Player")
         {
             targetTransform.gameObject.GetComponent<Player>().takeDamage(damage);
-            Debug.LogError("Attaquue joueur");
-            if (!targetTransform.gameObject.GetComponent<Player>().alive)
-            {
-                script_path.updateTarget(null); // TO DO 
-            }
         }
-        else // ENCLOS A FAIRE
+        if (targetTag == "Fences")
         {
-
+            targetTransform.parent.gameObject.GetComponent<EnclosManager>().DamageEnclos(damage);
         }
     }
 

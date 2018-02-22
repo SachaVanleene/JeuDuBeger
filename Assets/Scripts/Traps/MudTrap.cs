@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Assets.Script.Traps
 {
@@ -12,31 +13,36 @@ namespace Assets.Script.Traps
         private int j = 0;
         public void Start()
         {
-            Level = 0;
             Damages = new List<int>() {40, 50, 60};
-            Debug.Log(Damages.Count);
-            
+            DurabilityMax = 100;
+            Durability = DurabilityMax;            
         }
 
         public override IEnumerator Activate(GameObject go)
         {
+            if (go.tag != "Terrain" && go.name != "Plane") j++;
             if (go.tag == "Wolf")
             {
-                var rb = go.GetComponent<Rigidbody>();
-                if (Damages.Count > Level) rb.velocity = rb.velocity*(Damages[Level]/100f);
+                var rb = go.GetComponent<NavMeshAgent>();
+                if (Damages.Count > Level)
+                {
+                    Debug.Log(rb.velocity);
+                    rb.speed = rb.speed*(Damages[Level]/100f);
+                }
                 yield break;
-            }
-            if(go.tag != "Terrain" && go.name != "Plane") j++;
-
+            }    
         }
 
         public void OnTriggerExit(Collider collider)
         {
-            var rb = collider.gameObject.GetComponent<Rigidbody>();
-            if (Damages.Count > Level) rb.velocity = rb.velocity * (100f/ Damages[Level]);
+            if (collider.gameObject.tag == "Wolf")
+            {   
+                var rb = collider.gameObject.GetComponent<NavMeshAgent>();
+                if (Damages.Count > Level) rb.speed = 10f;
+            }
             if (collider.gameObject.tag != "Terrain" && collider.gameObject.name != "Plane") j--;
             Debug.Log(j);
-            if (IsInPreviewMode && collider.tag != "Terrain" && j == 0)
+            if (IsInPreviewMode && collider.tag != "Terrain" && j <= 0)
             {
                 foreach (var rend in GetComponentsInChildren<Renderer>())
                 {

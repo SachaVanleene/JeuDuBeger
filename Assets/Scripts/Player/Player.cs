@@ -4,23 +4,24 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 
+    private int health;
     public bool alive;
     public GameObject spawn;
     private float respawningTime;
     Animator anim;
     int initHealth;
 
-    public int Gold { get; set; }
+    public delegate void onDead();
+    public onDead onTriggerDead; //Prévenir touts les loups que je suis mort
 
-    private int health;
-    
+    public delegate void onRespawn();
+    public onRespawn onTriggerRespawn; //Prévenir touts les loups que je suis en vie
 
     private void Awake()
     {
         initHealth = 100;
         health = initHealth;
         alive = true;
-        Gold = 100; 
         respawningTime = 7f;
         anim = GetComponent<Animator>();
     }
@@ -30,6 +31,8 @@ public class Player : MonoBehaviour {
         health -= dps;
         if (health< 0)
         {
+            onTriggerDead.Invoke();
+            onTriggerDead = null; //On reset le delegate
             alive = false;
             anim.SetTrigger("dead");
             Debug.LogError("Mort");
@@ -51,17 +54,36 @@ public class Player : MonoBehaviour {
     void Respawn()
     {
         this.gameObject.transform.position = spawn.transform.position;
+        onTriggerRespawn.Invoke();
     }
-    // Use this for initialization
-    void Start ()
+
+    public void AddSubscriber(Player.onDead function)
     {
+        onTriggerDead += function;
+    }
+
+    public void RemoveSubscriber(Player.onDead function)
+    {
+        onTriggerDead -= function;
+    }
+
+    public void AddSubscriberRespawn(Player.onRespawn function)
+    {
+        onTriggerRespawn += function;
+    }
+
+    public void RemoveSubscriberRespawn(Player.onRespawn function)
+    {
+        onTriggerRespawn -= function;
+    }
+
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
 	// Update is called once per frame
-	void Update ()
-    {
-
-    }
-
+	void Update () {
+		
+	}
 }

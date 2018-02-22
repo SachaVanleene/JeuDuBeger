@@ -12,15 +12,40 @@ namespace Assets.Script
     {
         public List<Trap> Traps;
         public TrapTypes ActualSelectedTrapTypes;
-        public Terrain Terrain;
+        public static Terrain Terrain;
+        public static GameObject PlayerGameObject;
+
+
+
         public void Start()
         {
-            CreateTrapPrevu();
-            ActualSelectedTrapTypes = TrapFactory.SelectedTrapType;
+            PlayerGameObject = GameObject.FindWithTag("Player");
+            Terrain = Terrain.activeTerrain;
+            ActualSelectedTrapTypes = TrapTypes.None;
         }
 
         public void Update()
         {
+            if (Input.GetKey("1"))
+            {
+                TrapFactory.IsInTrapCreationMode = true;
+                TrapFactory.SelectedTrapType = TrapTypes.NeedleTrap;
+            }
+            if (Input.GetKey("2"))
+            {
+                TrapFactory.IsInTrapCreationMode = true;
+                TrapFactory.SelectedTrapType = TrapTypes.BaitTrap;
+            }
+            if (Input.GetKey("3"))
+            {
+                TrapFactory.IsInTrapCreationMode = true;
+                TrapFactory.SelectedTrapType = TrapTypes.MudTrap;
+            }
+            if (Input.GetKey("4"))
+            {
+                TrapFactory.IsInTrapCreationMode = true;
+                TrapFactory.SelectedTrapType = TrapTypes.LandmineTrap;
+            }
             if (TrapFactory.IsInTrapCreationMode)
             {
                 if (TrapFactory.SelectedTrapType != ActualSelectedTrapTypes)
@@ -32,27 +57,15 @@ namespace Assets.Script
                 Vector3 mousePosition = TrapFactory.GetMousePosition();
                 var normalizedPos = new Vector2(Mathf.InverseLerp(0f, Terrain.terrainData.size.x, mousePosition.x),
                     Mathf.InverseLerp(0, Terrain.terrainData.size.z, mousePosition.z));
-                TrapFactory.ActualTrap.transform.rotation =
-                    Quaternion.LookRotation(Terrain.terrainData.GetInterpolatedNormal(normalizedPos.x, normalizedPos.y),
-                        Terrain.terrainData.GetInterpolatedNormal(normalizedPos.x, normalizedPos.y));
+                TrapFactory.ActualTrap.transform.rotation = Quaternion.LookRotation(Terrain.terrainData.GetInterpolatedNormal(normalizedPos.x, normalizedPos.y), Terrain.terrainData.GetInterpolatedNormal(normalizedPos.x, normalizedPos.y));
                 TrapFactory.ActualTrap.transform.position = mousePosition;
-                if (Input.GetMouseButtonDown(1))
+                if (Input.GetMouseButtonDown(0))
                     CreateTrap();
-                if (Input.GetKey("1"))
+                if (Input.GetMouseButtonDown(1))
                 {
-                    TrapFactory.SelectedTrapType = TrapTypes.NeedleTrap;
-                }
-                if (Input.GetKey("2"))
-                {
-                    TrapFactory.SelectedTrapType = TrapTypes.BaitTrap;
-                }
-                if (Input.GetKey("3"))
-                {
-                    TrapFactory.SelectedTrapType = TrapTypes.MudTrap;
-                }
-                if (Input.GetKey("4"))
-                {
-                    TrapFactory.SelectedTrapType = TrapTypes.LandmineTrap;
+                    TrapFactory.IsInTrapCreationMode = false;
+                    ActualSelectedTrapTypes = TrapTypes.None;
+                    Destroy(TrapFactory.ActualTrap);
                 }
             }
         }
@@ -75,7 +88,7 @@ namespace Assets.Script
                 foreach (var rend in trap.GetComponentsInChildren<Renderer>())
                 {
                     var newMaterial = new Material(rend.material);
-                    newMaterial.color = Color.white;
+                    newMaterial.color = Color.grey;
                     rend.material = newMaterial;
                 }
                 Vector3 mousePosition = TrapFactory.GetMousePosition();
