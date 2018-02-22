@@ -14,6 +14,9 @@ public class Player : MonoBehaviour {
     public delegate void onDead();
     public onDead onTriggerDead; //Prévenir touts les loups que je suis mort
 
+    public delegate void onRespawn();
+    public onRespawn onTriggerRespawn; //Prévenir touts les loups que je suis en vie
+
     private void Awake()
     {
         initHealth = 100;
@@ -51,6 +54,7 @@ public class Player : MonoBehaviour {
     void Respawn()
     {
         this.gameObject.transform.position = spawn.transform.position;
+        onTriggerRespawn.Invoke();
     }
 
     public void AddSubscriber(Player.onDead function)
@@ -62,6 +66,17 @@ public class Player : MonoBehaviour {
     {
         onTriggerDead -= function;
     }
+
+    public void AddSubscriberRespawn(Player.onRespawn function)
+    {
+        onTriggerRespawn += function;
+    }
+
+    public void RemoveSubscriberRespawn(Player.onRespawn function)
+    {
+        onTriggerRespawn -= function;
+    }
+
     // Use this for initialization
     void Start () {
 		

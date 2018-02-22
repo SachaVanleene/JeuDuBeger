@@ -47,11 +47,14 @@ public class IA_Wolves_Attack : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        float dist = Vector3.Distance(targetTransform.position, transform.position); // Afin dêtre sur que ce soit le bon enclos
-        if (other.gameObject.tag == targetTag && dist < 5f)
+        if (targetTransform != null)
         {
-            targetInRange = true;
-            onTriggerRange.Invoke();
+            float dist = Vector3.Distance(targetTransform.position, transform.position); // Afin dêtre sur que ce soit le bon enclos
+            if (other.gameObject.tag == targetTag && dist < 5f)
+            {
+                targetInRange = true;
+                onTriggerRange.Invoke();
+            }
         }
     }
 
@@ -71,11 +74,14 @@ public class IA_Wolves_Attack : MonoBehaviour {
     // oncollider stay
     void OnTriggerExit(Collider other)
     {
-        //float dist = Vector3.Distance(targetTransform.position, transform.position);
-        if (other.gameObject.tag == targetTag  )
+        if (targetTransform != null)
         {
-            targetInRange = false;
-            onTriggerRange.Invoke();
+            float dist = Vector3.Distance(targetTransform.position, transform.position);
+            if (other.gameObject.tag == targetTag)
+            {
+                targetInRange = false;
+                onTriggerRange.Invoke();
+            }
         }
     }
 
@@ -105,26 +111,28 @@ public class IA_Wolves_Attack : MonoBehaviour {
 
         }
 
-
-        if (isAttacking && anim.GetCurrentAnimatorStateInfo(0).IsName("Wolf_Layer.Attack Jump") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > anim_time) // attaquer au bon moment de l'naimation
+        if (targetTransform != null)
         {
-            Attack();
-            isAttacking = false;
-        }
-        // si tmeps danimations poche de 99 % is attacking devient false
-        if(targetTag == "Fences")
-        {
-            targetAlive = (targetTransform.parent.gameObject.GetComponent<EnclosManager>().getHealth() > 0);
-        }
-        else
-        {
-            targetAlive = targetTransform.gameObject.GetComponent<Player>().alive;
-        }
-        if ((timer >= timeBetweenAttacks) && targetInRange && !isAttacking && targetTag !="Aucune" && targetAlive )
-        {
-            anim.SetTrigger("attack");
-            isAttacking = true;
-            timer = 0f;
+            if (isAttacking && anim.GetCurrentAnimatorStateInfo(0).IsName("Wolf_Layer.Attack Jump") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > anim_time) // attaquer au bon moment de l'naimation
+            {
+                Attack();
+                isAttacking = false;
+            }
+            // si tmeps danimations poche de 99 % is attacking devient false
+            if (targetTag == "Fences")
+            {
+                targetAlive = (targetTransform.parent.gameObject.GetComponent<EnclosManager>().getHealth() > 0);
+            }
+            else
+            {
+                targetAlive = targetTransform.gameObject.GetComponent<Player>().alive;
+            }
+            if ((timer >= timeBetweenAttacks) && targetInRange && !isAttacking && targetTag != "Aucune" && targetAlive)
+            {
+                anim.SetTrigger("attack");
+                isAttacking = true;
+                timer = 0f;
+            }
         }
 
     }
@@ -134,26 +142,10 @@ public class IA_Wolves_Attack : MonoBehaviour {
         if (targetTag == "Player")
         {
             targetTransform.gameObject.GetComponent<Player>().takeDamage(damage);
-            //Debug.LogError("Attaque joueur");
-            if (!targetTransform.gameObject.GetComponent<Player>().alive)
-            {
-                targetInRange = false;
-                onTriggerRange.Invoke();
-                //script_path.GetTargetEnclos(); // TO DO 
-            }
         }
         if (targetTag == "Fences")
         {
             targetTransform.parent.gameObject.GetComponent<EnclosManager>().DamageEnclos(damage);
-            //Debug.LogError("Attaque enclos : sante : ");
-
-            /*if (targetTransform.parent.gameObject.GetComponent<EnclosManager>().getHealth() <= 0)
-            {
-                Debug.LogError("Target tue");
-                targetInRange = false;
-                onTriggerRange.Invoke();
-                //script_path.updateTarget(null);
-            }*/
         }
     }
 
