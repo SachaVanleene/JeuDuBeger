@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class InputHandler : MonoBehaviour {
 
+    #region Inputs
     public float horizontal;
     public float vertical;
     public float mouse1;
@@ -12,6 +13,9 @@ public class InputHandler : MonoBehaviour {
     public float middleMouse;
     public float mouseX;
     public float mouseY;
+    public bool jumpInput;
+    public bool runInput;
+    #endregion
 
     [HideInInspector]
     public FreeCameraLook camProperties;
@@ -24,22 +28,32 @@ public class InputHandler : MonoBehaviour {
     ShakeCamera shakeCam;
     StateManager states;
 
+    HandleMovement_Player hMove;
+
+    #region Camera Settings
     public float normalFov = 60;
     public float aimingFov = 40;
     float targetFov;
     float curFov;
-    public float cameraNormalZ = 2;
+
+    public float cameraNormalX = 0.5f;
+    public float cameraAimingX = 0;
+    public float cameraNormalY = 1.5f ;
+    public float cameraAimingY = 0;
+    public float cameraNormalZ = -6;
     public float cameraAimingZ = -0.86f;
+    
     float targetZ;
     float curZ;
     float actualZ;
     LayerMask layerMask;
 
-    public float shakeRecoil = 0.5f;
-    public float shakeMovement = 0.3f;
-    public float shakeMin = 0.1f;
+    public float shakeRecoil = 0.05f;
+    public float shakeMovement = 0.05f;
+    public float shakeMin = 0f;
     float targetShake;
     float curShake;
+    #endregion
 
     // Use this for initialization
     void Start ()
@@ -53,13 +67,29 @@ public class InputHandler : MonoBehaviour {
         states = GetComponent<StateManager>();
 
         layerMask = ~(1 << gameObject.layer);
-        states.layerMask = layerMask;	
+        states.layerMask = layerMask;
+
+        gameObject.AddComponent<HandleMovement_Player>();
+        hMove = GetComponent<HandleMovement_Player>();
+
+        states.isPlayer = true;
+        states.Init();
+        hMove.Init(states, this);
+
+        FixPlayerMeshes();
 	}
+
+    void Update()
+    {
+        states.RegularTick();
+    }
 
     void FixedUpdate()
     {
+        states.FixedTick();
         HandleInput();
         UpdateStates();
+        hMove.Tick();
         HandleShake();
 
         //Find where camera is looking
@@ -67,7 +97,7 @@ public class InputHandler : MonoBehaviour {
         states.lookPosition = ray.GetPoint(20);
         RaycastHit hit;
 
-        Debug.DrawRay(ray.origin, ray.direction);
+        Debug.DrawRay(ray.origin, ray.direction, Color.blue);
 
         if (Physics.Raycast(ray.origin, ray.direction, out hit, 100, layerMask))
         {
@@ -84,7 +114,7 @@ public class InputHandler : MonoBehaviour {
 
         //Update camera's postion
         curZ = Mathf.Lerp(curZ, actualZ, Time.deltaTime * 15);
-        camTrans.localPosition = new Vector3(0, 0, curZ);
+        camTrans.localPosition = new Vector3(cameraNormalX, cameraNormalY, curZ);
     }
 
     void HandleInput()
@@ -97,6 +127,9 @@ public class InputHandler : MonoBehaviour {
         mouseX = Input.GetAxis("Mouse X");
         mouseY = Input.GetAxis("Mouse Y");
         fire3 = Input.GetAxis("Fire3");
+
+        jumpInput = Input.GetButtonDown(Statics.Jump);
+        runInput = Input.GetButton(Statics.Run);
     }
 
     void UpdateStates()
@@ -107,6 +140,25 @@ public class InputHandler : MonoBehaviour {
 
         states.horizontal = horizontal;
         states.vertical = vertical;
+
+        Vector3 h = camTrans.right * horizontal;
+        Vector3 v = camTrans.forward * vertical;
+
+        h.y = 0;
+        v.y = 0;
+
+        Vector3 moveDir = (h + v).normalized;
+        states.moveDirection = moveDir;
+        states.inAngle_MoveDir = InAngle(states.moveDirection, 25);
+
+        if (states.walk && horizontal != 0 || states.walk && vertical != 0)
+        {
+            states.inAngle_MoveDir = true;
+        }
+
+        states.onLocomotion = states.anim.GetBool(Statics.onLocomotion);
+        HandleRun();
+        states.jumpInput = jumpInput;
 
         if (states.aiming)
         {
@@ -129,6 +181,63 @@ public class InputHandler : MonoBehaviour {
             targetFov = normalFov;
         }
 
+    }
+
+    void FixPlayerMeshes()
+    {
+        SkinnedMeshRenderer[] skinned = GetComponentsInChildren<SkinnedMeshRenderer>();
+        for (int i = 0; i < skinned.Length; i++)
+        {
+            skinned[i].updateWhenOffscreen = true;
+        }
+    }
+
+    bool InAngle(Vector3 targetDir, float angleTreshold)
+    {
+        bool retVal = false;
+        float angle = Vector3.Angle(transform.forward, targetDir);
+
+        if (angle < angleTreshold)
+            retVal = true;
+
+        return retVal;
+    }
+
+    void HandleRun()
+    {
+        bool canRun = states.canRun;
+
+        if (runInput && canRun)
+        {
+            states.walk = false;
+            states.run = true;
+        }
+        else
+        {
+            states.walk = true;
+            states.run = false;
+        }
+
+        if (horizontal != 0 || vertical != 0)
+        {
+            states.run = runInput;
+            states.anim.SetInteger(Statics.specialType, 
+                Statics.GetAnimSpecialType(AnimSpecials.run));
+        }
+        else
+        {
+            if (states.run)
+                states.run = false;
+        }
+
+        if (!states.inAngle_MoveDir && hMove.doAngleCheck)
+            states.run = false;
+
+        if (states.run == false)
+        {
+            states.anim.SetInteger(Statics.specialType, 
+                Statics.GetAnimSpecialType(AnimSpecials.runToStop));
+        }
     }
 
     void HandleShake()
