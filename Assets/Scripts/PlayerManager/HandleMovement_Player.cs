@@ -163,7 +163,9 @@ public class HandleMovement_Player : MonoBehaviour {
         }
         else
         {
-            Quaternion targetRot = Quaternion.LookRotation((states.lookHitPosition - transform.position).normalized);
+            Vector3 lookAt = (states.lookHitPosition - transform.position).normalized;
+            lookAt.y = 0;
+            Quaternion targetRot = Quaternion.LookRotation(lookAt);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * velocityChange);
         }
     }

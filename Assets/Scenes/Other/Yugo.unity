@@ -275,6 +275,10 @@ Prefab:
       propertyPath: defaultSpread
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11487074, guid: a5984f13f3c383240b4012bf7f8a7e56, type: 2}
+      propertyPath: activeCrosshair
+      value: 
+      objectReference: {fileID: 1947037778}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a5984f13f3c383240b4012bf7f8a7e56, type: 2}
   m_IsPrefabParent: 0
@@ -340,6 +344,7 @@ MonoBehaviour:
   aiming: 0
   canRun: 0
   shoot: 0
+  canShoot: 0
   reloading: 0
   anim: {fileID: 0}
   rb: {fileID: 0}
@@ -427,7 +432,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 902546821}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.72, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1766167658}
@@ -815,6 +820,12 @@ ParticleSystem:
   m_PrefabParentObject: {fileID: 198160183039462636, guid: 9d10e3a6c9d6afe489d811e5660d925f,
     type: 2}
   m_PrefabInternal: {fileID: 121448678}
+--- !u!114 &1947037778 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11489322, guid: a5984f13f3c383240b4012bf7f8a7e56,
+    type: 2}
+  m_PrefabInternal: {fileID: 844481840}
+  m_Script: {fileID: 11500000, guid: a7330c50f56385a4e931132fe3a1f258, type: 3}
 --- !u!1001 &1965068738
 Prefab:
   m_ObjectHideFlags: 0

@@ -178,7 +178,8 @@ public class StateManager : MonoBehaviour {
             }
         }
 
-        
+        UpdateState();
+        MonitorAirTime();
     }
 
     void UpdateState()
