@@ -77,7 +77,7 @@ public class HandleMovement_Player : MonoBehaviour {
 
             float targetSpeed = states.walkSpeed;
 
-            if (states.run && states.groundAngle == 0)
+            if (states.run && states.groundAngle <= 5)
                 targetSpeed = states.runSpeed;
 
             if (inAngle)
@@ -93,7 +93,7 @@ public class HandleMovement_Player : MonoBehaviour {
     {
         Vector3 curVelocity = rb.velocity;
 
-        if (states.horizontal != 0 || states.vertical != 0)
+        if (states.moving)
         {
             targetVelocity = (h + v).normalized * speed;
             velocityChange = 3;
@@ -104,16 +104,22 @@ public class HandleMovement_Player : MonoBehaviour {
             targetVelocity = Vector3.zero;
         }
 
-        Vector3 vel = Vector3.Lerp(curVelocity, targetVelocity, Time.deltaTime * velocityChange);
-        rb.velocity = vel;
-
         if (states.obstacleForward)
+        {
             rb.velocity = Vector3.zero;
+        }
+        else
+        {
+            Vector3 vel = Vector3.Lerp(curVelocity, targetVelocity, Time.deltaTime * velocityChange);
+            rb.velocity = vel;
+        }
+
+
     }
 
     void HandleRotation_Normal(Vector3 h, Vector3 v)
     {
-        if (Mathf.Abs(states.horizontal) > 0 || Mathf.Abs(states.vertical) > 0)
+        if (states.moving)
         {
             storeDirection = (h + v).normalized;
 
@@ -217,7 +223,6 @@ public class HandleMovement_Player : MonoBehaviour {
         {
 
         }
-
     }
 
     IEnumerator AddJumpForce(float delay)
@@ -252,7 +257,7 @@ public class HandleMovement_Player : MonoBehaviour {
 
     void HandleDrag()
     {
-        if (states.horizontal != 0 || states.vertical != 0 || states.onGround == false)
+        if (states.moving || states.onGround == false)
             rb.drag = 0;
         else
             rb.drag = 4;

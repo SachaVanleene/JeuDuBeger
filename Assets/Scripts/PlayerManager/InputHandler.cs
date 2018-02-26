@@ -25,6 +25,9 @@ public class InputHandler : MonoBehaviour {
     public Transform camTrans;
 
     CrosshairManager crosshairManager;
+    [HideInInspector]
+    public Crosshair crosshair;
+
     ShakeCamera shakeCam;
     StateManager states;
 
@@ -59,6 +62,7 @@ public class InputHandler : MonoBehaviour {
     void Start ()
     {
         crosshairManager = CrosshairManager.GetInstance();
+        crosshair = crosshairManager.activeCrosshair.GetComponent<Crosshair>();
         camProperties = FreeCameraLook.GetInstance();
         camPivot = camProperties.transform.GetChild(0);
         camTrans = camPivot.GetChild(0);
@@ -74,6 +78,7 @@ public class InputHandler : MonoBehaviour {
 
         states.isPlayer = true;
         states.Init();
+        Debug.Log(states.anim.name + states.anim.avatar);
         hMove.Init(states, this);
 
         FixPlayerMeshes();
@@ -82,6 +87,7 @@ public class InputHandler : MonoBehaviour {
     void Update()
     {
         states.RegularTick();
+       
     }
 
     void FixedUpdate()
@@ -140,6 +146,7 @@ public class InputHandler : MonoBehaviour {
 
         states.horizontal = horizontal;
         states.vertical = vertical;
+        states.moving = states.horizontal != 0 || states.vertical != 0;
 
         Vector3 h = camTrans.right * horizontal;
         Vector3 v = camTrans.forward * vertical;
@@ -149,7 +156,7 @@ public class InputHandler : MonoBehaviour {
 
         Vector3 moveDir = (h + v).normalized;
         states.moveDirection = moveDir;
-        states.inAngle_MoveDir = InAngle(states.moveDirection, 25);
+        states.inAngle_MoveDir = InAngle(states.moveDirection, 90);
 
         if (states.walk && horizontal != 0 || states.walk && vertical != 0)
         {
@@ -164,22 +171,17 @@ public class InputHandler : MonoBehaviour {
         {
             targetZ = cameraAimingZ;
             targetFov = aimingFov;
-
-            if (mouse1 > 0.5 && !states.reloading)
-            {
-                states.shoot = true;
-            }
-            else
-            {
-                states.shoot = false;
-            }
         }
         else
         {
-            states.shoot = false;
             targetZ = cameraNormalZ;
             targetFov = normalFov;
         }
+
+        if (mouse1 > 0.5 && !states.reloading)
+            states.shoot = true;
+        else
+            states.shoot = false;
 
     }
 
@@ -207,7 +209,7 @@ public class InputHandler : MonoBehaviour {
     {
         bool canRun = states.canRun;
 
-        if (runInput && canRun)
+        if (runInput && canRun && !states.aiming)
         {
             states.walk = false;
             states.run = true;
@@ -218,7 +220,7 @@ public class InputHandler : MonoBehaviour {
             states.run = false;
         }
 
-        if (horizontal != 0 || vertical != 0)
+        if ((horizontal != 0 || vertical != 0) && !states.aiming)
         {
             states.run = runInput;
             states.anim.SetInteger(Statics.specialType, 
@@ -242,11 +244,30 @@ public class InputHandler : MonoBehaviour {
 
     void HandleShake()
     {
+        if (states.aiming)
+        {
+            crosshair.defaultSpread = 0.6f;
+        }
+        else
+        {
+            crosshair.defaultSpread = 1.2f;
+        }
+
         if (states.shoot)
         {
-            targetShake = shakeRecoil;
-            camProperties.WiggleCrosshairAndCamera(0.2f);
-            targetFov += 5;
+            if (states.aiming)
+            {
+                targetShake = shakeRecoil;
+                camProperties.WiggleCrosshairAndCamera(0.05f);
+                targetFov += 3;
+            }
+            else
+            {
+                states.anim.SetTrigger("Fire");
+                targetShake = shakeRecoil;
+                camProperties.WiggleCrosshairAndCamera(0.1f);
+                targetFov += 5;
+            }
         }
         else
         {

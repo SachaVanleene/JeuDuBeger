@@ -152,6 +152,12 @@ public class Crosshair : MonoBehaviour
 			targetSpread = value;
 			spreadT =0;
 		}
+        else
+        {
+            isSpreadWorking = false;
+            targetSpread = defaultSpread;
+            spreadT = 0;
+        }
 	}
 
 	public void rotateCursor(float seconds) //rotates it
@@ -164,6 +170,7 @@ public class Crosshair : MonoBehaviour
 			if(spreadWhileRotating)
 			{
 				ChangeCursorSpread(rotationSpeed);
+                Debug.Log(rotationSpeed);
 			}
 		}
 	}

@@ -28,6 +28,7 @@ public class StateManager : MonoBehaviour {
     public bool obstacleForward;
     public bool groundForward;
     public float groundAngle;
+    public bool moving;
 
     #region StateRequests
     [Header("Movement State Requests")]
@@ -92,6 +93,7 @@ public class StateManager : MonoBehaviour {
     void Start () {
         handleShooting = GetComponent<HandleShooting>();
         handleAnim = GetComponent<HandleAnimations>();
+        
 	}
 	
 	void FixedUpdate () {
@@ -102,7 +104,7 @@ public class StateManager : MonoBehaviour {
     public void Init()
     {
         inGame = true;
-        CreateModel();
+        activeModel = gameObject.transform.GetChild(1).gameObject;
         SetupAnimator();
         AddControllerReferences();
         canJump = true;
@@ -127,7 +129,10 @@ public class StateManager : MonoBehaviour {
         anim = GetComponent<Animator>();
         Animator childAnim = activeModel.GetComponent<Animator>();
         if (childAnim != null)
+        {
+            anim.avatar = childAnim.avatar;
             Destroy(childAnim);
+        }
     }
 
     void AddControllerReferences()
@@ -139,6 +144,11 @@ public class StateManager : MonoBehaviour {
         rb.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX;
     }
     #endregion
+
+    public void RegularTick()
+    {
+        onGround = IsOnGround();
+    }
 
     public void FixedTick()
     {
@@ -170,17 +180,12 @@ public class StateManager : MonoBehaviour {
         
     }
 
-    public void RegularTick()
-    {
-        onGround = IsOnGround();
-    }
-
     void UpdateState()
     {
         if (curState == CharStates.hold)
             return;
 
-        if (horizontal != 0 || vertical != 0)
+        if (moving)
             curState = CharStates.moving;
         else
             curState = CharStates.idle;
@@ -196,7 +201,7 @@ public class StateManager : MonoBehaviour {
         if (curState == CharStates.hold)
             return false;
 
-        Vector3 origin = transform.position + Vector3.up * 0.5f;
+        Vector3 origin = transform.position + Vector3.up * 0.8f;
         RaycastHit hit = new RaycastHit();
 
         bool isHit = false;
@@ -252,8 +257,8 @@ public class StateManager : MonoBehaviour {
 
     void FindGround(Vector3 origin, ref RaycastHit hit, ref bool isHit)
     {
-        Debug.DrawRay(origin, -Vector3.up * 0.5f, Color.red);
-        if (Physics.Raycast(origin, -Vector3.up, out hit, groundDistance, ignoreLayers))
+        Debug.DrawRay(origin, -Vector3.up * 0.7f, Color.red);
+        if (Physics.Raycast(origin, -Vector3.up, out hit, 1, ignoreLayers))
         {
             isHit = true;
         }
@@ -286,7 +291,7 @@ public class StateManager : MonoBehaviour {
 
         if (groundForward)
         {
-            if (horizontal != 0 || vertical != 0)
+            if (moving)
             {
                 Vector3 p1 = transform.position;
                 Vector3 p2 = hit.point;
@@ -322,7 +327,7 @@ public class StateManager : MonoBehaviour {
             {
                 anim.SetInteger(Statics.jumpType,
                     (airTime > airTimeTreshold) ?
-                    (horizontal != 0 || vertical != 0) ?
+                    (moving) ?
                     2 : 1 : 0);
             }
 

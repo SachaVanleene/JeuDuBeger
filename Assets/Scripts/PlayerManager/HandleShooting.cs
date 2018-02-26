@@ -15,6 +15,8 @@ public class HandleShooting : MonoBehaviour {
     public Transform caseSpawn;
 
     public int curBullets = 3;
+    public bool infiniteBullets = true;
+
 
     bool shoot;
     bool dontShoot;
@@ -37,15 +39,15 @@ public class HandleShooting : MonoBehaviour {
             {
                 weaponAnim.SetBool("Shoot", false);
 
-                if (curBullets > 0)
+                if (curBullets > 0 || infiniteBullets)
                 {
                     emptyGun = false;
                     //states.audioManager.PlayGunSound();
 
-                    GameObject go = Instantiate(casingPrefab, caseSpawn.position, caseSpawn.rotation) as GameObject;
-                    Rigidbody rb = go.GetComponent<Rigidbody>();
-                    rb.AddForce(transform.right.normalized * 2 + Vector3.up * 1.3f, ForceMode.Impulse);
-                    rb.AddRelativeTorque(go.transform.right * 1.5f, ForceMode.Impulse);
+                    //GameObject go = Instantiate(casingPrefab, caseSpawn.position, caseSpawn.rotation) as GameObject;
+                    //Rigidbody rb = go.GetComponent<Rigidbody>();
+                    //rb.AddForce(transform.right.normalized * 2 + Vector3.up * 1.3f, ForceMode.Impulse);
+                    //rb.AddRelativeTorque(go.transform.right * 1.5f, ForceMode.Impulse);
 
                     for (int i = 0; i < muzzle.Length; i++)
                     {
