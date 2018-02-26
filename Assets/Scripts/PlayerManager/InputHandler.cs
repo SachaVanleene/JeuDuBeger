@@ -253,7 +253,7 @@ public class InputHandler : MonoBehaviour {
             crosshair.defaultSpread = 1.2f;
         }
 
-        if (states.shoot)
+        if (states.shoot && states.canShoot)
         {
             if (states.aiming)
             {

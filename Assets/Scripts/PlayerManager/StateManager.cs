@@ -45,6 +45,7 @@ public class StateManager : MonoBehaviour {
     public bool aiming;
     public bool canRun;
     public bool shoot;
+    public bool canShoot;
     public bool reloading;
     #endregion
 

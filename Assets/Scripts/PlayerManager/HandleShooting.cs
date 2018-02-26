@@ -38,7 +38,7 @@ public class HandleShooting : MonoBehaviour {
             if (timer <= 0)
             {
                 weaponAnim.SetBool("Shoot", false);
-
+                states.canShoot = true;
                 if (curBullets > 0 || infiniteBullets)
                 {
                     emptyGun = false;
@@ -54,7 +54,7 @@ public class HandleShooting : MonoBehaviour {
                         muzzle[i].Emit(1);
                     }
 
-                    RaycastShoot();
+                    StartCoroutine(RaycastShoot());
 
                     curBullets--;
                 }
@@ -77,6 +77,7 @@ public class HandleShooting : MonoBehaviour {
             {
                 weaponAnim.SetBool("Shoot", true);
                 timer -= Time.deltaTime;
+                states.canShoot = false;
             }
         }
         else
@@ -86,11 +87,11 @@ public class HandleShooting : MonoBehaviour {
         }	
 	}
 
-    void RaycastShoot()
+    IEnumerator RaycastShoot()
     {
+        yield return new WaitForSeconds(0.2f);
         Vector3 direction = states.lookHitPosition - bulletSpawnPoint.position;
         RaycastHit hit;
-
         if (Physics.Raycast(bulletSpawnPoint.position, direction, out hit, 100, states.layerMask))
         {
             GameObject go = Instantiate(smokeParticle, hit.point, Quaternion.identity) as GameObject;
