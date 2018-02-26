@@ -17,6 +17,7 @@ public static class Statics
     public static string mirrorJump = "mirrorJump";
     public static string incline = "incline";
     public static string Run = "Run";
+    public static string moving = "moving";
     #endregion
 
     public static int GetAnimSpecialType(AnimSpecials i)

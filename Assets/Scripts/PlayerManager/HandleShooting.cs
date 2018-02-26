@@ -27,6 +27,7 @@ public class HandleShooting : MonoBehaviour {
 	void Start ()
     {
         states = GetComponent<StateManager>();
+        timer = 1;
 	}
 	
 	// Update is called once per frame
@@ -37,32 +38,22 @@ public class HandleShooting : MonoBehaviour {
         {
             if (timer <= 0)
             {
-                weaponAnim.SetBool("Shoot", false);
+                
                 states.canShoot = true;
                 if (curBullets > 0 || infiniteBullets)
                 {
                     emptyGun = false;
-                    //states.audioManager.PlayGunSound();
-
-                    //GameObject go = Instantiate(casingPrefab, caseSpawn.position, caseSpawn.rotation) as GameObject;
-                    //Rigidbody rb = go.GetComponent<Rigidbody>();
-                    //rb.AddForce(transform.right.normalized * 2 + Vector3.up * 1.3f, ForceMode.Impulse);
-                    //rb.AddRelativeTorque(go.transform.right * 1.5f, ForceMode.Impulse);
-
-                    for (int i = 0; i < muzzle.Length; i++)
-                    {
-                        muzzle[i].Emit(1);
-                    }
-
-                    StartCoroutine(RaycastShoot());
-
+                    
+                    StartCoroutine(NoAimShoot());
+                    weaponAnim.SetBool("Shoot", false);
+                    states.anim.SetTrigger("Fire");
                     curBullets--;
                 }
                 else
                 {
                     if (emptyGun)
                     {
-                        states.handleAnim.StartReload();
+                        //states.handleAnim.StartReload();
                         curBullets = 3;
                     }
                     else
@@ -82,14 +73,30 @@ public class HandleShooting : MonoBehaviour {
         }
         else
         {
-            timer = -1;
+            timer -= Time.deltaTime;
             //weaponAnim.SetBool("Shoot", false);
         }	
 	}
 
-    IEnumerator RaycastShoot()
+
+    IEnumerator NoAimShoot()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.3f);
+        //states.audioManager.PlayGunSound();
+
+        //GameObject go = Instantiate(casingPrefab, caseSpawn.position, caseSpawn.rotation) as GameObject;
+        //Rigidbody rb = go.GetComponent<Rigidbody>();
+        //rb.AddForce(transform.right.normalized * 2 + Vector3.up * 1.3f, ForceMode.Impulse);
+        //rb.AddRelativeTorque(go.transform.right * 1.5f, ForceMode.Impulse);
+
+        for (int i = 0; i < muzzle.Length; i++)
+        {
+            muzzle[i].Emit(1);
+        }
+        RaycastShoot();
+    }
+    void RaycastShoot()
+    {
         Vector3 direction = states.lookHitPosition - bulletSpawnPoint.position;
         RaycastHit hit;
         if (Physics.Raycast(bulletSpawnPoint.position, direction, out hit, 100, states.layerMask))

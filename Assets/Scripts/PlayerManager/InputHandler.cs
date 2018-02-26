@@ -141,12 +141,13 @@ public class InputHandler : MonoBehaviour {
     void UpdateStates()
     {
         states.aiming = states.onGround && (mouse2 > 0);
-        states.canRun = !states.aiming;
         states.walk = (fire3 > 0);
 
         states.horizontal = horizontal;
         states.vertical = vertical;
         states.moving = states.horizontal != 0 || states.vertical != 0;
+
+        states.canRun = !states.aiming || states.vertical > 0;
 
         Vector3 h = camTrans.right * horizontal;
         Vector3 v = camTrans.forward * vertical;
@@ -258,14 +259,14 @@ public class InputHandler : MonoBehaviour {
             if (states.aiming)
             {
                 targetShake = shakeRecoil;
-                camProperties.WiggleCrosshairAndCamera(0.05f);
+                camProperties.WiggleCrosshairAndCamera(0.1f);
                 targetFov += 3;
             }
             else
             {
-                states.anim.SetTrigger("Fire");
+                
                 targetShake = shakeRecoil;
-                camProperties.WiggleCrosshairAndCamera(0.1f);
+                camProperties.WiggleCrosshairAndCamera(0.2f);
                 targetFov += 5;
             }
         }

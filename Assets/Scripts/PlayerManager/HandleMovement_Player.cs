@@ -50,7 +50,7 @@ public class HandleMovement_Player : MonoBehaviour {
             HandleDrag();
             if (states.onLocomotion)
                 MovementNormal();
-            HandleJump();
+            //HandleJump();
         }
         else
         {
@@ -80,10 +80,9 @@ public class HandleMovement_Player : MonoBehaviour {
             if (states.run && states.groundAngle <= 5)
                 targetSpeed = states.runSpeed;
 
-            if (inAngle)
-                HandleVelocity_Normal(h, v, targetSpeed);
-            else
-                rb.velocity = Vector3.zero;
+
+            HandleVelocity_Normal(h, v, targetSpeed);
+
         }
 
         HandleAnimations_Normal();
@@ -158,10 +157,24 @@ public class HandleMovement_Player : MonoBehaviour {
             if (targetDir == Vector3.zero)
                 targetDir = transform.forward;
 
-            Quaternion targetRot = Quaternion.LookRotation(targetDir);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * velocityChange);
+            if (states.vertical > 0)
+            {
+                Quaternion targetRot = Quaternion.LookRotation(targetDir);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * velocityChange);
+            }
+            
+           else
+            {
+                
+                Vector3 lookAt = (states.lookHitPosition - transform.position).normalized;
+                lookAt.y = 0;
+                Debug.DrawRay(transform.position, lookAt, Color.cyan);
+                Quaternion targetRot = Quaternion.LookRotation(lookAt);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * velocityChange);
+            }
+
         }
-        else
+        else 
         {
             Vector3 lookAt = (states.lookHitPosition - transform.position).normalized;
             lookAt.y = 0;
@@ -182,6 +195,7 @@ public class HandleMovement_Player : MonoBehaviour {
 
         states.anim.SetFloat(Statics.vertical, v, 0.2f, Time.deltaTime);
         states.anim.SetFloat(Statics.horizontal, h, 0.2f, Time.deltaTime);
+        states.anim.SetBool(Statics.moving, states.moving);
     }
 
     void HandleJump()
@@ -194,8 +208,9 @@ public class HandleMovement_Player : MonoBehaviour {
             {
                 if (states.curState == StateManager.CharStates.idle)
                 {
-                    states.anim.SetBool(Statics.special, true);
-                    states.anim.SetInteger(Statics.specialType, Statics.GetAnimSpecialType(AnimSpecials.jump_idle));
+                    //TODO: Fix bug.
+                    //states.anim.SetBool(Statics.special, true);
+                    //states.anim.SetInteger(Statics.specialType, Statics.GetAnimSpecialType(AnimSpecials.jump_idle));
                 }
 
                 if (states.curState == StateManager.CharStates.moving)
