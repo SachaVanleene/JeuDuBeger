@@ -317,6 +317,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 0
   actualHealth: 0
+  alive: 0
+  gold: 0
+  storedSheeps: 0
   spawnPoint: {fileID: 1490070733}
   respawnDelay: 5
 --- !u!114 &902546823
@@ -514,7 +517,7 @@ MonoBehaviour:
   turnsmoothing: 0.1
   tiltMax: 35
   tiltMin: 30
-  lockCursor: 0
+  lockCursor: 1
   crosshairOffsetWiggle: 0.2
 --- !u!4 &911694437
 Transform:

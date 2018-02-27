@@ -6,8 +6,10 @@ public class Player : MonoBehaviour {
 
     [HideInInspector]
     public int maxHealth;
+    [Header("Info")]
     public int actualHealth;
 
+    [SerializeField]
     bool alive;
     public bool Alive
     {
@@ -29,8 +31,12 @@ public class Player : MonoBehaviour {
 
         }
     }
-    
+
+    public int gold;
+    public int storedSheeps;
+
     [Space]
+    [Header("Respawn")]
     public Transform spawnPoint;
     public float respawnDelay;
     WaitForSeconds respawnWait;

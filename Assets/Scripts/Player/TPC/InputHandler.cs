@@ -6,7 +6,7 @@ namespace TPC
 {
     public class InputHandler : MonoBehaviour
     {
-
+        [Header("Inputs")]
         #region Inputs
         public float horizontal;
         public float vertical;
@@ -38,6 +38,8 @@ namespace TPC
 
         Player player;
 
+        [Space]
+        [Header("Camera Settings")]
         #region Camera Settings
         public float normalFov = 60;
         public float aimingFov = 40;
