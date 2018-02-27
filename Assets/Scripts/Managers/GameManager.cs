@@ -14,16 +14,18 @@ namespace Assets.Script.Managers
         public Text TextGolds;
         public Text TextSheeps;
         public GameObject TextInfo;
-        public int TotalSheeps { get; set; }
         public List<EnclosManager> Paddocks;
         public GameObject Player;
         public GameObject CycleManagerObject;
+        public GameObject Spawns;
 
-
+        private int _roundNumber = 0;
         private SoundManager soundManager;
         private CycleManager cycleManager;
+        // player's inventory relativ
         private int gold = 0;
-        private int _roundNumber = 0;
+        public int TotalSheeps { get; set; } 
+
 
         private void Awake()
         {
@@ -45,9 +47,6 @@ namespace Assets.Script.Managers
             DayStart();
         }
 
-        void Update()
-        {
-        }
         public void KillSheep()
         {
             // achievement
@@ -110,7 +109,7 @@ namespace Assets.Script.Managers
         }
         private void newRound()
         {
-            _roundNumber++;
+            Spawns.GetComponent<Spawn_wolf>().Cycle = ++_roundNumber;
             TextRounds.text = "ROUND " + _roundNumber;
             displayInfo("Round " + _roundNumber + " begin", 2);
             // calls achievements nb rounds
@@ -126,8 +125,7 @@ namespace Assets.Script.Managers
             //TODO: Enable traps placement, sheeps interactions, player control. Start day light.
             newRound();
             getGoldsRound();
-            cycleManager.GoToAngle(10, 181);
-            //cycleManager.GoToAngle(175 / 600, 175); //  takes aprox 5min to end the day
+            cycleManager.GoToAngle(0.3f, 175); //  takes aprox 5min to end the day
         }
 
         public void NightStart()
@@ -140,13 +138,17 @@ namespace Assets.Script.Managers
             placeSheeps();
             cycleManager.GoToAngle(10, 1);
 
-            //cycleManager.GoToAngle(175 / 600, 355); //  takes aprox 5min to end the night
+            Spawns.GetComponent<Spawn_wolf>().Begin_Night();
+
+            cycleManager.GoToAngle(0.3f, 355); //  takes aprox 5min to end the night
         }
 
         public void WaitingAt(int goal, int angle)
         {
             TextRounds.text = "waiting at " + angle + ", while aiming " + goal;
             // can do some verification, start a new wave, etc.
+            if(goal == 355 && Spawns.GetComponent<Spawn_wolf>().hasWolfAlive())
+                displayInfo("The Night will only end when all the wolfs will be dead", 4);
         }
         private void earnGold(int value)
         {

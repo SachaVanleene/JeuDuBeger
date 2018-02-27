@@ -15,7 +15,7 @@ public class InfoTextScript : MonoBehaviour
     }
     public void DisplayInfo(string msg, int duration)
     {
-       // text.text = msg;
+        text.text = msg;
         this.duration = duration;
         StartCoroutine(clearMessage());
     }

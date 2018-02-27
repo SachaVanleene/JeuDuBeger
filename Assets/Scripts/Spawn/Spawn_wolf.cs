@@ -10,22 +10,18 @@ public class Spawn_wolf : MonoBehaviour {
     public Transform[] spawnPoints;         // Spawn classique
     public GameObject spawnLac;             // Spawn lac
     public GameObject spawnMountain;        // Spawn montagne
-    private int cycle = 1;
+    public int Cycle { get; set; }
+    private List<GameObject> spawedWolfs = new List<GameObject>();
 	private int number_wolf;
 	private int i = 0;
 	private int temp;
 
-	void Start ()
-	{
-		
-	}
-
-    void Begin_Night()
+	public void Begin_Night()
     {
         // + 5 loups toute les vague
-        if (cycle <= 20)
+        if (Cycle <= 20)
         {
-            number_wolf = cycle * 5;
+            number_wolf = Cycle * 5;
         }
 
         //Quand 100 loup spawn, augmenter leur vie a chaque cycle
@@ -39,11 +35,16 @@ public class Spawn_wolf : MonoBehaviour {
         while (i < number_wolf)
         {
             // Call the Spawn function after a delay of the spawnTime
-            temp = Spawn(i, cycle);
+            temp = Spawn(i, Cycle);
             i = i + temp;
         }
     }
-	int Spawn (int total, int cycle)
+    public bool hasWolfAlive()
+    { // return if there's still wolfs alive
+        return spawedWolfs.Count > 0;
+    }
+
+    int Spawn (int total, int cycle)
 	{
         //Spawn de loups par paquet
 		int hounds = Random.Range(1, 5);
@@ -60,7 +61,7 @@ public class Spawn_wolf : MonoBehaviour {
                 for (int j = 0; j < hounds; j++)
                 {
                     // Create an instance of the enemy prefab at the randomly selected spawn point's position and rotation.
-                    Instantiate(enemy_classic, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+                    spawedWolfs.Add(Instantiate(enemy_classic, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation));
                 }
         }
 
@@ -72,11 +73,11 @@ public class Spawn_wolf : MonoBehaviour {
             //2 chances sur 3 de loups classique
             if(type <= 2)
             {
-                Instantiate(enemy_classic, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+                spawedWolfs.Add(Instantiate(enemy_classic, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation));
             }
             else //1 chance sur 3 spawn loup montagne
             {
-                Instantiate(enemy_ice, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+                spawedWolfs.Add(Instantiate(enemy_ice, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation));
             }
         }
 
@@ -88,15 +89,15 @@ public class Spawn_wolf : MonoBehaviour {
             //4 chances sur 6 de loups classique
             if (type <= 4)
             {
-                Instantiate(enemy_classic, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+                spawedWolfs.Add(Instantiate(enemy_classic, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation));
             }
             else if (type == 5)//1 chance sur 6 spawn loup montagne
             {
-                Instantiate(enemy_ice, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+                spawedWolfs.Add(Instantiate(enemy_ice, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation));
             }
             else if (type == 6)//1 chance sur 6 spawn loup lac
             {
-                Instantiate(enemy_water, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+                spawedWolfs.Add(Instantiate(enemy_water, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation));
             }
         }
 		return hounds;

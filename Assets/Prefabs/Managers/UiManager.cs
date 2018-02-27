@@ -6,16 +6,12 @@ using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour
 {
-
     public Camera Camera;
-	// Use this for initialization
 	void Start () {
 		
 	}
 	
-	// Update is called once per frame
 	void Update () {
-       Debug.Log(TrapFactory.ClosestTrap);
 	   if (TrapFactory.ClosestTrap != null)
 	    {
 	        transform.GetChild(0).gameObject.SetActive(true);
@@ -28,8 +24,6 @@ public class UiManager : MonoBehaviour
 	        {
 	            rend.material.color = Color.white;
 	        }
-	       
-
         }
 	    else
 	    {
