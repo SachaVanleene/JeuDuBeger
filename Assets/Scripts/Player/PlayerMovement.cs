@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour {
     // Use this for initialization
     void Start () {
         script_player = GetComponent<Player>();
-        dead = !script_player.alive;
+        dead = !script_player.Alive;
         function = updateDeadValue;
     }
     void Awake()
@@ -131,6 +131,6 @@ public class PlayerMovement : MonoBehaviour {
 
     void updateDeadValue()
     {
-        dead =!script_player.alive;
+        dead =!script_player.Alive;
     }
 }

@@ -11,6 +11,7 @@ namespace TPC
         public GameObject modelPrefab;
         public bool inGame;
         public bool isPlayer;
+        public bool alive;
 
         [Header("Stats")]
         public float groundDistance = 0.6f;
@@ -99,7 +100,6 @@ namespace TPC
         {
             handleShooting = GetComponent<HandleShooting>();
             handleAnim = GetComponent<HandleAnimations>();
-
         }
 
         void FixedUpdate()

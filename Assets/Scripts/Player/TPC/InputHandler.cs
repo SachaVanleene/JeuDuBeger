@@ -36,6 +36,8 @@ namespace TPC
 
         HandleMovement_Player hMove;
 
+        Player player;
+
         #region Camera Settings
         public float normalFov = 60;
         public float aimingFov = 40;
@@ -78,10 +80,12 @@ namespace TPC
 
             gameObject.AddComponent<HandleMovement_Player>();
             hMove = GetComponent<HandleMovement_Player>();
+            player = GetComponent<Player>();
 
             states.isPlayer = true;
             states.Init();
             hMove.Init(states, this);
+            player.Init();
 
             FixPlayerMeshes();
         }
@@ -256,7 +260,7 @@ namespace TPC
                 crosshair.defaultSpread = 1.2f;
             }
 
-            if (states.shoot && states.canShoot)
+            if (states.shoot && states.canShoot && states.alive)
             {
                 if (states.aiming)
                 {

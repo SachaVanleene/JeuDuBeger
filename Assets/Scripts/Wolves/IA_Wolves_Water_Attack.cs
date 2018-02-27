@@ -56,7 +56,7 @@ public class IA_Wolves_Water_Attack : MonoBehaviour {
         {
             targetTransform.gameObject.GetComponent<Player>().takeDamage(damage);
             //Debug.LogError("Attaque joueur");
-            if (!targetTransform.gameObject.GetComponent<Player>().alive)
+            if (!targetTransform.gameObject.GetComponent<Player>().Alive)
             {
                 targetInRange = false;
                 onTriggerRange.Invoke();

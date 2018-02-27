@@ -37,7 +37,7 @@ namespace TPC
         void Update()
         {
             shoot = states.shoot;
-            if (shoot)
+            if (shoot && states.alive)
             {
                 if (timer <= 0)
                 {

@@ -293,10 +293,10 @@ GameObject:
   - component: {fileID: 902546828}
   - component: {fileID: 902546827}
   - component: {fileID: 902546825}
+  - component: {fileID: 902546822}
   - component: {fileID: 902546824}
   - component: {fileID: 902546823}
   - component: {fileID: 902546829}
-  - component: {fileID: 902546831}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -304,6 +304,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4
   m_IsActive: 1
+--- !u!114 &902546822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 902546821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0072f757e948e7b4d90cfd40daf1a965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 0
+  actualHealth: 0
+  spawnPoint: {fileID: 1490070733}
+  respawnDelay: 5
 --- !u!114 &902546823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -319,6 +334,7 @@ MonoBehaviour:
     type: 2}
   inGame: 0
   isPlayer: 0
+  alive: 0
   groundDistance: 0.7
   groundOffset: 0
   distanceToCheckForward: 1.3
@@ -347,6 +363,7 @@ MonoBehaviour:
   shoot: 0
   canShoot: 0
   reloading: 0
+  shooting: 0
   anim: {fileID: 0}
   rb: {fileID: 0}
   moveDirection: {x: 0, y: 0, z: 0}
@@ -420,12 +437,12 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 902546821}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 1
-  m_Height: 1
+  m_Height: 3.2
   m_Direction: 1
-  m_Center: {x: 0, y: 1.6, z: 0}
+  m_Center: {x: 0, y: 1.8, z: 0}
 --- !u!4 &902546828
 Transform:
   m_ObjectHideFlags: 0
@@ -462,28 +479,6 @@ MonoBehaviour:
   caseSpawn: {fileID: 68799224}
   curBullets: 3
   infiniteBullets: 1
---- !u!114 &902546831
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 902546821}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba514ee30654bd44fbc49330de5e93f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lookWeight: 1
-  bodyWeight: 0.8
-  headWeight: 1
-  clampWeight: 1
-  weaponHolder: {fileID: 0}
-  rightShoulder: {fileID: 0}
-  overrideLookTarget: {fileID: 0}
-  rightHandIkTarget: {fileID: 0}
-  rightHandIkWeight: 0
-  leftHandIkTarget: {fileID: 0}
-  leftHandIkWeight: 0
 --- !u!1 &911694435
 GameObject:
   m_ObjectHideFlags: 0
@@ -682,6 +677,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1490070732
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1490070733}
+  m_Layer: 0
+  m_Name: Spawn Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1490070733
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1490070732}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.38712502, y: 1.72, z: 8.194}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1587109452
 GameObject:

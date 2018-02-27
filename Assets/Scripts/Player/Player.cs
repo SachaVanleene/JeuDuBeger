@@ -4,59 +4,100 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 
-    private int health;
-    public bool alive;
-    public GameObject spawn;
-    private float respawningTime;
-    Animator anim;
-    int initHealth;
+    [HideInInspector]
+    public int maxHealth;
+    public int actualHealth;
 
+    bool alive;
+    public bool Alive
+    {
+        get
+        {
+            return alive;
+        }
+        set
+        {
+            alive = value;
+            states.alive = alive;
+            anim.SetBool("alive", alive);
+
+            if (!alive)
+            {
+                hMove.AddVelocity(Vector3.zero, respawnDelay, 0, true);
+                anim.SetTrigger("deathMoment");  
+            }
+
+        }
+    }
+    
+
+    [Space]
+    public Transform spawnPoint;
+    public float respawnDelay;
+    WaitForSeconds respawnWait;
+
+    Animator anim;
+    TPC.StateManager states;
+    TPC.HandleMovement_Player hMove;
+
+
+    //IA Subscribers
     public delegate void onDead();
     public onDead onTriggerDead; //Prévenir touts les loups que je suis mort
 
     public delegate void onRespawn();
     public onRespawn onTriggerRespawn; //Prévenir touts les loups que je suis en vie
 
-    private void Awake()
+
+    public void Init()
     {
-        initHealth = 100;
-        health = initHealth;
-        alive = true;
-        respawningTime = 7f;
+        maxHealth = 100;
+        actualHealth = maxHealth;
+        respawnWait = new WaitForSeconds(respawnDelay);
+        spawnPoint.position.Set(spawnPoint.position.x, 1.72f, spawnPoint.position.z);
+
         anim = GetComponent<Animator>();
+        states = GetComponent<TPC.StateManager>();
+
+        Alive = true;
+        hMove = GetComponent<TPC.HandleMovement_Player>();
+        StartCoroutine(testRespawn());
+    }
+
+    IEnumerator testRespawn()
+    {
+        yield return new WaitForSeconds(1);
+        takeDamage(26);
+        if (Alive)
+            StartCoroutine(testRespawn());
     }
 
     public void takeDamage(int dps)
     {
-        health -= dps;
-        if (health< 0)
+        actualHealth -= dps;
+
+        if (actualHealth <= 0)
         {
-            onTriggerDead.Invoke();
-            onTriggerDead = null; //On reset le delegate
-            alive = false;
+            Alive = false;
             anim.SetTrigger("dead");
-            Debug.LogError("Mort");
-            this.GetComponent<PlayerMovement>().function.Invoke();
-            StartCoroutine(WaitForSpawning());
+            StartCoroutine(Respawn());
         }
     }
 
 
-    IEnumerator WaitForSpawning()
+    IEnumerator Respawn()
     {
-        yield return new WaitForSeconds(respawningTime);
-        alive = true;
-        health = initHealth;
-        this.GetComponent<PlayerMovement>().function.Invoke();
-        anim.SetTrigger("respawn");
-        Respawn();
-    }
-    void Respawn()
-    {
-        this.gameObject.transform.position = spawn.transform.position;
+        yield return respawnWait;
+        Alive = true;
+        actualHealth = maxHealth;
+
+        transform.position = spawnPoint.position;
         onTriggerRespawn.Invoke();
+        anim.SetTrigger("respawn");
     }
 
+
+    #region IA Subscribers
     public void AddSubscriber(Player.onDead function)
     {
         onTriggerDead += function;
@@ -76,14 +117,5 @@ public class Player : MonoBehaviour {
     {
         onTriggerRespawn -= function;
     }
-
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    #endregion
 }

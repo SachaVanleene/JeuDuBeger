@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//*******************
+// Not used
+//*******************
 namespace TPC
 {
     public class HandleAnimations : MonoBehaviour

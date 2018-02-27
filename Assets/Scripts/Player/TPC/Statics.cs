@@ -20,6 +20,7 @@ namespace TPC
         public static string incline = "incline";
         public static string Run = "Run";
         public static string moving = "moving";
+        public static string death = "death";
         #endregion
 
         public static int GetAnimSpecialType(AnimSpecials i)
