@@ -30,7 +30,6 @@ public class Player : MonoBehaviour {
         }
     }
     
-
     [Space]
     public Transform spawnPoint;
     public float respawnDelay;
@@ -40,14 +39,12 @@ public class Player : MonoBehaviour {
     TPC.StateManager states;
     TPC.HandleMovement_Player hMove;
 
-
     //IA Subscribers
     public delegate void onDead();
     public onDead onTriggerDead; //Prévenir touts les loups que je suis mort
 
     public delegate void onRespawn();
     public onRespawn onTriggerRespawn; //Prévenir touts les loups que je suis en vie
-
 
     public void Init()
     {
@@ -61,15 +58,6 @@ public class Player : MonoBehaviour {
 
         Alive = true;
         hMove = GetComponent<TPC.HandleMovement_Player>();
-        StartCoroutine(testRespawn());
-    }
-
-    IEnumerator testRespawn()
-    {
-        yield return new WaitForSeconds(1);
-        takeDamage(26);
-        if (Alive)
-            StartCoroutine(testRespawn());
     }
 
     public void takeDamage(int dps)
@@ -84,7 +72,6 @@ public class Player : MonoBehaviour {
         }
     }
 
-
     IEnumerator Respawn()
     {
         yield return respawnWait;
@@ -95,7 +82,6 @@ public class Player : MonoBehaviour {
         onTriggerRespawn.Invoke();
         anim.SetTrigger("respawn");
     }
-
 
     #region IA Subscribers
     public void AddSubscriber(Player.onDead function)
