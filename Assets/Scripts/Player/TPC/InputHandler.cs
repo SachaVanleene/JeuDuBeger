@@ -266,8 +266,6 @@ namespace TPC
                 }
                 else
                 {
-                    states.horizontal = 0;
-                    states.vertical = 0;
                     targetShake = shakeRecoil;
                     camProperties.WiggleCrosshairAndCamera(0.2f);
                     targetFov += 5;
