@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.5007132, g: 0.51716244, b: 0.48212957, a: 1}
+  m_IndirectSpecularColor: {r: 0.45690513, g: 0.3564098, b: 0.17174765, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -5060,9 +5060,8 @@ GameObject:
   - component: {fileID: 1402869006}
   - component: {fileID: 1402869005}
   - component: {fileID: 1402869004}
-  - component: {fileID: 1402869007}
-  - component: {fileID: 1402869008}
   - component: {fileID: 1402869009}
+  - component: {fileID: 1402869007}
   m_Layer: 8
   m_Name: Terrain
   m_TagString: Terrain
@@ -5134,26 +5133,9 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1402869003}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a40c0daffc8d69439a8a4b07b260fa2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cellSize: 0.5
-  gridWidth: 1
-  gridHeight: 1
-  yOffset: 0.5
-  cellMaterialValid: {fileID: 2100000, guid: a1ecfd0c4ee3c9644893574b8b9472ef, type: 2}
-  cellMaterialInvalid: {fileID: 0}
---- !u!114 &1402869008
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1402869003}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd99df86047905646aeed3ec784a31b2, type: 3}
+  m_Script: {fileID: 11500000, guid: d54ce9785a97d404cafdba649ec93c6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Traps:

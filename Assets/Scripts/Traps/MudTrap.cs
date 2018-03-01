@@ -50,10 +50,5 @@ namespace Assets.Script.Traps
                 }
             }
         }
-
-        public override void Upgrade()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

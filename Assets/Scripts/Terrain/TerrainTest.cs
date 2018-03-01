@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Assets.Script.Factory;
+using Assets.Script.Managers;
 using Assets.Script.Traps;
+using Assets.Scripts.Traps;
 using UnityEngine;
 
 namespace Assets.Script
@@ -15,11 +16,13 @@ namespace Assets.Script
         public static Terrain Terrain;
         public static GameObject PlayerGameObject;
         public static GameObject MainCanvasGameObject;
-
+        private GameManager _gameManager;
 
         public void Start()
         {
             PlayerGameObject = GameObject.FindWithTag("Player");
+
+            _gameManager = GameManager.instance;
             MainCanvasGameObject  = GameObject.FindWithTag("MainCanvas");
             Terrain = Terrain.activeTerrain;
             ActualSelectedTrapTypes = TrapTypes.None;
@@ -27,25 +30,33 @@ namespace Assets.Script
 
         public void Update()
         {
-            if (Input.GetKey("1"))
+            if (_gameManager.IsTheSunAwakeAndTheBirdAreSinging)
             {
-                TrapFactory.IsInTrapCreationMode = true;
-                TrapFactory.SelectedTrapType = TrapTypes.NeedleTrap;
+                if (Input.GetKey("1"))
+                {
+                    TrapFactory.IsInTrapCreationMode = true;
+                    TrapFactory.SelectedTrapType = TrapTypes.NeedleTrap;
+                }
+                if (Input.GetKey("2"))
+                {
+                    TrapFactory.IsInTrapCreationMode = true;
+                    TrapFactory.SelectedTrapType = TrapTypes.BaitTrap;
+                }
+                if (Input.GetKey("3"))
+                {
+                    TrapFactory.IsInTrapCreationMode = true;
+                    TrapFactory.SelectedTrapType = TrapTypes.MudTrap;
+                }
+                if (Input.GetKey("4"))
+                {
+                    TrapFactory.IsInTrapCreationMode = true;
+                    TrapFactory.SelectedTrapType = TrapTypes.LandmineTrap;
+                }
             }
-            if (Input.GetKey("2"))
+            else
             {
-                TrapFactory.IsInTrapCreationMode = true;
-                TrapFactory.SelectedTrapType = TrapTypes.BaitTrap;
-            }
-            if (Input.GetKey("3"))
-            {
-                TrapFactory.IsInTrapCreationMode = true;
-                TrapFactory.SelectedTrapType = TrapTypes.MudTrap;
-            }
-            if (Input.GetKey("4"))
-            {
-                TrapFactory.IsInTrapCreationMode = true;
-                TrapFactory.SelectedTrapType = TrapTypes.LandmineTrap;
+                TrapFactory.IsInTrapCreationMode = false;
+                Destroy(TrapFactory.ActualTrap);
             }
             if (TrapFactory.IsInTrapCreationMode)
             {

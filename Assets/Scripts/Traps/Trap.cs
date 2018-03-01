@@ -3,14 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Remoting;
-using Assets.Script.Factory;
+using Assets.Scripts.Traps;
 using UnityEngine;
 
 namespace Assets.Script.Traps
 {
     public abstract class Trap : MonoBehaviour
     {
-        public int Height, Width, Length;
         public int DurabilityMax, Durability, BuyingCost;
         public GameObject TrapPrefab;
         public List<int> UpgradeCosts, Damages;
@@ -53,7 +52,6 @@ namespace Assets.Script.Traps
         }
 
         public abstract IEnumerator Activate(GameObject go);
-        public abstract void Upgrade();
         private int i = 0;
         private int v = 0;
 
@@ -75,7 +73,6 @@ namespace Assets.Script.Traps
         public void LevelUp()
         {
             Level++;
-            Upgrade();
         }
 
         public void Update()

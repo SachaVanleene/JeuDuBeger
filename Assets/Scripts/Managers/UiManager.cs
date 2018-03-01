@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Assets.Script.Factory;
+using Assets.Scripts.Traps;
 using UnityEngine;
 using UnityEngine.UI;
 
