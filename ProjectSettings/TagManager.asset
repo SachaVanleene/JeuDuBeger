@@ -12,6 +12,7 @@ TagManager:
   - Wolf
   - Enclos
   - MainCanvas
+  - EnclosurePannel
   layers:
   - Default
   - TransparentFX

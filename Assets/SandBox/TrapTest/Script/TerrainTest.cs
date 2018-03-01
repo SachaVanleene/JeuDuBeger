@@ -14,12 +14,13 @@ namespace Assets.Script
         public TrapTypes ActualSelectedTrapTypes;
         public static Terrain Terrain;
         public static GameObject PlayerGameObject;
-
+        public static GameObject MainCanvasGameObject;
 
 
         public void Start()
         {
             PlayerGameObject = GameObject.FindWithTag("Player");
+            MainCanvasGameObject  = GameObject.FindWithTag("MainCanvas");
             Terrain = Terrain.activeTerrain;
             ActualSelectedTrapTypes = TrapTypes.None;
         }

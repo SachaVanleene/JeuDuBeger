@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts.Enclosures;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -205,7 +206,7 @@ public class IA_Wolves_Path : MonoBehaviour {
             }
             else
             {
-                targetTransform.parent.gameObject.GetComponent<EnclosManager>().RemoveSubscriber(GetTargetEnclos);
+                targetTransform.parent.gameObject.GetComponent<EnclosureScript>().RemoveSubscriber(GetTargetEnclos);
             }
         }
     }
@@ -220,7 +221,7 @@ public class IA_Wolves_Path : MonoBehaviour {
             }
             else
             {
-                targetTransform.parent.gameObject.GetComponent<EnclosManager>().AddSubscriber(GetTargetEnclos);
+                targetTransform.parent.gameObject.GetComponent<EnclosureScript>().AddSubscriber(GetTargetEnclos);
             }
         }
     }

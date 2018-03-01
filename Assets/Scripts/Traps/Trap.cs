@@ -100,7 +100,7 @@ namespace Assets.Script.Traps
                         foreach (var rend in TrapFactory.ClosestTrap.transform.parent
                             .GetComponentsInChildren<Renderer>())
                         {
-                            rend.material.color = Color.white;
+                            rend.material.color = new Color(0.3f, 0.3f, 0.3f, 1f);
                         }
                     TrapFactory.ClosestTrap = this;
                 }
@@ -137,7 +137,7 @@ namespace Assets.Script.Traps
                 if (TrapFactory.ClosestTrap != null)
                     foreach (var rend in TrapFactory.ClosestTrap.transform.parent.GetComponentsInChildren<Renderer>())
                     {
-                        rend.material.color = Color.grey;
+                        rend.material.color = new Color(0.3f,0.3f,0.3f,1f);
                     }
                 TrapFactory.ClosestTrap = this;
             }
@@ -148,7 +148,7 @@ namespace Assets.Script.Traps
             {
                 foreach (var rend in TrapFactory.ClosestTrap.transform.parent.GetComponentsInChildren<Renderer>())
                 {
-                    rend.material.color = Color.grey;
+                    rend.material.color = new Color(0.3f, 0.3f, 0.3f, 1f);
                 }
                 TrapFactory.ClosestTrap = null;
             }

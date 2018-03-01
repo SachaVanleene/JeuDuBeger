@@ -10,23 +10,12 @@ public class EnclosManager : MonoBehaviour {
     public ParticleSystem smoke;
     public float RewardGold = 1.0f;
     public GameObject MainCanvas;
-    private int nbSheep = -1;
-    public int NbSheep
-    {
-        get
-        {
-            return this.nbSheep;
-        }
-        set
-        {
-            this.nbSheep = value;
-        }
-    }
+    public int NbSheep = 0;
     private int health;
     private bool activePanel;
     private GameObject[] sheepClone = new GameObject[10];
     private Assets.Script.Managers.GameManager _gameManager;
-
+    public int nbSheep;
     public delegate void onDead();
     public onDead onTriggerDead; //Prévenir touts les loups que je suis mort
 
@@ -40,7 +29,6 @@ public class EnclosManager : MonoBehaviour {
     void Start ()
     {
         MainCanvas = GameObject.FindWithTag("MainCanvas");
-        nbSheep = -1;
         activePanel = false;
         _gameManager = Assets.Script.Managers.GameManager.instance;
     }
@@ -92,8 +80,8 @@ public class EnclosManager : MonoBehaviour {
     //Ajouter mouton
     //******************************************************************
     public void AddSheep() {
-        if (_gameManager.TotalSheeps <= 0)
-            return;
+      /**  if (_gameManager.TotalSheeps <= 0)
+            return;**/
         if (nbSheep < 9)
         {
             nbSheep++;

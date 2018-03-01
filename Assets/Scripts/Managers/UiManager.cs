@@ -15,7 +15,6 @@ public class UiManager : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
-       Debug.Log(TrapFactory.ClosestTrap);
 	   if (TrapFactory.ClosestTrap != null)
 	    {
 	        transform.GetChild(0).gameObject.SetActive(true);
