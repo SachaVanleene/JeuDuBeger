@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts.Enclosures;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -172,7 +173,7 @@ public class IA_Wolves_Boss_Path : MonoBehaviour {
         for (int i = 0; i < enclos.Length; i++) // On parcoure les enclos pour trouver le plus proche
         {
             current_enclos = enclos[i];
-            if (current_enclos.GetComponent<EnclosManager>().getHealth() > 0)
+            if (current_enclos.GetComponent<EnclosureScript>().Health > 0)
             {
                 current_distance = Vector3.Distance(current_enclos.transform.position, this.gameObject.transform.position);
                 if (current_distance < dist_to_target)
@@ -235,7 +236,7 @@ public class IA_Wolves_Boss_Path : MonoBehaviour {
             }
             else
             {
-                targetTransform.parent.gameObject.GetComponent<EnclosManager>().RemoveSubscriber(GetTargetEnclos);
+                targetTransform.parent.gameObject.GetComponent<EnclosureScript>().RemoveSubscriber(GetTargetEnclos);
             }
         }
     }
@@ -250,7 +251,7 @@ public class IA_Wolves_Boss_Path : MonoBehaviour {
             }
             else
             {
-                targetTransform.parent.gameObject.GetComponent<EnclosManager>().AddSubscriber(GetTargetEnclos);
+                targetTransform.parent.gameObject.GetComponent<EnclosureScript>().AddSubscriber(GetTargetEnclos);
             }
         }
     }

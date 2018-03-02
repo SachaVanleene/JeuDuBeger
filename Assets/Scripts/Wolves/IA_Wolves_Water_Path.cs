@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts.Enclosures;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -150,7 +151,7 @@ public class IA_Wolves_Water_Path : MonoBehaviour {
         for (int i = 0; i < enclos.Length; i++) // On parcoure les enclos pour trouver le plus proche
         {
             current_enclos = enclos[i];
-            if (current_enclos.GetComponent<EnclosManager>().getHealth() > 0)
+            if (current_enclos.GetComponent<EnclosureScript>().Health > 0)
             {
                 Debug.LogError("ENclos idsponible");
                 current_distance = Vector3.Distance(current_enclos.transform.position, this.gameObject.transform.position);

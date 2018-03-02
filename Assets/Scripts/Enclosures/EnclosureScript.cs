@@ -91,9 +91,7 @@ namespace Assets.Scripts.Enclosures
             Vector3 distPlayertoEnclos = TerrainTest.PlayerGameObject.transform.position - transform.position;
 
             if (distPlayertoEnclos.magnitude < 25 && _gameManager.IsTheSunAwakeAndTheBirdAreSinging)
-            {
-                Debug.Log((int)distPlayertoEnclos.magnitude + gameObject.name);
-
+            {   
                 if (!EnclosureManager.EnclosurePannel.activeSelf)
                 {
                     EnclosureManager.EnclosurePannel.SetActive(true);

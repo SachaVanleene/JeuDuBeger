@@ -18,7 +18,7 @@ public class EnclosureManager : MonoBehaviour
     public static GameObject EnclosurePannel;
     public static int SheepNumberInTheWorld;
 
-    private List<EnclosureScript> _enclosureList = new List<EnclosureScript>();
+    public  static List<EnclosureScript> EnclosureList = new List<EnclosureScript>();
     private GameManager _gameManager;
     private void Awake()
     {
@@ -56,17 +56,13 @@ public class EnclosureManager : MonoBehaviour
 	            enclosure = Instantiate(EnclosPrefabList[2]);
 	            enclosure.transform.position = enclosurePosition;
             }
-	        _enclosureList.Add(enclosure);
+	        EnclosureList.Add(enclosure);
         }
-        _enclosureList = _enclosureList.OrderBy(o=>o.Distance).ToList();
+        EnclosureList = EnclosureList.OrderBy(o=>o.Distance).ToList();
     }
-    void Update () {
-		
-	}
-
     public void DefaultFilling()
     {
-        foreach (var enclosure in _enclosureList)
+        foreach (var enclosure in EnclosureList)
         {
             while (_gameManager.TotalSheeps > 0)
             {
@@ -81,7 +77,7 @@ public class EnclosureManager : MonoBehaviour
     {
         _gameManager.TotalSheeps = SheepNumberInTheWorld;
         EnclosurePannel.transform.GetChild(1).GetComponent<Text>().text ="0";
-        foreach (var enclosure in _enclosureList)
+        foreach (var enclosure in EnclosureList)
         {
             enclosure.KillAllSheep();
         }

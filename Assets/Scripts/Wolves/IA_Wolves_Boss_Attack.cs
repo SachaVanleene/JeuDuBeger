@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts.Enclosures;
 using UnityEngine;
 
 public class IA_Wolves_Boss_Attack : MonoBehaviour {
@@ -120,7 +121,7 @@ public class IA_Wolves_Boss_Attack : MonoBehaviour {
             // si tmeps danimations poche de 99 % is attacking devient false
             if (targetTag == "Fences")
             {
-                targetAlive = (targetTransform.parent.gameObject.GetComponent<EnclosManager>().getHealth() > 0);
+                targetAlive = (targetTransform.parent.gameObject.GetComponent<EnclosureScript>().Health > 0);
             }
             else
             {
@@ -150,7 +151,7 @@ public class IA_Wolves_Boss_Attack : MonoBehaviour {
         }
         if (targetTag == "Fences")
         {
-            targetTransform.parent.gameObject.GetComponent<EnclosManager>().DamageEnclos(damage);
+            targetTransform.parent.gameObject.GetComponent<EnclosureScript>().DamageEnclos(damage);
             //Debug.LogError("Attaque enclos : sante : ");
 
             /*if (targetTransform.parent.gameObject.GetComponent<EnclosManager>().getHealth() <= 0)
