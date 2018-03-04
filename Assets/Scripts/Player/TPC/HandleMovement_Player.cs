@@ -106,7 +106,7 @@ namespace TPC
                 targetVelocity = Vector3.zero;
             }
 
-            if (states.obstacleForward || states.shooting)
+            if (states.obstacleForward)
             {
                 rb.velocity = Vector3.zero;
             }

@@ -100,6 +100,7 @@ namespace TPC
             }
             RaycastShoot();
         }
+
         void RaycastShoot()
         {
             Vector3 direction = states.lookHitPosition - bulletSpawnPoint.position;

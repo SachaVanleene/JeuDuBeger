@@ -321,7 +321,7 @@ MonoBehaviour:
   gold: 0
   storedSheeps: 0
   spawnPoint: {fileID: 1490070733}
-  respawnDelay: 5
+  respawnDelay: 0
 --- !u!114 &902546823
 MonoBehaviour:
   m_ObjectHideFlags: 0
