@@ -11,18 +11,15 @@ namespace Assets.Script.Traps
 
     {
         public GameObject ExplosionEffect;
+
         public LandmineTrap()
         {
             DurabilityMax = 1;
             Durability = 1;
-            Damages = new List<int>(){20,27,35};
-            UpgradeCosts = new List<int>() { 100, 200, 300 };
-            Height = 10;
-            Length = 10;
-            Width = 10;
-
-
+            Damages = new List<int>() {20, 27, 35};
+            UpgradeCosts = new List<int>() {100, 200, 300};
         }
+
         public override IEnumerator Activate(GameObject go)
         {
             if (!IsInPreviewMode && go.tag == "Wolf")
@@ -33,23 +30,16 @@ namespace Assets.Script.Traps
                     .OverlapSphere(GetComponent<BoxCollider>().center, 2)
                     .Where(T => T.gameObject.tag == "Wolf"))
                 {
-                    WolfHealth wolf = (WolfHealth)superTarget.GetComponent<WolfHealth>();
+                    WolfHealth wolf = (WolfHealth) superTarget.GetComponent<WolfHealth>();
                     wolf.takeDamage(Damages[Level]);
                 }
                 Durability--;
-                if(Durability == 0)
+                if (Durability == 0)
                 {
                     Destroy(gameObject);
                 }
             }
             yield break;
-        }
-
-
-
-        public override void Upgrade()
-        {
-            throw new NotImplementedException();
         }
     }
 }

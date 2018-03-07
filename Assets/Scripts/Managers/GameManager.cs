@@ -14,12 +14,14 @@ namespace Assets.Script.Managers
         public Text TextGolds;
         public Text TextSheeps;
         public GameObject TextInfo;
-        public List<EnclosManager> Paddocks;
         public GameObject Player;
         public GameObject CycleManagerObject;
         public GameObject Spawns;
+        public bool IsTheSunAwakeAndTheBirdAreSinging;
 
         private int _roundNumber = 0;
+        private EnclosureManager _enclosureManager;
+
         private SoundManager soundManager;
         private CycleManager cycleManager;
         // player's inventory relativ
@@ -40,6 +42,7 @@ namespace Assets.Script.Managers
         private void Start()
         {
             soundManager = gameObject.GetComponent<SoundManager>();
+            _enclosureManager = EnclosureManager.Instance;
             cycleManager = CycleManagerObject.GetComponent<CycleManager>();
             cycleManager.SubscribCycle(this);
             cycleManager.GoToAngle(1, 30);
@@ -62,35 +65,10 @@ namespace Assets.Script.Managers
             TotalSheeps--;
             TextSheeps.text = TotalSheeps + " Sheeps in Inventory";
         }
-        private void placeSheeps() // place remaining sheeps in paddocks automatically
-        {
-            if (TotalSheeps <= 0)
-                return;
-            displayInfo("Your " + TotalSheeps + " sheeps have been automatically placed", 2);
-            foreach (var p in Paddocks)
-            {
-                int i = 0;
-                while (TotalSheeps > 0)
-                {
-                    if (i++ >= 9) // can't place more than 10 sheeps
-                        break;
-                    p.AddSheep();
-                }
-            }
-        }
-        private void removeAllSheeps()
-        {
-            foreach (var p in Paddocks)
-            {
-                while (p.NbSheep >= 0)
-                {
-                    p.RemoveSheep();
-                }
-            }
-        }
+       
         private void getGoldsRound()
         {
-            foreach (var p in Paddocks)
+            /**foreach (var p in Paddocks)
             {
                 if (p.NbSheep <= 0)
                     continue;
@@ -100,7 +78,7 @@ namespace Assets.Script.Managers
                 earnGold(toBeAdded);
             }
             TextGolds.text = gold + " gold";
-            removeAllSheeps();
+            removeAllSheeps();**/
         }
 
         private void displayInfo(string msg, int duration)
@@ -117,6 +95,8 @@ namespace Assets.Script.Managers
 
         public void DayStart()
         {
+            IsTheSunAwakeAndTheBirdAreSinging = true;
+           if(_roundNumber != 0) _enclosureManager.TakeOffAllSheeps();
             TextSheeps.text = TotalSheeps + " Sheeps in Inventory";
             soundManager.PlayAmbuanceMusic("day_theme", 0.2f);
             soundManager.PlaySound("safe_place_to_rest", 1.5f);
@@ -130,17 +110,18 @@ namespace Assets.Script.Managers
 
         public void NightStart()
         {
+            IsTheSunAwakeAndTheBirdAreSinging = false;
             soundManager.PlayAmbuanceMusic("night_theme", .2f);
             soundManager.PlaySound("wolf", 0.2f);
             soundManager.PlaySound("dont_fuck_with_me", 1.5f);
             //TODO: Disable traps placement, sheeps interactions. Start night light.
 
-            placeSheeps();
-            cycleManager.GoToAngle(10, 1);
 
             Spawns.GetComponent<Spawn_wolf>().Begin_Night();
 
             cycleManager.GoToAngle(0.3f, 355); //  takes aprox 5min to end the night
+            _enclosureManager.DefaultFilling();
+            //cycleManager.GoToAngle(175 / 600, 355); //  takes aprox 5min to end the night
         }
 
         public void WaitingAt(int goal, int angle)

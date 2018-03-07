@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts.Enclosures;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -39,6 +40,15 @@ public class IA_Wolves_Path : MonoBehaviour {
         enclos = GameObject.FindGameObjectsWithTag("Enclos");
     }
 
+    void Update()
+    {
+        if (enclos.Length == 0)
+        {
+            enclos = GameObject.FindGameObjectsWithTag("Enclos");   
+            if(enclos.Length !=0)
+                GetTargetEnclos();
+        }
+    }
 
     // Use this for initialization
     void Start () {
@@ -48,7 +58,7 @@ public class IA_Wolves_Path : MonoBehaviour {
         //updateTarget(fakenclos.transform);
         agent.Warp(this.gameObject.transform.position);
         NavMesh.pathfindingIterationsPerFrame = 500;
-        GetTargetEnclos();
+       // GetTargetEnclos();
 	}
 
     public void updateTarget(Transform target)
@@ -84,7 +94,7 @@ public class IA_Wolves_Path : MonoBehaviour {
             anim.SetBool("Moving", moving);
             if(targetTag == "Fences")
             {
-                Vector3 position = targetTransform.position - 2.3f*targetTransform.right; // SInon le pathfinding ne larchera pas car la zone est no walkabme
+                Vector3 position = targetTransform.position - 2.3f*targetTransform.right; // Sinon le pathfinding ne larchera pas car la zone est no walkabme
                 agent.SetDestination(position);
             }
             else
@@ -126,7 +136,6 @@ public class IA_Wolves_Path : MonoBehaviour {
     public void GetTargetEnclos()
     {
         GameObject closest_enclos = DetectCLosestEnclos();
-
         if(closest_enclos != null)
         {
             GameObject barreer = GetBareerFromEnclos(closest_enclos);
@@ -147,8 +156,10 @@ public class IA_Wolves_Path : MonoBehaviour {
         for (int i=0; i< enclos.Length; i++) // On parcoure les enclos pour trouver le plus proche
         {
             current_enclos = enclos[i];
-            if (current_enclos.GetComponent<EnclosManager>().getHealth() > 0)
+
+            if (current_enclos.GetComponent<EnclosureScript>().Health > 0)
             {
+                Debug.Log(current_enclos);
                 current_distance = Vector3.Distance(current_enclos.transform.position, this.gameObject.transform.position);
                 if (current_distance < dist_to_target)
                 {
@@ -205,7 +216,7 @@ public class IA_Wolves_Path : MonoBehaviour {
             }
             else
             {
-                targetTransform.parent.gameObject.GetComponent<EnclosManager>().RemoveSubscriber(GetTargetEnclos);
+                targetTransform.parent.gameObject.GetComponent<EnclosureScript>().RemoveSubscriber(GetTargetEnclos);
             }
         }
     }
@@ -220,7 +231,7 @@ public class IA_Wolves_Path : MonoBehaviour {
             }
             else
             {
-                targetTransform.parent.gameObject.GetComponent<EnclosManager>().AddSubscriber(GetTargetEnclos);
+                targetTransform.parent.gameObject.GetComponent<EnclosureScript>().AddSubscriber(GetTargetEnclos);
             }
         }
     }

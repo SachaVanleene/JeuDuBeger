@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Remoting;
-using System.Text;
+using Assets.Script;
 using Assets.Script.Traps;
 using UnityEngine;
 
-namespace Assets.Script.Factory
+namespace Assets.Scripts.Traps
 {
     static class TrapFactory 
     {

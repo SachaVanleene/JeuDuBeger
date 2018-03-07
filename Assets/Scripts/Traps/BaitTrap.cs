@@ -13,10 +13,5 @@ namespace Assets.Script.Traps
         {
             yield break;
         }
-
-        public override void Upgrade()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

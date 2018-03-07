@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts.Enclosures;
 using UnityEngine;
 
 public class IA_Wolves_Water_Attack : MonoBehaviour {
@@ -65,9 +66,9 @@ public class IA_Wolves_Water_Attack : MonoBehaviour {
         }
         if (targetTag == "Fences")
         {
-            targetTransform.parent.gameObject.GetComponent<EnclosManager>().DamageEnclos(damage);
+            targetTransform.parent.gameObject.GetComponent<EnclosureScript>().DamageEnclos(damage);
             //Debug.LogError("Attaque enclos");
-            if (targetTransform.parent.gameObject.GetComponent<EnclosManager>().getHealth() <= 0)
+            if (targetTransform.parent.gameObject.GetComponent<EnclosureScript>().Health <= 0)
             {
                 targetInRange = false;
                 onTriggerRange.Invoke();
@@ -86,7 +87,7 @@ public class IA_Wolves_Water_Attack : MonoBehaviour {
     void Update()
     {
 
-        if (targetTransform != null && targetTransform.parent.gameObject.GetComponent<EnclosManager>().getHealth() > 0)
+        if (targetTransform != null && targetTransform.parent.gameObject.GetComponent<EnclosureScript>().Health > 0)
         {
             float dist = Vector3.Distance(targetTransform.position, transform.position);
             if (dist < range && !targetInRange)
