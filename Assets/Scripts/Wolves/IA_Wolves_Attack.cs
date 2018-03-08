@@ -126,7 +126,7 @@ public class IA_Wolves_Attack : MonoBehaviour {
             }
             else
             {
-                targetAlive = targetTransform.gameObject.GetComponent<Player>().alive;
+                targetAlive = targetTransform.gameObject.GetComponent<Player>().Alive;
             }
             if ((timer >= timeBetweenAttacks) && targetInRange && !isAttacking && targetTag != "Aucune" && targetAlive)
             {

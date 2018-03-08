@@ -5,7 +5,7 @@ using UnityEngine;
 public class intensity : MonoBehaviour {
 public Gradient nightDayColor;
 
-    public float maxIntensity = 3f;
+    public float maxIntensity = 1.2f;
     public float minIntensity = 0f;
     public float minPoint = -0.2f;
 
@@ -54,6 +54,6 @@ public Gradient nightDayColor;
         i = ((dayAtmosphereThickness - nightAtmosphereThickness) * dot) + nightAtmosphereThickness;
         skyMat.SetFloat ("_AtmosphereThickness", i);
 
-        transform.Rotate (RotateSpeed * Time.deltaTime * new Vector3(1, 0, 0)); 
+        transform.Rotate (RotateSpeed * Time.deltaTime * new Vector3(1, 0, 0));
     }
 }
