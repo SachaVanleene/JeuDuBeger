@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using Assets.Script.Managers;
-using Assets.Scripts.Enclosures;
+//using Assets.Scripts.Enclosures;
 using UnityEngine;
 using UnityEngine.UI;
+
+//[ExecuteInEditMode]
 
 public class EnclosureManager : MonoBehaviour
 {

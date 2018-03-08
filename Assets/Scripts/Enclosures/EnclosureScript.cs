@@ -8,8 +8,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-namespace Assets.Scripts.Enclosures
-{
+//namespace Assets.Scripts.Enclosures
+
     public class EnclosureScript : MonoBehaviour
     {
 
@@ -73,9 +73,12 @@ namespace Assets.Scripts.Enclosures
         }
 
 
+    private void Awake()
+    {
+        _health = 10;
+    }
 
-
-        void Start()
+    void Start()
         {
             Distance = Vector3.Distance(EnclosureManager.HousePosition, this.transform.position);
             _gameManager = GameManager.instance;
@@ -84,7 +87,7 @@ namespace Assets.Scripts.Enclosures
 
         void Update()
         {
-            ShowPannel();
+            //ShowPannel();
         }
 
         private void ShowPannel()
@@ -180,4 +183,4 @@ namespace Assets.Scripts.Enclosures
             }
         }
     }
-}
+

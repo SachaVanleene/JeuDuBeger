@@ -12,7 +12,7 @@ public class WolfWaterAttack : MonoBehaviour {
 
 
     // Use this for initialization
-    void Start () {
+    /*void Start () {
         waterJet = gameObject.GetComponentInChildren<ParticleSystem>();
         anim = GetComponentInParent<Animator>();
     }
@@ -28,14 +28,32 @@ public class WolfWaterAttack : MonoBehaviour {
             waterJet.Play();
         } 
 
-    }
+    }*/
+
+    /*private void OnParticleCollision(GameObject other)
+    {
+        if (targetTag == "Player")
+        {
+            targetTransform.gameObject.GetComponent<Player>().takeDamage(damage);
+            //Debug.LogError("Attaque joueur");
+            if (!targetTransform.gameObject.GetComponent<Player>().Alive)
+            {
+                targetInRange = false;
+            }
+        }
+        if (targetTag == "Fences")
+        {
+            targetTransform.parent.gameObject.GetComponent<EnclosureScript>().DamageEnclos(damage);
+            //Debug.LogError("Attaque enclos");
+            if (targetTransform.parent.gameObject.GetComponent<EnclosureScript>().Health <= 0)
+            {
+                targetInRange = false;
+            }
+        }
+    }*/
 
     private void OnParticleCollision(GameObject other)
     {
-        if (other.CompareTag("Player"))
-        {
-            Player player = other.gameObject.GetComponent<Player>();
-            player.takeDamage(damage);
-        }
+        Debug.LogError("Collision particle");
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Assets.Scripts.Enclosures;
+//using Assets.Scripts.Enclosures;
 using UnityEngine;
 
 public class IA_Wolves_Boss_Attack : MonoBehaviour {
