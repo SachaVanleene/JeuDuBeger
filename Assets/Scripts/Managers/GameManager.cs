@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 namespace Assets.Script.Managers
 {
-    public class GameManager : MonoBehaviour, INewCycleListner
+    public class GameManager : MonoBehaviour//, INewCycleListner
     {
 
         public static GameManager instance = null;
@@ -44,8 +44,8 @@ namespace Assets.Script.Managers
             soundManager = gameObject.GetComponent<SoundManager>();
             _enclosureManager = EnclosureManager.Instance;
             cycleManager = CycleManagerObject.GetComponent<CycleManager>();
-            cycleManager.SubscribCycle(this);
-            cycleManager.GoToAngle(1, 30);
+            //cycleManager.SubscribCycle(this);
+            //cycleManager.GoToAngle(1, 30);
             TotalSheeps = 15;
             DayStart();
         }
@@ -105,7 +105,7 @@ namespace Assets.Script.Managers
             //TODO: Enable traps placement, sheeps interactions, player control. Start day light.
             newRound();
             getGoldsRound();
-            cycleManager.GoToAngle(0.3f, 175); //  takes aprox 5min to end the day
+            //cycleManager.GoToAngle(0.3f, 175); //  takes aprox 5min to end the day
         }
 
         public void NightStart()
@@ -119,7 +119,7 @@ namespace Assets.Script.Managers
 
             Spawns.GetComponent<Spawn_wolf>().Begin_Night();
 
-            cycleManager.GoToAngle(0.3f, 355); //  takes aprox 5min to end the night
+            //cycleManager.GoToAngle(0.3f, 355); //  takes aprox 5min to end the night
             _enclosureManager.DefaultFilling();
             //cycleManager.GoToAngle(175 / 600, 355); //  takes aprox 5min to end the night
         }

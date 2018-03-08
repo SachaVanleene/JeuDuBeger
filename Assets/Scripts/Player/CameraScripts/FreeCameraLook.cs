@@ -6,15 +6,15 @@ namespace TPC
     {
 
         [SerializeField]
-        private float moveSpeed = 5f;
+        private float moveSpeed = 15f;
         [SerializeField]
         private float turnSpeed = 1.5f;
         [SerializeField]
         private float turnsmoothing = .1f;
         [SerializeField]
-        private float tiltMax = 75f;
+        private float tiltMax = 35f;
         [SerializeField]
-        private float tiltMin = 45f;
+        private float tiltMin = 30f;
         [SerializeField]
         private bool lockCursor = false;
 

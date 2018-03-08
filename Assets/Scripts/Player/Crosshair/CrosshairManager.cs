@@ -10,15 +10,15 @@ namespace TPC
         public Crosshair activeCrosshair;
         public Crosshair[] crosshairs;
 
-        public static CrosshairManager instace;
+        public static CrosshairManager instance;
         public static CrosshairManager GetInstance()
         {
-            return instace;
+            return instance;
         }
 
         void Awake()
         {
-            instace = this;
+            instance = this;
         }
 
         void Start()

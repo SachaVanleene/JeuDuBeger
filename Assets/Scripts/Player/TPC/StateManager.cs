@@ -111,6 +111,7 @@ namespace TPC
         public void Init()
         {
             inGame = true;
+            Debug.Log(gameObject.transform.GetChild(1).gameObject);
             activeModel = gameObject.transform.GetChild(1).gameObject;
             SetupAnimator();
             AddControllerReferences();
@@ -118,7 +119,6 @@ namespace TPC
 
             gameObject.layer = 8;
             ignoreLayers = ~(1 << 3 | 1 << 8);
-
         }
 
         void CreateModel()

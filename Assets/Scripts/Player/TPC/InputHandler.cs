@@ -69,6 +69,7 @@ namespace TPC
         void Start()
         {
             crosshairManager = CrosshairManager.GetInstance();
+            //Debug.Log(crosshairManager.activeCrosshair);
             crosshair = crosshairManager.activeCrosshair.GetComponent<Crosshair>();
             camProperties = FreeCameraLook.GetInstance();
             camPivot = camProperties.transform.GetChild(0);
@@ -83,7 +84,7 @@ namespace TPC
             gameObject.AddComponent<HandleMovement_Player>();
             hMove = GetComponent<HandleMovement_Player>();
             player = GetComponent<Player>();
-
+            
             states.isPlayer = true;
             states.Init();
             hMove.Init(states, this);
@@ -94,6 +95,8 @@ namespace TPC
 
         void Update()
         {
+            transform.GetChild(0).transform.localPosition = Vector3.zero;
+            transform.GetChild(1).transform.localPosition = Vector3.zero;
             states.RegularTick();
 
         }
@@ -196,6 +199,11 @@ namespace TPC
 
         void FixPlayerMeshes()
         {
+            transform.GetChild(0).transform.localPosition = Vector3.zero;
+            transform.GetChild(0).transform.position = transform.position;
+            transform.GetChild(1).transform.localPosition = Vector3.zero;
+            transform.GetChild(1).transform.position = transform.position;
+
             SkinnedMeshRenderer[] skinned = GetComponentsInChildren<SkinnedMeshRenderer>();
             for (int i = 0; i < skinned.Length; i++)
             {
