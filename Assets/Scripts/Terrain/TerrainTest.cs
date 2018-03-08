@@ -21,7 +21,7 @@ namespace Assets.Script
         public void Start()
         {
             PlayerGameObject = GameObject.FindWithTag("Player");
-
+            Debug.Log(PlayerGameObject);
             _gameManager = GameManager.instance;
             MainCanvasGameObject  = GameObject.FindWithTag("MainCanvas");
             Terrain = Terrain.activeTerrain;

@@ -13,7 +13,7 @@ using Random = UnityEngine.Random;
     public class EnclosureScript : MonoBehaviour
     {
 
-        public int GoldReward;
+        public int GoldReward = 1;  // depend of the distance of the enclos
         public GameObject SmokeEffect;
         public delegate void OnDead();
         public OnDead OnTriggerDead;
@@ -28,8 +28,7 @@ using Random = UnityEngine.Random;
         {
             get
             {
-                return _sheepNumber;
-                
+                return _sheepNumber;                
             }
             set
             {
@@ -78,7 +77,8 @@ using Random = UnityEngine.Random;
         _health = 10;
     }
 
-    void Start()
+
+        void Start()
         {
             Distance = Vector3.Distance(EnclosureManager.HousePosition, this.transform.position);
             _gameManager = GameManager.instance;
