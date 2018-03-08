@@ -111,7 +111,7 @@ namespace TPC
         public void Init()
         {
             inGame = true;
-            Debug.Log(gameObject.transform.GetChild(1).gameObject);
+            //Debug.Log(gameObject.transform.GetChild(1).gameObject);
             activeModel = gameObject.transform.GetChild(1).gameObject;
             SetupAnimator();
             AddControllerReferences();

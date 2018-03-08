@@ -13,7 +13,7 @@ namespace Assets.Scripts.Enclosures
     public class EnclosureScript : MonoBehaviour
     {
 
-        public int GoldReward;
+        public int GoldReward = 1;  // depend of the distance of the enclos
         public GameObject SmokeEffect;
         public delegate void OnDead();
         public OnDead OnTriggerDead;
@@ -28,8 +28,7 @@ namespace Assets.Scripts.Enclosures
         {
             get
             {
-                return _sheepNumber;
-                
+                return _sheepNumber;                
             }
             set
             {
@@ -71,9 +70,6 @@ namespace Assets.Scripts.Enclosures
                 _health = value;
             }
         }
-
-
-
 
         void Start()
         {
