@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Assets.Scripts.Enclosures;
+//using Assets.Scripts.Enclosures;
 using UnityEngine;
 
 public class IA_Wolves_Attack : MonoBehaviour {
@@ -38,7 +38,7 @@ public class IA_Wolves_Attack : MonoBehaviour {
         timeBetweenAttacks = 0.833f; // timing animation
         timer = 0f;
         damage = 10;
-        anim_time = 0.5f;
+        anim_time = 0.5f;//
         rotationSpeed = 2f;
 
         isAttacking = false;

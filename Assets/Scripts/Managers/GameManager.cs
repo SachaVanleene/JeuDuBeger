@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 namespace Assets.Script.Managers
 {
-    public class GameManager : MonoBehaviour//, INewCycleListner
+    public class GameManager : MonoBehaviour, INewCycleListner
     {
 
         public static GameManager instance = null;
@@ -14,10 +14,9 @@ namespace Assets.Script.Managers
         public Text TextGolds;
         public Text TextSheeps;
         public GameObject TextInfo;
-        public GameObject Player;
+        //public GameObject Player;
         public GameObject CycleManagerObject;
         public GameObject Spawns;
-        public bool IsTheSunAwakeAndTheBirdAreSinging;
 
         private int _roundNumber = 0;
         private EnclosureManager _enclosureManager;
@@ -26,7 +25,8 @@ namespace Assets.Script.Managers
         private CycleManager cycleManager;
         // player's inventory relativ
         private int gold = 0;
-        public int TotalSheeps { get; set; } 
+        public int TotalSheeps { get; set; }
+        public bool IsTheSunAwakeAndTheBirdAreSinging { get; set; }
 
 
         private void Awake()
@@ -44,10 +44,16 @@ namespace Assets.Script.Managers
             soundManager = gameObject.GetComponent<SoundManager>();
             _enclosureManager = EnclosureManager.Instance;
             cycleManager = CycleManagerObject.GetComponent<CycleManager>();
-            //cycleManager.SubscribCycle(this);
-            //cycleManager.GoToAngle(1, 30);
+            cycleManager.SubscribCycle(this);
+            cycleManager.GoToAngle(1, 30);
             TotalSheeps = 15;
             DayStart();
+        }
+        private void Update()
+        {
+            // enable cheats here
+            if (Input.GetKey("n"))
+                cycleManager.NextCycle(50f);
         }
 
         public void KillSheep()
@@ -68,17 +74,16 @@ namespace Assets.Script.Managers
        
         private void getGoldsRound()
         {
-            /**foreach (var p in Paddocks)
+            foreach (var p in _enclosureManager.EnclosPrefabList)
             {
-                if (p.NbSheep <= 0)
+                if (p.SheepNumber <= 0)
                     continue;
-                int toBeAdded = Mathf.RoundToInt(p.NbSheep - (2 * Mathf.Log(p.NbSheep)) * p.RewardGold);
-                if (toBeAdded != (int)(p.NbSheep - (2 * Mathf.Log(p.NbSheep)) * p.RewardGold)) //  round up
+                int toBeAdded = Mathf.RoundToInt(p.SheepNumber - (2 * Mathf.Log(p.SheepNumber)) * p.SheepNumber);
+                if (toBeAdded != (int)(p.SheepNumber - (2 * Mathf.Log(p.SheepNumber)) * p.GoldReward)) //  round up
                     toBeAdded++;
                 earnGold(toBeAdded);
             }
             TextGolds.text = gold + " gold";
-            removeAllSheeps();**/
         }
 
         private void displayInfo(string msg, int duration)
@@ -105,7 +110,7 @@ namespace Assets.Script.Managers
             //TODO: Enable traps placement, sheeps interactions, player control. Start day light.
             newRound();
             getGoldsRound();
-            //cycleManager.GoToAngle(0.3f, 175); //  takes aprox 5min to end the day
+            cycleManager.GoToAngle(180f/360f, 181); //  takes aprox 5min to end the day
         }
 
         public void NightStart()
@@ -119,9 +124,8 @@ namespace Assets.Script.Managers
 
             Spawns.GetComponent<Spawn_wolf>().Begin_Night();
 
-            //cycleManager.GoToAngle(0.3f, 355); //  takes aprox 5min to end the night
             _enclosureManager.DefaultFilling();
-            //cycleManager.GoToAngle(175 / 600, 355); //  takes aprox 5min to end the night
+            cycleManager.GoToAngle(180f / 600f, 355); //  takes aprox 5min to end the night
         }
 
         public void WaitingAt(int goal, int angle)
@@ -129,7 +133,7 @@ namespace Assets.Script.Managers
             TextRounds.text = "waiting at " + angle + ", while aiming " + goal;
             // can do some verification, start a new wave, etc.
             if(goal == 355 && Spawns.GetComponent<Spawn_wolf>().hasWolfAlive())
-                displayInfo("The Night will only end when all the wolfs will be dead", 4);
+                displayInfo("The Night will end only when the wolfs are dead", 4);
         }
         private void earnGold(int value)
         {
@@ -146,6 +150,17 @@ namespace Assets.Script.Managers
 
             // TODO : call achievement gold spent
             return true;
+        }
+        public void DeathPersonnage()
+        {
+
+        }
+        public void DeathWolf()
+        {
+            Spawns.GetComponent<Spawn_wolf>().WolfDeath();
+
+            if (!Spawns.GetComponent<Spawn_wolf>().hasWolfAlive())
+                cycleManager.NextCycle(10f);
         }
     }
 }

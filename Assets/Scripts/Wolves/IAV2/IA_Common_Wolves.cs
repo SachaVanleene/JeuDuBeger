@@ -1,12 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-//using Assets.Scripts.Enclosures;
 using UnityEngine;
 using UnityEngine.AI;
 
-
-public class IA_Wolves_Boss_Path : MonoBehaviour {
-
+public class IA_Common_Wolves : MonoBehaviour {
 
     private Animator anim;
     private NavMeshAgent agent;
@@ -20,77 +17,72 @@ public class IA_Wolves_Boss_Path : MonoBehaviour {
     float timeBetweenAttacks;
     int damage;
 
-    public delegate void TriggerTag();
-    public TriggerTag function;
-
     bool moving;
 
     GameObject[] enclos;
 
+    bool isAttacking;
+    //Variable pour regarder l'objet
+    private Quaternion lookRotation;
+    private Vector3 direction;
 
-    public GameObject farmer;
+    bool targetAlive;
+
+
+    public GameObject fakenclos;
+
+    float rotationSpeed;
+    float anim_time; // time of anim where it attack
 
     private void Awake()
     {
-        timeBetweenAttacks = 2f;
         timer = 0f;
+        //Characteristics of Common WOlves
+        timeBetweenAttacks = 0.833f; // time between attack 
         damage = 10;
+        anim_time = 0.5f;
+        rotationSpeed = 2f;
+
+        //Initial set up
         targetTransform = null;
         moving = false;
-        enclos = GameObject.FindGameObjectsWithTag("Enclos");
+        isAttacking = false;;
     }
 
 
     // Use this for initialization
     void Start()
     {
-        function += GetComponent<IA_Wolves_Boss_Attack>().updateTarget;
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
-        updateTarget(farmer.transform);
+        //updateTarget(fakenclos.transform);
         agent.Warp(this.gameObject.transform.position);
-        farmer.GetComponent<Player>().AddSubscriberRespawn(targetPlayer);
-
-        //GetTargetEnclos();
-    }
-
-    public void targetPlayer()
-    {
-        updateTarget(farmer.transform);
+        NavMesh.pathfindingIterationsPerFrame = 500;
+        enclos = GameObject.FindGameObjectsWithTag("Enclos");
+        GetTargetEnclos();
     }
 
     public void updateTarget(Transform target)
     {
+
         if (target != null)
         {
             // Debug.LogError("Position target : " + target.position);
         }
-
         RealaseBarrer();
         RealeaseDlegate();
         targetInRange = false; // Si nouvelle target supposé qu'elle n'est pas en rnage sinon bug dans les invoke
-        GetComponent<IA_Wolves_Boss_Attack>().targetInRange = false;
         if (target == null) // Remise en idle
         {
             targetTransform = target;
             targetTag = "Aucune";
             targetInRange = false;
         }
-        else
-        {
-            if (targetTransform == null) // Théoriquement en idle
-            {
-                targetTransform = target;
-                targetTag = target.gameObject.tag;
-            }
-            else //Attaque ou 
-            {
-                targetTransform = target;
-                targetTag = target.gameObject.tag;
-            }
+        else { 
+            targetTransform = target;
+            targetTag = target.gameObject.tag;
             SubscribeDelegate();
         }
-        function.Invoke();
 
     }
 
@@ -102,8 +94,7 @@ public class IA_Wolves_Boss_Path : MonoBehaviour {
             anim.SetBool("Moving", moving);
             if (targetTag == "Fences")
             {
-                // Debug.LogError("DIrection fences");
-                Vector3 position = targetTransform.position - 2.3f * targetTransform.right; // SInon le pathfinding ne larchera pas car la zone est no walkabme
+                Vector3 position = targetTransform.position - 2.3f * targetTransform.right; // Sinon le pathfinding ne larchera pas car la zone est no walkabme
                 agent.SetDestination(position);
             }
             else
@@ -131,27 +122,16 @@ public class IA_Wolves_Boss_Path : MonoBehaviour {
 
     void FixedUpdate()
     {
-        //updateTarget(fakenclos.transform);
         moveToTarget();
+
     }
 
 
-    public void updateRange()
-    {
-        targetInRange = GetComponent<IA_Wolves_Boss_Attack>().targetInRange;
-    }
 
-    /* public Transform detectTarget()
-     {
-     // fences
-     //Script EnclosManager
-     // Script 
-     }*/
-
+    // Get a tagret from an enclos which is alive
     public void GetTargetEnclos()
     {
         GameObject closest_enclos = DetectCLosestEnclos();
-
         if (closest_enclos != null)
         {
             GameObject barreer = GetBareerFromEnclos(closest_enclos);
@@ -164,6 +144,7 @@ public class IA_Wolves_Boss_Path : MonoBehaviour {
         }
     }
 
+    //Detect closest enclos which is alive
     public GameObject DetectCLosestEnclos()
     {
         GameObject enclos_target = null;
@@ -175,6 +156,7 @@ public class IA_Wolves_Boss_Path : MonoBehaviour {
             current_enclos = enclos[i];
             if (current_enclos.GetComponent<EnclosureScript>().Health > 0)
             {
+                Debug.Log(current_enclos);
                 current_distance = Vector3.Distance(current_enclos.transform.position, this.gameObject.transform.position);
                 if (current_distance < dist_to_target)
                 {
@@ -183,13 +165,11 @@ public class IA_Wolves_Boss_Path : MonoBehaviour {
                 }
             }
         }
-        /*if(enclos_target != null)
-        {
-            enclos_target.GetComponent<EnclosManager>().addSubscriber(GetTargetEnclos);
-        }*/
         return enclos_target;
     }
 
+
+    // Get a barreer from the preivous enclos found and lock this bareer if it is free. If every barreer are not availbale get one using random way
     public GameObject GetBareerFromEnclos(GameObject enclos)
     {
         List<GameObject> all_bareers = new List<GameObject>();
@@ -218,6 +198,7 @@ public class IA_Wolves_Boss_Path : MonoBehaviour {
         return resu;
     }
 
+    //ReleaseBareer
     public void RealaseBarrer()
     {
         if (targetTag == "Fences" && targetTransform != null)
@@ -226,6 +207,7 @@ public class IA_Wolves_Boss_Path : MonoBehaviour {
         }
     }
 
+    //Realease Deleagate when switching target
     public void RealeaseDlegate()
     {
         if (targetTransform != null)
@@ -241,6 +223,7 @@ public class IA_Wolves_Boss_Path : MonoBehaviour {
         }
     }
 
+    //Subscribe to target to be alert when our target died to switch
     public void SubscribeDelegate()
     {
         if (targetTransform != null)
@@ -256,7 +239,101 @@ public class IA_Wolves_Boss_Path : MonoBehaviour {
         }
     }
 
+    //Check if we are close to our target using colider
+    void OnTriggerEnter(Collider other)
+    {
+        if (targetTransform != null)
+        {
+            float dist = Vector3.Distance(targetTransform.position, transform.position); // Afin dêtre sur que ce soit le bon enclos
+            if (other.gameObject.tag == targetTag && dist < 5f)
+            {
+                targetInRange = true;
+            }
+        }
+    }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (targetTransform != null)
+        {
+            float dist = Vector3.Distance(targetTransform.position, transform.position); // Afin dêtre sur que ce soit le bon enclos
+            if (other.gameObject.tag == targetTag && dist > 5f)
+            {
+                targetInRange = false;
+            }
+        }
+    }
 
+    //If we exit collider of  our target then it is not in range anymore
+    void OnTriggerExit(Collider other)
+    {
+        if (targetTransform != null)
+        {
+            if (other.gameObject.tag == targetTag)
+            {
+                targetInRange = false;
+            }
+        }
+    }
 
+    // Update is called once per frame
+    void Update()
+    {
+
+        if(targetTransform == null)
+        {
+            GetTargetEnclos();
+        }
+        timer += Time.deltaTime;
+
+        if (true & targetTransform != null)
+        {
+            //look at target
+            //find the vector pointing from our position to the target
+            direction = (targetTransform.position - transform.position).normalized;
+
+            //create the rotation we need to be in to look at the target
+            lookRotation = Quaternion.LookRotation(direction);
+
+            //rotate us over time according to speed until we are in the required rotation
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+        }
+
+        if (targetTransform != null)
+        {
+            if (isAttacking && anim.GetCurrentAnimatorStateInfo(0).IsName("Wolf_Layer.Attack Jump") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > anim_time) // attaquer au bon moment de l'naimation
+            {
+                Attack();
+                isAttacking = false;
+            }
+            // si tmeps danimations poche de 99 % is attacking devient false
+            if (targetTag == "Fences")
+            {
+                targetAlive = (targetTransform.parent.gameObject.GetComponent<EnclosureScript>().Health > 0);
+            }
+            else
+            {
+                targetAlive = targetTransform.gameObject.GetComponent<Player>().Alive;
+            }
+            if ((timer >= timeBetweenAttacks) && targetInRange && !isAttacking && targetTag != "Aucune" && targetAlive)
+            {
+                anim.SetTrigger("attack");
+                isAttacking = true;
+                timer = 0f;
+            }
+        }
+
+    }
+
+    void Attack()
+    {
+        if (targetTag == "Player")
+        {
+            targetTransform.gameObject.GetComponent<Player>().takeDamage(damage);
+        }
+        if (targetTag == "Fences")
+        {
+            targetTransform.parent.gameObject.GetComponent<EnclosureScript>().DamageEnclos(damage);
+        }
+    }
 }

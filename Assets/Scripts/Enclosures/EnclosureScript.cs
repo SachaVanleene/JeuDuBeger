@@ -8,12 +8,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-namespace Assets.Scripts.Enclosures
-{
+//namespace Assets.Scripts.Enclosures
+
     public class EnclosureScript : MonoBehaviour
     {
 
-        public int GoldReward;
+        public int GoldReward = 1;  // depend of the distance of the enclos
         public GameObject SmokeEffect;
         public delegate void OnDead();
         public OnDead OnTriggerDead;
@@ -28,8 +28,7 @@ namespace Assets.Scripts.Enclosures
         {
             get
             {
-                return _sheepNumber;
-                
+                return _sheepNumber;                
             }
             set
             {
@@ -73,6 +72,10 @@ namespace Assets.Scripts.Enclosures
         }
 
 
+    private void Awake()
+    {
+        _health = 10;
+    }
 
 
         void Start()
@@ -84,7 +87,7 @@ namespace Assets.Scripts.Enclosures
 
         void Update()
         {
-            ShowPannel();
+            //ShowPannel();
         }
 
         private void ShowPannel()
@@ -180,4 +183,4 @@ namespace Assets.Scripts.Enclosures
             }
         }
     }
-}
+
