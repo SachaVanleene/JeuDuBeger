@@ -18,6 +18,7 @@ using Random = UnityEngine.Random;
         public delegate void OnDead();
         public OnDead OnTriggerDead;
         public GameObject SheepPrefab;
+        public GameObject PinkSuperSheepPrefab;
         public float Distance;
         private bool _isDisplayingPannel = false;
 
@@ -71,118 +72,128 @@ using Random = UnityEngine.Random;
         }
 
 
+    //public void AddPinkSuperSheep()
+    //{
+    //    _health += 10;
+    //    var sheep = Instantiate(PinkSuperSheepPrefab, this.transform); //crée un clone mouton
+    //    sheep.transform.position = this.transform.position; //le place dans l'enclos
+    //    sheep.transform.Rotate(0, Random.Range(0, 360), 0);
+    //}
+
     private void Awake()
     {
         _health = 10;
+        //AddPinkSuperSheep();
     }
 
 
-        void Start()
+    void Start()
+    {
+        Distance = Vector3.Distance(EnclosureManager.HousePosition, this.transform.position);
+        _gameManager = GameManager.instance;
+        Health += 10;
+    }
+
+    void Update()
+    {
+        //ShowPannel();
+    }
+
+    private void ShowPannel()
+    {
+        Vector3 distPlayertoEnclos = TerrainTest.PlayerGameObject.transform.position - transform.position;
+
+        if (distPlayertoEnclos.magnitude < 25 && _gameManager.IsTheSunAwakeAndTheBirdAreSinging)
+        {   
+            if (!EnclosureManager.EnclosurePannel.activeSelf)
+            {
+                EnclosureManager.EnclosurePannel.transform.GetChild(1).GetComponent<Text>().text = SheepNumber.ToString();
+                EnclosureManager.EnclosurePannel.SetActive(true);
+                _isDisplayingPannel = true;
+            }
+            HandleInputs();
+        }
+        else
         {
-            Distance = Vector3.Distance(EnclosureManager.HousePosition, this.transform.position);
-            _gameManager = GameManager.instance;
+            if (EnclosureManager.EnclosurePannel.activeSelf && _isDisplayingPannel)
+            {
+                _isDisplayingPannel = false;
+                EnclosureManager.EnclosurePannel.SetActive(false);
+            }
+        }
+    }
+    private void HandleInputs()
+    {
+
+        if (Input.GetKeyDown(KeyCode.KeypadPlus))
+        {
             Health += 10;
+            EnclosureManager.EnclosurePannel.transform.GetChild(1).GetComponent<Text>().text = SheepNumber.ToString();
         }
-
-        void Update()
+        if (Input.GetKeyDown(KeyCode.KeypadMinus))
         {
-            //ShowPannel();
-        }
-
-        private void ShowPannel()
-        {
-            Vector3 distPlayertoEnclos = TerrainTest.PlayerGameObject.transform.position - transform.position;
-
-            if (distPlayertoEnclos.magnitude < 25 && _gameManager.IsTheSunAwakeAndTheBirdAreSinging)
-            {   
-                if (!EnclosureManager.EnclosurePannel.activeSelf)
-                {
-                    EnclosureManager.EnclosurePannel.transform.GetChild(1).GetComponent<Text>().text = SheepNumber.ToString();
-                    EnclosureManager.EnclosurePannel.SetActive(true);
-                    _isDisplayingPannel = true;
-                }
-                HandleInputs();
-            }
-            else
-            {
-                if (EnclosureManager.EnclosurePannel.activeSelf && _isDisplayingPannel)
-                {
-                    _isDisplayingPannel = false;
-                    EnclosureManager.EnclosurePannel.SetActive(false);
-                }
-            }
-        }
-        private void HandleInputs()
-        {
-
-            if (Input.GetKeyDown(KeyCode.KeypadPlus))
-            {
-                Health += 10;
-                EnclosureManager.EnclosurePannel.transform.GetChild(1).GetComponent<Text>().text = SheepNumber.ToString();
-            }
-            if (Input.GetKeyDown(KeyCode.KeypadMinus))
-            {
-                if (Health != 0) _gameManager.TakeSheep();
-                Health -= 10;
-                EnclosureManager.EnclosurePannel.transform.GetChild(1).GetComponent<Text>().text = SheepNumber.ToString();
-            }
-        }
-
-        public void DamageEnclos(int degats)
-        {
-            Health -= degats;
-            if (Health == 0)
-            {
-                Health = 0; //santé min
-                Debug.Log("Enclos Mort");
-                OnTriggerDead.Invoke();
-                OnTriggerDead = null; //On reset le delegate
-            }
-
-        }
-
-        public void AddSheep()
-        {
-            if (_gameManager.TotalSheeps <= 0)
-                return;
-            if (SheepNumber < 10)
-            {
-                SheepNumber++;
-            //var sheep = Instantiate(SheepPrefab, this.transform); //crée un clone mouton
-            //sheep.transform.Rotate(0, Random.Range(0, 360), 0); //l'oriente d'une façon aléatoire
-            var sheep = Instantiate(SheepPrefab, this.transform); //crée un clone mouton
-            sheep.transform.position = this.transform.position; //le place dans l'enclos
-            sheep.transform.Rotate(0, Random.Range(0, 360), 0); //l'oriente d'une façon aléatoire
-        }
-            _gameManager.PlaceSheep();
-        }
-        public void KillSheep()
-        {
-            if (SheepNumber > 0)
-            {
-                var sheepClone = transform.GetChild(transform.childCount - SheepNumber).gameObject;
-                GameObject boom = CFX_SpawnSystem.GetNextObject(SmokeEffect);
-                boom.transform.position = sheepClone.transform.position;
-                Destroy(sheepClone);
-                SheepNumber--;
-            }
-        }
-
-        public void KillAllSheep()
-        {
-            Health = 0;
-        }
-
-        public void AddSubscriber(OnDead function)
-        {
-            OnTriggerDead += function;
-        }
-        public void RemoveSubscriber(OnDead function)
-        {
-            if (function != null)
-            {
-                OnTriggerDead -= function;
-            }
+            if (Health != 0) _gameManager.TakeSheep();
+            Health -= 10;
+            EnclosureManager.EnclosurePannel.transform.GetChild(1).GetComponent<Text>().text = SheepNumber.ToString();
         }
     }
+
+    public void DamageEnclos(int degats)
+    {
+        Health -= degats;
+        if (Health == 0)
+        {
+            Health = 0; //santé min
+            Debug.Log("Enclos Mort");
+            OnTriggerDead.Invoke();
+            OnTriggerDead = null; //On reset le delegate
+        }
+
+    }
+
+    public void AddSheep()
+    {
+        if (_gameManager.TotalSheeps <= 0)
+            return;
+        if (SheepNumber < 10)
+        {
+            SheepNumber++;
+        //var sheep = Instantiate(SheepPrefab, this.transform); //crée un clone mouton
+        //sheep.transform.Rotate(0, Random.Range(0, 360), 0); //l'oriente d'une façon aléatoire
+        var sheep = Instantiate(SheepPrefab, this.transform); //crée un clone mouton
+        sheep.transform.position = this.transform.position; //le place dans l'enclos
+        sheep.transform.Rotate(0, Random.Range(0, 360), 0); //l'oriente d'une façon aléatoire
+    }
+        _gameManager.PlaceSheep();
+    }
+
+    public void KillSheep()
+    {
+        if (SheepNumber > 0)
+        {
+            var sheepClone = transform.GetChild(transform.childCount - SheepNumber).gameObject;
+            GameObject boom = CFX_SpawnSystem.GetNextObject(SmokeEffect);
+            boom.transform.position = sheepClone.transform.position;
+            Destroy(sheepClone);
+            SheepNumber--;
+        }
+    }
+
+    public void KillAllSheep()
+    {
+        Health = 0;
+    }
+
+    public void AddSubscriber(OnDead function)
+    {
+        OnTriggerDead += function;
+    }
+    public void RemoveSubscriber(OnDead function)
+    {
+        if (function != null)
+        {
+            OnTriggerDead -= function;
+        }
+    }
+}
 
