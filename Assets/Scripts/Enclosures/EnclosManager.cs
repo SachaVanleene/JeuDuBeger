@@ -80,8 +80,8 @@ public class EnclosManager : MonoBehaviour {
     //Ajouter mouton
     //******************************************************************
     public void AddSheep() {
-      /**  if (_gameManager.TotalSheeps <= 0)
-            return;**/
+      /*  if (_gameManager.TotalSheeps <= 0)
+            return; */
         if (nbSheep < 9)
         {
             nbSheep++;
@@ -89,9 +89,8 @@ public class EnclosManager : MonoBehaviour {
             totalSheep.text = (nbSheep + 1).ToString();
 
             sheepClone[nbSheep] = Instantiate(sheep, enclos.transform); //crée un clone mouton
-            sheepClone[nbSheep].transform.rotation = enclos.transform.rotation; //le place dans l'enclos
+            sheepClone[nbSheep].transform.position = enclos.transform.position; //le place dans l'enclos
             sheepClone[nbSheep].transform.Rotate(0, Random.Range(0, 360), 0); //l'oriente d'une façon aléatoire
-
             _gameManager.PlaceSheep();
         }
     }

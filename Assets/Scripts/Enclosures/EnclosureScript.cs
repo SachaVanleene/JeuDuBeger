@@ -64,7 +64,6 @@ using Random = UnityEngine.Random;
                     for (var i = 0; i < sheepToAdd; i++)
                     {
                         AddSheep();
-
                     }
                 }
                 _health = value;
@@ -149,9 +148,12 @@ using Random = UnityEngine.Random;
             if (SheepNumber < 10)
             {
                 SheepNumber++;
-                var sheep = Instantiate(SheepPrefab, this.transform); //crée un clone mouton
-                sheep.transform.Rotate(0, Random.Range(0, 360), 0); //l'oriente d'une façon aléatoire
-            }
+            //var sheep = Instantiate(SheepPrefab, this.transform); //crée un clone mouton
+            //sheep.transform.Rotate(0, Random.Range(0, 360), 0); //l'oriente d'une façon aléatoire
+            var sheep = Instantiate(SheepPrefab, this.transform); //crée un clone mouton
+            sheep.transform.position = this.transform.position; //le place dans l'enclos
+            sheep.transform.Rotate(0, Random.Range(0, 360), 0); //l'oriente d'une façon aléatoire
+        }
             _gameManager.PlaceSheep();
         }
         public void KillSheep()
