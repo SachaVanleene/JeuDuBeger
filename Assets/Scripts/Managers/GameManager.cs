@@ -93,7 +93,7 @@ namespace Assets.Script.Managers
         {
             Spawns.GetComponent<Spawn_wolf>().Cycle = ++_roundNumber;
             TextRounds.text = "ROUND " + _roundNumber;
-            displayInfo("Round " + _roundNumber + " begin", 2);
+            displayInfo("Round " + _roundNumber + " begin \n Press n to pass directly to the night", 4);
             // calls achievements nb rounds
         }
 
@@ -152,10 +152,11 @@ namespace Assets.Script.Managers
         }
         public void DeathPersonnage()
         {
-
+            // TODO : call achievement death personnage
         }
         public void DeathWolf()
         {
+            // TODO : call achievement death wolfs
             Spawns.GetComponent<Spawn_wolf>().WolfDeath();
 
             if (!Spawns.GetComponent<Spawn_wolf>().hasWolfAlive())
