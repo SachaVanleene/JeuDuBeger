@@ -72,22 +72,21 @@ using Random = UnityEngine.Random;
         }
 
 
-    private void Awake()
-    {
-        _health = 10;
-    }
+        private void Awake()
+        {
+        }
 
 
         void Start()
         {
             Distance = Vector3.Distance(EnclosureManager.HousePosition, this.transform.position);
             _gameManager = GameManager.instance;
-            Health += 10;
         }
 
         void Update()
         {
-            //ShowPannel();
+            Debug.Log(this.name + " : " + SheepNumber + " moutons");
+            ShowPannel();
         }
 
         private void ShowPannel()

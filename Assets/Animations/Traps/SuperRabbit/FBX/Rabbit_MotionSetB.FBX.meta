@@ -1,0 +1,376 @@
+fileFormatVersion: 2
+guid: ac2ed6771c648834e851bd867f717040
+timeCreated: 1503029122
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: _root
+    100002: bip001
+    100004: body
+    100006: Bone_L_foot
+    100008: Bone_L_leg
+    100010: Bone_R_foot
+    100012: Bone_R_leg
+    100014: ear_L_01
+    100016: ear_L_02
+    100018: ear_R_01
+    100020: ear_R_02
+    100022: eye
+    100024: head
+    100026: nose
+    100028: Rabbit_08_polyart
+    100030: //RootNode
+    100032: tail
+    100034: Text001
+    400000: _root
+    400002: bip001
+    400004: body
+    400006: Bone_L_foot
+    400008: Bone_L_leg
+    400010: Bone_R_foot
+    400012: Bone_R_leg
+    400014: ear_L_01
+    400016: ear_L_02
+    400018: ear_R_01
+    400020: ear_R_02
+    400022: eye
+    400024: head
+    400026: nose
+    400028: Rabbit_08_polyart
+    400030: //RootNode
+    400032: tail
+    400034: Text001
+    4300000: Rabbit_08_polyart
+    7400000: rabbit_stand
+    7400002: rabbit_idleA
+    7400004: rabbit_idleB
+    7400006: rabbit_idleC
+    9500000: //RootNode
+    13700000: Rabbit_08_polyart
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: rabbit_stand
+      takeName: Take 001
+      firstFrame: 20
+      lastFrame: 160
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: _root
+        weight: 1
+      - path: _root/bip001
+        weight: 1
+      - path: _root/bip001/body
+        weight: 1
+      - path: _root/bip001/body/head
+        weight: 1
+      - path: _root/bip001/body/head/ear_L_01
+        weight: 1
+      - path: _root/bip001/body/head/ear_L_01/ear_L_02
+        weight: 1
+      - path: _root/bip001/body/head/ear_R_01
+        weight: 1
+      - path: _root/bip001/body/head/ear_R_01/ear_R_02
+        weight: 1
+      - path: _root/bip001/body/head/eye
+        weight: 1
+      - path: _root/bip001/body/head/nose
+        weight: 1
+      - path: _root/bip001/body/tail
+        weight: 1
+      - path: _root/bip001/Bone_L_leg
+        weight: 1
+      - path: _root/bip001/Bone_L_leg/Bone_L_foot
+        weight: 1
+      - path: _root/bip001/Bone_R_leg
+        weight: 1
+      - path: _root/bip001/Bone_R_leg/Bone_R_foot
+        weight: 1
+      - path: Rabbit_08_polyart
+        weight: 1
+      - path: Text001
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: rabbit_idleA
+      takeName: Take 001
+      firstFrame: 180
+      lastFrame: 320
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: _root
+        weight: 1
+      - path: _root/bip001
+        weight: 1
+      - path: _root/bip001/body
+        weight: 1
+      - path: _root/bip001/body/head
+        weight: 1
+      - path: _root/bip001/body/head/ear_L_01
+        weight: 1
+      - path: _root/bip001/body/head/ear_L_01/ear_L_02
+        weight: 1
+      - path: _root/bip001/body/head/ear_R_01
+        weight: 1
+      - path: _root/bip001/body/head/ear_R_01/ear_R_02
+        weight: 1
+      - path: _root/bip001/body/head/eye
+        weight: 1
+      - path: _root/bip001/body/head/nose
+        weight: 1
+      - path: _root/bip001/body/tail
+        weight: 1
+      - path: _root/bip001/Bone_L_leg
+        weight: 1
+      - path: _root/bip001/Bone_L_leg/Bone_L_foot
+        weight: 1
+      - path: _root/bip001/Bone_R_leg
+        weight: 1
+      - path: _root/bip001/Bone_R_leg/Bone_R_foot
+        weight: 1
+      - path: Rabbit_08_polyart
+        weight: 1
+      - path: Text001
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: rabbit_idleB
+      takeName: Take 001
+      firstFrame: 360
+      lastFrame: 500
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: _root
+        weight: 1
+      - path: _root/bip001
+        weight: 1
+      - path: _root/bip001/body
+        weight: 1
+      - path: _root/bip001/body/head
+        weight: 1
+      - path: _root/bip001/body/head/ear_L_01
+        weight: 1
+      - path: _root/bip001/body/head/ear_L_01/ear_L_02
+        weight: 1
+      - path: _root/bip001/body/head/ear_R_01
+        weight: 1
+      - path: _root/bip001/body/head/ear_R_01/ear_R_02
+        weight: 1
+      - path: _root/bip001/body/head/eye
+        weight: 1
+      - path: _root/bip001/body/head/nose
+        weight: 1
+      - path: _root/bip001/body/tail
+        weight: 1
+      - path: _root/bip001/Bone_L_leg
+        weight: 1
+      - path: _root/bip001/Bone_L_leg/Bone_L_foot
+        weight: 1
+      - path: _root/bip001/Bone_R_leg
+        weight: 1
+      - path: _root/bip001/Bone_R_leg/Bone_R_foot
+        weight: 1
+      - path: Rabbit_08_polyart
+        weight: 1
+      - path: Text001
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: rabbit_idleC
+      takeName: Take 001
+      firstFrame: 520
+      lastFrame: 560
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: _root
+        weight: 1
+      - path: _root/bip001
+        weight: 1
+      - path: _root/bip001/body
+        weight: 1
+      - path: _root/bip001/body/head
+        weight: 1
+      - path: _root/bip001/body/head/ear_L_01
+        weight: 1
+      - path: _root/bip001/body/head/ear_L_01/ear_L_02
+        weight: 1
+      - path: _root/bip001/body/head/ear_R_01
+        weight: 1
+      - path: _root/bip001/body/head/ear_R_01/ear_R_02
+        weight: 1
+      - path: _root/bip001/body/head/eye
+        weight: 1
+      - path: _root/bip001/body/head/nose
+        weight: 1
+      - path: _root/bip001/body/tail
+        weight: 1
+      - path: _root/bip001/Bone_L_leg
+        weight: 1
+      - path: _root/bip001/Bone_L_leg/Bone_L_foot
+        weight: 1
+      - path: _root/bip001/Bone_R_leg
+        weight: 1
+      - path: _root/bip001/Bone_R_leg/Bone_R_foot
+        weight: 1
+      - path: Rabbit_08_polyart
+        weight: 1
+      - path: Text001
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

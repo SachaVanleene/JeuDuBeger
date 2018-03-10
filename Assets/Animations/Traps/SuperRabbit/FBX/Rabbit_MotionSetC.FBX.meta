@@ -1,0 +1,181 @@
+fileFormatVersion: 2
+guid: 7ebbde3614f0a8f4f8a5dbde58cbd54c
+timeCreated: 1503303634
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: ' Row_rabbit002'
+    100002: _root
+    100004: bip001
+    100006: body
+    100008: Bone_L_foot
+    100010: Bone_L_leg
+    100012: Bone_R_foot
+    100014: Bone_R_leg
+    100016: ear_L_01
+    100018: ear_L_02
+    100020: ear_R_01
+    100022: ear_R_02
+    100024: eye
+    100026: head
+    100028: nose
+    100030: //RootNode
+    100032: tail
+    100034: Text002
+    400000: ' Row_rabbit002'
+    400002: _root
+    400004: bip001
+    400006: body
+    400008: Bone_L_foot
+    400010: Bone_L_leg
+    400012: Bone_R_foot
+    400014: Bone_R_leg
+    400016: ear_L_01
+    400018: ear_L_02
+    400020: ear_R_01
+    400022: ear_R_02
+    400024: eye
+    400026: head
+    400028: nose
+    400030: //RootNode
+    400032: tail
+    400034: Text002
+    4300000: ' Row_rabbit002'
+    7400000: rabbit_walk
+    9500000: //RootNode
+    13700000: ' Row_rabbit002'
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: rabbit_walk
+      takeName: Take 001
+      firstFrame: 200
+      lastFrame: 230
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: ' Row_rabbit002'
+        weight: 1
+      - path: _root
+        weight: 1
+      - path: _root/bip001
+        weight: 1
+      - path: _root/bip001/body
+        weight: 1
+      - path: _root/bip001/body/head
+        weight: 1
+      - path: _root/bip001/body/head/ear_L_01
+        weight: 1
+      - path: _root/bip001/body/head/ear_L_01/ear_L_02
+        weight: 1
+      - path: _root/bip001/body/head/ear_R_01
+        weight: 1
+      - path: _root/bip001/body/head/ear_R_01/ear_R_02
+        weight: 1
+      - path: _root/bip001/body/head/eye
+        weight: 1
+      - path: _root/bip001/body/head/nose
+        weight: 1
+      - path: _root/bip001/body/tail
+        weight: 1
+      - path: _root/bip001/Bone_L_leg
+        weight: 1
+      - path: _root/bip001/Bone_L_leg/Bone_L_foot
+        weight: 1
+      - path: _root/bip001/Bone_R_leg
+        weight: 1
+      - path: _root/bip001/Bone_R_leg/Bone_R_foot
+        weight: 1
+      - path: Text002
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
