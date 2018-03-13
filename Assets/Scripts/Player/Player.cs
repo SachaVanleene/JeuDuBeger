@@ -5,13 +5,14 @@ using UnityEngine;
 public class Player : MonoBehaviour {
 
     [HideInInspector]
-    public int maxHealth;
+    public float maxHealth;
     [Header("Info")]
-    public int actualHealth;
+    public float actualHealth;
 
     [SerializeField]
     bool alive;
     public bool Alive
+
     {
         get
         {
@@ -31,6 +32,8 @@ public class Player : MonoBehaviour {
 
         }
     }
+
+
 
     public int gold;
     public int storedSheeps;
@@ -52,6 +55,26 @@ public class Player : MonoBehaviour {
     public delegate void onRespawn();
     public onRespawn onTriggerRespawn; //Prévenir touts les loups que je suis en vie
 
+    //Freezing System
+    bool isFreezing;
+    bool froze;
+    bool canBeFrozen;
+
+    float timerForLastCallingFreeze;
+
+    float timeNeededToDodgeFreeze;
+    float timeNeededForBeingFrozen;
+    float freezingDUration;
+    float freezingCoolDown;
+
+    float timer;
+
+    Color32 frozenColor = new Color32(54, 167, 204, 255);
+    Color32 normalColor = new Color32(255, 255, 255, 255);
+
+    //Reference To Change Color Of The Player
+    public GameObject goAttachedToModel;
+
     public void Init()
     {
         maxHealth = 100;
@@ -66,14 +89,94 @@ public class Player : MonoBehaviour {
         hMove = GetComponent<TPC.HandleMovement_Player>();
     }
 
-    public void takeDamage(int dps)
+    //FreezingHandler
+
+    private void Awake()
+    {
+        isFreezing = false;
+        froze = false;
+        canBeFrozen = true;
+
+        //Timers
+        timer = 0f;
+
+        //Limits
+        freezingDUration = 5f;
+        freezingCoolDown = 7f;
+        timeNeededForBeingFrozen = 2f;
+        timeNeededToDodgeFreeze = 1f;
+    }
+
+    public void Freezing()
+    {
+        timerForLastCallingFreeze = 0f;
+        if (!isFreezing && canBeFrozen)
+        {
+            isFreezing = true;
+            timer = 0f;
+        }
+    }
+
+    void Frozen()
+    {
+        Debug.LogError("Frozen");
+        hMove.AddVelocity(Vector3.zero, freezingDUration, 0, true);
+        goAttachedToModel.GetComponent<Renderer>().material.SetColor("_Color", frozenColor);
+        StartCoroutine(WaitForEndOfFreeze());
+    }
+
+    IEnumerator WaitForBeingFrozeOnceAgain()
+    {
+        yield return new WaitForSeconds(freezingCoolDown);
+        canBeFrozen = true;
+        Debug.LogError("Can be Froze again");
+    }
+
+    IEnumerator WaitForEndOfFreeze()
+    {
+        yield return new WaitForSeconds(freezingDUration);
+        UnFrozen();
+    }
+
+    void UnFrozen()
+    {
+        Debug.LogError("UnFrozen");
+        goAttachedToModel.GetComponent<Renderer>().material.SetColor("_Color", normalColor);
+        froze = false;
+        StartCoroutine(WaitForBeingFrozeOnceAgain());
+    }
+
+    public void Update()
+    {
+
+        timer += Time.deltaTime;
+        timerForLastCallingFreeze += Time.deltaTime;
+        if(timerForLastCallingFreeze >= timeNeededToDodgeFreeze && isFreezing)
+        {
+            isFreezing = false;
+            Debug.LogError("Remise à 0 du freeze");
+        }
+
+            if(timer >= timeNeededForBeingFrozen && canBeFrozen && isFreezing) // Si on a dépassé la liite sous le gel on se freeze
+            {
+                canBeFrozen = false;
+                froze = true;
+                isFreezing = false;
+                Frozen();
+            }
+    }
+
+
+
+    public void takeDamage(float dps)
     {
         actualHealth -= dps;
 
-        if (actualHealth <= 0)
+        if (actualHealth <= 0 && Alive)
         {
             Alive = false;
             anim.SetTrigger("dead");
+            onTriggerDead.Invoke();
             StartCoroutine(Respawn());
         }
     }

@@ -8,12 +8,14 @@ public class WolfBossHealth : MonoBehaviour
     private Animator anim;
     private ParticleSystem cloud;
     private int health;
+    public bool alive;
 
     private void Awake()
     {
         health = 100;
         anim = GetComponent<Animator>();
         cloud = GetComponentInChildren<ParticleSystem>();
+        alive = true;
     }
 
     public void takeDamage(int damage)
@@ -23,9 +25,11 @@ public class WolfBossHealth : MonoBehaviour
 
         if (health < 0)
         {
-            GetComponent<IA_Wolves_Path>().updateTarget(null);
+            alive = false;
+            GetComponent<IA_Boss_Wolves>().DisableCollider();
+            GetComponent<IA_Boss_Wolves>().updateTarget(null);
             anim.SetTrigger("dead");
-            Destroy(gameObject, 2.5f);
+            Destroy(gameObject, 3.75f);
         }
 
     }

@@ -35,6 +35,8 @@ namespace Assets.Script.Managers
                 instance = this;
             else if (instance != this)
                 Destroy(gameObject);
+
+            IsTheSunAwakeAndTheBirdAreSinging = true;
         }
 
 

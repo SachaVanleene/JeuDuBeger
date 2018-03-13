@@ -18,6 +18,8 @@ namespace Assets.Script
         public static GameObject MainCanvasGameObject;
         private GameManager _gameManager;
 
+
+
         public void Start()
         {
             PlayerGameObject = GameObject.FindWithTag("Player");

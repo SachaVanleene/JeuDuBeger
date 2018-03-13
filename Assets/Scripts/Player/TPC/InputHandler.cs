@@ -138,16 +138,16 @@ namespace TPC
         {
             horizontal = Input.GetAxis("Horizontal");
             vertical = Input.GetAxis("Vertical");
-            if (!Assets.Script.Managers.GameManager.instance.IsTheSunAwakeAndTheBirdAreSinging)
-            {
+            // (!Assets.Script.Managers.GameManager.instance.IsTheSunAwakeAndTheBirdAreSinging)
+            //{
                 mouse1 = Input.GetAxis("Fire1");
                 mouse2 = Input.GetAxis("Fire2");
                 middleMouse = Input.GetAxis("Mouse ScrollWheel");
                 mouseX = Input.GetAxis("Mouse X");
                 mouseY = Input.GetAxis("Mouse Y");
                 fire3 = Input.GetAxis("Fire3");
-            }
-            else
+            //}
+            /*else
             {
                 mouse1 = 0f;
                 mouse2 = 0f;
@@ -155,7 +155,7 @@ namespace TPC
                 mouseX = 0f;
                 mouseY = 0f;
                 fire3 = 0f;
-            }
+            *///
 
             jumpInput = Input.GetButtonDown(Statics.Jump);
             runInput = Input.GetButton(Statics.Run);

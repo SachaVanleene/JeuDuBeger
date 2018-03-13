@@ -1,12 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
-public class IA_Common_Wolves : MonoBehaviour {
+public class IA_Boss_Wolves : MonoBehaviour {
 
     private Animator anim;
-    private NavMeshAgent agent;
+    private UnityEngine.AI.NavMeshAgent agent;
 
 
     public Transform targetTransform; //Wolf target
@@ -37,11 +36,13 @@ public class IA_Common_Wolves : MonoBehaviour {
     bool focusingPlayer;
     GameObject player;
 
+    BoxCollider collider;
+
     private void Awake()
     {
         timer = 0f;
         //Characteristics of Common WOlves
-        timeBetweenAttacks = 0.834f; // time between attack 
+        timeBetweenAttacks = 0.833f; // time between attack 
         damage = 10f;
         anim_time = 0.5f;
         rotationSpeed = 2f;
@@ -49,10 +50,12 @@ public class IA_Common_Wolves : MonoBehaviour {
         //Initial set up
         targetTransform = null;
         moving = false;
-        isAttacking = false;;
+        isAttacking = false; ;
 
         focusingPlayer = false;
         player = GameObject.FindGameObjectWithTag("Player");
+
+        collider = GetComponent<BoxCollider>();
     }
 
 
@@ -60,17 +63,20 @@ public class IA_Common_Wolves : MonoBehaviour {
     void Start()
     {
         anim = GetComponent<Animator>();
-        agent = GetComponent<NavMeshAgent>();
-        //updateTarget(fakenclos.transform);
+        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();;
         agent.Warp(this.gameObject.transform.position);
-        NavMesh.pathfindingIterationsPerFrame = 500;
+        UnityEngine.AI.NavMesh.pathfindingIterationsPerFrame = 500;
         enclos = GameObject.FindGameObjectsWithTag("Enclos");
-        GetTargetEnclos();
+
+        //FocusPlayer
+        focusPlayer();
+        //SubscribeToPlayerRespanToFocusHimWheneverItIsPossible
+        player.GetComponent<Player>().AddSubscriberRespawn(focusPlayer);
     }
 
     public void updateTarget(Transform target)
     {
-        Debug.LogError("Je change de target");
+
         if (target != null)
         {
             // Debug.LogError("Position target : " + target.position);
@@ -83,8 +89,10 @@ public class IA_Common_Wolves : MonoBehaviour {
             targetTransform = target;
             targetTag = "Aucune";
             targetInRange = false;
+            HandleMove();
         }
-        else { 
+        else
+        {
             targetTransform = target;
             targetTag = target.gameObject.tag;
             SubscribeDelegate();
@@ -254,8 +262,10 @@ public class IA_Common_Wolves : MonoBehaviour {
     {
         if (targetTransform != null)
         {
+            float dist = Vector3.Distance(targetTransform.position, transform.position); // Afin dêtre sur que ce soit le bon enclos
             if (GameObject.ReferenceEquals(targetTransform.gameObject,other.gameObject))
             {
+                //Debug.LogError("In Range");
                 targetInRange = true;
                 HandleMove();
             }
@@ -284,6 +294,7 @@ public class IA_Common_Wolves : MonoBehaviour {
         {
             if (GameObject.ReferenceEquals(targetTransform.gameObject, other.gameObject))
             {
+                //Debug.LogError("target lost");
                 targetInRange = false;
             }
         }
@@ -293,7 +304,7 @@ public class IA_Common_Wolves : MonoBehaviour {
     void Update()
     {
 
-        /*if(targetTransform == null && GetComponent<WolfHealth>().alive)
+        /*if (targetTransform == null && GetComponent<WolfBossHealth>().alive)
         {
             GetTargetEnclos();
         }*/
@@ -316,7 +327,6 @@ public class IA_Common_Wolves : MonoBehaviour {
         {
             if (isAttacking && anim.GetCurrentAnimatorStateInfo(0).IsName("Wolf_Layer.Attack Jump") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > anim_time) // attaquer au bon moment de l'naimation
             {
-                //Debug.LogError("J attaque");
                 Attack();
                 isAttacking = false;
             }
@@ -331,7 +341,7 @@ public class IA_Common_Wolves : MonoBehaviour {
             }
             if ((timer >= timeBetweenAttacks) && targetInRange && !isAttacking && targetTag != "Aucune" && targetAlive)
             {
-                Debug.LogError("J attaque");
+                //Debug.LogError("Lance attaque");
                 anim.SetTrigger("attack");
                 isAttacking = true;
                 timer = 0f;
@@ -348,6 +358,7 @@ public class IA_Common_Wolves : MonoBehaviour {
         }
         if (targetTag == "Fences")
         {
+            //Debug.LogError("Attaque enclos");
             targetTransform.parent.gameObject.GetComponent<EnclosureScript>().DamageEnclos(damage);
         }
     }
@@ -359,5 +370,10 @@ public class IA_Common_Wolves : MonoBehaviour {
             focusingPlayer = true;
             updateTarget(player.transform);
         }
+    }
+
+    public void DisableCollider()
+    {
+        collider.enabled = false;
     }
 }

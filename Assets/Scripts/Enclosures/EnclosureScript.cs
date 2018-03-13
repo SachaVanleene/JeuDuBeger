@@ -37,8 +37,8 @@ using Random = UnityEngine.Random;
             }
         }
 
-        private int _health;
-        public int Health
+        private float _health;
+        public float Health
         {
             get { return _health; }
             set
@@ -129,7 +129,7 @@ using Random = UnityEngine.Random;
             }
         }
 
-        public void DamageEnclos(int degats)
+        public void DamageEnclos(float degats)
         {
             Health -= degats;
             if (Health == 0)
