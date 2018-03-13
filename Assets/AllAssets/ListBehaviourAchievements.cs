@@ -4,14 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ListBehaviour : MonoBehaviour {
+public class ListBehaviourAchievements : MonoBehaviour {
 
-    public GameObject DetailPrefab;
+    public GameObject AchievementPrefab;
     public GameObject ObjectMainMenu;
-    public GameObject ListProfiles;
-    public GameObject ScrollList;
-    public GameObject TextLogPanel;
-    public GameObject TextNoProfileFound;
+    public GameObject ListAchievements;
+
     private List<GameObject> elements;
 
     public void Start()
@@ -27,29 +25,15 @@ public class ListBehaviour : MonoBehaviour {
         }
         elements = new List<GameObject>();
 
-        if(ProfileManager.ProfilesFound.Count <= 0)
-        {
-            ScrollList.SetActive(false);
-            TextLogPanel.SetActive(false);
-            TextNoProfileFound.SetActive(true);
-            return;
-        }
-        else
-        {
-            ScrollList.SetActive(true);
-            TextLogPanel.SetActive(true);
-            TextNoProfileFound.SetActive(false);
-        }
-
-        ListProfiles.GetComponent<RectTransform>().sizeDelta = new Vector2(220f * ProfileManager.ProfilesFound.Count, 0);
-        ListProfiles.transform.localPosition += new Vector3((ProfileManager.ProfilesFound.Count * 220f) / 2, 0, 0);
+        ListAchievements.GetComponent<RectTransform>().sizeDelta = new Vector2(220f * ProfileManager.ProfilesFound.Count, 0);
+        ListAchievements.transform.localPosition += new Vector3((ProfileManager.ProfilesFound.Count * 220f) / 2, 0, 0);
         float x = (ProfileManager.ProfilesFound.Count * 220f) / 2 + 110f;
 
         foreach(var data in ProfileManager.ProfilesFound)
         {
             x -= 220;
 
-            GameObject r = Instantiate(DetailPrefab, ListProfiles.transform);
+            GameObject r = Instantiate(AchievementPrefab, ListAchievements.transform);
             elements.Add(r);
             r.GetComponent<ScriptLoadProfile>().fullName = data[0] + "-" + data[1] + ".save";
             r.GetComponent<Button>().onClick.AddListener(r.GetComponent<ScriptLoadProfile>().Load);

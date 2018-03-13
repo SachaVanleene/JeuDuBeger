@@ -7,71 +7,90 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour {
 
-    public GameObject loadingScreen;
-    public Text loadingText;
-    public GameObject difficultyPanel;
-    public GameObject achievementsPanel;
-    public GameObject logPanel;
-    public GameObject logButton;
-
-    private void Start()
-    {
-    }
-
-
+    public GameObject LoadingScreen;
+    public GameObject DifficultyPanel;
+    public GameObject AchievementsPanel;
+    public GameObject LogPanel;
+    public GameObject LogButton;
+    public GameObject DeleteButton;
+    public Text LoadingText;
+    public Text PlayerNameText;
+    public InputField NewPlayerName;
+    
     //Choose difficulty of game
     public void PlayWithDifficulty(int difficulty)
     {
-        loadingScreen.SetActive(true);
-        switch (difficulty)
-        {
-            case 1:
-                //Load scene with easy enemies
-                break;
-            case 2:
-                //Load scene with medium enemies
-                break;
-            case 3:
-                //Load scene with hard enemies
-                break;
-        }
-
-
+        HideAllPanels();
+        LoadingScreen.SetActive(true);
+        SProfilePlayer.getInstance().Difficulty = difficulty; // to be use in game
         SceneManager.LoadScene(1);
     }
 
     //On play, show panel to choose difficulty
     public void ShowDifficultyPanel()
     {
-        difficultyPanel.SetActive(true);
+        HideAllPanels();
+        DifficultyPanel.SetActive(true);
     }
 
     public void HideDifficultyPanel()
     {
-        difficultyPanel.SetActive(false);
+        DifficultyPanel.SetActive(false);
     }
-    public void ShowLogPanel()
+    public void DeleteCurrentProfile()
     {
-        logButton.SetActive(false);
-        logPanel.SetActive(true);
+        ProfileManager.DeleteProfile(SProfilePlayer.getInstance().Name);
+        ShowLogPanel();
+    }
+    public void ChangeCurrentProfile()
+    {
+        ProfileManager.SaveProfile();   
+        ShowLogPanel();
+    }
+    public void CreateProfile()
+    {
+        if (NewPlayerName.text.Equals(""))
+            ProfileManager.CreateProfile("UnknownPlayer");
+        else
+            ProfileManager.CreateProfile(NewPlayerName.text);
+        NewPlayerName.text = "";
+        HideLogPanel();
+    }
+    private void ShowLogPanel()
+    {
+        HideAllPanels();
+        ProfileManager.RetreiveSaves();
+        LogPanel.GetComponentInChildren<ListBehaviour>().CreateListPanel();
+        LogButton.SetActive(false);
+        LogPanel.SetActive(true);
+        DeleteButton.SetActive(false);
     }
     public void HideLogPanel()
     {
-        Debug.Log("toto");
-        logButton.SetActive(true);
-        logPanel.SetActive(false);
+        PlayerNameText.text = "Hello " + SProfilePlayer.getInstance().Name;
+        LogButton.SetActive(true);
+        DeleteButton.SetActive(true);
+        LogPanel.SetActive(false);
     }
     public void ShowAchievementsPanel()
     {
-        achievementsPanel.SetActive(true);
+        HideAllPanels();
+        AchievementsPanel.SetActive(true);
     }
     public void HideAchievementsPanel()
     {
-        achievementsPanel.SetActive(false);
+        AchievementsPanel.SetActive(false);
     }
-    //Exit game
     public void ExitGame()
     {
+        ProfileManager.SaveProfile();
         Application.Quit();
+    }
+    public void HideAllPanels()
+    {
+        LoadingScreen.SetActive(false);
+        DifficultyPanel.SetActive(false);
+        AchievementsPanel.SetActive(false);
+        LogPanel.SetActive(false);
     }
 }

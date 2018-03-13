@@ -8,11 +8,12 @@ using UnityEngine;
 
 public class ProfileManager : MonoBehaviour {
     static public List<string[]> ProfilesFound;
+    public Sprite SpritesAchievements;
     public void Awake()
     {
-        retreiveSaves();
+        RetreiveSaves();
     }
-    private void retreiveSaves()
+    static public void RetreiveSaves()
     {
         ProfilesFound = new List<string[]>();
         try
@@ -20,37 +21,56 @@ public class ProfileManager : MonoBehaviour {
             foreach (string file in System.IO.Directory.GetFiles("./saves/", "*.save"))
             // get list of files *.maps in folder
             {
-                ProfilesFound.Add(Path.GetFileName(file).Split(new[] { '-' }));
+                ProfilesFound.Add(Path.GetFileNameWithoutExtension(file).Split(new[] { '-' }));
             }
         }
         catch (Exception excp)
         {
-            Debug.LogError("no save folder");
+            Debug.LogWarning("no save folder found, create a new one");
+            System.IO.Directory.CreateDirectory("./saves");
+        }
+    }
+    static public void DeleteProfile(string name)
+    {
+        foreach (var profile in ProfilesFound)  
+        {
+            if (profile[0].Equals(name))
+                File.Delete("./saves/" + profile[0] + "-" + profile[1] + ".save");
         }
     }
 
-    public void LoadProfile(string name)
+    static public void CreateProfile(string name)
     {
-        if (File.Exists("./maps/" + name))
+        //DeleteProfile(name);
+        SProfilePlayer.setInstance(new SProfilePlayer());
+        SProfilePlayer.getInstance().Name = name;
+    }
+    static public void LoadProfile(string fullName)
+    {
+        if (File.Exists("./saves/" + fullName))
         {
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open("./saves/" + name, FileMode.Open);
-            SProfilePlayer.Instance = (SProfilePlayer)bf.Deserialize(file);
+            FileStream file = File.Open("./saves/" + fullName, FileMode.Open);
+            SProfilePlayer.setInstance((SProfilePlayer) bf.Deserialize(file));
             file.Close();
         }
         else
         {
-            Debug.LogError("file not found");
+            Debug.LogWarning("file not found");
         }
-
     }
-    public void SaveProfile()
+    static public void SaveProfile()
     {
+        if (SProfilePlayer.getInstance().Name == null)
+            // no profile loaded
+            return;
         if (!File.Exists("./saves"))
             System.IO.Directory.CreateDirectory("./saves");
-        FileStream file = File.Create("./saves/" + SProfilePlayer.Instance.Name + "-" + DateTime.Now.ToShortDateString() + ".save");
+        DeleteProfile(SProfilePlayer.getInstance().Name);
+        FileStream file = File.Create("./saves/" + SProfilePlayer.getInstance().Name + "-" + 
+            DateTime.Now.ToLongDateString().Split(',')[1] + ".save");
         BinaryFormatter bf = new BinaryFormatter();
-        bf.Serialize(file, SProfilePlayer.Instance);
+        bf.Serialize(file, SProfilePlayer.getInstance());
         file.Close();
     }
 

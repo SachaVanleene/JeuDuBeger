@@ -19,16 +19,16 @@ public class AchievementInfo {
         EventsToListen = events;
         foreach(var ev in events)
         {
-            SProfilePlayer.Instance.AchievementsManager.Subscribe(ev, this);
+            SProfilePlayer.getInstance().AchievementsManager.Subscribe(ev, this);
         }
-        SProfilePlayer.Instance.AchievementsManager.AddAchievement(this);
+        SProfilePlayer.getInstance().AchievementsManager.AddAchievement(this);
     }
     public void AddStep(AchievementEvent ev, int step = 1)
     {
         completion[ev] += step;
         if(completion[ev] >= Aim[ev])
         {
-            SProfilePlayer.Instance.AchievementsManager.Unsubscribe(ev, this);
+            SProfilePlayer.getInstance().AchievementsManager.Unsubscribe(ev, this);
         }
     }
     public bool IsComplete()

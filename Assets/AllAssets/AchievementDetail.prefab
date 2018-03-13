@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 114563141193732188}
   - component: {fileID: 114852202683519900}
   m_Layer: 5
-  m_Name: SaveDetail
+  m_Name: AchievementDetail
   m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -176,7 +176,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.19463669, g: 0.207358, b: 0.36764705, a: 1}
+    m_NormalColor: {r: 0.5294118, g: 0.8636917, b: 1, a: 1}
     m_HighlightedColor: {r: 0.125, g: 0.8189653, b: 1, a: 1}
     m_PressedColor: {r: 0.13305579, g: 0.2728142, b: 0.78676474, a: 1}
     m_DisabledColor: {r: 0.75, g: 0.75, b: 0.75, a: 1}
