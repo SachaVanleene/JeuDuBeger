@@ -10,6 +10,9 @@ public class MainMenu : MonoBehaviour {
     public GameObject loadingScreen;
     public Text loadingText;
     public GameObject difficultyPanel;
+    public GameObject achievementsPanel;
+    public GameObject logPanel;
+    public GameObject logButton;
 
     private void Start()
     {
@@ -47,7 +50,25 @@ public class MainMenu : MonoBehaviour {
     {
         difficultyPanel.SetActive(false);
     }
-
+    public void ShowLogPanel()
+    {
+        logButton.SetActive(false);
+        logPanel.SetActive(true);
+    }
+    public void HideLogPanel()
+    {
+        Debug.Log("toto");
+        logButton.SetActive(true);
+        logPanel.SetActive(false);
+    }
+    public void ShowAchievementsPanel()
+    {
+        achievementsPanel.SetActive(true);
+    }
+    public void HideAchievementsPanel()
+    {
+        achievementsPanel.SetActive(false);
+    }
     //Exit game
     public void ExitGame()
     {

@@ -14,7 +14,6 @@ namespace Assets.Script.Managers
         public Text TextGolds;
         public Text TextSheeps;
         public GameObject TextInfo;
-        //public GameObject Player;
         public GameObject CycleManagerObject;
         public GameObject Spawns;
 
@@ -59,6 +58,24 @@ namespace Assets.Script.Managers
         {
             // achievement
             displayInfo("A sheep has been eaten", 2);
+            bool sheepsAlives = false;
+            foreach (var p in _enclosureManager.EnclosPrefabList)
+            {
+                if (p.SheepNumber <= 0)
+                    continue;
+                else
+                {
+                    sheepsAlives = true;
+                    break;
+                }
+            }
+            if (sheepsAlives)
+                gameOver();
+
+        }
+        private void gameOver()
+        {
+            // TODO : call the achievements, pause the game, display panel GAMEOVER that allow the player to return to the mainmenu
         }
         public void TakeSheep()
         {
@@ -154,10 +171,10 @@ namespace Assets.Script.Managers
         {
             // TODO : call achievement death personnage
         }
-        public void DeathWolf()
+        public void DeathWolf(GameObject wolf = null)
         {
             // TODO : call achievement death wolfs
-            Spawns.GetComponent<Spawn_wolf>().WolfDeath();
+            Spawns.GetComponent<Spawn_wolf>().WolfDeath(wolf);
 
             if (!Spawns.GetComponent<Spawn_wolf>().hasWolfAlive())
                 cycleManager.NextCycle(10f);
