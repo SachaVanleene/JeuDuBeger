@@ -14,12 +14,12 @@ namespace TPC
         public bool alive;
 
         [Header("Stats")]
-        public float groundDistance = 0.6f;
-        public float groundOffset = 0.2f;
-        public float distanceToCheckForward = 1.3f;
-        public float runSpeed = 6;
+        public float groundDistance = 0.7f;
+        public float groundOffset = 0.1f;
+        public float distanceToCheckForward = 2.3f;
+        public float runSpeed = 8;
         public float walkSpeed = 4;
-        public float jumpForce = 15;
+        public float jumpForce = 6;
         public float airTimeTreshold = 0.8f;
 
         [Header("Inputs")]
@@ -168,19 +168,12 @@ namespace TPC
                 Vector3 origin = transform.position;
                 //Clear forward
                 origin += Vector3.up * 0.75f;
-                IsClear(origin, transform.forward, distanceToCheckForward, ref obstacleForward);
+                IsClear(origin, moveDirection, distanceToCheckForward, ref obstacleForward);
                 if (!obstacleForward)
                 {
                     //Is ground forward ?
-                    origin += transform.forward * 0.6f;
+                    origin += moveDirection * 0.6f;
                     IsClear(origin, -Vector3.up, groundDistance * 3, ref groundForward);
-                }
-                else
-                {
-                    if (Vector3.Angle(transform.forward, moveDirection) > 30)
-                    {
-                        obstacleForward = false;
-                    }
                 }
             }
 

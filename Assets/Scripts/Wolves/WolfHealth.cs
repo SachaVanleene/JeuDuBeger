@@ -34,6 +34,10 @@ public class WolfHealth : MonoBehaviour
             {
                 GetComponent<IA_Water_Wolves>().updateTarget(null);
             }
+            if (gameObject.tag == "MoutainWolf")
+            {
+                GetComponent<IA_Moutain_Wolves>().updateTarget(null);
+            }
             anim.SetTrigger("dead");
             Destroy(gameObject, 2.5f);
         }

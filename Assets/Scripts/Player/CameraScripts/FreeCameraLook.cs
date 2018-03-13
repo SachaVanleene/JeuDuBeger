@@ -14,7 +14,7 @@ namespace TPC
         [SerializeField]
         private float tiltMax = 35f;
         [SerializeField]
-        private float tiltMin = 30f;
+        private float tiltMin = 15f;
         [SerializeField]
         private bool lockCursor = false;
 
