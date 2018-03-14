@@ -71,6 +71,11 @@ using Random = UnityEngine.Random;
         }
 
 
+    public void setHealth(int superSheepHealth)
+    {
+        _health += superSheepHealth;
+    }
+
     private void Awake()
     {
         _health = 10;
@@ -86,7 +91,7 @@ using Random = UnityEngine.Random;
 
         void Update()
         {
-            //ShowPannel();
+            ShowPannel();
         }
 
         private void ShowPannel()

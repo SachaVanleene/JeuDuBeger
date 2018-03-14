@@ -364,6 +364,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4087810568446316}
   - component: {fileID: 114031508847626236}
+  - component: {fileID: 114307793798184366}
   m_Layer: 0
   m_Name: EnclosMoyen
   m_TagString: Untagged
@@ -2599,6 +2600,10 @@ MonoBehaviour:
   panelEnclos: {fileID: 1411021228913878}
   totalSheep: {fileID: 114600999052327418}
   smoke: {fileID: 198856252096401474, guid: 430759bb50b1c6e49a13a126c55ef6da, type: 2}
+  RewardGold: 1
+  MainCanvas: {fileID: 0}
+  NbSheep: 0
+  nbSheep: 0
 --- !u!114 &114049655262490958
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2779,6 +2784,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: defc34e546c0560408c92f6b738cbec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114307793798184366
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1524733720052002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f6b7e98f646e23479703728793d8894, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PinkSuperSheepPrefab: {fileID: 1246015367775400, guid: 68aa04091c5b0664ea9635844819aa4e,
+    type: 2}
+  pinkFence: {fileID: 2100000, guid: 8710bfe6de4185f4493a5cb024f4cd22, type: 2}
 --- !u!114 &114329743447116262
 MonoBehaviour:
   m_ObjectHideFlags: 1
