@@ -8,7 +8,9 @@ using UnityEngine;
 
 public class ProfileManager : MonoBehaviour {
     static public List<string[]> ProfilesFound;
-    public Sprite SpritesAchievements;
+    public List<Texture2D> SpritesAchievements;
+    public Texture2D DefaultSprite;
+    public Texture2D CompletedSprite;
     public void Awake()
     {
         RetreiveSaves();
@@ -42,17 +44,23 @@ public class ProfileManager : MonoBehaviour {
     static public void CreateProfile(string name)
     {
         //DeleteProfile(name);
-        SProfilePlayer.setInstance(new SProfilePlayer());
-        SProfilePlayer.getInstance().Name = name;
+        SProfilePlayer.setInstance(new SProfilePlayer(name));
     }
     static public void LoadProfile(string fullName)
     {
         if (File.Exists("./saves/" + fullName))
         {
+            //Debug.Log(SProfilePlayer.getInstance().AchievementsManager.GetHashCode());
+
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open("./saves/" + fullName, FileMode.Open);
             SProfilePlayer.setInstance((SProfilePlayer) bf.Deserialize(file));
             file.Close();
+            SProfilePlayer.getInstance().AchievementsManager.ResetManagerOnAchievementInfos();
+            /*
+            Debug.Log(SProfilePlayer.getInstance().AchievementsManager.getAchivements()[0].getManager().GetHashCode());
+            Debug.Log(SProfilePlayer.getInstance().AchievementsManager.GetHashCode());
+            Debug.Log(" --- ");*/
         }
         else
         {
@@ -61,8 +69,7 @@ public class ProfileManager : MonoBehaviour {
     }
     static public void SaveProfile()
     {
-        if (SProfilePlayer.getInstance().Name == null)
-            // no profile loaded
+        if (SProfilePlayer.getInstance().Name.Equals("<Default>"))
             return;
         if (!File.Exists("./saves"))
             System.IO.Directory.CreateDirectory("./saves");

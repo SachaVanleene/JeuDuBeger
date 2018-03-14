@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 [Serializable]
 public class AchievementInfo {
@@ -8,27 +9,31 @@ public class AchievementInfo {
     public Dictionary<AchievementEvent, int> completion { get; set; }
     public Dictionary<AchievementEvent, int> Aim { get; set; }
     public List<AchievementEvent> EventsToListen;
+    [NonSerialized]
+    private AchievementsManager manager; // is reset when loaded to prevent loop
     // NOTE : the image to be displayed must match the name of the AchievementInfo
     public AchievementInfo(string name, string info, List<AchievementEvent> events, Dictionary<AchievementEvent, int> aim,
-        Dictionary<AchievementEvent, int> startedCompletion)
+        Dictionary<AchievementEvent, int> startedCompletion, AchievementsManager manager)
     {
         Name = name;
         InfoText = info;
         Aim = aim;
         completion = startedCompletion;
         EventsToListen = events;
-        foreach(var ev in events)
+        this.manager = manager;
+
+        foreach (var ev in events)
         {
-            SProfilePlayer.getInstance().AchievementsManager.Subscribe(ev, this);
+            manager.Subscribe(ev, this);
         }
-        SProfilePlayer.getInstance().AchievementsManager.AddAchievement(this);
+        manager.AddAchievement(this);
     }
     public void AddStep(AchievementEvent ev, int step = 1)
     {
         completion[ev] += step;
         if(completion[ev] >= Aim[ev])
         {
-            SProfilePlayer.getInstance().AchievementsManager.Unsubscribe(ev, this);
+            manager.Unsubscribe(ev, this);
         }
     }
     public bool IsComplete()
@@ -41,5 +46,14 @@ public class AchievementInfo {
             }
         }
         return true;
+    }
+    public void SetManager(AchievementsManager man)
+    {
+        manager = man;
+    }
+    // TODO : to be deleted after tests 
+    public AchievementsManager getManager()
+    {
+        return manager;
     }
 }

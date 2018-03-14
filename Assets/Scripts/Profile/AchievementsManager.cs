@@ -7,7 +7,13 @@ public class AchievementsManager {
     // list of achievements
     private List<AchievementInfo> achievements;
     // which achievement listen to which event
-    private Dictionary<AchievementEvent, List<AchievementInfo>> listeners = new Dictionary<AchievementEvent, List<AchievementInfo>>();
+    private Dictionary<AchievementEvent, List<AchievementInfo>> listeners;
+
+    public AchievementsManager()
+    {
+        this.achievements = new List<AchievementInfo>();
+        this.listeners = new Dictionary<AchievementEvent, List<AchievementInfo>>();
+    }
 
     public void AddStepAchievement(AchievementEvent eventAchievement, int step = 1)
     {
@@ -24,10 +30,11 @@ public class AchievementsManager {
     public void Subscribe(AchievementEvent listen, AchievementInfo ach)
     {
         if (!listeners.ContainsKey(listen))
+        {
             listeners.Add(listen, new List<AchievementInfo>());
-        var list = listeners[listen];
-        list.Add(ach);
-        listeners[listen] = list;
+            return;
+        }
+        listeners[listen].Add(ach);
     }
     public void Unsubscribe(AchievementEvent listen, AchievementInfo ach)
     {
@@ -49,5 +56,12 @@ public class AchievementsManager {
     public void RemoveAchievement(AchievementInfo ach)
     {
         achievements.Remove(ach);
+    }
+    public void ResetManagerOnAchievementInfos()
+    {
+        foreach(var achInf in achievements)
+        {
+            achInf.SetManager(this);
+        }
     }
 }

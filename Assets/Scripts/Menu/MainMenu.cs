@@ -10,6 +10,7 @@ public class MainMenu : MonoBehaviour {
     public GameObject LoadingScreen;
     public GameObject DifficultyPanel;
     public GameObject AchievementsPanel;
+    public GameObject AchievementInfoPanel;
     public GameObject LogPanel;
     public GameObject LogButton;
     public GameObject DeleteButton;
@@ -60,7 +61,7 @@ public class MainMenu : MonoBehaviour {
     {
         HideAllPanels();
         ProfileManager.RetreiveSaves();
-        LogPanel.GetComponentInChildren<ListBehaviour>().CreateListPanel();
+        LogPanel.GetComponent<ListBehaviour>().CreateListPanel();
         LogButton.SetActive(false);
         LogPanel.SetActive(true);
         DeleteButton.SetActive(false);
@@ -75,6 +76,7 @@ public class MainMenu : MonoBehaviour {
     public void ShowAchievementsPanel()
     {
         HideAllPanels();
+        AchievementsPanel.GetComponent<ListBehaviourAchievements>().CreateListPanel();
         AchievementsPanel.SetActive(true);
     }
     public void HideAchievementsPanel()
@@ -86,11 +88,21 @@ public class MainMenu : MonoBehaviour {
         ProfileManager.SaveProfile();
         Application.Quit();
     }
+    public void DisplayAchievementInfo(AchievementInfo achievement)
+    {
+        AchievementInfoPanel.SetActive(true);
+        AchievementInfoPanel.GetComponent<ScriptAchievementInfo>().DisplayAchievementInfo(achievement, this.GetComponent<ProfileManager>());
+    }
+    public void HideAchievementInfo()
+    {
+        AchievementInfoPanel.SetActive(false);
+    }
     public void HideAllPanels()
     {
         LoadingScreen.SetActive(false);
         DifficultyPanel.SetActive(false);
         AchievementsPanel.SetActive(false);
         LogPanel.SetActive(false);
+        AchievementInfoPanel.SetActive(false);
     }
 }
