@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Assets.Script.Managers;
 using Assets.Script;
+using Assets.Scripts.Enclosures;
 
 public class SuperSheep : MonoBehaviour
 {
@@ -79,7 +80,7 @@ public class SuperSheep : MonoBehaviour
             {
                 AddPinkSuperSheep();
                 nbSuperSheep++;
-                this.GetComponent<EnclosureScript>().setHealth(50);
+              //  this.GetComponent<EnclosureScript>().setHealth(50);
                 _gameManager.PlaceSuperSheep();
             } 
         }
