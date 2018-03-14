@@ -55,6 +55,7 @@ namespace Assets.Script
             else
             {
                 TrapFactory.IsInTrapCreationMode = false;
+                ActualSelectedTrapTypes = TrapTypes.None;
                 Destroy(TrapFactory.ActualTrap);
             }
             if (TrapFactory.IsInTrapCreationMode)

@@ -16,9 +16,10 @@ namespace Assets.Scripts.Traps
         public static Vector3 GetMousePosition()
         {
             RaycastHit hitInfo;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Ray ray = Camera.main.ScreenPointToRay(new Vector2(Camera.main.pixelWidth / 2f, Camera.main.pixelHeight / 2f));
             Physics.Raycast(ray, out hitInfo, Mathf.Infinity, LayerMask.GetMask("Terrain"));
             float distance = Vector3.Distance(hitInfo.point, TerrainTest.PlayerGameObject.transform.position);
+
             if (distance <= ActionRange && hitInfo.point != Vector3.zero)
             {
                 return hitInfo.point;
@@ -26,7 +27,7 @@ namespace Assets.Scripts.Traps
             if (hitInfo.point != Vector3.zero)
             {
                 Vector3 positionAtRange = ray.direction * ActionRange + TerrainTest.PlayerGameObject.transform.position;
-                return  new Vector3(positionAtRange.x, TerrainTest.Terrain.SampleHeight(positionAtRange),positionAtRange.z);
+                return new Vector3(positionAtRange.x, TerrainTest.Terrain.SampleHeight(positionAtRange), positionAtRange.z);
             }
             else
             {
@@ -34,7 +35,6 @@ namespace Assets.Scripts.Traps
                 Vector3 positionAtRange = ray.direction * ActionRange + TerrainTest.PlayerGameObject.transform.position;
                 return new Vector3(positionAtRange.x, TerrainTest.Terrain.SampleHeight(positionAtRange), positionAtRange.z);
             }
-              
         }
 
 
