@@ -17,7 +17,9 @@ public class EnclosureManager : MonoBehaviour
 
     public static EnclosureManager Instance = null;
     public static Vector3 HousePosition;
+
     public static GameObject EnclosurePannel;
+
     public static int SheepNumberInTheWorld;
 
     public  static List<EnclosureScript> EnclosureList = new List<EnclosureScript>();

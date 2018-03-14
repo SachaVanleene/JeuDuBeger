@@ -18,7 +18,6 @@ using Random = UnityEngine.Random;
         public delegate void OnDead();
         public OnDead OnTriggerDead;
         public GameObject SheepPrefab;
-        public GameObject PinkSuperSheepPrefab;
         public float Distance;
         private bool _isDisplayingPannel = false;
 
@@ -71,19 +70,15 @@ using Random = UnityEngine.Random;
             }
         }
 
+    public void setHealth(int SuperSheepHealth)
+    {
+        _health += SuperSheepHealth;
+    }
 
-    //public void AddPinkSuperSheep()
-    //{
-    //    _health += 10;
-    //    var sheep = Instantiate(PinkSuperSheepPrefab, this.transform); //crée un clone mouton
-    //    sheep.transform.position = this.transform.position; //le place dans l'enclos
-    //    sheep.transform.Rotate(0, Random.Range(0, 360), 0);
-    //}
-
+   
     private void Awake()
     {
         _health = 10;
-        //AddPinkSuperSheep();
     }
 
 
@@ -96,7 +91,7 @@ using Random = UnityEngine.Random;
 
     void Update()
     {
-        //ShowPannel();
+        ShowPannel();
     }
 
     private void ShowPannel()
@@ -158,12 +153,12 @@ using Random = UnityEngine.Random;
         if (SheepNumber < 10)
         {
             SheepNumber++;
-        //var sheep = Instantiate(SheepPrefab, this.transform); //crée un clone mouton
-        //sheep.transform.Rotate(0, Random.Range(0, 360), 0); //l'oriente d'une façon aléatoire
-        var sheep = Instantiate(SheepPrefab, this.transform); //crée un clone mouton
-        sheep.transform.position = this.transform.position; //le place dans l'enclos
-        sheep.transform.Rotate(0, Random.Range(0, 360), 0); //l'oriente d'une façon aléatoire
-    }
+            //var sheep = Instantiate(SheepPrefab, this.transform); //crée un clone mouton
+            //sheep.transform.Rotate(0, Random.Range(0, 360), 0); //l'oriente d'une façon aléatoire
+            var sheep = Instantiate(SheepPrefab, this.transform); //crée un clone mouton
+            sheep.transform.position = this.transform.position; //le place dans l'enclos
+            sheep.transform.Rotate(0, Random.Range(0, 360), 0); //l'oriente d'une façon aléatoire
+        }
         _gameManager.PlaceSheep();
     }
 
