@@ -36,6 +36,7 @@ public class IA_Common_Wolves : MonoBehaviour {
 
     bool focusingPlayer;
     GameObject player;
+    bool enclosFound;
 
     private void Awake()
     {
@@ -53,6 +54,7 @@ public class IA_Common_Wolves : MonoBehaviour {
 
         focusingPlayer = false;
         player = GameObject.FindGameObjectWithTag("Player");
+        enclosFound = false;
     }
 
 
@@ -70,7 +72,7 @@ public class IA_Common_Wolves : MonoBehaviour {
 
     public void updateTarget(Transform target)
     {
-        Debug.LogError("Je change de target");
+        //Debug.LogError("Je change de target");
         if (target != null)
         {
             // Debug.LogError("Position target : " + target.position);
@@ -293,10 +295,15 @@ public class IA_Common_Wolves : MonoBehaviour {
     void Update()
     {
 
-        /*if(targetTransform == null && GetComponent<WolfHealth>().alive)
+        if (!enclosFound)
         {
-            GetTargetEnclos();
-        }*/
+            enclos = GameObject.FindGameObjectsWithTag("Enclos");
+            if (enclos != null)
+            {
+                enclosFound = true;
+                GetTargetEnclos();
+            }
+        }
         timer += Time.deltaTime;
 
         if (true & targetTransform != null)
@@ -331,7 +338,7 @@ public class IA_Common_Wolves : MonoBehaviour {
             }
             if ((timer >= timeBetweenAttacks) && targetInRange && !isAttacking && targetTag != "Aucune" && targetAlive)
             {
-                Debug.LogError("J attaque");
+                //Debug.LogError("J attaque");
                 anim.SetTrigger("attack");
                 isAttacking = true;
                 timer = 0f;

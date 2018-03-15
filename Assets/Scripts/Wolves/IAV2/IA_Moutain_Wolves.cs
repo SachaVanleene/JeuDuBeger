@@ -46,6 +46,8 @@ public class IA_Moutain_Wolves : MonoBehaviour {
 
     GameObject player;
 
+    bool enclosFound;
+
     private void Awake()
     {
         timer = 0f;
@@ -66,6 +68,7 @@ public class IA_Moutain_Wolves : MonoBehaviour {
         focusingPlayer = false;
 
         player = GameObject.FindGameObjectWithTag("Player");
+        enclosFound = false;
     }
 
 
@@ -334,10 +337,15 @@ public class IA_Moutain_Wolves : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        /*if (targetTransform == null)
+        if (!enclosFound)
         {
-            GetTargetEnclos();
-        }*/
+            enclos = GameObject.FindGameObjectsWithTag("Enclos");
+            if (enclos != null)
+            {
+                enclosFound = true;
+                GetTargetEnclos();
+            }
+        }
         timer += Time.deltaTime;
 
         if (true & targetTransform != null)

@@ -12,7 +12,7 @@ public class WolfBossHealth : MonoBehaviour
 
     private void Awake()
     {
-        health = 100;
+        health = 300;
         anim = GetComponent<Animator>();
         cloud = GetComponentInChildren<ParticleSystem>();
         alive = true;

@@ -188,7 +188,10 @@ public class Player : MonoBehaviour {
         actualHealth = maxHealth;
 
         transform.position = spawnPoint.position;
-        onTriggerRespawn.Invoke();
+        if(onTriggerRespawn != null)
+        {
+            onTriggerRespawn.Invoke();
+        }
         anim.SetTrigger("respawn");
     }
 

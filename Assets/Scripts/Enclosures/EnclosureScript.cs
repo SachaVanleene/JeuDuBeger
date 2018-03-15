@@ -20,11 +20,15 @@ using Random = UnityEngine.Random;
         public GameObject SheepPrefab;
         public float Distance;
         private bool _isDisplayingPannel = false;
+        public GameObject PinkSuperSheepPrefab;
+        public Material pinkFence;
 
-        private GameManager _gameManager;
+
+    private GameManager _gameManager;
 
         private int _sheepNumber;
-        public int SheepNumber
+    private int _nbSuperSheep;
+    public int SheepNumber
         {
             get
             {
@@ -85,9 +89,15 @@ using Random = UnityEngine.Random;
             Health += 10;
         }
 
-        void Update()
+    public void setHealth(int superSheepHealth)
+    {
+        _health += superSheepHealth;
+    }
+
+
+    void Update()
         {
-            //ShowPannel();
+            ShowPannel();
         }
 
         private void ShowPannel()
@@ -127,9 +137,20 @@ using Random = UnityEngine.Random;
                 Health -= 10;
                 EnclosureManager.EnclosurePannel.transform.GetChild(1).GetComponent<Text>().text = SheepNumber.ToString();
             }
-        }
+            if (Input.GetKeyDown(KeyCode.KeypadMultiply))
+            {
+                if (_nbSuperSheep < 1 && _gameManager.TotalSuperSheeps == 1)
+                {
+                    AddPinkSuperSheep();
+                    _nbSuperSheep++;
+                    _health += 50;
+                    _gameManager.PlaceSuperSheep();
+                }
+            }
 
-        public void DamageEnclos(float degats)
+    }
+
+    public void DamageEnclos(float degats)
         {
             Health -= degats;
             if (Health == 0)
@@ -156,7 +177,25 @@ using Random = UnityEngine.Random;
         }
         _gameManager.PlaceSheep();
         }
-        public void KillSheep()
+
+        public void AddPinkSuperSheep()
+        {
+            var sheep = Instantiate(PinkSuperSheepPrefab, this.transform); //crée un clone mouton
+            sheep.transform.position = this.transform.position; //le place dans l'enclos
+            sheep.transform.Rotate(0, Random.Range(0, 360), 0);
+
+            foreach (Transform child in transform)
+            {
+                if (child.tag == "Fences")
+                {
+                    Renderer r = child.GetComponent<Renderer>();
+                    r.material = pinkFence;
+                }
+
+            }
+        }
+
+    public void KillSheep()
         {
             if (SheepNumber > 0)
             {

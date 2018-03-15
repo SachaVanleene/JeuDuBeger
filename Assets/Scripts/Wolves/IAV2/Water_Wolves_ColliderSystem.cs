@@ -78,6 +78,7 @@ public class Water_Wolves_ColliderSystem : MonoBehaviour {
         }
         if (targetTag == "Fences")
         {
+            //Debug.LogError("Collision particle");
             if (other.transform.IsChildOf(targetTransform.parent))
             {
                 //Debug.LogError("Collision particle");

@@ -38,6 +38,8 @@ public class IA_Boss_Wolves : MonoBehaviour {
 
     BoxCollider collider;
 
+    bool enclosFound;
+
     private void Awake()
     {
         timer = 0f;
@@ -56,6 +58,7 @@ public class IA_Boss_Wolves : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player");
 
         collider = GetComponent<BoxCollider>();
+        enclosFound = true;
     }
 
 
@@ -304,10 +307,14 @@ public class IA_Boss_Wolves : MonoBehaviour {
     void Update()
     {
 
-        /*if (targetTransform == null && GetComponent<WolfBossHealth>().alive)
+        if (!enclosFound)
         {
-            GetTargetEnclos();
-        }*/
+            enclos = GameObject.FindGameObjectsWithTag("Enclos");
+            if (enclos != null)
+            {
+                enclosFound = true;
+            }
+        }
         timer += Time.deltaTime;
 
         if (true & targetTransform != null)
@@ -325,8 +332,9 @@ public class IA_Boss_Wolves : MonoBehaviour {
 
         if (targetTransform != null)
         {
-            if (isAttacking && anim.GetCurrentAnimatorStateInfo(0).IsName("Wolf_Layer.Attack Jump") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > anim_time) // attaquer au bon moment de l'naimation
+            if (isAttacking && anim.GetCurrentAnimatorStateInfo(1).IsName("Wolf_Left_Arm_Layer.Attack") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > anim_time) // attaquer au bon moment de l'naimation
             {
+                Debug.LogError("Lance attaque");
                 Attack();
                 isAttacking = false;
             }
@@ -341,7 +349,6 @@ public class IA_Boss_Wolves : MonoBehaviour {
             }
             if ((timer >= timeBetweenAttacks) && targetInRange && !isAttacking && targetTag != "Aucune" && targetAlive)
             {
-                //Debug.LogError("Lance attaque");
                 anim.SetTrigger("attack");
                 isAttacking = true;
                 timer = 0f;
