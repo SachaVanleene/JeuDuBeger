@@ -349,7 +349,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1639676467496986, guid: d793e0b509d4dd0489d43012f1ecb072, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d793e0b509d4dd0489d43012f1ecb072, type: 2}
@@ -11124,7 +11124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Traps:
   - {fileID: 114644300071532264, guid: 2e959eb7962958f498e04f05a1b2a93b, type: 2}
-  - {fileID: 114027383516172796, guid: 66ae7e756fb44a446a9f448c478ab76f, type: 2}
+  - {fileID: 114538132993399666, guid: 2faa51497b90d1c4493feb93e8623a6a, type: 2}
   - {fileID: 114009363486418920, guid: 0df16a2e03e1f2f4fa23b7ed2cec9867, type: 2}
   - {fileID: 114782415239696130, guid: 8e61e8519785d6d4fb5e0a5a214863f1, type: 2}
   ActualSelectedTrapTypes: 0
