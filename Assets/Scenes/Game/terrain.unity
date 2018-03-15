@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0004075353, g: 0.000006762964, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.33105266, g: 0.19582099, b: 0.047690175, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -392,6 +392,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11489322, guid: a5984f13f3c383240b4012bf7f8a7e56, type: 2}
+      propertyPath: parts.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 22430648, guid: a5984f13f3c383240b4012bf7f8a7e56, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -482,11 +486,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11489322, guid: a5984f13f3c383240b4012bf7f8a7e56, type: 2}
       propertyPath: wiggleSpread
-      value: 2
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 11489322, guid: a5984f13f3c383240b4012bf7f8a7e56, type: 2}
       propertyPath: defaultSpread
-      value: 1
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11489322, guid: a5984f13f3c383240b4012bf7f8a7e56, type: 2}
+      propertyPath: CrosshairName
+      value: Cross
+      objectReference: {fileID: 0}
+    - target: {fileID: 11489322, guid: a5984f13f3c383240b4012bf7f8a7e56, type: 2}
+      propertyPath: rotationSpread
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a5984f13f3c383240b4012bf7f8a7e56, type: 2}
@@ -12643,7 +12655,7 @@ MonoBehaviour:
   turnSpeed: 1.5
   turnsmoothing: 0.1
   tiltMax: 35
-  tiltMin: 30
+  tiltMin: 15
   lockCursor: 0
   crosshairOffsetWiggle: 0.2
 --- !u!4 &1930441035
