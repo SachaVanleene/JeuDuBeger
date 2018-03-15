@@ -25,6 +25,7 @@ namespace TPC
         bool dontShoot;
         bool emptyGun;
 
+        public LayerMask mask;
 
         // Use this for initialization
         void Start()
@@ -103,16 +104,53 @@ namespace TPC
 
         void RaycastShoot()
         {
+            GameObject target = null;
             Vector3 direction = states.lookHitPosition - bulletSpawnPoint.position;
             RaycastHit hit;
-            if (Physics.Raycast(bulletSpawnPoint.position, direction, out hit, 100, states.layerMask))
+            if (Physics.Raycast(bulletSpawnPoint.position, direction, out hit,100, mask.value))
             {
                 GameObject go = Instantiate(smokeParticle, hit.point, Quaternion.identity) as GameObject;
-                go.transform.LookAt(bulletSpawnPoint.position);
-
-                if (hit.transform.GetComponent<WolfHealth>())
+                go.transform.LookAt(bulletSpawnPoint.position);               
+                if(hit.collider.tag == "CommonWolf" || hit.collider.tag == "WaterWolf" || hit.collider.tag == "BossWolf" || hit.collider.tag == "MoutainWolf")
                 {
-                    hit.transform.GetComponent<WolfHealth>().takeDamage(20);
+                    //Get the target where scripts are attached to 
+                    if (hit.collider.tag == "CommonWolf" || hit.collider.tag == "BossWolf")
+                    {
+                        target = hit.collider.gameObject;
+                    }
+                    if (hit.collider.tag == "WaterWolf" || hit.collider.tag == "MoutainWolf")
+                    {
+                        target = hit.collider.transform.gameObject.transform.parent.gameObject;
+                    }
+                    //Debug.LogError("Okay");
+                    //Apply damage
+                    if (hit.collider.tag == "CommonWolf" || hit.collider.tag == "WaterWolf" || hit.collider.tag == "MoutainWolf")
+                    {
+                        if (target.GetComponent<WolfHealth>())
+                        {
+                            target.GetComponent<WolfHealth>().takeDamage(20);
+                        }
+                    }
+                    if(hit.collider.tag == "BossWolf")
+                    {
+                        if (target.GetComponent<WolfBossHealth>())
+                        {
+                            target.GetComponent<WolfBossHealth>().takeDamage(20);
+                        }
+                    }
+                    //Focusing Player, no need for boss cause he will focus player whenever he is alive
+                    if(target.tag == "WaterWolf")
+                    {
+                        target.GetComponent<IA_Water_Wolves>().focusPlayer();
+                    }
+                    if (target.tag == "MoutainWolf")
+                    {
+                        target.GetComponent<IA_Moutain_Wolves>().focusPlayer();
+                    }
+                    if (target.tag == "CommonWolf")
+                    {
+                        target.GetComponent<IA_Common_Wolves>().focusPlayer();
+                    }
                 }
             }
         }

@@ -81,7 +81,7 @@ namespace TPC
         public Vector3 lookHitPosition;
         public LayerMask layerMask;
 
-        LayerMask ignoreLayers;
+        public LayerMask ignoreLayers;
 
         //public CharacterAudioManager audioManager;
 
@@ -119,7 +119,7 @@ namespace TPC
             canJump = true;
 
             gameObject.layer = 8;
-            ignoreLayers = ~(1 << 3 | 1 << 8);
+            //ignoreLayers = ~(1 << 3 | 1 << 8);
         }
 
         void CreateModel()

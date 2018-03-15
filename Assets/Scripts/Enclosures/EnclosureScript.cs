@@ -21,15 +21,16 @@ namespace Assets.Scripts.Enclosures
         public OnDead OnTriggerDead;
         public GameObject SheepPrefab;
         public float Distance;
+        private bool _isDisplayingPanel = false;
         public GameObject PinkSuperSheepPrefab;
         public Material pinkFence;
 
-        private GameManager _gameManager;
-        private bool _isDisplayingPanel = false;
-        private int _nbSuperSheep;
+
+    private GameManager _gameManager;
 
         private int _sheepNumber;
-        public int SheepNumber
+    private int _nbSuperSheep;
+    public int SheepNumber
         {
             get { return _sheepNumber; }
             set
@@ -39,8 +40,8 @@ namespace Assets.Scripts.Enclosures
             }
         }
 
-        private int _health;
-        public int Health
+        private float _health;
+        public float Health
         {
             get { return _health; }
             set
@@ -75,20 +76,20 @@ namespace Assets.Scripts.Enclosures
 
         private void Awake()
         {
-            _health = 10;
         }
         private void Start()
         {
             Distance = Vector3.Distance(EnclosureManager.HousePosition, this.transform.position);
             _gameManager = GameManager.instance;
-            Health += 10;
-        }
-        private void Update()
-        {
-            ShowPannel();
         }
 
-        private void ShowPannel()
+
+    void Update()
+        {
+            ShowPanel();
+        }
+
+        private void ShowPanel()
         {
             Vector3 distPlayertoEnclos = TerrainTest.PlayerGameObject.transform.position - transform.position;
 
@@ -134,6 +135,22 @@ namespace Assets.Scripts.Enclosures
                 {
                     AddPinkSuperSheep();
                     _nbSuperSheep++;
+                    _health += 50;
+                    _gameManager.PlaceSuperSheep();
+                }
+            }
+
+    }
+
+    public void DamageEnclos(float degats)
+        {
+            Health -= degats;
+            if (Health == 0)
+            {
+                if (_nbSuperSheep < 1 && _gameManager.TotalSuperSheeps == 1)
+                {
+                    AddPinkSuperSheep();
+                    _nbSuperSheep++;
                     _health += 50; 
                     _gameManager.PlaceSuperSheep();
                 }
@@ -148,14 +165,14 @@ namespace Assets.Scripts.Enclosures
             if (SheepNumber < 10)
             {
                 SheepNumber++;
-                //var sheep = Instantiate(SheepPrefab, this.transform); //crée un clone mouton
-                //sheep.transform.Rotate(0, Random.Range(0, 360), 0); //l'oriente d'une façon aléatoire
-                var sheep = Instantiate(SheepPrefab, this.transform); //crée un clone mouton
-                sheep.transform.position = this.transform.position; //le place dans l'enclos
-                sheep.transform.Rotate(0, Random.Range(0, 360), 0); //l'oriente d'une façon aléatoire
-            }
-            _gameManager.PlaceSheep();
+            var sheep = Instantiate(SheepPrefab, this.transform); //crée un clone mouton
+            sheep.transform.position = this.transform.position; //le place dans l'enclos
+            sheep.transform.Rotate(0, Random.Range(0, 360), 0); //l'oriente d'une façon aléatoire
+
         }
+        _gameManager.PlaceSheep();
+        }
+
         public void AddPinkSuperSheep()
         {
             var sheep = Instantiate(PinkSuperSheepPrefab, this.transform); //crée un clone mouton
@@ -173,7 +190,7 @@ namespace Assets.Scripts.Enclosures
             }
         }
 
-        public void KillSheep()
+    public void KillSheep()
         {
             if (SheepNumber > 0)
             {

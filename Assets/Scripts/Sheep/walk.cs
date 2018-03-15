@@ -8,14 +8,19 @@ public class walk : MonoBehaviour {
     private Vector3 direction = new Vector3(0, 0, 0.1f);
 
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {
         transform.Translate(direction.x, direction.y, direction.z);
     }
 
-    private void OnTriggerEnter(Collider other) {
-        if (other.gameObject.CompareTag("Fences") || other.gameObject.CompareTag("Sheep")) {
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Fences") || other.gameObject.CompareTag("Sheep"))
+        {
             transform.Rotate(0, 180, 0);
             transform.Translate(direction.x + 0.5f, direction.y, direction.z); //poussé pour éviter problème quand collé à la barrière
         }
     }
 }
+
+
