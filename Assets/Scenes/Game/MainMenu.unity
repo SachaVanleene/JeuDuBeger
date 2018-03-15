@@ -2690,7 +2690,7 @@ MonoBehaviour:
   - {fileID: 2800000, guid: f66db888455a7cc46920c925930cd3fa, type: 3}
   - {fileID: 2800000, guid: 09af6cdaf398fff4683fab1c8abc92eb, type: 3}
   DefaultSprite: {fileID: 2800000, guid: 9b79078faadf20b458ae6eae55714755, type: 3}
-  CompletedSprite: {fileID: 2800000, guid: 61f156aa0fc2b0a419b4d7025790b975, type: 3}
+  CompletedSprite: {fileID: 2800000, guid: 70eaf1f6608a99a47b052db2eb798f5d, type: 3}
 --- !u!222 &1108544245
 CanvasRenderer:
   m_ObjectHideFlags: 0
