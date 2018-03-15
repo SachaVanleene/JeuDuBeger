@@ -5293,7 +5293,7 @@ Transform:
   - {fileID: 1023803585}
   - {fileID: 1930441035}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &573020339
 GameObject:
@@ -11000,7 +11000,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1395751036
 GameObject:
@@ -11108,6 +11108,7 @@ Transform:
   - {fileID: 259840063}
   - {fileID: 1979121086}
   - {fileID: 230047398}
+  - {fileID: 1896502966}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12550,7 +12551,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 632cd0b92ef9fa84289325baeb324390, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 0}
+  enemy: {fileID: 1358350807162304, guid: 7f36434214632464b9a3a47ffdae5fcc, type: 2}
   spawnPoints:
   - {fileID: 868670337}
   - {fileID: 2082711823}
@@ -12572,7 +12573,7 @@ Transform:
   - {fileID: 1057496766}
   - {fileID: 1255194462}
   - {fileID: 1755766679}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1402869006}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1911422182
