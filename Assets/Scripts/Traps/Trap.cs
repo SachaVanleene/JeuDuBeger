@@ -73,7 +73,7 @@ namespace Assets.Script.Traps
 
         public void LevelUp()
         {
-            if (TerrainTest.GameManager.SpendGold(UpgradeCosts[Level]) && Level < 3)
+            if (GameManager.instance.SpendGold(UpgradeCosts[Level - 1]) && Level < 3)
             {
                 Level++;
             }

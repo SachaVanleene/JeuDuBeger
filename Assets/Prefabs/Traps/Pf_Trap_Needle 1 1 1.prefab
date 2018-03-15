@@ -71,7 +71,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1464578403803410}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 259.79132, y: 15.131881, z: 272.8047}
+  m_LocalPosition: {x: 255.29205, y: 14.997253, z: 266.0804}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4488746463642534}
@@ -247,6 +247,6 @@ MonoBehaviour:
   Durability: 1
   BuyingCost: 0
   TrapPrefab: {fileID: 1464578403803410}
-  UpgradeCosts: 
+  UpgradeCosts: 3200000064000000
   Damages: 0a000000140000001e000000
   IsActive: 0

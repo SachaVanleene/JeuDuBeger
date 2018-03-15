@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0004075353, g: 0.000006762964, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -6167,11 +6167,6 @@ Transform:
   m_Father: {fileID: 579783440}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &977788365 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1639676467496986, guid: d793e0b509d4dd0489d43012f1ecb072,
-    type: 2}
-  m_PrefabInternal: {fileID: 148582086}
 --- !u!1 &1000695299
 GameObject:
   m_ObjectHideFlags: 0
@@ -12532,9 +12527,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fb895e7025a6104888fc90cfaa83c98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy_classic: {fileID: 977788365}
-  enemy_water: {fileID: 977788365}
-  enemy_ice: {fileID: 977788365}
+  enemy_classic: {fileID: 1639676467496986, guid: d793e0b509d4dd0489d43012f1ecb072,
+    type: 2}
+  enemy_water: {fileID: 1305097166461230, guid: e762fb6ae7bd22c4680240e8c063f541,
+    type: 2}
+  enemy_ice: {fileID: 1639676467496986, guid: d793e0b509d4dd0489d43012f1ecb072, type: 2}
   spawnPoints:
   - {fileID: 868670337}
   - {fileID: 2082711823}

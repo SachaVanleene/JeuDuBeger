@@ -58,6 +58,10 @@ namespace Assets.Script.Managers
             // enable cheats here
             if (Input.GetKey("n"))
                 cycleManager.NextCycle(50f);
+            if (Input.GetKeyUp("e"))
+            {
+                earnGold(150);
+            }
         }
 
         public void KillSheep()
