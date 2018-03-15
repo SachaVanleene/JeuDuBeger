@@ -95,10 +95,7 @@ namespace TPC
 
         void Update()
         {
-            transform.GetChild(0).transform.localPosition = Vector3.zero;
-            transform.GetChild(1).transform.localPosition = Vector3.zero;
             states.RegularTick();
-
         }
 
         void FixedUpdate()
@@ -170,7 +167,7 @@ namespace TPC
             states.vertical = vertical;
             states.moving = states.horizontal != 0 || states.vertical != 0;
 
-            states.canRun = !states.aiming || states.vertical > 0;
+            states.canRun = !states.aiming && states.vertical > 0 && !states.obstacleForward;
 
             Vector3 h = camTrans.right * horizontal;
             Vector3 v = camTrans.forward * vertical;
@@ -249,7 +246,7 @@ namespace TPC
                 states.run = false;
             }
 
-            if ((horizontal != 0 || vertical != 0) && !states.aiming)
+            if (canRun)
             {
                 states.run = runInput;
                 states.anim.SetInteger(Statics.specialType,

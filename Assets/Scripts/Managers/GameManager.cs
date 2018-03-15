@@ -13,6 +13,7 @@ namespace Assets.Script.Managers
         public Text TextRounds;
         public Text TextGolds;
         public Text TextSheeps;
+        public Text TextSuperSheeps;
         public GameObject TextInfo;
         public GameObject CycleManagerObject;
         public GameObject Spawns;
@@ -25,6 +26,9 @@ namespace Assets.Script.Managers
         // player's inventory relativ
         private int gold = 0;
         public int TotalSheeps { get; set; }
+
+        public int TotalSuperSheeps { get; set; }
+
         public bool IsTheSunAwakeAndTheBirdAreSinging { get; set; }
 
 
@@ -45,6 +49,7 @@ namespace Assets.Script.Managers
             cycleManager.SubscribCycle(this);
             cycleManager.GoToAngle(1, 30);
             TotalSheeps = 15;
+            TotalSuperSheeps = 1;
             DayStart();
         }
         private void Update()
@@ -52,6 +57,10 @@ namespace Assets.Script.Managers
             // enable cheats here
             if (Input.GetKey("n"))
                 cycleManager.NextCycle(50f);
+            if (Input.GetKeyUp("e"))
+            {
+                earnGold(150);
+            }
         }
 
         public void KillSheep()
@@ -87,6 +96,12 @@ namespace Assets.Script.Managers
             TotalSheeps--;
             TextSheeps.text = TotalSheeps + " Sheeps in Inventory";
         }
+
+        public void PlaceSuperSheep()
+        {
+            TotalSuperSheeps--;
+            TextSuperSheeps.text = TotalSuperSheeps + " SuperSheep in Inventory";
+        }
        
         private void getGoldsRound()
         {
@@ -119,6 +134,7 @@ namespace Assets.Script.Managers
             IsTheSunAwakeAndTheBirdAreSinging = true;
            if(_roundNumber != 0) _enclosureManager.TakeOffAllSheeps();
             TextSheeps.text = TotalSheeps + " Sheeps in Inventory";
+            TextSuperSheeps.text = TotalSuperSheeps + " SuperSheep in Inventory";
             soundManager.PlayAmbuanceMusic("day_theme", 0.2f);
             soundManager.PlaySound("safe_place_to_rest", 1.5f);
             soundManager.PlaySound("bird", 0.2f);

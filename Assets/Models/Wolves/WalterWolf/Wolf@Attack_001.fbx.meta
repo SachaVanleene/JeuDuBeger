@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 62ab8eb9fa73d704ca62ad6e31476dfc
-timeCreated: 1520296129
+guid: f61e63c4acfd0e54b80c7f642f4689e3
+timeCreated: 1521088006
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -124,28 +124,28 @@ ModelImporter:
     100232: Spine_01_JNT
     100234: Spine_02_JNT
     100236: Spine_03_JNT
-    100238: //RootNode
-    100240: Tail_01_JNT
-    100242: Tail_02_JNT
-    100244: Tail_03_JNT
-    100246: Tail_04_JNT
-    100248: Tail_05_JNT
-    100250: Tail_TIP
-    100252: Tail_TIP_end
-    100254: Teeth_Lower
-    100256: Teeth_Upper
-    100258: Tie_01_JNT
-    100260: Tie_02_JNT
-    100262: Tie_03_JNT
-    100264: Tie_04_JNT
-    100266: Tie_TIP
-    100268: Tie_TIP_end
-    100270: Tongue
-    100272: Tongue_01_JNT
-    100274: Tongue_02_JNT
-    100276: Tongue_03_JNT
-    100278: Tongue_TIP
-    100280: Tongue_TIP_end
+    100238: Tail_01_JNT
+    100240: Tail_02_JNT
+    100242: Tail_03_JNT
+    100244: Tail_04_JNT
+    100246: Tail_05_JNT
+    100248: Tail_TIP
+    100250: Tail_TIP_end
+    100252: Teeth_Lower
+    100254: Teeth_Upper
+    100256: Tie_01_JNT
+    100258: Tie_02_JNT
+    100260: Tie_03_JNT
+    100262: Tie_04_JNT
+    100264: Tie_TIP
+    100266: Tie_TIP_end
+    100268: Tongue
+    100270: Tongue_01_JNT
+    100272: Tongue_02_JNT
+    100274: Tongue_03_JNT
+    100276: Tongue_TIP
+    100278: Tongue_TIP_end
+    100280: //RootNode
     100282: Wolf_Geo
     100284: World_NODE
     400000: Armature
@@ -267,28 +267,28 @@ ModelImporter:
     400232: Spine_01_JNT
     400234: Spine_02_JNT
     400236: Spine_03_JNT
-    400238: //RootNode
-    400240: Tail_01_JNT
-    400242: Tail_02_JNT
-    400244: Tail_03_JNT
-    400246: Tail_04_JNT
-    400248: Tail_05_JNT
-    400250: Tail_TIP
-    400252: Tail_TIP_end
-    400254: Teeth_Lower
-    400256: Teeth_Upper
-    400258: Tie_01_JNT
-    400260: Tie_02_JNT
-    400262: Tie_03_JNT
-    400264: Tie_04_JNT
-    400266: Tie_TIP
-    400268: Tie_TIP_end
-    400270: Tongue
-    400272: Tongue_01_JNT
-    400274: Tongue_02_JNT
-    400276: Tongue_03_JNT
-    400278: Tongue_TIP
-    400280: Tongue_TIP_end
+    400238: Tail_01_JNT
+    400240: Tail_02_JNT
+    400242: Tail_03_JNT
+    400244: Tail_04_JNT
+    400246: Tail_05_JNT
+    400248: Tail_TIP
+    400250: Tail_TIP_end
+    400252: Teeth_Lower
+    400254: Teeth_Upper
+    400256: Tie_01_JNT
+    400258: Tie_02_JNT
+    400260: Tie_03_JNT
+    400262: Tie_04_JNT
+    400264: Tie_TIP
+    400266: Tie_TIP_end
+    400268: Tongue
+    400270: Tongue_01_JNT
+    400272: Tongue_02_JNT
+    400274: Tongue_03_JNT
+    400276: Tongue_TIP
+    400278: Tongue_TIP_end
+    400280: //RootNode
     400282: Wolf_Geo
     400284: World_NODE
     2000000: Camera
@@ -299,13 +299,15 @@ ModelImporter:
     2100006: CoffeCup_Material
     4300000: Tongue
     4300002: Teeth_Lower
-    4300004: Teeth_Upper
-    4300006: Eye_Left
+    4300004: Eye_Left
+    4300006: Coffe_Cup
     4300008: Wolf_Geo
     4300010: Eye_Right
-    4300012: Coffe_Cup
+    4300012: Teeth_Upper
     7400000: Armature|Armature|Take 001|BaseLayer
-    7400002: Armature|Swim2
+    7400002: Armature|Armature|Take 001|BaseLayer.001
+    7400004: Armature|Armature|Take 001|BaseLayer.002
+    7400006: Armature|Attack
     9500000: //RootNode
     10800000: Lamp
     13700000: Coffe_Cup
@@ -315,32 +317,12 @@ ModelImporter:
     13700008: Teeth_Upper
     13700010: Tongue
     13700012: Wolf_Geo
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: CoffeCup_Material
-    second: {fileID: 2100000, guid: a127b2d24af08344f85c38717156c734, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: lambert3
-    second: {fileID: 2100000, guid: 50132a982a873784f99299f36ef6b813, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: lambert5
-    second: {fileID: 2100000, guid: 79ef21c5152e1af46b1b1b5e294b8cec, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: lambert7
-    second: {fileID: 2100000, guid: 9babac8f908ed604a9a03cf66bcdaeb6, type: 2}
+  externalObjects: {}
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -388,7 +370,7 @@ ModelImporter:
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
-    tangentImportMode: 4
+    tangentImportMode: 3
     normalCalculationMode: 4
   importAnimation: 1
   copyAvatar: 0

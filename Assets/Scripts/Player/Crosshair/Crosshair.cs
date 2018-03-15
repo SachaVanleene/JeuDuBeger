@@ -11,9 +11,9 @@ namespace TPC
         public string CrosshairName; //we can use this as a tag to sort through our crosshairs if needed
 
         //self explanatory
-        public float defaultSpread = 1;
+        public float defaultSpread = 2;
         public float maxSpread = 2.5f;
-        public float wiggleSpread = 2;
+        public float wiggleSpread = 0.5f;
         public float wiggleSpreadMaxTimer = 60;
 
         //internal helper variables
@@ -35,7 +35,7 @@ namespace TPC
 
         //more self explanatory variables
         public bool spreadWhileRotating = false;
-        public float rotationSpread = 30;
+        public float rotationSpread = 10;
 
         public bool allowSpread = true;
 

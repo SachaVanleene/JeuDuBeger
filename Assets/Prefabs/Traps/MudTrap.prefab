@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 54581072007046840}
   m_Layer: 0
   m_Name: Mud
-  m_TagString: Untagged
+  m_TagString: Trap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53,7 +53,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1903951027442256}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 226.69861, y: 16.467737, z: 372.79376}
+  m_LocalPosition: {x: 262.28055, y: 14.997253, z: 255.92622}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4729972767750160}
@@ -156,6 +156,6 @@ MonoBehaviour:
   Durability: 0
   BuyingCost: 0
   TrapPrefab: {fileID: 1903951027442256}
-  UpgradeCosts: 
+  UpgradeCosts: 3200000064000000
   Damages: 
   IsActive: 0
