@@ -27,9 +27,7 @@ namespace Assets.Script.Managers
         // player's inventory relativ
         private int gold = 0;
         public int TotalSheeps { get; set; }
-
         public int TotalSuperSheeps { get; set; }
-
         public bool IsTheSunAwakeAndTheBirdAreSinging { get; set; }
 
 
@@ -39,6 +37,8 @@ namespace Assets.Script.Managers
                 instance = this;
             else if (instance != this)
                 Destroy(gameObject);
+
+            IsTheSunAwakeAndTheBirdAreSinging = true;
         }
 
 
@@ -64,6 +64,13 @@ namespace Assets.Script.Managers
             }
         }
 
+        public void PlaceSuperSheep()
+        {
+            TotalSuperSheeps--;
+            TextSuperSheeps.text = TotalSuperSheeps + " SuperSheep in Inventory";
+        }
+
+
         public void KillSheep()
         {
             // achievement
@@ -80,12 +87,6 @@ namespace Assets.Script.Managers
             TextSheeps.text = TotalSheeps + " Sheeps in Inventory";
         }
 
-        public void PlaceSuperSheep()
-        {
-            TotalSuperSheeps--;
-            TextSuperSheeps.text = TotalSuperSheeps + " SuperSheep in Inventory";
-        }
-       
         private void getGoldsRound()
         {
             foreach (var p in _enclosureManager.EnclosPrefabList)

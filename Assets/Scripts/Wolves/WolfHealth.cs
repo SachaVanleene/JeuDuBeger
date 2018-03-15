@@ -8,7 +8,7 @@ public class WolfHealth : MonoBehaviour
     private Animator anim;
     private ParticleSystem cloud;
     private int health;
-    private bool alive;
+    public bool alive;
 
     private void Awake()
     {
@@ -26,7 +26,18 @@ public class WolfHealth : MonoBehaviour
         if (health < 0 && alive)
         {
             alive = false;
-            GetComponent<IA_Wolves_Path>().updateTarget(null);
+            if (gameObject.tag == "CommonWolf")
+            {
+                GetComponent<IA_Common_Wolves>().updateTarget(null);
+            }
+            if (gameObject.tag == "WaterWolf")
+            {
+                GetComponent<IA_Water_Wolves>().updateTarget(null);
+            }
+            if (gameObject.tag == "MoutainWolf")
+            {
+                GetComponent<IA_Moutain_Wolves>().updateTarget(null);
+            }
             anim.SetTrigger("dead");
             Destroy(gameObject, 2.5f);
         }

@@ -58,7 +58,11 @@ namespace Assets.Script.Traps
 
         public void OnTriggerEnter(Collider collider)
         {
-            if (collider.gameObject.tag != "Terrain" && collider.gameObject.name != "Plane") v++;
+            if (collider.gameObject.tag != "Terrain" && collider.gameObject.name != "Plane" && collider.gameObject.name != "WaterShower" &&  collider.gameObject.name != "ShootableHitbox")
+            {
+                Debug.Log(collider.gameObject);
+                v++;
+            }
             if (IsInPreviewMode && collider.tag != "Terrain")
             {
                 foreach (var rend in TrapPrefab.GetComponentsInChildren<Renderer>())
