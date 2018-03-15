@@ -17,6 +17,7 @@ public class InfoTextScript : MonoBehaviour
     {
         text.text = msg;
         this.duration = duration;
+        StopAllCoroutines();
         StartCoroutine(clearMessage());
     }
     private IEnumerator clearMessage()

@@ -21,10 +21,11 @@ public class ListBehaviour : MonoBehaviour {
     }
 
     public void CreateListPanel() {
-        foreach(var go in elements)
-        {
-            UnityEngine.Object.Destroy(go);
-        }
+        if(elements != null)
+            foreach(var go in elements)
+            {
+                UnityEngine.Object.Destroy(go);
+            }
         elements = new List<GameObject>();
 
         if(ProfileManager.ProfilesFound.Count <= 0)

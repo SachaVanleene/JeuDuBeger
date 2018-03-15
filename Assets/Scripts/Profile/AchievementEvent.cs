@@ -8,5 +8,9 @@
     cycleEnd,
     trapBought,
     trapUpdate,
-    sheepUpdate
+    sheepUpdate,
+    cheat,
+    lose,
+    quit,
+    createProfile
 }

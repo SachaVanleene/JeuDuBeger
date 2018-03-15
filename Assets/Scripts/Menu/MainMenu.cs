@@ -17,11 +17,28 @@ public class MainMenu : MonoBehaviour {
     public Text LoadingText;
     public Text PlayerNameText;
     public InputField NewPlayerName;
-    
+
+
+    public void Start()
+    {
+        // hide the panel to select profiles when we come back to this scene (from the scene of the game)
+        if (SProfilePlayer.getInstance().Name.Equals("<Default>"))
+            LogPanel.SetActive(true);
+        else
+        {
+            PlayerNameText.text = "Hello " + SProfilePlayer.getInstance().Name;
+            LogButton.SetActive(true);
+            DeleteButton.SetActive(true);
+
+        }
+    }
+
     //Choose difficulty of game
     public void PlayWithDifficulty(int difficulty)
     {
         HideAllPanels();
+        LogButton.SetActive(false);
+        DeleteButton.SetActive(false);
         LoadingScreen.SetActive(true);
         SProfilePlayer.getInstance().Difficulty = difficulty; // to be use in game
         SceneManager.LoadScene(1);

@@ -22,12 +22,13 @@ public class ScriptAchievementInfo : MonoBehaviour
         this.GetComponent<RawImage>().texture = texture;
         //set details text (info + completion)
         DetailsText.text = achInfo.InfoText + "\n";
-        foreach (var tupleInfo in achInfo.completion)
+        foreach (var ev in achInfo.EventsToListen)
         {
             DetailsText.text += "\n";
-            if (achInfo.Aim[tupleInfo.Key] <= tupleInfo.Value)
+            int[] values = achInfo.getCompletion(ev);
+            if (values[1] <= values[0])
                 DetailsText.text += "[ok] ";
-            DetailsText.text += tupleInfo.Key.ToString() + " : " + tupleInfo.Value + " / " + achInfo.Aim[tupleInfo.Key];
+            DetailsText.text += ev.ToString() + " : " + values[0] + " / " + values[1];
         }
 
     }

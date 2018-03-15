@@ -8,11 +8,13 @@ public class AchievementsManager {
     private List<AchievementInfo> achievements;
     // which achievement listen to which event
     private Dictionary<AchievementEvent, List<AchievementInfo>> listeners;
+    public Dictionary<AchievementEvent, int> Completion;
 
     public AchievementsManager()
     {
         this.achievements = new List<AchievementInfo>();
         this.listeners = new Dictionary<AchievementEvent, List<AchievementInfo>>();
+        this.Completion = new Dictionary<AchievementEvent, int>();
     }
 
     public void AddStepAchievement(AchievementEvent eventAchievement, int step = 1)
@@ -23,8 +25,9 @@ public class AchievementsManager {
                 + eventAchievement);
             return;
         }
+        Completion[eventAchievement] += step;
         foreach (var l in listeners[eventAchievement])
-            l.AddStep(eventAchievement, step);
+            l.EventNotification(eventAchievement);
     }
 
     public void Subscribe(AchievementEvent listen, AchievementInfo ach)
@@ -32,6 +35,7 @@ public class AchievementsManager {
         if (!listeners.ContainsKey(listen))
         {
             listeners.Add(listen, new List<AchievementInfo>());
+            Completion.Add(listen, 0);
             return;
         }
         listeners[listen].Add(ach);

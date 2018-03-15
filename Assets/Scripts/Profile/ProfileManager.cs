@@ -43,24 +43,18 @@ public class ProfileManager : MonoBehaviour {
 
     static public void CreateProfile(string name)
     {
-        //DeleteProfile(name);
         SProfilePlayer.setInstance(new SProfilePlayer(name));
+        SProfilePlayer.getInstance().AchievementsManager.AddStepAchievement(AchievementEvent.createProfile);
     }
     static public void LoadProfile(string fullName)
     {
         if (File.Exists("./saves/" + fullName))
         {
-            //Debug.Log(SProfilePlayer.getInstance().AchievementsManager.GetHashCode());
-
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open("./saves/" + fullName, FileMode.Open);
             SProfilePlayer.setInstance((SProfilePlayer) bf.Deserialize(file));
             file.Close();
-            SProfilePlayer.getInstance().AchievementsManager.ResetManagerOnAchievementInfos();
-            /*
-            Debug.Log(SProfilePlayer.getInstance().AchievementsManager.getAchivements()[0].getManager().GetHashCode());
-            Debug.Log(SProfilePlayer.getInstance().AchievementsManager.GetHashCode());
-            Debug.Log(" --- ");*/
+            SProfilePlayer.getInstance().AchievementsManager.ResetManagerOnAchievementInfos();            
         }
         else
         {
