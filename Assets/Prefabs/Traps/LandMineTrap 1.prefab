@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 114782415239696130}
   m_Layer: 0
   m_Name: LandMine
-  m_TagString: Untagged
+  m_TagString: Trap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -81,6 +81,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -96,6 +97,7 @@ MeshRenderer:
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -134,9 +136,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c5a8f7a01946564d9ecbf2d1d703957, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Height: 10
-  Width: 10
-  Length: 10
   DurabilityMax: 1
   Durability: 1
   BuyingCost: 0

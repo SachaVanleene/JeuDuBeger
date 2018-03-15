@@ -16,20 +16,22 @@ namespace Assets.Script
         public static Terrain Terrain;
         public static GameObject PlayerGameObject;
         public static GameObject MainCanvasGameObject;
-        private GameManager _gameManager;
+        public static GameManager GameManager;
+
+
 
         public void Start()
         {
             PlayerGameObject = GameObject.FindWithTag("Player");
-            _gameManager = GameManager.instance;
-            MainCanvasGameObject  = GameObject.FindWithTag("MainCanvas");
+            GameManager = GameManager.instance;
+            MainCanvasGameObject = GameObject.FindWithTag("MainCanvas");
             Terrain = Terrain.activeTerrain;
             ActualSelectedTrapTypes = TrapTypes.None;
         }
 
         public void Update()
         {
-            if (_gameManager.IsTheSunAwakeAndTheBirdAreSinging)
+            if (GameManager.IsTheSunAwakeAndTheBirdAreSinging)
             {
                 if (Input.GetKey("1"))
                 {
@@ -56,6 +58,7 @@ namespace Assets.Script
             {
                 TrapFactory.IsInTrapCreationMode = false;
                 ActualSelectedTrapTypes = TrapTypes.None;
+                TrapFactory.ClosestTrap = null;
                 Destroy(TrapFactory.ActualTrap);
             }
             if (TrapFactory.IsInTrapCreationMode)
@@ -80,11 +83,24 @@ namespace Assets.Script
                     Destroy(TrapFactory.ActualTrap);
                 }
             }
+            else if (TrapFactory.IsColliding() && GameManager.IsTheSunAwakeAndTheBirdAreSinging)
+            {
+                if (Input.GetMouseButtonDown(0))
+                {
+                    TrapFactory.ClosestTrap.LevelUp();
+                }
+                if (Input.GetMouseButtonDown(1))
+                {
+                    var cl = TrapFactory.ClosestTrap;
+                    TrapFactory.ClosestTrap = null;
+                    cl.Destroy();
+                }
+            }
         }
 
         public void CreateTrapPrevu()
         {
-            Trap trap = Traps[(int) TrapFactory.SelectedTrapType];
+            Trap trap = Traps[(int)TrapFactory.SelectedTrapType];
             trap.IsInPreviewMode = true;
             GameObject trapGameObject = trap.TrapPrefab;
             trapGameObject.transform.position = TrapFactory.GetMousePosition();
@@ -94,9 +110,9 @@ namespace Assets.Script
         {
             if (Math.Abs(TrapFactory.ActualTrap.GetComponentInChildren<Renderer>().material.color.r - 205) > 0.1)
             {
-                Trap t = Traps[(int) TrapFactory.SelectedTrapType];
+                Trap t = Traps[(int)TrapFactory.SelectedTrapType];
                 GameObject trap = Instantiate(t.TrapPrefab);
-                ((Trap) trap.GetComponentInChildren(typeof(Trap))).IsInPreviewMode = false;
+                ((Trap)trap.GetComponentInChildren(typeof(Trap))).IsInPreviewMode = false;
                 foreach (var rend in trap.GetComponentsInChildren<Renderer>())
                 {
                     var newMaterial = new Material(rend.material);

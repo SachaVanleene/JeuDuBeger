@@ -1,17 +1,38 @@
 ﻿using System;
 using Assets.Script;
+using Assets.Script.Managers;
 using Assets.Script.Traps;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Assets.Scripts.Traps
 {
-    static class TrapFactory 
+    static class TrapFactory
     {
         public static TrapTypes SelectedTrapType = TrapTypes.NeedleTrap;
         public static Boolean IsInTrapCreationMode = false;
-            public static Trap ClosestTrap = null;
+        public static Trap ClosestTrap = null;
         public static GameObject ActualTrap;
         public static int ActionRange = 15;
+
+        public static Boolean IsColliding()
+        {
+            RaycastHit hitInfo;
+            Ray ray = Camera.main.ScreenPointToRay(new Vector2(Camera.main.pixelWidth / 2f, Camera.main.pixelHeight / 2f));
+            Physics.Raycast(ray, out hitInfo, 100);
+            float distance = Vector3.Distance(hitInfo.point, TerrainTest.PlayerGameObject.transform.position);
+            if (distance <= ActionRange && hitInfo.collider.tag == "Trap" && TerrainTest.GameManager.IsTheSunAwakeAndTheBirdAreSinging)
+            {
+                ClosestTrap = hitInfo.collider.gameObject.GetComponentInChildren<Trap>();
+                ClosestTrap.Select();
+                return true;
+            }
+            if(ClosestTrap != null)
+                ClosestTrap.Deselect();
+            ClosestTrap = null;
+            return false;
+        }
+
 
         public static Vector3 GetMousePosition()
         {

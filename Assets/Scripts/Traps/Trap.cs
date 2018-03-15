@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Remoting;
+using Assets.Script.Managers;
 using Assets.Scripts.Traps;
 using UnityEngine;
 
@@ -27,7 +28,7 @@ namespace Assets.Script.Traps
                 {
                     foreach (var rend in GetComponentsInChildren<Renderer>())
                     {
-                       rend.sharedMaterial.color = new Color(10, 205, 0, 0.02f);
+                        rend.sharedMaterial.color = new Color(10, 205, 0, 0.02f);
                     }
                 }
             }
@@ -65,43 +66,40 @@ namespace Assets.Script.Traps
                     rend.sharedMaterial.color = new Color(205, 0, 0, 0.02f);
                 }
             }
-            if(!IsActive && !IsInPreviewMode)
+            if (!IsActive && !IsInPreviewMode)
                 StartCoroutine(Activate(collider.gameObject));
 
         }
 
         public void LevelUp()
         {
-            Level++;
+            if (TerrainTest.GameManager.SpendGold(UpgradeCosts[Level]) && Level < 3)
+            {
+                Level++;
+            }
         }
 
-        public void Update()
+        public void Deselect()
         {
-            if (gameObject.GetComponent<Renderer>().isVisible)
+            foreach (var rend in TrapFactory.ClosestTrap.transform.parent
+                .GetComponentsInChildren<Renderer>())
             {
-                bool isTheClosest;
-                if (TrapFactory.ClosestTrap != null)
-                {
-                    isTheClosest = Vector3.Distance(TrapFactory.ClosestTrap.transform.position,
-                                       TerrainTest.PlayerGameObject.transform.position) >
-                                   Vector3.Distance(transform.position, TerrainTest.PlayerGameObject.transform.position);
-                }
-                else
-                {
-                    isTheClosest = true;
-                }
-
-                if (!IsInPreviewMode && isTheClosest)
-                {
-                    if (TrapFactory.ClosestTrap != null)
-                        foreach (var rend in TrapFactory.ClosestTrap.transform.parent
-                            .GetComponentsInChildren<Renderer>())
-                        {
-                            rend.material.color = new Color(0.3f, 0.3f, 0.3f, 1f);
-                        }
-                    TrapFactory.ClosestTrap = this;
-                }
+                rend.material.color = new Color(0.3f, 0.3f, 0.3f, 1f);
             }
+        }
+
+        public void Select()
+        {
+            foreach (var rend in TrapFactory.ClosestTrap.transform.parent
+                .GetComponentsInChildren<Renderer>())
+            {
+                rend.material.color = Color.white;
+            }
+        }
+
+        public void Destroy()
+        {
+            Destroy(TrapPrefab);
         }
 
         public void OnTriggerExit(Collider collider)
@@ -113,41 +111,6 @@ namespace Assets.Script.Traps
                 {
                     rend.sharedMaterial.color = new Color(10, 205, 0, 0.02f);
                 }
-            }
-        }
-        public void OnBecameVisible()
-        {
-            bool isTheClosest;
-            if (TrapFactory.ClosestTrap != null)
-            {
-                isTheClosest = Vector3.Distance(TrapFactory.ClosestTrap.transform.position,
-                                   TerrainTest.PlayerGameObject.transform.position) >
-                               Vector3.Distance(transform.position, TerrainTest.PlayerGameObject.transform.position);
-            }
-            else
-            {
-                isTheClosest = true;
-            }
-                
-            if (!IsInPreviewMode && isTheClosest)
-            {
-                if (TrapFactory.ClosestTrap != null)
-                    foreach (var rend in TrapFactory.ClosestTrap.transform.parent.GetComponentsInChildren<Renderer>())
-                    {
-                        rend.material.color = new Color(0.3f,0.3f,0.3f,1f);
-                    }
-                TrapFactory.ClosestTrap = this;
-            }
-        }
-        public void OnBecameInvisible()
-        {
-            if (TrapFactory.ClosestTrap == this)
-            {
-                foreach (var rend in TrapFactory.ClosestTrap.transform.parent.GetComponentsInChildren<Renderer>())
-                {
-                    rend.material.color = new Color(0.3f, 0.3f, 0.3f, 1f);
-                }
-                TrapFactory.ClosestTrap = null;
             }
         }
     }
