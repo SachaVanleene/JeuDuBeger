@@ -135,7 +135,7 @@ namespace TPC
         {
             horizontal = Input.GetAxis("Horizontal");
             vertical = Input.GetAxis("Vertical");
-            if (!Assets.Script.Managers.GameManager.instance.IsTheSunAwakeAndTheBirdAreSinging)
+            if(!Assets.Script.Managers.GameManager.instance.IsTheSunAwakeAndTheBirdAreSinging)
             {
                 mouse1 = Input.GetAxis("Fire1");
                 mouse2 = Input.GetAxis("Fire2");
@@ -167,7 +167,7 @@ namespace TPC
             states.vertical = vertical;
             states.moving = states.horizontal != 0 || states.vertical != 0;
 
-            states.canRun = !states.aiming && states.vertical > 0 && !states.obstacleForward;
+            states.canRun = states.canRun = !states.aiming && states.vertical > 0 && !states.obstacleForward;
 
             Vector3 h = camTrans.right * horizontal;
             Vector3 v = camTrans.forward * vertical;

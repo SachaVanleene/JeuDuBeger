@@ -16,14 +16,14 @@ namespace Assets.Script
         public static Terrain Terrain;
         public static GameObject PlayerGameObject;
         public static GameObject MainCanvasGameObject;
-        public static GameManager GameManager;
+        private GameManager _gameManager;
 
 
 
         public void Start()
         {
             PlayerGameObject = GameObject.FindWithTag("Player");
-            GameManager = GameManager.instance;
+            _gameManager = GameManager.instance;
             MainCanvasGameObject = GameObject.FindWithTag("MainCanvas");
             Terrain = Terrain.activeTerrain;
             ActualSelectedTrapTypes = TrapTypes.None;
@@ -31,7 +31,7 @@ namespace Assets.Script
 
         public void Update()
         {
-            if (GameManager.IsTheSunAwakeAndTheBirdAreSinging)
+            if (_gameManager.IsTheSunAwakeAndTheBirdAreSinging)
             {
                 if (Input.GetKey("1"))
                 {
@@ -58,7 +58,6 @@ namespace Assets.Script
             {
                 TrapFactory.IsInTrapCreationMode = false;
                 ActualSelectedTrapTypes = TrapTypes.None;
-                TrapFactory.ClosestTrap = null;
                 Destroy(TrapFactory.ActualTrap);
             }
             if (TrapFactory.IsInTrapCreationMode)
@@ -83,7 +82,7 @@ namespace Assets.Script
                     Destroy(TrapFactory.ActualTrap);
                 }
             }
-            else if (TrapFactory.IsColliding() && GameManager.IsTheSunAwakeAndTheBirdAreSinging)
+            else if (TrapFactory.IsColliding() && _gameManager.IsTheSunAwakeAndTheBirdAreSinging)
             {
                 if (Input.GetMouseButtonDown(0))
                 {

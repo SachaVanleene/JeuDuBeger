@@ -15,7 +15,7 @@ public class IA_Water_Wolves : MonoBehaviour {
     float timer;
 
     float timeBetweenAttacks;
-    int damage;
+    float damage;
 
     bool moving;
 
@@ -38,19 +38,38 @@ public class IA_Water_Wolves : MonoBehaviour {
     private ParticleSystem waterJet;
     public GameObject jets;
 
+
+    bool alreadyFocusingAFence;
+
+    SphereCollider firstSPhere;
+
+    bool focusingPlayer;
+
+    GameObject player;
+
+    bool enclosFound;
+
     private void Awake()
     {
         timer = 0f;
         //Characteristics of Common WOlves
         timeBetweenAttacks = 0.833f; // time between attack 
-        damage = 10;
+        damage = 0.5f;
         anim_time = 0.5f;
-        rotationSpeed = 2f;
+        rotationSpeed = 4f;
 
         //Initial set up
         targetTransform = null;
         moving = false;
-        isAttacking = false; ;
+        isAttacking = false;
+        targetTag = "Aucune";
+
+        alreadyFocusingAFence = false;
+        firstSPhere = GetComponent<SphereCollider>();
+        focusingPlayer = false;
+
+        player = GameObject.FindGameObjectWithTag("Player");
+        enclosFound = false;
     }
 
 
@@ -69,19 +88,22 @@ public class IA_Water_Wolves : MonoBehaviour {
 
     public void updateTarget(Transform target)
     {
-
         if (target != null)
         {
             // Debug.LogError("Position target : " + target.position);
         }
+        agent.updateRotation = true;
+        waterJet.Stop();
         RealaseBarrer();
         RealeaseDlegate();
         targetInRange = false; // Si nouvelle target supposé qu'elle n'est pas en rnage sinon bug dans les invoke
+        alreadyFocusingAFence = false;
         if (target == null) // Remise en idle
         {
             targetTransform = target;
             targetTag = "Aucune";
             targetInRange = false;
+            anim.SetBool("attaque", false);
         }
         else
         {
@@ -89,10 +111,16 @@ public class IA_Water_Wolves : MonoBehaviour {
             targetTag = target.gameObject.tag;
             SubscribeDelegate();
         }
-
+        jets.GetComponent<Water_Wolves_ColliderSystem>().updateParameter();
+        EnableFirstSPhere();
     }
 
     void moveToTarget()
+    {
+        HandleMove();
+    }
+
+    void HandleMove()
     {
         if (targetTransform != null && !targetInRange) //Si a effectivement une cible et qu'elle n'est pas en rnage
         {
@@ -124,8 +152,6 @@ public class IA_Water_Wolves : MonoBehaviour {
     }
 
 
-
-
     void FixedUpdate()
     {
         moveToTarget();
@@ -137,6 +163,7 @@ public class IA_Water_Wolves : MonoBehaviour {
     // Get a tagret from an enclos which is alive
     public void GetTargetEnclos()
     {
+        focusingPlayer = false;
         GameObject closest_enclos = DetectCLosestEnclos();
         if (closest_enclos != null)
         {
@@ -255,12 +282,20 @@ public class IA_Water_Wolves : MonoBehaviour {
                 if(targetTag == "Player")
                 {
                     targetInRange = true;
+                    HandleMove();
+                    firstSPhere.enabled = false;
                 }
                 else // fences case
                 {
-                    if (other.gameObject.transform.IsChildOf(targetTransform.parent.transform))
+                    if (other.transform.IsChildOf(targetTransform.parent))
                     {
+                        targetTransform = other.transform;
+                        //Debug.LogError("In Range");
                         targetInRange = true;
+                        HandleMove();
+                        firstSPhere.enabled = false;
+                        /*targetTransform = other.transform;
+                        alreadyFocusingAFence = true;*/
                     }
                 }
 
@@ -268,34 +303,7 @@ public class IA_Water_Wolves : MonoBehaviour {
         }
     }
 
-   /* private void OnTriggerStay(Collider other)
-    {
-        if (targetTransform != null)
-        {
-            if (other.gameObject.tag == targetTag )
-            {
-                if(targetTag == "Player")
-                {
-                    targetInRange = true;
-                }
-                else // fences case
-                {
-                    if (other.gameObject.transform.IsChildOf(targetTransform.parent.transform))
-                    {
-                        targetInRange = true;
-                    }
-                    else
-                    {
-                        targetInRange = false;
-                    }
-                }
-
-            }
-        }
-    } */
-
-    //If we exit collider of  our target then it is not in range anymore
-    void OnTriggerExit(Collider other)
+    void OnTriggerStay(Collider other)
     {
         if (targetTransform != null)
         {
@@ -303,13 +311,21 @@ public class IA_Water_Wolves : MonoBehaviour {
             {
                 if (targetTag == "Player")
                 {
-                    targetInRange = false;
+                    targetInRange = true;
+                    HandleMove();
+                    firstSPhere.enabled = false;
                 }
                 else // fences case
                 {
-                    if (other.gameObject.transform.IsChildOf(targetTransform.parent.transform))
+                    if (other.transform.IsChildOf(targetTransform.parent))
                     {
-                        targetInRange = false;
+                        targetTransform = other.transform;
+                        Debug.LogError("In Range");
+                        targetInRange = true;
+                        HandleMove();
+                        firstSPhere.enabled = false;
+                        /*targetTransform = other.transform;
+                        alreadyFocusingAFence = true;*/
                     }
                 }
 
@@ -317,36 +333,19 @@ public class IA_Water_Wolves : MonoBehaviour {
         }
     }
 
-    /*private void OnParticleCollision(GameObject other)
-    {
-        Debug.LogError("Collision particle");
-        if (targetTag == "Player")
-        {
-            targetTransform.gameObject.GetComponent<Player>().takeDamage(damage);
-            //Debug.LogError("Attaque joueur");
-            if (!targetTransform.gameObject.GetComponent<Player>().Alive)
-            {
-                targetInRange = false; 
-            }
-        }
-        if (targetTag == "Fences")
-        {
-            targetTransform.parent.gameObject.GetComponent<EnclosureScript>().DamageEnclos(damage);
-            //Debug.LogError("Attaque enclos");
-            if (targetTransform.parent.gameObject.GetComponent<EnclosureScript>().Health <= 0)
-            {
-                targetInRange = false;            }
-        }
-    }*/
 
     // Update is called once per frame
     void Update()
     {
-
-        /*if (targetTransform == null)
+        if (!enclosFound)
         {
-            GetTargetEnclos();
-        }*/
+            enclos = GameObject.FindGameObjectsWithTag("Enclos");
+            if(enclos != null)
+            {
+                enclosFound = true;
+                GetTargetEnclos();
+            }
+        }
         timer += Time.deltaTime;
 
         if (true & targetTransform != null)
@@ -380,26 +379,51 @@ public class IA_Water_Wolves : MonoBehaviour {
             }
             if (targetInRange  && targetTag != "Aucune" && targetAlive)
             {
-                anim.SetTrigger("attack");
+               // Debug.LogError("Attaque");
+                anim.SetBool("attaque", true);
                 waterJet.Play();
+                agent.updateRotation = false;
             }
             if (!targetInRange)
             {
+                anim.SetBool("attaque", false);
                 waterJet.Stop();
             }
         }
 
     }
 
-    void Attack()
+    public void focusPlayer()
     {
-        if (targetTag == "Player")
+        if (!focusingPlayer)
         {
-            targetTransform.gameObject.GetComponent<Player>().takeDamage(damage);
+            focusingPlayer = true;
+            updateTarget(player.transform);
         }
-        if (targetTag == "Fences")
-        {
-            targetTransform.parent.gameObject.GetComponent<EnclosureScript>().DamageEnclos(damage);
-        }
+    }
+
+    public void updateRange(bool r)
+    {
+        targetInRange = r;
+        EnableFirstSPhere();
+    }
+
+    public Transform getTargetTransform()
+    {
+        return targetTransform;
+    }
+    public string getTargetTag()
+    {
+        return targetTag;
+    }
+
+    public float getDamage()
+    {
+        return damage;
+    }
+
+    public void EnableFirstSPhere()
+    {
+        firstSPhere.enabled = true;
     }
 }

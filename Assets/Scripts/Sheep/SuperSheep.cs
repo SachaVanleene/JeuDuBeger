@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Assets.Script.Managers;
 using Assets.Script;
-using Assets.Scripts.Enclosures;
+//using Assets.Scripts.Enclosures;
 
 public class SuperSheep : MonoBehaviour
 {

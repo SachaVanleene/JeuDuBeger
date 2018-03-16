@@ -21,7 +21,7 @@ namespace Assets.Scripts.Traps
             Ray ray = Camera.main.ScreenPointToRay(new Vector2(Camera.main.pixelWidth / 2f, Camera.main.pixelHeight / 2f));
             Physics.Raycast(ray, out hitInfo, 100);
             float distance = Vector3.Distance(hitInfo.point, TerrainTest.PlayerGameObject.transform.position);
-            if (distance <= ActionRange && hitInfo.collider.tag == "Trap" && TerrainTest.GameManager.IsTheSunAwakeAndTheBirdAreSinging)
+            if (distance <= ActionRange && hitInfo.collider.tag == "Trap" && GameManager.instance.IsTheSunAwakeAndTheBirdAreSinging)
             {
                 ClosestTrap = hitInfo.collider.gameObject.GetComponentInChildren<Trap>();
                 ClosestTrap.Select();
@@ -38,10 +38,10 @@ namespace Assets.Scripts.Traps
         {
             RaycastHit hitInfo;
             Ray ray = Camera.main.ScreenPointToRay(new Vector2(Camera.main.pixelWidth / 2f, Camera.main.pixelHeight / 2f));
-            Physics.Raycast(ray, out hitInfo, Mathf.Infinity, LayerMask.GetMask("Terrain"));
+            Physics.Raycast(ray, out hitInfo, Mathf.Infinity, LayerMask.GetMask("Shootable"));
             float distance = Vector3.Distance(hitInfo.point, TerrainTest.PlayerGameObject.transform.position);
 
-            if (distance <= ActionRange && hitInfo.point != Vector3.zero)
+            if (distance <= ActionRange && hitInfo.point != Vector3.zero && hitInfo.collider.gameObject.tag != "Enclos")
             {
                 return hitInfo.point;
             }
@@ -50,9 +50,13 @@ namespace Assets.Scripts.Traps
                 Vector3 positionAtRange = ray.direction * ActionRange + TerrainTest.PlayerGameObject.transform.position;
                 return new Vector3(positionAtRange.x, TerrainTest.Terrain.SampleHeight(positionAtRange), positionAtRange.z);
             }
+            if (hitInfo.collider.gameObject.tag == "Enclos")
+            {
+                Debug.Log(hitInfo.collider.gameObject);
+                return hitInfo.collider.gameObject.transform.position;
+            }
             else
             {
-
                 Vector3 positionAtRange = ray.direction * ActionRange + TerrainTest.PlayerGameObject.transform.position;
                 return new Vector3(positionAtRange.x, TerrainTest.Terrain.SampleHeight(positionAtRange), positionAtRange.z);
             }

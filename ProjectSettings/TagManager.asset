@@ -13,7 +13,10 @@ TagManager:
   - Enclos
   - MainCanvas
   - EnclosurePannel
-  - Trap
+  - CommonWolf
+  - WaterWolf
+  - BossWolf
+  - MoutainWolf
   layers:
   - Default
   - TransparentFX
@@ -24,9 +27,9 @@ TagManager:
   - 
   - 
   - Player
-  - Terrain
-  - 
-  - 
+  - Shootable
+  - Wolf
+  - Enclos
   - 
   - 
   - 

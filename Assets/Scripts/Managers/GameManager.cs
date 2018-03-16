@@ -15,23 +15,22 @@ namespace Assets.Script.Managers
         public Text TextSheeps;
         public Text TextSuperSheeps;
         public GameObject TextInfo;
-        //public GameObject Player;
         public GameObject CycleManagerObject;
         public GameObject Spawns;
+        public GameObject PanelBackToMenu;
 
         private int _roundNumber = 0;
         private EnclosureManager _enclosureManager;
 
         private SoundManager soundManager;
         private CycleManager cycleManager;
+        private bool cheatsActivated = false;
         // player's inventory relativ
         private int gold = 0;
         public int TotalSheeps { get; set; }
-
         public int TotalSuperSheeps { get; set; }
-
         public bool IsTheSunAwakeAndTheBirdAreSinging { get; set; }
-
+        public bool IsPaused { get; set; }
 
         private void Awake()
         {
@@ -39,6 +38,8 @@ namespace Assets.Script.Managers
                 instance = this;
             else if (instance != this)
                 Destroy(gameObject);
+            IsPaused = false;
+            IsTheSunAwakeAndTheBirdAreSinging = true;
         }
 
 
@@ -52,18 +53,101 @@ namespace Assets.Script.Managers
             TotalSheeps = 15;
             TotalSuperSheeps = 1;
             DayStart();
+            Cursor.visible = false;
         }
+
         private void Update()
         {
-            // enable cheats here
-            if (Input.GetKey("n"))
+
+            if (Input.GetKeyUp(KeyCode.Escape))
+            {
+                if (IsPaused)
+                    UnPauseGame();
+                else
+                    PauseGame();
+                return;
+            }
+
+            if (Input.GetKey(KeyCode.Tab))
+            {
+                displayInfo("cheats activés", 1);
+                callAchievement(AchievementEvent.cheat);
+            }
+            else
+                return;
+
+            // cheats here
+            if (Input.GetKeyUp("n"))
                 cycleManager.NextCycle(50f);
+            if (Input.GetKeyUp("e"))
+            {
+                earnGold(150);
+            }
+            if (Input.GetKeyUp("l"))
+            {
+                SpendGold(150);
+            }
+            if (Input.GetKeyUp("w"))
+            {
+                GameOver();
+            }
         }
+
+        public void UnPauseGame()
+        {
+            Cursor.visible = false;
+            IsPaused = false;
+            Time.timeScale = 1;
+            PanelBackToMenu.SetActive(false);
+        }
+        public void PauseGame()
+        {
+            Cursor.visible = true;
+            IsPaused = true;
+            Time.timeScale = 0;
+            PanelBackToMenu.SetActive(true);
+            PanelBackToMenu.GetComponent<ScriptBackToMenuPanel>().Pause();
+        }
+        public void GameOver()
+        {
+            callAchievement(AchievementEvent.lose);
+            Cursor.visible = true;
+            IsPaused = true;
+            Time.timeScale = 0;
+            PanelBackToMenu.SetActive(true);
+            PanelBackToMenu.GetComponent<ScriptBackToMenuPanel>().Pause(gameOver : true);
+        }
+        public void BackToMenu()
+        {
+            callAchievement(AchievementEvent.quit);
+            SceneManager.LoadScene("MainMenu");
+        }
+
+        public void PlaceSuperSheep()
+        {
+            TotalSuperSheeps--;
+            TextSuperSheeps.text = TotalSuperSheeps + " SuperSheep in Inventory";
+        }
+
 
         public void KillSheep()
         {
-            // achievement
+            callAchievement(AchievementEvent.sheepDeath);
             displayInfo("A sheep has been eaten", 2);
+            bool sheepsAlives = false;
+            foreach (var p in _enclosureManager.EnclosPrefabList)
+            {
+                if (p.SheepNumber <= 0)
+                    continue;
+                else
+                {
+                    sheepsAlives = true;
+                    break;
+                }
+            }
+            if (sheepsAlives)
+                GameOver();
+
         }
         public void TakeSheep()
         {
@@ -76,12 +160,6 @@ namespace Assets.Script.Managers
             TextSheeps.text = TotalSheeps + " Sheeps in Inventory";
         }
 
-        public void PlaceSuperSheep()
-        {
-            TotalSuperSheeps--;
-            TextSuperSheeps.text = TotalSuperSheeps + " SuperSheep in Inventory";
-        }
-       
         private void getGoldsRound()
         {
             foreach (var p in _enclosureManager.EnclosPrefabList)
@@ -104,8 +182,8 @@ namespace Assets.Script.Managers
         {
             Spawns.GetComponent<Spawn_wolf>().Cycle = ++_roundNumber;
             TextRounds.text = "ROUND " + _roundNumber;
-            displayInfo("Round " + _roundNumber + " begin", 2);
-            // calls achievements nb rounds
+            displayInfo("Round " + _roundNumber + " begin \n Press n to pass directly to the night", 4);
+            callAchievement(AchievementEvent.cycleEnd);
         }
 
         public void DayStart()
@@ -150,7 +228,7 @@ namespace Assets.Script.Managers
         {
             gold += value;
             TextGolds.text = gold + " gold";
-            // call achievement gold earn
+            callAchievement(AchievementEvent.goldEarn, value);
         }
         public bool SpendGold(int value)
         { //  allow the player to purchase
@@ -159,19 +237,24 @@ namespace Assets.Script.Managers
             gold -= value;
             TextGolds.text = gold + " gold";
 
-            // TODO : call achievement gold spent
+            callAchievement(AchievementEvent.goldSpent, value);
             return true;
         }
         public void DeathPersonnage()
         {
-
+            callAchievement(AchievementEvent.playerDeath);
         }
-        public void DeathWolf()
+        public void DeathWolf(GameObject wolf = null)
         {
-            Spawns.GetComponent<Spawn_wolf>().WolfDeath();
+            callAchievement(AchievementEvent.wolfDeath);
+            Spawns.GetComponent<Spawn_wolf>().WolfDeath(wolf);
 
             if (!Spawns.GetComponent<Spawn_wolf>().hasWolfAlive())
                 cycleManager.NextCycle(10f);
+        }
+        private void callAchievement(AchievementEvent achEvent, int step = 1)
+        {
+            SProfilePlayer.getInstance().AchievementsManager.AddStepAchievement(achEvent, step);
         }
     }
 }
