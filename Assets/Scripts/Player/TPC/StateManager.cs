@@ -354,9 +354,9 @@ namespace TPC
 
         public IEnumerator KillFeedBack()
         {
-            GameObject.Find("/Canvas/Crosshair Manager/Kill").SetActive(true);
+            GameObject.Find("/Canvas/Kill").SetActive(true);
             yield return new WaitForSeconds(1.0f);
-            GameObject.Find("/Canvas/Crosshair Manager/Kill").SetActive(false);
+            GameObject.Find("/Canvas/Kill").SetActive(false);
         }
     }
 }
