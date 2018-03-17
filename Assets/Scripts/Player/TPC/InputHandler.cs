@@ -139,7 +139,7 @@ namespace TPC
         {
             horizontal = Input.GetAxis("Horizontal");
             vertical = Input.GetAxis("Vertical");
-            if(true) //!Assets.Script.Managers.GameManager.instance.IsTheSunAwakeAndTheBirdAreSinging)
+            if(!Assets.Script.Managers.GameManager.instance.IsTheSunAwakeAndTheBirdAreSinging)
             {
                 mouse1 = Input.GetAxis("Fire1");
                 mouse2 = Input.GetAxis("Fire2");

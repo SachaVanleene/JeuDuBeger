@@ -20,9 +20,6 @@ namespace Assets.Script.Managers
             else if (instance != this)
                 Destroy(gameObject);
         }
-        private void Start()
-        {
-        }
 
         public void PlaySound(string name, float intensity = 1f)
         {

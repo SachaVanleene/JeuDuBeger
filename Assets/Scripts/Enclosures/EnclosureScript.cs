@@ -15,28 +15,38 @@ namespace Assets.Scripts.Enclosures
     public class EnclosureScript : MonoBehaviour
     {
 
-        public int GoldReward = 1; // depend of the distance of the enclos
         public GameObject SmokeEffect;
+        public GameObject PinkSuperSheepPrefab;
+        public GameObject SheepPrefab;
+        public Material pinkFence;
+        public Material defaultFence;
+        public int GoldReward = 1; // depend of the distance of the enclos
+        public float Distance;
         public delegate void OnDead();
         public OnDead OnTriggerDead;
-        public GameObject SheepPrefab;
-        public float Distance;
+
+
         private bool _isDisplayingPanel = false;
-        public GameObject PinkSuperSheepPrefab;
-        public Material pinkFence;
+        private GameManager _gameManager;
+        private List<GameObject> _sheeps = new List<GameObject>();
+        private List<GameObject> _superSheeps = new List<GameObject>();
 
-
-    private GameManager _gameManager;
-
-        private int _sheepNumber;
-    private int _nbSuperSheep;
-    public int SheepNumber
+        public int SheepNumber
         {
-            get { return _sheepNumber; }
+            get { return _sheeps.Count; }
             set
             {
-                EnclosureManager.SheepNumberInTheWorld = EnclosureManager.SheepNumberInTheWorld - _sheepNumber + value;
-                _sheepNumber = value;
+                if (value < 0)
+                    return;
+                EnclosureManager.SheepNumberInTheWorld = EnclosureManager.SheepNumberInTheWorld - _sheeps.Count + value;
+                for(int i = 0; i < value - _sheeps.Count; i++)
+                {
+                    AddSheep();
+                }
+                for(int i = 0; i > value - _sheeps.Count; i--)
+                {
+                    KillSheep();
+                }
             }
         }
 
@@ -46,7 +56,6 @@ namespace Assets.Scripts.Enclosures
             get { return _health; }
             set
             {
-
                 if (value < 0)
                 {
                     value = 0;
@@ -73,10 +82,6 @@ namespace Assets.Scripts.Enclosures
             }
         }
 
-
-        private void Awake()
-        {
-        }
         private void Start()
         {
             Distance = Vector3.Distance(EnclosureManager.HousePosition, this.transform.position);
@@ -93,7 +98,7 @@ namespace Assets.Scripts.Enclosures
         {
             Vector3 distPlayertoEnclos = TerrainTest.PlayerGameObject.transform.position - transform.position;
 
-            if (distPlayertoEnclos.magnitude < 25 && _gameManager.IsTheSunAwakeAndTheBirdAreSinging)
+            if (distPlayertoEnclos.magnitude < 25 && _gameManager.IsTheSunAwakeAndTheBirdAreSinging && !_gameManager.IsPaused)
             {
                 if (!EnclosureManager.EnclosurePannel.activeSelf)
                 {
@@ -131,12 +136,9 @@ namespace Assets.Scripts.Enclosures
             }
             if (Input.GetKeyDown(KeyCode.KeypadMultiply))
             {
-                if (_nbSuperSheep < 1 && _gameManager.TotalSuperSheeps == 1)
+                if (_superSheeps.Count < 1 && _gameManager.TotalSuperSheeps >= 1)
                 {
                     AddPinkSuperSheep();
-                    _nbSuperSheep++;
-                    _health += 50;
-                    _gameManager.PlaceSuperSheep();
                 }
             }
 
@@ -147,12 +149,9 @@ namespace Assets.Scripts.Enclosures
             Health -= degats;
             if (Health == 0)
             {
-                if (_nbSuperSheep < 1 && _gameManager.TotalSuperSheeps == 1)
+                if (_superSheeps.Count < 1 && _gameManager.TotalSuperSheeps >= 1)
                 {
                     AddPinkSuperSheep();
-                    _nbSuperSheep++;
-                    _health += 50; 
-                    _gameManager.PlaceSuperSheep();
                 }
             }
         }
@@ -164,20 +163,42 @@ namespace Assets.Scripts.Enclosures
                 return;
             if (SheepNumber < 10)
             {
-                SheepNumber++;
-            var sheep = Instantiate(SheepPrefab, this.transform); //crée un clone mouton
-            sheep.transform.position = this.transform.position; //le place dans l'enclos
-            sheep.transform.Rotate(0, Random.Range(0, 360), 0); //l'oriente d'une façon aléatoire
-
+                var sheep = Instantiate(SheepPrefab, this.transform); //crée un clone mouton
+                sheep.transform.position = this.transform.position; //le place dans l'enclos
+                sheep.transform.Rotate(0, Random.Range(0, 360), 0); //l'oriente d'une façon aléatoire
+                _sheeps.Add(sheep);
+            }
+            _gameManager.PlaceSheep();
         }
-        _gameManager.PlaceSheep();
+
+        public void RemovePinkSuperSheep()
+        {
+            var SuperSheep = _superSheeps[_superSheeps.Count - 1];
+            GameObject boom = CFX_SpawnSystem.GetNextObject(SmokeEffect);
+            boom.transform.position = SuperSheep.transform.position;
+            Destroy(SuperSheep);
+            _superSheeps.Remove(SuperSheep);
+
+            foreach (Transform child in transform)
+            {
+                if (child.tag == "Fences")
+                {
+                    Renderer r = child.GetComponent<Renderer>();
+                    r.material = defaultFence;
+                }
+            }
         }
 
         public void AddPinkSuperSheep()
         {
-            var sheep = Instantiate(PinkSuperSheepPrefab, this.transform); //crée un clone mouton
-            sheep.transform.position = this.transform.position; //le place dans l'enclos
-            sheep.transform.Rotate(0, Random.Range(0, 360), 0);
+
+            var SuperSheep = Instantiate(PinkSuperSheepPrefab, this.transform); //crée un clone mouton
+            SuperSheep.transform.position = this.transform.position; //le place dans l'enclos
+            SuperSheep.transform.Rotate(0, Random.Range(0, 360), 0);
+
+            _superSheeps.Add(SuperSheep);
+            
+            _gameManager.PlaceSuperSheep();
 
             foreach (Transform child in transform)
             {
@@ -186,7 +207,6 @@ namespace Assets.Scripts.Enclosures
                     Renderer r = child.GetComponent<Renderer>();
                     r.material = pinkFence;
                 }
-
             }
         }
 
@@ -194,19 +214,25 @@ namespace Assets.Scripts.Enclosures
         {
             if (SheepNumber > 0)
             {
-                var sheepClone = transform.GetChild(transform.childCount - SheepNumber).gameObject;
+                var sheepClone = _sheeps[_sheeps.Count - 1]; //transform.GetChild(transform.childCount - SheepNumber).gameObject;
                 GameObject boom = CFX_SpawnSystem.GetNextObject(SmokeEffect);
                 boom.transform.position = sheepClone.transform.position;
+                _sheeps.Remove(sheepClone);
                 Destroy(sheepClone);
-                SheepNumber--;
             }
         }
-        public void KillAllSheep()
+        public void RemoveAllSheeps()
         {
+            _gameManager.TotalSheeps += _sheeps.Count;
             Health = 0;
+            if (_superSheeps.Count > 0)
+                RemovePinkSuperSheep();
         }
         public void DamageEnclos(int degats)
         {
+            // takes no damage if protected by a super sheep
+            if (_superSheeps.Count > 0)
+                return;
             Health -= degats;
             if (Health == 0)
             {

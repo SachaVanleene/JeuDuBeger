@@ -82,7 +82,7 @@ public class EnclosureManager : MonoBehaviour
         EnclosurePannel.transform.GetChild(1).GetComponent<Text>().text ="0";
         foreach (var enclosure in EnclosureList)
         {
-            enclosure.KillAllSheep();
+            enclosure.RemoveAllSheeps();
         }
     }
 }

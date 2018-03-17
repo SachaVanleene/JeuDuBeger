@@ -13,7 +13,6 @@ namespace Assets.Script.Managers
         public Text TextRounds;
         public Text TextGolds;
         public Text TextSheeps;
-        public Text TextSuperSheeps;
         public GameObject TextInfo;
         public GameObject CycleManagerObject;
         public GameObject Spawns;
@@ -51,7 +50,11 @@ namespace Assets.Script.Managers
             cycleManager.SubscribCycle(this);
             cycleManager.GoToAngle(1, 30);
             TotalSheeps = 15;
-            TotalSuperSheeps = 1;
+            
+            if(SProfilePlayer.getInstance().AchievementsManager.GetAchievementByName("Player").IsComplete())
+                TotalSuperSheeps = 1;
+            else
+                TotalSuperSheeps = 0;
             DayStart();
             Cursor.visible = false;
         }
@@ -91,6 +94,11 @@ namespace Assets.Script.Managers
             {
                 GameOver();
             }
+            if (Input.GetKeyUp("m"))
+            {
+                TotalSuperSheeps++;
+                printNbSHeeps();
+            }
         }
 
         public void UnPauseGame()
@@ -123,13 +131,6 @@ namespace Assets.Script.Managers
             SceneManager.LoadScene("MainMenu");
         }
 
-        public void PlaceSuperSheep()
-        {
-            TotalSuperSheeps--;
-            TextSuperSheeps.text = TotalSuperSheeps + " SuperSheep in Inventory";
-        }
-
-
         public void KillSheep()
         {
             callAchievement(AchievementEvent.sheepDeath);
@@ -152,12 +153,25 @@ namespace Assets.Script.Managers
         public void TakeSheep()
         {
             TotalSheeps++;
-            TextSheeps.text = TotalSheeps + " Sheeps in Inventory";
+            printNbSHeeps();
         }
         public void PlaceSheep()
         {
             TotalSheeps--;
-            TextSheeps.text = TotalSheeps + " Sheeps in Inventory";
+            printNbSHeeps();
+        }
+        public void PlaceSuperSheep()
+        {
+            TotalSuperSheeps--;
+            printNbSHeeps();
+        }
+
+        private void printNbSHeeps()
+        {
+            if (TotalSuperSheeps > 0)
+                TextSheeps.text = TotalSheeps + " Sheeps in Inventory and " + TotalSuperSheeps + " Super.";
+            else
+                TextSheeps.text = TotalSheeps + " Sheeps in Inventory.";
         }
 
         private void getGoldsRound()
@@ -190,8 +204,7 @@ namespace Assets.Script.Managers
         {
             IsTheSunAwakeAndTheBirdAreSinging = true;
            if(_roundNumber != 0) _enclosureManager.TakeOffAllSheeps();
-            TextSheeps.text = TotalSheeps + " Sheeps in Inventory";
-            TextSuperSheeps.text = TotalSuperSheeps + " SuperSheep in Inventory";
+            printNbSHeeps();
             soundManager.PlayAmbuanceMusic("day_theme", 0.2f);
             soundManager.PlaySound("safe_place_to_rest", 1.5f);
             soundManager.PlaySound("bird", 0.2f);

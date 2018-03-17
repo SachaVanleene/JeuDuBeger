@@ -169,7 +169,7 @@ public class IA_Common_Wolves : MonoBehaviour {
             current_enclos = enclos[i];
             if (current_enclos.GetComponent<EnclosureScript>().Health > 0)
             {
-                Debug.Log(current_enclos);
+                //Debug.Log(current_enclos);
                 current_distance = Vector3.Distance(current_enclos.transform.position, this.gameObject.transform.position);
                 if (current_distance < dist_to_target)
                 {
