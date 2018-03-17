@@ -200,5 +200,12 @@ namespace TPC
             return retVal;
         }
 
+        public void SetColor(Color color)
+        {
+            foreach (CrosshairPart c in parts)
+            {
+                c.image.color = color;
+            }
+        }
     }
 }

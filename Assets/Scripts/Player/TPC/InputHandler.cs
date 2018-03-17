@@ -120,10 +120,15 @@ namespace TPC
             if (Physics.Raycast(ray.origin, ray.direction, out hit, 100, shotLayerMask))
             {
                 states.lookHitPosition = hit.point;
+                if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Shootable"))
+                    crosshair.SetColor(Color.red);
+                else
+                    crosshair.SetColor(Color.white);
             }
             else
             {
                 states.lookHitPosition = states.lookPosition;
+                crosshair.SetColor(Color.white);
             }
 
 
@@ -317,6 +322,7 @@ namespace TPC
             Camera.main.fieldOfView = curFov;
         }
 
+        
         void CameraCollision(LayerMask layerMask)
         {
             //Do a raycast from the pivot to the camera
