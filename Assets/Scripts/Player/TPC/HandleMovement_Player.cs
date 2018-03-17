@@ -160,12 +160,11 @@ namespace TPC
                 if (targetDir == Vector3.zero)
                     targetDir = transform.forward;
 
-                if (states.vertical > 0)
+                if (states.vertical > 0 && !states.shoot)
                 {
                     Quaternion targetRot = Quaternion.LookRotation(targetDir);
                     transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * velocityChange);
                 }
-
                 else
                 {
 
@@ -182,7 +181,7 @@ namespace TPC
                 Vector3 lookAt = (states.lookHitPosition - transform.position).normalized;
                 lookAt.y = 0;
                 Quaternion targetRot = Quaternion.LookRotation(lookAt);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * velocityChange);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * velocityChange );
             }
         }
 

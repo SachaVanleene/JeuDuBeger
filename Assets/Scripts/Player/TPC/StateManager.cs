@@ -27,7 +27,6 @@ namespace TPC
         public float horizontal;
         public float vertical;
         public bool jumpInput;
-        public bool runInput;
 
         [Header("States")]
         public bool obstacleForward;
@@ -79,8 +78,7 @@ namespace TPC
 
         public Vector3 lookPosition;
         public Vector3 lookHitPosition;
-        public LayerMask layerMask;
-
+        public LayerMask shotLayerMask;
         public LayerMask ignoreLayers;
 
         //public CharacterAudioManager audioManager;
@@ -119,7 +117,7 @@ namespace TPC
             canJump = true;
 
             gameObject.layer = 8;
-            //ignoreLayers = ~(1 << 3 | 1 << 8);
+            ignoreLayers = ~(1 << LayerMask.NameToLayer("Player"));
         }
 
         void CreateModel()
@@ -145,7 +143,7 @@ namespace TPC
 
         void AddControllerReferences()
         {
-            gameObject.AddComponent<Rigidbody>();
+            //gameObject.AddComponent<Rigidbody>();
             rb = GetComponent<Rigidbody>();
             rb.angularDrag = 999;
             rb.drag = 4;
