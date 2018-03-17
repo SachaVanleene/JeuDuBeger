@@ -131,6 +131,8 @@ namespace TPC
                             if (target.GetComponent<WolfHealth>())
                             {
                                 target.GetComponent<WolfHealth>().takeDamage(20);
+                                if (!target.GetComponent<WolfHealth>().alive)
+                                    StartCoroutine(states.KillFeedBack());
                             }
                         }
                         if (hit.collider.tag == "BossWolf")

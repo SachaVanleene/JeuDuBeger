@@ -351,5 +351,12 @@ namespace TPC
             bool left = rel_ll.z > rel_rl.z;
             anim.SetBool(Statics.mirrorJump, left);
         }
+
+        public IEnumerator KillFeedBack()
+        {
+            GameObject.Find("/Canvas/Crosshair Manager/Kill").SetActive(true);
+            yield return new WaitForSeconds(1.0f);
+            GameObject.Find("/Canvas/Crosshair Manager/Kill").SetActive(false);
+        }
     }
 }
