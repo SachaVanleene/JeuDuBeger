@@ -56,7 +56,8 @@ namespace TPC
         float targetZ;
         float curZ;
         float actualZ;
-        LayerMask layerMask;
+        LayerMask shotLayerMask;
+        LayerMask camLayerMask;
 
         public float shakeRecoil = 0.05f;
         public float shakeMovement = 0.05f;
@@ -78,8 +79,11 @@ namespace TPC
 
             states = GetComponent<StateManager>();
 
-            layerMask = ~(1 << gameObject.layer);
-            states.layerMask = layerMask;
+            shotLayerMask = ~(1 << gameObject.layer);
+            states.shotLayerMask = shotLayerMask;
+
+            camLayerMask = ~(1 << gameObject.layer | LayerMask.NameToLayer("Default"));
+
 
             gameObject.AddComponent<HandleMovement_Player>();
             hMove = GetComponent<HandleMovement_Player>();
@@ -113,7 +117,7 @@ namespace TPC
 
             Debug.DrawRay(ray.origin, ray.direction, Color.blue);
 
-            if (Physics.Raycast(ray.origin, ray.direction, out hit, 100, layerMask))
+            if (Physics.Raycast(ray.origin, ray.direction, out hit, 100, shotLayerMask))
             {
                 states.lookHitPosition = hit.point;
             }
@@ -124,7 +128,7 @@ namespace TPC
 
 
             //Check for obstacles in front of camera
-            CameraCollision(layerMask);
+            CameraCollision(camLayerMask);
 
             //Update camera's postion
             curZ = Mathf.Lerp(curZ, actualZ, Time.deltaTime * 15);
@@ -135,7 +139,7 @@ namespace TPC
         {
             horizontal = Input.GetAxis("Horizontal");
             vertical = Input.GetAxis("Vertical");
-            if(!Assets.Script.Managers.GameManager.instance.IsTheSunAwakeAndTheBirdAreSinging)
+            if(true) //!Assets.Script.Managers.GameManager.instance.IsTheSunAwakeAndTheBirdAreSinging)
             {
                 mouse1 = Input.GetAxis("Fire1");
                 mouse2 = Input.GetAxis("Fire2");
@@ -326,7 +330,7 @@ namespace TPC
             //If an obstacle is found
             if (Physics.Raycast(origin, direction, out hit, Mathf.Abs(targetZ), layerMask))
             {
-                //If we hit something, then find that distance
+                //If we hit the terrain, then find that distance
                 float dist = Vector3.Distance(camPivot.position, hit.point);
                 actualZ = -dist;
             }
