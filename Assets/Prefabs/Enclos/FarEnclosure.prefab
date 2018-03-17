@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 95281684435079564}
   - component: {fileID: 65535573835585676}
   - component: {fileID: 114624995991092638}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fence1_broken (2)
   m_TagString: Fences
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 95690994114881988}
   - component: {fileID: 65616746926787252}
   - component: {fileID: 114524378848368336}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fence1_pole (17)
   m_TagString: Fences
   m_Icon: {fileID: 0}
@@ -64,7 +64,7 @@ GameObject:
   - component: {fileID: 95580688187028246}
   - component: {fileID: 65338841029298472}
   - component: {fileID: 114887275202491338}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fence1_pole (15)
   m_TagString: Fences
   m_Icon: {fileID: 0}
@@ -84,7 +84,7 @@ GameObject:
   - component: {fileID: 95752198701473456}
   - component: {fileID: 65179838714752616}
   - component: {fileID: 114923126288153654}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fence1_broken3 (4)
   m_TagString: Fences
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 95948730537030328}
   - component: {fileID: 65739317864558554}
   - component: {fileID: 114555544928277444}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fence1_broken3 (5)
   m_TagString: Fences
   m_Icon: {fileID: 0}
@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 23635718842238302}
   - component: {fileID: 65473662226144582}
   - component: {fileID: 114579518929206788}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fence1_Door (1)
   m_TagString: Fences
   m_Icon: {fileID: 0}
@@ -143,7 +143,7 @@ GameObject:
   - component: {fileID: 95886215736010408}
   - component: {fileID: 65879843278832580}
   - component: {fileID: 114583386830103366}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fence1_pole (4)
   m_TagString: Fences
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 95392833021772614}
   - component: {fileID: 65096154953005338}
   - component: {fileID: 114129796422298220}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fence1_broken2 (5)
   m_TagString: Fences
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 95568221521164624}
   - component: {fileID: 65571434171934754}
   - component: {fileID: 114998663383695304}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fence_1_2 (1)
   m_TagString: Fences
   m_Icon: {fileID: 0}
@@ -203,7 +203,7 @@ GameObject:
   - component: {fileID: 95711685569950126}
   - component: {fileID: 65473097236579304}
   - component: {fileID: 114837162018774536}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fence1_pole (19)
   m_TagString: Fences
   m_Icon: {fileID: 0}
@@ -223,7 +223,7 @@ GameObject:
   - component: {fileID: 95593826428500262}
   - component: {fileID: 65100535919766100}
   - component: {fileID: 114295646641582804}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fence1_broken2 (3)
   m_TagString: Fences
   m_Icon: {fileID: 0}
@@ -243,7 +243,7 @@ GameObject:
   - component: {fileID: 95019592389412310}
   - component: {fileID: 65148640009384546}
   - component: {fileID: 114702884454354274}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fence1_broken (3)
   m_TagString: Fences
   m_Icon: {fileID: 0}
@@ -261,7 +261,7 @@ GameObject:
   - component: {fileID: 114695632365051304}
   - component: {fileID: 114895799048417094}
   - component: {fileID: 114815314327187914}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: FarEnclosure
   m_TagString: Enclos
   m_Icon: {fileID: 0}
@@ -281,7 +281,7 @@ GameObject:
   - component: {fileID: 95962589018240292}
   - component: {fileID: 65945173595946678}
   - component: {fileID: 114884658670923824}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fence1_pole (23)
   m_TagString: Fences
   m_Icon: {fileID: 0}
@@ -301,7 +301,7 @@ GameObject:
   - component: {fileID: 95447846904030664}
   - component: {fileID: 65581652832541914}
   - component: {fileID: 114561450781193316}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fence1_pole (3)
   m_TagString: Fences
   m_Icon: {fileID: 0}
@@ -321,7 +321,7 @@ GameObject:
   - component: {fileID: 95346383932210280}
   - component: {fileID: 65517407407061884}
   - component: {fileID: 114025125149448574}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fence1_pole (18)
   m_TagString: Fences
   m_Icon: {fileID: 0}
@@ -341,7 +341,7 @@ GameObject:
   - component: {fileID: 95389799594081146}
   - component: {fileID: 65849303840199586}
   - component: {fileID: 114918842288846094}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fence_1_2 (2)
   m_TagString: Fences
   m_Icon: {fileID: 0}
@@ -361,7 +361,7 @@ GameObject:
   - component: {fileID: 95092402453055366}
   - component: {fileID: 65432423789945420}
   - component: {fileID: 114945319367143368}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fence1_broken2 (1)
   m_TagString: Fences
   m_Icon: {fileID: 0}
@@ -381,7 +381,7 @@ GameObject:
   - component: {fileID: 95317648932006966}
   - component: {fileID: 65956886244582892}
   - component: {fileID: 114406821375139280}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fence1_pole (22)
   m_TagString: Fences
   m_Icon: {fileID: 0}
@@ -401,7 +401,7 @@ GameObject:
   - component: {fileID: 95404122211980414}
   - component: {fileID: 65158667106204658}
   - component: {fileID: 114826103404730060}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fence1_pole (2)
   m_TagString: Fences
   m_Icon: {fileID: 0}
@@ -421,7 +421,7 @@ GameObject:
   - component: {fileID: 95566339368530724}
   - component: {fileID: 65531697312347268}
   - component: {fileID: 114136922399990274}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fence1_pole (20)
   m_TagString: Fences
   m_Icon: {fileID: 0}
@@ -441,7 +441,7 @@ GameObject:
   - component: {fileID: 95146246834037390}
   - component: {fileID: 65618557720055456}
   - component: {fileID: 114267528923248970}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fence1_pole (16)
   m_TagString: Fences
   m_Icon: {fileID: 0}
@@ -461,7 +461,7 @@ GameObject:
   - component: {fileID: 95531921660663688}
   - component: {fileID: 65876068765557956}
   - component: {fileID: 114861752411493056}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fence1_broken2 (4)
   m_TagString: Fences
   m_Icon: {fileID: 0}
@@ -481,7 +481,7 @@ GameObject:
   - component: {fileID: 95896665988553434}
   - component: {fileID: 65812954934862988}
   - component: {fileID: 114588118986307462}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fence1_broken (4)
   m_TagString: Fences
   m_Icon: {fileID: 0}
@@ -501,7 +501,7 @@ GameObject:
   - component: {fileID: 95703605017210996}
   - component: {fileID: 65614143197933148}
   - component: {fileID: 114229702680785500}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fence1_pole (21)
   m_TagString: Fences
   m_Icon: {fileID: 0}
@@ -521,7 +521,7 @@ GameObject:
   - component: {fileID: 95330815047878052}
   - component: {fileID: 65823436111791246}
   - component: {fileID: 114472193126650792}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fence1_pole (14)
   m_TagString: Fences
   m_Icon: {fileID: 0}
@@ -541,7 +541,7 @@ GameObject:
   - component: {fileID: 95195062409818366}
   - component: {fileID: 65009295417444002}
   - component: {fileID: 114045425191792820}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fence1_broken3 (6)
   m_TagString: Fences
   m_Icon: {fileID: 0}

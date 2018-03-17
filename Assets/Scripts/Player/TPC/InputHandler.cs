@@ -56,14 +56,17 @@ namespace TPC
         float targetZ;
         float curZ;
         float actualZ;
-        LayerMask shotLayerMask;
-        LayerMask camLayerMask;
+        public LayerMask shotLayerMask;
+        public LayerMask camLayerMask;
 
         public float shakeRecoil = 0.05f;
         public float shakeMovement = 0.05f;
         public float shakeMin = 0f;
         float targetShake;
         float curShake;
+
+        bool fenceCollision;
+        GameObject fence;
         #endregion
 
         // Use this for initialization
@@ -79,11 +82,12 @@ namespace TPC
 
             states = GetComponent<StateManager>();
 
-            shotLayerMask = ~(1 << gameObject.layer);
+            shotLayerMask = ~(1 << gameObject.layer | 1 << LayerMask.NameToLayer("Enclos"));
             states.shotLayerMask = shotLayerMask;
 
-            camLayerMask = ~(1 << gameObject.layer | LayerMask.NameToLayer("Default"));
+            camLayerMask = ~(1 << gameObject.layer | 1 << LayerMask.NameToLayer("Default"));
 
+            fenceCollision = false;
 
             gameObject.AddComponent<HandleMovement_Player>();
             hMove = GetComponent<HandleMovement_Player>();
@@ -336,9 +340,35 @@ namespace TPC
             //If an obstacle is found
             if (Physics.Raycast(origin, direction, out hit, Mathf.Abs(targetZ), layerMask))
             {
-                //If we hit the terrain, then find that distance
-                float dist = Vector3.Distance(camPivot.position, hit.point);
-                actualZ = -dist;
+                if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Enclos"))
+                {
+                    if (!fenceCollision)
+                    {
+                        fence = hit.transform.gameObject;
+                        StandardShaderUtils.ChangeRenderMode(fence.GetComponent<MeshRenderer>().material, StandardShaderUtils.BlendMode.Transparent);
+                        fenceCollision = true;
+                    }
+
+                    if (fence != hit.transform.gameObject)
+                    {
+                        StandardShaderUtils.ChangeRenderMode(fence.GetComponent<MeshRenderer>().material, StandardShaderUtils.BlendMode.Opaque);
+                        fenceCollision = false;
+                    }
+                }
+                else
+                {
+                    //If we hit the terrain, then find that distance
+                    float dist = Vector3.Distance(camPivot.position, hit.point);
+                    actualZ = -dist;
+                }
+            }
+            else
+            {
+                if (fenceCollision)
+                {
+                    StandardShaderUtils.ChangeRenderMode(fence.GetComponent<MeshRenderer>().material, StandardShaderUtils.BlendMode.Opaque);
+                    fenceCollision = false;
+                }
             }
         }
     }
