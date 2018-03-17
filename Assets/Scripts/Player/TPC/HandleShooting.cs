@@ -25,12 +25,13 @@ namespace TPC
         bool dontShoot;
         bool emptyGun;
 
+        public GameObject killGo;
+
         // Use this for initialization
         void Start()
         {
             states = GetComponent<StateManager>();
             timer = 1;
-            
         }
 
         // Update is called once per frame
@@ -132,7 +133,7 @@ namespace TPC
                             {
                                 target.GetComponent<WolfHealth>().takeDamage(20);
                                 if (!target.GetComponent<WolfHealth>().alive)
-                                    StartCoroutine(states.KillFeedBack());
+                                    StartCoroutine(KillFeedBack());
                             }
                         }
                         if (hit.collider.tag == "BossWolf")
@@ -158,6 +159,13 @@ namespace TPC
                     }
                 }
             }
+        }
+
+        private IEnumerator KillFeedBack()
+        {
+            killGo.SetActive(true);
+            yield return new WaitForSeconds(1.0f);
+            killGo.SetActive(false);
         }
     }
 }

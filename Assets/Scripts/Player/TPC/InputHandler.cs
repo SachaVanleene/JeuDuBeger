@@ -75,6 +75,7 @@ namespace TPC
             crosshairManager = CrosshairManager.GetInstance();
             //Debug.Log(crosshairManager.activeCrosshair);
             crosshair = crosshairManager.activeCrosshair.GetComponent<Crosshair>();
+
             camProperties = FreeCameraLook.GetInstance();
             camPivot = camProperties.transform.GetChild(0);
             camTrans = camPivot.GetChild(0);

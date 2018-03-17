@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -592,7 +592,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &121787653
 RectTransform:
   m_ObjectHideFlags: 0
@@ -736,7 +736,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &137626551
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1257,7 +1257,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 149738, guid: a5984f13f3c383240b4012bf7f8a7e56, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1788538758244042, guid: a5984f13f3c383240b4012bf7f8a7e56, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a5984f13f3c383240b4012bf7f8a7e56, type: 2}
@@ -1315,7 +1319,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1022140375493792, guid: c7ec0cf439a55fa47bb3d344c1d4616c, type: 2}
       propertyPath: m_Layer
-      value: 9
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c7ec0cf439a55fa47bb3d344c1d4616c, type: 2}
@@ -1432,7 +1436,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 230047398}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1903,7 +1907,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 122584, guid: adbf69bb7bcdc054c984cf0359f9e65d, type: 2}
       propertyPath: m_Layer
-      value: 9
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: adbf69bb7bcdc054c984cf0359f9e65d, type: 2}
@@ -2027,7 +2031,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: f6e999359d202f6408dc1a03aed6dbc3, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f6e999359d202f6408dc1a03aed6dbc3, type: 3}
@@ -2076,7 +2080,7 @@ GameObject:
   - component: {fileID: 325774768}
   - component: {fileID: 325774766}
   - component: {fileID: 325774767}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6027,7 +6031,7 @@ GameObject:
   - component: {fileID: 482888077}
   - component: {fileID: 482888076}
   - component: {fileID: 482888075}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Sphere (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6118,7 +6122,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &490388954
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6325,7 +6329,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &537688238
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6518,6 +6522,12 @@ MonoBehaviour:
   cameraAimingY: 0
   cameraNormalZ: -5
   cameraAimingZ: -1
+  shotLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  camLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   shakeRecoil: 0.05
   shakeMovement: 0.01
   shakeMin: 0.01
@@ -7009,7 +7019,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &692700179
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7863,7 +7873,7 @@ GameObject:
   - component: {fileID: 1000695303}
   - component: {fileID: 1000695302}
   - component: {fileID: 1000695301}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Sphere (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8217,7 +8227,7 @@ GameObject:
   - component: {fileID: 1044374437}
   - component: {fileID: 1044374436}
   - component: {fileID: 1044374435}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Sphere (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8399,7 +8409,7 @@ GameObject:
   - component: {fileID: 1079071705}
   - component: {fileID: 1079071704}
   - component: {fileID: 1079071703}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Stars
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11855,7 +11865,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1088421940}
   - component: {fileID: 1088421941}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Moon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12300,7 +12310,7 @@ GameObject:
   - component: {fileID: 1187640694}
   - component: {fileID: 1187640693}
   - component: {fileID: 1187640692}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: MoonDisplay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12452,7 +12462,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 122584, guid: adbf69bb7bcdc054c984cf0359f9e65d, type: 2}
       propertyPath: m_Layer
-      value: 9
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: adbf69bb7bcdc054c984cf0359f9e65d, type: 2}
@@ -12529,7 +12539,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1228557513}
   - component: {fileID: 1228557514}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: DayCycle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12940,13 +12950,13 @@ GameObject:
   - component: {fileID: 1402869004}
   - component: {fileID: 1402869008}
   - component: {fileID: 1402869009}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Terrain
   m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!154 &1402869004
 TerrainCollider:
   m_ObjectHideFlags: 0
@@ -13448,7 +13458,7 @@ GameObject:
   - component: {fileID: 1636516229}
   - component: {fileID: 1636516228}
   - component: {fileID: 1636516227}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Clouds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13597,7 +13607,7 @@ GameObject:
   - component: {fileID: 1638098508}
   - component: {fileID: 1638098507}
   - component: {fileID: 1638098506}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13744,7 +13754,7 @@ GameObject:
   - component: {fileID: 1711271736}
   - component: {fileID: 1711271735}
   - component: {fileID: 1711271734}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Sphere (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13888,7 +13898,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 122584, guid: adbf69bb7bcdc054c984cf0359f9e65d, type: 2}
       propertyPath: m_Layer
-      value: 9
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: adbf69bb7bcdc054c984cf0359f9e65d, type: 2}
@@ -13978,7 +13988,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1732771767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14248,7 +14258,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 122584, guid: adbf69bb7bcdc054c984cf0359f9e65d, type: 2}
       propertyPath: m_Layer
-      value: 9
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: adbf69bb7bcdc054c984cf0359f9e65d, type: 2}
@@ -14363,7 +14373,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1786576979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14638,7 +14648,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 122584, guid: adbf69bb7bcdc054c984cf0359f9e65d, type: 2}
       propertyPath: m_Layer
-      value: 9
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: adbf69bb7bcdc054c984cf0359f9e65d, type: 2}
@@ -15348,7 +15358,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1979121086}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15605,7 +15615,7 @@ GameObject:
   - component: {fileID: 2023491531}
   - component: {fileID: 2023491530}
   - component: {fileID: 2023491529}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Sphere (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15741,7 +15751,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 122584, guid: adbf69bb7bcdc054c984cf0359f9e65d, type: 2}
       propertyPath: m_Layer
-      value: 9
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: adbf69bb7bcdc054c984cf0359f9e65d, type: 2}
@@ -15825,7 +15835,7 @@ GameObject:
   - component: {fileID: 2059843649}
   - component: {fileID: 2059843648}
   - component: {fileID: 2059843647}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Sphere (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15965,7 +15975,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 6783a94fbec42ea42817f01231ee7565, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6783a94fbec42ea42817f01231ee7565, type: 3}
@@ -16012,7 +16022,7 @@ GameObject:
   - component: {fileID: 2079162977}
   - component: {fileID: 2079162979}
   - component: {fileID: 2079162978}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Sun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16262,7 +16272,7 @@ GameObject:
   - component: {fileID: 2110090616}
   - component: {fileID: 2110090615}
   - component: {fileID: 2110090614}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Sphere (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
