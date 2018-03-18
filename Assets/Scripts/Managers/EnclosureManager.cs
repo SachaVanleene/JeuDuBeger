@@ -53,13 +53,15 @@ public class EnclosureManager : MonoBehaviour
 	        {
 	            enclosure = Instantiate(EnclosPrefabList[1]);
 	            enclosure.transform.position = enclosurePosition;
+                enclosure.GoldReward = GameVariables.EnclosureGold.medium;
             }
             else
 	        {
 	            enclosure = Instantiate(EnclosPrefabList[2]);
 	            enclosure.transform.position = enclosurePosition;
+                enclosure.GoldReward = GameVariables.EnclosureGold.far;
             }
-	        EnclosureList.Add(enclosure);
+            EnclosureList.Add(enclosure);
         }
         EnclosureList = EnclosureList.OrderBy(o=>o.Distance).ToList();
     }
@@ -75,7 +77,15 @@ public class EnclosureManager : MonoBehaviour
             }
         }
     }
-
+    public static int NbSheeps()
+    {
+        int nb = 0;
+        foreach (var enclosure in EnclosureList)
+        {
+            nb += enclosure.SheepNumber;
+        }
+        return nb;
+    }
     public void TakeOffAllSheeps()
     {
         _gameManager.TotalSheeps = SheepNumberInTheWorld;
