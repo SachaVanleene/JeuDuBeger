@@ -16,6 +16,16 @@ public class AchievementsManager {
         this.listeners = new Dictionary<AchievementEvent, List<AchievementInfo>>();
         this.Completion = new Dictionary<AchievementEvent, int>();
     }
+    
+    public AchievementInfo GetAchievementByName(string name)
+    {
+        foreach(var achInfo in achievements)
+        {
+            if (achInfo.Name.Equals(name))
+                return achInfo;
+        }
+        return null;
+    }
 
     public void AddStepAchievement(AchievementEvent eventAchievement, int step = 1)
     {
