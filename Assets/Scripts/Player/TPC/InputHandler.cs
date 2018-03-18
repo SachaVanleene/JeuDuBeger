@@ -129,7 +129,6 @@ namespace TPC
 
             if (Physics.Raycast(ray.origin, ray.direction, out hit, 100, shotLayerMask))
             {
-                Debug.Log(hit.transform.gameObject.layer);
                 states.lookHitPosition = hit.point;
                 if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Shootable"))
                     crosshair.SetColor(Color.red);
