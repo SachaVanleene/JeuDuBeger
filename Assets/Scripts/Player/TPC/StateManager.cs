@@ -117,7 +117,8 @@ namespace TPC
             canJump = true;
 
             gameObject.layer = 8;
-            ignoreLayers = ~(1 << LayerMask.NameToLayer("Player"));
+            ignoreLayers = ~(1 << LayerMask.NameToLayer("Player") | 
+                1 << LayerMask.NameToLayer("Wolf"));
         }
 
         void CreateModel()

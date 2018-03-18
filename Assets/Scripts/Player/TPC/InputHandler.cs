@@ -83,10 +83,15 @@ namespace TPC
 
             states = GetComponent<StateManager>();
 
-            shotLayerMask = ~(1 << gameObject.layer | 1 << LayerMask.NameToLayer("Enclos"));
+            shotLayerMask = ~(1 << gameObject.layer | 
+                1 << LayerMask.NameToLayer("Enclos") |
+                1 << LayerMask.NameToLayer("Wolf"));
+
             states.shotLayerMask = shotLayerMask;
 
-            camLayerMask = ~(1 << gameObject.layer | 1 << LayerMask.NameToLayer("Default"));
+            camLayerMask = ~(1 << gameObject.layer | 
+                1 << LayerMask.NameToLayer("Default") |
+                1 << LayerMask.NameToLayer("Wolf"));
 
             fenceCollision = false;
 
@@ -124,6 +129,7 @@ namespace TPC
 
             if (Physics.Raycast(ray.origin, ray.direction, out hit, 100, shotLayerMask))
             {
+                Debug.Log(hit.transform.gameObject.layer);
                 states.lookHitPosition = hit.point;
                 if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Shootable"))
                     crosshair.SetColor(Color.red);
@@ -149,7 +155,7 @@ namespace TPC
         {
             horizontal = Input.GetAxis("Horizontal");
             vertical = Input.GetAxis("Vertical");
-            if(true) //!Assets.Script.Managers.GameManager.instance.IsTheSunAwakeAndTheBirdAreSinging)
+            if(!Assets.Script.Managers.GameManager.instance.IsTheSunAwakeAndTheBirdAreSinging)
             {
                 mouse1 = Input.GetAxis("Fire1");
                 mouse2 = Input.GetAxis("Fire2");
