@@ -17,7 +17,7 @@ namespace Assets.Script.Traps
         public override IEnumerator Activate(GameObject go)
         {
             //TrapPrefab.GetComponent<Animation>().Play();
-            if (go.tag == "Wolf")
+            if (go.tag.Contains("Wolf"))
             {
                 TrapPrefab.GetComponent<Animation>().Play();
                 IsActive = true;
