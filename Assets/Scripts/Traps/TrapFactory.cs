@@ -50,11 +50,6 @@ namespace Assets.Scripts.Traps
                 Vector3 positionAtRange = ray.direction * ActionRange + TerrainTest.PlayerGameObject.transform.position;
                 return new Vector3(positionAtRange.x, TerrainTest.Terrain.SampleHeight(positionAtRange), positionAtRange.z);
             }
-            if (hitInfo.collider.gameObject.tag == "Enclos")
-            {
-                Debug.Log(hitInfo.collider.gameObject);
-                return hitInfo.collider.gameObject.transform.position;
-            }
             else
             {
                 Vector3 positionAtRange = ray.direction * ActionRange + TerrainTest.PlayerGameObject.transform.position;

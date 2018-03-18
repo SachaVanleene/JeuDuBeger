@@ -22,7 +22,7 @@ namespace Assets.Script.Traps
 
         public override IEnumerator Activate(GameObject go)
         {
-            if (!IsInPreviewMode && go.tag == "Wolf")
+            if (!IsInPreviewMode && go.tag.Contains("Wolf"))
             {
                 GameObject boom = CFX_SpawnSystem.GetNextObject(ExplosionEffect);
                 boom.transform.position = gameObject.transform.position;

@@ -21,7 +21,7 @@ namespace Assets.Script.Traps
         public override IEnumerator Activate(GameObject go)
         {
             if (go.tag != "Terrain" && go.name != "Plane") j++;
-            if (go.tag == "Wolf")
+            if (go.tag.Contains("Wolf"))
             {
                 var rb = go.GetComponent<NavMeshAgent>();
                 if (Damages.Count > Level)
