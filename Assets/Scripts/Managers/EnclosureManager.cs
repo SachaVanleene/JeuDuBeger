@@ -79,7 +79,7 @@ public class EnclosureManager : MonoBehaviour
     public void TakeOffAllSheeps()
     {
         _gameManager.TotalSheeps = SheepNumberInTheWorld;
-        EnclosurePannel.transform.GetChild(1).GetComponent<Text>().text ="0";
+        EnclosurePannel.transform.GetChild(0).GetChild(0).GetComponent<Text>().text ="0";
         foreach (var enclosure in EnclosureList)
         {
             enclosure.RemoveAllSheeps();

@@ -38,7 +38,8 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.007346398, g: 0.00084035494, b: 0.0000031144064,
+    a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -592,7 +593,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &121787653
 RectTransform:
   m_ObjectHideFlags: 0
@@ -732,11 +733,11 @@ GameObject:
   - component: {fileID: 137626552}
   m_Layer: 5
   m_Name: PanelEnclos
-  m_TagString: EnclosurePannel
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &137626551
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6118,11 +6119,11 @@ GameObject:
   - component: {fileID: 490388955}
   m_Layer: 5
   m_Name: Enclos
-  m_TagString: Untagged
+  m_TagString: EnclosurePannel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &490388954
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6329,7 +6330,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &537688238
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6428,6 +6429,7 @@ MonoBehaviour:
   caseSpawn: {fileID: 110281970}
   curBullets: 3
   infiniteBullets: 1
+  killGo: {fileID: 1581862530}
 --- !u!114 &570099606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7019,7 +7021,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &692700179
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7679,7 +7681,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 10, y: -10}
+  m_AnchoredPosition: {x: 10, y: 0}
   m_SizeDelta: {x: 80, y: 40}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &890828334
@@ -13414,6 +13416,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1581862530 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1788538758244042, guid: a5984f13f3c383240b4012bf7f8a7e56,
+    type: 2}
+  m_PrefabInternal: {fileID: 211879575}
 --- !u!1 &1631032270
 GameObject:
   m_ObjectHideFlags: 0
@@ -14058,7 +14065,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 116}
+  m_AnchoredPosition: {x: 0, y: 80}
   m_SizeDelta: {x: 500, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1736998710
@@ -15330,7 +15337,6 @@ MonoBehaviour:
   TextRounds: {fileID: 1979505861}
   TextGolds: {fileID: 890828335}
   TextSheeps: {fileID: 658351307}
-  TextSuperSheeps: {fileID: 68452002}
   TextInfo: {fileID: 1732771766}
   CycleManagerObject: {fileID: 1228557512}
   Spawns: {fileID: 1896502963}
@@ -15420,7 +15426,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 5}
+  m_AnchoredPosition: {x: -10, y: 10}
   m_SizeDelta: {x: 100, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1979505860

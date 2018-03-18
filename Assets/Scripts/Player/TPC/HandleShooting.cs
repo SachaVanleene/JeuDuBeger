@@ -32,6 +32,7 @@ namespace TPC
         {
             states = GetComponent<StateManager>();
             timer = 1;
+            killGo.SetActive(false);
         }
 
         // Update is called once per frame

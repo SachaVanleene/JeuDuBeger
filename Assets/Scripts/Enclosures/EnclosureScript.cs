@@ -102,7 +102,7 @@ namespace Assets.Scripts.Enclosures
             {
                 if (!EnclosureManager.EnclosurePannel.activeSelf)
                 {
-                    EnclosureManager.EnclosurePannel.transform.GetChild(1).GetComponent<Text>().text =
+                    EnclosureManager.EnclosurePannel.transform.GetChild(0).GetChild(0).GetComponent<Text>().text =
                         SheepNumber.ToString();
                     EnclosureManager.EnclosurePannel.SetActive(true);
                     _isDisplayingPanel = true;
@@ -124,14 +124,14 @@ namespace Assets.Scripts.Enclosures
             if (Input.GetKeyDown(KeyCode.KeypadPlus))
             {
                 Health += 10;
-                EnclosureManager.EnclosurePannel.transform.GetChild(1).GetComponent<Text>().text =
+                EnclosureManager.EnclosurePannel.transform.GetChild(0).GetChild(0).GetComponent<Text>().text =
                     SheepNumber.ToString();
             }
             if (Input.GetKeyDown(KeyCode.KeypadMinus))
             {
                 if (Health != 0) _gameManager.TakeSheep();
                 Health -= 10;
-                EnclosureManager.EnclosurePannel.transform.GetChild(1).GetComponent<Text>().text =
+                EnclosureManager.EnclosurePannel.transform.GetChild(0).GetChild(0).GetComponent<Text>().text =
                     SheepNumber.ToString();
             }
             if (Input.GetKeyDown(KeyCode.KeypadMultiply))
