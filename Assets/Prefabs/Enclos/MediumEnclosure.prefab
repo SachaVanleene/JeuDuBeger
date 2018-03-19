@@ -2534,8 +2534,8 @@ MonoBehaviour:
     type: 2}
   SheepPrefab: {fileID: 1905427280360540, guid: 03d759f7c27ea9340875faa4e32b6ccc,
     type: 2}
-  pinkFence: {fileID: 2100000, guid: 8710bfe6de4185f4493a5cb024f4cd22, type: 2}
-  defaultFence: {fileID: 2100000, guid: 0fa5553006893f34ca47fd3ccfcb7b12, type: 2}
+  PinkFence: {fileID: 2100000, guid: 8710bfe6de4185f4493a5cb024f4cd22, type: 2}
+  DefaultFence: {fileID: 2100000, guid: b7fb79d2e21765d42b0593e82f60242d, type: 2}
   GoldReward: 1
   Distance: 0
 --- !u!114 &114369186881204210

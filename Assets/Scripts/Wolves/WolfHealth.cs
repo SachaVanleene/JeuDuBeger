@@ -40,8 +40,8 @@ public class WolfHealth : MonoBehaviour
             }
             anim.SetTrigger("dead");
             Destroy(gameObject, 2.5f);
+            Assets.Script.Managers.GameManager.instance.DeathWolf(this.gameObject);
         }
-
     }
 
     public void setHealth(int newHealth)

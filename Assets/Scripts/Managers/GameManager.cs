@@ -17,19 +17,20 @@ namespace Assets.Script.Managers
         public GameObject CycleManagerObject;
         public GameObject Spawns;
         public GameObject PanelBackToMenu;
-
-        private int _roundNumber = 0;
-        private EnclosureManager _enclosureManager;
-
-        private SoundManager soundManager;
-        private CycleManager cycleManager;
-        private bool cheatsActivated = false;
-        // player's inventory relativ
-        private int gold = 0;
-        public int TotalSheeps { get; set; }
+                
+        public int TotalSheeps { get; set; }    // player inventory relativ
         public int TotalSuperSheeps { get; set; }
         public bool IsTheSunAwakeAndTheBirdAreSinging { get; set; }
         public bool IsPaused { get; set; }
+
+        private EnclosureManager _enclosureManager;
+        private SoundManager soundManager;
+        private CycleManager cycleManager;
+        private int _roundNumber = 0;
+        private bool cheatsActivated = false;
+        private bool gameOver = false;
+        private int gold = 0;   // player inventory relativ
+
 
         private void Awake()
         {
@@ -40,7 +41,6 @@ namespace Assets.Script.Managers
             IsPaused = false;
             IsTheSunAwakeAndTheBirdAreSinging = true;
         }
-
 
         private void Start()
         {
@@ -61,6 +61,8 @@ namespace Assets.Script.Managers
 
         private void Update()
         {
+            if (gameOver)   // can't unpaused when game is over
+                return;
 
             if (Input.GetKeyUp(KeyCode.Escape))
             {
@@ -70,32 +72,46 @@ namespace Assets.Script.Managers
                     PauseGame();
                 return;
             }
+            if (IsPaused)   // can only unpaused from pause
+                return;
+            if (Input.GetKeyUp("n") && IsTheSunAwakeAndTheBirdAreSinging)
+            {
+                cycleManager.NextCycle(50f);
+            }
 
             if (Input.GetKey(KeyCode.Tab))
             {
                 displayInfo("cheats activés", 1);
-                callAchievement(AchievementEvent.cheat);
             }
             else
                 return;
 
             // cheats here
-            if (Input.GetKeyUp("n"))
-                cycleManager.NextCycle(50f);
+            if (Input.GetKeyUp("n") && !IsTheSunAwakeAndTheBirdAreSinging)
+            {
+                callAchievement(AchievementEvent.cheat);
+                while (Spawns.GetComponent<Spawn_wolf>().hasWolfAlive())
+                    this.DeathWolf();
+            }
             if (Input.GetKeyUp("e"))
             {
+                callAchievement(AchievementEvent.cheat);
                 earnGold(150);
             }
             if (Input.GetKeyUp("l"))
             {
+                callAchievement(AchievementEvent.cheat);
                 SpendGold(150);
             }
             if (Input.GetKeyUp("w"))
             {
+                callAchievement(AchievementEvent.cheat);
+                TextInfo.GetComponent<InfoTextScript>().Clear();
                 GameOver();
             }
             if (Input.GetKeyUp("m"))
             {
+                callAchievement(AchievementEvent.cheat);
                 TotalSuperSheeps++;
                 printNbSHeeps();
             }
@@ -103,6 +119,8 @@ namespace Assets.Script.Managers
 
         public void UnPauseGame()
         {
+            if (gameOver)
+                return;
             Cursor.visible = false;
             IsPaused = false;
             Time.timeScale = 1;
@@ -119,8 +137,9 @@ namespace Assets.Script.Managers
         public void GameOver()
         {
             callAchievement(AchievementEvent.lose);
-            Cursor.visible = true;
             IsPaused = true;
+            gameOver = true;
+            Cursor.visible = true;
             Time.timeScale = 0;
             PanelBackToMenu.SetActive(true);
             PanelBackToMenu.GetComponent<ScriptBackToMenuPanel>().Pause(gameOver : true);
@@ -130,25 +149,12 @@ namespace Assets.Script.Managers
             callAchievement(AchievementEvent.quit);
             SceneManager.LoadScene("MainMenu");
         }
-
         public void KillSheep()
         {
             callAchievement(AchievementEvent.sheepDeath);
             displayInfo("A sheep has been eaten", 2);
-            bool sheepsAlives = false;
-            foreach (var p in _enclosureManager.EnclosPrefabList)
-            {
-                if (p.SheepNumber <= 0)
-                    continue;
-                else
-                {
-                    sheepsAlives = true;
-                    break;
-                }
-            }
-            if (sheepsAlives)
+            if (EnclosureManager.NbSheeps() <= 0)
                 GameOver();
-
         }
         public void TakeSheep()
         {
@@ -165,7 +171,6 @@ namespace Assets.Script.Managers
             TotalSuperSheeps--;
             printNbSHeeps();
         }
-
         private void printNbSHeeps()
         {
             if (TotalSuperSheeps > 0)
@@ -173,7 +178,6 @@ namespace Assets.Script.Managers
             else
                 TextSheeps.text = TotalSheeps + " Sheeps in Inventory.";
         }
-
         private void getGoldsRound()
         {
             foreach (var p in _enclosureManager.EnclosPrefabList)
@@ -187,7 +191,6 @@ namespace Assets.Script.Managers
             }
             TextGolds.text = gold + " gold";
         }
-
         private void displayInfo(string msg, int duration)
         {
             TextInfo.GetComponent<InfoTextScript>().DisplayInfo(msg, duration);
@@ -196,10 +199,9 @@ namespace Assets.Script.Managers
         {
             Spawns.GetComponent<Spawn_wolf>().Cycle = ++_roundNumber;
             TextRounds.text = "ROUND " + _roundNumber;
-            displayInfo("Round " + _roundNumber + " begin \n Press n to pass directly to the night", 4);
+            displayInfo("Round " + _roundNumber + " begin \n Press n to pass directly to the night", 5);
             callAchievement(AchievementEvent.cycleEnd);
         }
-
         public void DayStart()
         {
             IsTheSunAwakeAndTheBirdAreSinging = true;
@@ -209,27 +211,22 @@ namespace Assets.Script.Managers
             soundManager.PlaySound("safe_place_to_rest", 1.5f);
             soundManager.PlaySound("bird", 0.2f);
 
-            //TODO: Enable traps placement, sheeps interactions, player control. Start day light.
             newRound();
             getGoldsRound();
             cycleManager.GoToAngle(180f/360f, 181); //  takes aprox 5min to end the day
         }
-
         public void NightStart()
         {
             IsTheSunAwakeAndTheBirdAreSinging = false;
             soundManager.PlayAmbuanceMusic("night_theme", .2f);
             soundManager.PlaySound("wolf", 0.2f);
             soundManager.PlaySound("dont_fuck_with_me", 1.5f);
-            //TODO: Disable traps placement, sheeps interactions. Start night light.
-
 
             Spawns.GetComponent<Spawn_wolf>().Begin_Night();
 
             _enclosureManager.DefaultFilling();
             cycleManager.GoToAngle(180f / 600f, 355); //  takes aprox 5min to end the night
         }
-
         public void WaitingAt(int goal, int angle)
         {
             TextRounds.text = "waiting at " + angle + ", while aiming " + goal;
@@ -261,9 +258,8 @@ namespace Assets.Script.Managers
         {
             callAchievement(AchievementEvent.wolfDeath);
             Spawns.GetComponent<Spawn_wolf>().WolfDeath(wolf);
-
             if (!Spawns.GetComponent<Spawn_wolf>().hasWolfAlive())
-                cycleManager.NextCycle(10f);
+                cycleManager.NextCycle(25f);
         }
         private void callAchievement(AchievementEvent achEvent, int step = 1)
         {

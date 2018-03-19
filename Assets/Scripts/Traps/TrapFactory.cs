@@ -38,7 +38,7 @@ namespace Assets.Scripts.Traps
         {
             RaycastHit hitInfo;
             Ray ray = Camera.main.ScreenPointToRay(new Vector2(Camera.main.pixelWidth / 2f, Camera.main.pixelHeight / 2f));
-            Physics.Raycast(ray, out hitInfo, Mathf.Infinity, LayerMask.GetMask("Shootable"));
+            Physics.Raycast(ray, out hitInfo, Mathf.Infinity, LayerMask.GetMask("Terrain"));
             float distance = Vector3.Distance(hitInfo.point, TerrainTest.PlayerGameObject.transform.position);
 
             if (distance <= ActionRange && hitInfo.point != Vector3.zero && hitInfo.collider.gameObject.tag != "Enclos")
@@ -49,11 +49,6 @@ namespace Assets.Scripts.Traps
             {
                 Vector3 positionAtRange = ray.direction * ActionRange + TerrainTest.PlayerGameObject.transform.position;
                 return new Vector3(positionAtRange.x, TerrainTest.Terrain.SampleHeight(positionAtRange), positionAtRange.z);
-            }
-            if (hitInfo.collider.gameObject.tag == "Enclos")
-            {
-                Debug.Log(hitInfo.collider.gameObject);
-                return hitInfo.collider.gameObject.transform.position;
             }
             else
             {
