@@ -31,7 +31,7 @@ public class MiniMap : MonoBehaviour
                     Mathf.InverseLerp(0, Terrain.activeTerrain.terrainData.size.z, enclosure.transform.position.z));
                 text = Instantiate(SheepNumberPrefab);
                 text.transform.parent = this.transform;
-                text.transform.localPosition = new Vector2(normalizedPos.x * 100 - 45, normalizedPos.y * 100 - 50);
+                text.transform.localPosition = new Vector2(normalizedPos.x * 100 - 50, normalizedPos.y * 100 - 50);
                 text.GetComponent<Text>().text = enclosure.SheepNumber.ToString();
                 _sheepNumberList.Add(text);
             }

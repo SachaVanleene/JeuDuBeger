@@ -16,11 +16,14 @@ public class EnclosureManager : MonoBehaviour
     public List<EnclosureScript> EnclosPrefabList;
     public GameObject House;
 
+
     public static EnclosureManager Instance = null;
     public static Vector3 HousePosition;
+
+    public GameObject enclosurePanel;
     public static GameObject EnclosurePannel;
-    public static int SheepNumberInTheWorld;
     public static MiniMap MiniMap;
+    public static int SheepNumberInTheWorld;
 
     public  static List<EnclosureScript> EnclosureList = new List<EnclosureScript>();
     private GameManager _gameManager;
@@ -34,13 +37,17 @@ public class EnclosureManager : MonoBehaviour
     }
 
     void Start () {
-        EnclosurePannel = GameObject.FindWithTag("EnclosurePannel");
-        EnclosurePannel.SetActive(false);
+        //EnclosurePannel = GameObject.FindWithTag("EnclosurePannel");
+        EnclosurePannel = enclosurePanel;
+        int i = 0;
+
+        if (EnclosurePannel.activeInHierarchy)
+            EnclosurePannel.SetActive(false);
 
         _gameManager = GameManager.instance;
 
         HousePosition = House.transform.position;
-        int i = 0;
+
 	    foreach (var enclosurePosition in EnclosurePositionList)
 	    {
 	        EnclosureScript enclosure;
@@ -105,5 +112,4 @@ public class EnclosureManager : MonoBehaviour
             enclosure.RemoveAllSheeps();
         }
     }
-
 }

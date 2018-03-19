@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 224281656201714130}
   - component: {fileID: 222862329008197390}
   - component: {fileID: 114304910185464016}
-  - component: {fileID: 114561851180077722}
+  - component: {fileID: 114694648618097096}
   m_Layer: 5
   m_Name: Map
   m_TagString: Untagged
@@ -56,7 +56,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114561851180077722
+--- !u!114 &114694648618097096
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -64,12 +64,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1536256416649600}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70477ca70a69e7c4fa7536dd23da8d09, type: 3}
+  m_Script: {fileID: 11500000, guid: 80ccc40d5f576864684ba9aa77615c3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   SheepNumberPrefab: {fileID: 114520939811366482, guid: 18423efd1e2d16942a733e980530d078,
     type: 2}
   EnclosureList: []
+  Farmer: {fileID: 114061601951511658, guid: 1a71a9addf7b835409b0a77beaf2cd3a, type: 2}
 --- !u!222 &222862329008197390
 CanvasRenderer:
   m_ObjectHideFlags: 1
