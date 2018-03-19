@@ -16,9 +16,13 @@ public class EnclosureManager : MonoBehaviour
     public List<EnclosureScript> EnclosPrefabList;
     public GameObject House;
 
+
     public static EnclosureManager Instance = null;
     public static Vector3 HousePosition;
+
+    public GameObject enclosurePanel;
     public static GameObject EnclosurePannel;
+
     public static int SheepNumberInTheWorld;
 
     public  static List<EnclosureScript> EnclosureList = new List<EnclosureScript>();
@@ -33,8 +37,11 @@ public class EnclosureManager : MonoBehaviour
     }
 
     void Start () {
-        EnclosurePannel = GameObject.FindWithTag("EnclosurePannel");
-        EnclosurePannel.SetActive(false);
+        //EnclosurePannel = GameObject.FindWithTag("EnclosurePannel");
+        EnclosurePannel = enclosurePanel;
+
+        if (EnclosurePannel.activeInHierarchy)
+            EnclosurePannel.SetActive(false);
 
         _gameManager = GameManager.instance;
 
