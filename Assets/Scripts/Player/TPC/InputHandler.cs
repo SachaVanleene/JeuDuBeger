@@ -90,7 +90,7 @@ namespace TPC
             states.shotLayerMask = shotLayerMask;
 
             camLayerMask = ~(1 << gameObject.layer | 
-                1 << LayerMask.NameToLayer("Default") |
+                1 << LayerMask.NameToLayer("Terrain") |
                 1 << LayerMask.NameToLayer("Wolf"));
 
             fenceCollision = false;
