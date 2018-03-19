@@ -22,7 +22,7 @@ public class EnclosureManager : MonoBehaviour
 
     public GameObject enclosurePanel;
     public static GameObject EnclosurePannel;
-
+    public static MiniMap MiniMap;
     public static int SheepNumberInTheWorld;
 
     public  static List<EnclosureScript> EnclosureList = new List<EnclosureScript>();
@@ -39,6 +39,7 @@ public class EnclosureManager : MonoBehaviour
     void Start () {
         //EnclosurePannel = GameObject.FindWithTag("EnclosurePannel");
         EnclosurePannel = enclosurePanel;
+        int i = 0;
 
         if (EnclosurePannel.activeInHierarchy)
             EnclosurePannel.SetActive(false);
@@ -71,6 +72,15 @@ public class EnclosureManager : MonoBehaviour
             EnclosureList.Add(enclosure);
         }
         EnclosureList = EnclosureList.OrderBy(o=>o.Distance).ToList();
+        foreach (var enclosure in EnclosureList)
+        {
+            Debug.Log(enclosure.Distance);
+            enclosure.Order = i;
+            i++;
+        }
+
+        MiniMap = FindObjectOfType<MiniMap>();
+        MiniMap.InstantiateText();
     }
     public void DefaultFilling()
     {
