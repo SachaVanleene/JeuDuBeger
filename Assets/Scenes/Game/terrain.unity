@@ -7909,7 +7909,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -13759,7 +13759,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   descriptionGO: {fileID: 2014528808}
-  gameOver: 0
   idleDelay: 0.5
   show: 0
 --- !u!1 &1136166347
@@ -17460,7 +17459,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1786576979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18115,8 +18114,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -25}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 0, y: -20}
+  m_SizeDelta: {x: 400, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1830725927
 MonoBehaviour:
@@ -18893,6 +18892,8 @@ MonoBehaviour:
   CycleManagerObject: {fileID: 1228557512}
   Spawns: {fileID: 1896502963}
   PanelBackToMenu: {fileID: 1786576978}
+  GameOverChart: {fileID: 1791846841}
+  gameOver: 0
 --- !u!4 &1958775833
 Transform:
   m_ObjectHideFlags: 0

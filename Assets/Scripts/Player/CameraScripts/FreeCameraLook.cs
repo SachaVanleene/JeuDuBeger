@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Assets.Script.Managers;
 
 namespace TPC
 {
@@ -62,10 +63,12 @@ namespace TPC
         // Update is called once per frame
         protected override void Update()
         {
-            base.Update();
+            if (!GameManager.instance.IsPaused)
+            {
+                base.Update();
 
-            HandleRotationMovement();
-
+                HandleRotationMovement();
+            }
         }
 
         protected override void Follow(float deltaTime)

@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
+using Assets.Script.Managers;
 
 public class ShowDescription : MonoBehaviour
 {
@@ -15,8 +16,6 @@ public class ShowDescription : MonoBehaviour
     PointerEventData m_PointerEventData;
     EventSystem m_EventSystem;
     List<RaycastResult> results;
-
-    public bool gameOver;
 
     public float idleDelay = .5f;
     float timer;
@@ -42,7 +41,7 @@ public class ShowDescription : MonoBehaviour
 
     void Update()
     {
-        if (gameOver)
+        if (GameManager.instance.gameOver)
         {
             if (Input.GetAxis("Mouse X") < 0.01 && Input.GetAxis("Mouse Y") < 0.01)
             {

@@ -17,6 +17,7 @@ namespace Assets.Script.Managers
         public GameObject CycleManagerObject;
         public GameObject Spawns;
         public GameObject PanelBackToMenu;
+        public GameObject GameOverChart;
                 
         public int TotalSheeps { get; set; }    // player inventory relativ
         public int TotalSuperSheeps { get; set; }
@@ -28,7 +29,8 @@ namespace Assets.Script.Managers
         private CycleManager cycleManager;
         private int _roundNumber = 0;
         private bool cheatsActivated = false;
-        private bool gameOver = false;
+        
+        public bool gameOver = false;
         private int gold = 0;   // player inventory relativ
 
 
@@ -103,7 +105,7 @@ namespace Assets.Script.Managers
                 callAchievement(AchievementEvent.cheat);
                 SpendGold(150);
             }
-            if (Input.GetKeyUp("w"))
+            if (Input.GetKeyUp("p"))
             {
                 callAchievement(AchievementEvent.cheat);
                 TextInfo.GetComponent<InfoTextScript>().Clear();
@@ -130,6 +132,7 @@ namespace Assets.Script.Managers
         {
             Cursor.visible = true;
             IsPaused = true;
+            
             Time.timeScale = 0;
             PanelBackToMenu.SetActive(true);
             PanelBackToMenu.GetComponent<ScriptBackToMenuPanel>().Pause();
@@ -142,6 +145,7 @@ namespace Assets.Script.Managers
             Cursor.visible = true;
             Time.timeScale = 0;
             PanelBackToMenu.SetActive(true);
+            GameOverChart.SetActive(true);
             PanelBackToMenu.GetComponent<ScriptBackToMenuPanel>().Pause(gameOver : true);
         }
         public void BackToMenu()
