@@ -18,9 +18,9 @@ namespace Assets.Scripts.Enclosures
         public GameObject SmokeEffect;
         public GameObject PinkSuperSheepPrefab;
         public GameObject SheepPrefab;
-        public Material pinkFence;
-        public Material defaultFence;
-        public int GoldReward = 1; // depend of the distance of the enclos
+        public Material PinkFence;
+        public Material DefaultFence;
+        public int GoldReward = GameVariables.EnclosureGold.close;
         public float Distance;
         public delegate void OnDead();
         public OnDead OnTriggerDead;
@@ -90,60 +90,57 @@ namespace Assets.Scripts.Enclosures
 
 
     void Update()
-        {
-            ShowPanel();
-        }
-
-        private void ShowPanel()
-        {
-            Vector3 distPlayertoEnclos = TerrainTest.PlayerGameObject.transform.position - transform.position;
-
-            if (distPlayertoEnclos.magnitude < 25 && _gameManager.IsTheSunAwakeAndTheBirdAreSinging && !_gameManager.IsPaused)
-            {
-                if (!EnclosureManager.EnclosurePannel.activeSelf)
-                {
-                    EnclosureManager.EnclosurePannel.transform.GetChild(0).GetChild(0).GetComponent<Text>().text =
-                        SheepNumber.ToString();
-                    EnclosureManager.EnclosurePannel.SetActive(true);
-                    _isDisplayingPanel = true;
-                }
-                HandleInputs();
-            }
-            else
-            {
-                if (EnclosureManager.EnclosurePannel.activeSelf && _isDisplayingPanel)
-                {
-                    _isDisplayingPanel = false;
-                    EnclosureManager.EnclosurePannel.SetActive(false);
-                }
-            }
-        }
-        private void HandleInputs()
-        {
-
-            if (Input.GetKeyDown(KeyCode.KeypadPlus))
-            {
-                Health += 10;
-                EnclosureManager.EnclosurePannel.transform.GetChild(0).GetChild(0).GetComponent<Text>().text =
-                    SheepNumber.ToString();
-            }
-            if (Input.GetKeyDown(KeyCode.KeypadMinus))
-            {
-                if (Health != 0) _gameManager.TakeSheep();
-                Health -= 10;
-                EnclosureManager.EnclosurePannel.transform.GetChild(0).GetChild(0).GetComponent<Text>().text =
-                    SheepNumber.ToString();
-            }
-            if (Input.GetKeyDown(KeyCode.KeypadMultiply))
-            {
-                if (_superSheeps.Count < 1 && _gameManager.TotalSuperSheeps >= 1)
-                {
-                    AddPinkSuperSheep();
-                }
-            }
-
+    {
+        ShowPanel();
     }
 
+    private void ShowPanel()
+    {
+        Vector3 distPlayertoEnclos = TerrainTest.PlayerGameObject.transform.position - transform.position;
+
+        if (distPlayertoEnclos.magnitude < 25 && _gameManager.IsTheSunAwakeAndTheBirdAreSinging && !_gameManager.IsPaused)
+        {
+            if (!EnclosureManager.EnclosurePannel.activeSelf)
+            {
+                EnclosureManager.EnclosurePannel.transform.GetChild(0).GetChild(0).GetComponent<Text>().text =
+                    SheepNumber.ToString();
+                EnclosureManager.EnclosurePannel.SetActive(true);
+                _isDisplayingPanel = true;
+            }
+            HandleInputs();
+        }
+        else
+        {
+            if (EnclosureManager.EnclosurePannel.activeSelf && _isDisplayingPanel)
+            {
+                _isDisplayingPanel = false;
+                EnclosureManager.EnclosurePannel.SetActive(false);
+            }
+        }
+    }
+    private void HandleInputs()
+    {
+        if (Input.GetKeyDown(KeyCode.KeypadPlus))
+        {
+            Health += 10;
+            EnclosureManager.EnclosurePannel.transform.GetChild(0).GetChild(0).GetComponent<Text>().text =
+                SheepNumber.ToString();
+        }
+        if (Input.GetKeyDown(KeyCode.KeypadMinus))
+        {
+            if (Health != 0) _gameManager.TakeSheep();
+            Health -= 10;
+            EnclosureManager.EnclosurePannel.transform.GetChild(0).GetChild(0).GetComponent<Text>().text =
+                SheepNumber.ToString();
+        }
+        if (Input.GetKeyDown(KeyCode.KeypadMultiply))
+        {
+            if (_superSheeps.Count < 1 && _gameManager.TotalSuperSheeps >= 1)
+            {
+                AddPinkSuperSheep();
+            }
+        }
+    }
     public void DamageEnclos(float degats)
         {
             Health -= degats;
@@ -155,8 +152,6 @@ namespace Assets.Scripts.Enclosures
                 }
             }
         }
-
-
         public void AddSheep()
         {
             if (_gameManager.TotalSheeps <= 0)
@@ -170,7 +165,6 @@ namespace Assets.Scripts.Enclosures
             }
             _gameManager.PlaceSheep();
         }
-
         public void RemovePinkSuperSheep()
         {
             var SuperSheep = _superSheeps[_superSheeps.Count - 1];
@@ -184,14 +178,13 @@ namespace Assets.Scripts.Enclosures
                 if (child.tag == "Fences")
                 {
                     Renderer r = child.GetComponent<Renderer>();
-                    r.material = defaultFence;
+                    r.material = DefaultFence;
                 }
             }
         }
 
         public void AddPinkSuperSheep()
         {
-
             var SuperSheep = Instantiate(PinkSuperSheepPrefab, this.transform); //crée un clone mouton
             SuperSheep.transform.position = this.transform.position; //le place dans l'enclos
             SuperSheep.transform.Rotate(0, Random.Range(0, 360), 0);
@@ -205,7 +198,7 @@ namespace Assets.Scripts.Enclosures
                 if (child.tag == "Fences")
                 {
                     Renderer r = child.GetComponent<Renderer>();
-                    r.material = pinkFence;
+                    r.material = PinkFence;
                 }
             }
         }
@@ -219,6 +212,9 @@ namespace Assets.Scripts.Enclosures
                 boom.transform.position = sheepClone.transform.position;
                 _sheeps.Remove(sheepClone);
                 Destroy(sheepClone);
+                // only call it if the sheep has been killed by a wolf, not removed from panel
+                if(!_gameManager.IsTheSunAwakeAndTheBirdAreSinging)   
+                    _gameManager.KillSheep();
             }
         }
         public void RemoveAllSheeps()

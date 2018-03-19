@@ -13,6 +13,11 @@ public class InfoTextScript : MonoBehaviour
         text = gameObject.GetComponent<Text>();
         text.text = "";
     }
+    public void Clear()
+    {
+        StopAllCoroutines();
+        text.text = "";
+    }
     public void DisplayInfo(string msg, int duration)
     {
         text.text = msg;

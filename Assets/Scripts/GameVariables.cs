@@ -173,11 +173,11 @@
 
     public static class EnclosureGold
     {
-        public static readonly int[] close = { };
+        public static readonly int close = 1;
 
-        public static readonly int[] medium = { };
+        public static readonly int medium = 2;
 
-        public static readonly int[] far = { };
+        public static readonly int far = 3;
     }
 
     //Wolf multiplier 
