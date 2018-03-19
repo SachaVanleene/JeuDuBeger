@@ -20,6 +20,7 @@ public class EnclosureManager : MonoBehaviour
     public static Vector3 HousePosition;
     public static GameObject EnclosurePannel;
     public static int SheepNumberInTheWorld;
+    public static MiniMap MiniMap;
 
     public  static List<EnclosureScript> EnclosureList = new List<EnclosureScript>();
     private GameManager _gameManager;
@@ -39,7 +40,7 @@ public class EnclosureManager : MonoBehaviour
         _gameManager = GameManager.instance;
 
         HousePosition = House.transform.position;
-
+        int i = 0;
 	    foreach (var enclosurePosition in EnclosurePositionList)
 	    {
 	        EnclosureScript enclosure;
@@ -64,6 +65,15 @@ public class EnclosureManager : MonoBehaviour
             EnclosureList.Add(enclosure);
         }
         EnclosureList = EnclosureList.OrderBy(o=>o.Distance).ToList();
+        foreach (var enclosure in EnclosureList)
+        {
+            Debug.Log(enclosure.Distance);
+            enclosure.Order = i;
+            i++;
+        }
+
+        MiniMap = FindObjectOfType<MiniMap>();
+        MiniMap.InstantiateText();
     }
     public void DefaultFilling()
     {
@@ -95,4 +105,5 @@ public class EnclosureManager : MonoBehaviour
             enclosure.RemoveAllSheeps();
         }
     }
+
 }

@@ -24,7 +24,7 @@ namespace Assets.Scripts.Enclosures
         public float Distance;
         public delegate void OnDead();
         public OnDead OnTriggerDead;
-
+        public int Order;
 
         private bool _isDisplayingPanel = false;
         private GameManager _gameManager;
@@ -152,56 +152,57 @@ namespace Assets.Scripts.Enclosures
                 }
             }
         }
-        public void AddSheep()
+    public void AddSheep()
+    {
+        if (_gameManager.TotalSheeps <= 0)
+            return;
+        if (SheepNumber < 10)
         {
-            if (_gameManager.TotalSheeps <= 0)
-                return;
-            if (SheepNumber < 10)
-            {
-                var sheep = Instantiate(SheepPrefab, this.transform); //crée un clone mouton
-                sheep.transform.position = this.transform.position; //le place dans l'enclos
-                sheep.transform.Rotate(0, Random.Range(0, 360), 0); //l'oriente d'une façon aléatoire
-                _sheeps.Add(sheep);
+            var sheep = Instantiate(SheepPrefab, this.transform); //crée un clone mouton
+            sheep.transform.position = this.transform.position; //le place dans l'enclos
+            sheep.transform.Rotate(0, Random.Range(0, 360), 0); //l'oriente d'une façon aléatoire
+            _sheeps.Add(sheep);
+            EnclosureManager.MiniMap.UpdateEnclosure(Order);
             }
             _gameManager.PlaceSheep();
-        }
-        public void RemovePinkSuperSheep()
-        {
-            var SuperSheep = _superSheeps[_superSheeps.Count - 1];
-            GameObject boom = CFX_SpawnSystem.GetNextObject(SmokeEffect);
-            boom.transform.position = SuperSheep.transform.position;
-            Destroy(SuperSheep);
-            _superSheeps.Remove(SuperSheep);
+    }
+    public void RemovePinkSuperSheep()
+    {
+        var SuperSheep = _superSheeps[_superSheeps.Count - 1];
+        GameObject boom = CFX_SpawnSystem.GetNextObject(SmokeEffect);
+        boom.transform.position = SuperSheep.transform.position;
+        Destroy(SuperSheep);
+        _superSheeps.Remove(SuperSheep);
 
-            foreach (Transform child in transform)
+        foreach (Transform child in transform)
+        {
+            if (child.tag == "Fences")
             {
-                if (child.tag == "Fences")
-                {
-                    Renderer r = child.GetComponent<Renderer>();
-                    r.material = DefaultFence;
-                }
+                Renderer r = child.GetComponent<Renderer>();
+                r.material = DefaultFence;
             }
         }
+    }
 
-        public void AddPinkSuperSheep()
-        {
-            var SuperSheep = Instantiate(PinkSuperSheepPrefab, this.transform); //crée un clone mouton
-            SuperSheep.transform.position = this.transform.position; //le place dans l'enclos
-            SuperSheep.transform.Rotate(0, Random.Range(0, 360), 0);
+    public void AddPinkSuperSheep()
+    {
+        var SuperSheep = Instantiate(PinkSuperSheepPrefab, this.transform); //crée un clone mouton
+        SuperSheep.transform.position = this.transform.position; //le place dans l'enclos
+        SuperSheep.transform.Rotate(0, Random.Range(0, 360), 0);
 
-            _superSheeps.Add(SuperSheep);
+        _superSheeps.Add(SuperSheep);
             
-            _gameManager.PlaceSuperSheep();
+        _gameManager.PlaceSuperSheep();
 
-            foreach (Transform child in transform)
+        foreach (Transform child in transform)
+        {
+            if (child.tag == "Fences")
             {
-                if (child.tag == "Fences")
-                {
-                    Renderer r = child.GetComponent<Renderer>();
-                    r.material = PinkFence;
-                }
+                Renderer r = child.GetComponent<Renderer>();
+                r.material = PinkFence;
             }
         }
+    }
 
     public void KillSheep()
         {
@@ -212,45 +213,46 @@ namespace Assets.Scripts.Enclosures
                 boom.transform.position = sheepClone.transform.position;
                 _sheeps.Remove(sheepClone);
                 Destroy(sheepClone);
+                EnclosureManager.MiniMap.UpdateEnclosure(Order);
                 // only call it if the sheep has been killed by a wolf, not removed from panel
-                if(!_gameManager.IsTheSunAwakeAndTheBirdAreSinging)   
+                if (!_gameManager.IsTheSunAwakeAndTheBirdAreSinging)   
                     _gameManager.KillSheep();
             }
         }
-        public void RemoveAllSheeps()
+    public void RemoveAllSheeps()
+    {
+        _gameManager.TotalSheeps += _sheeps.Count;
+        Health = 0;
+        if (_superSheeps.Count > 0)
+            RemovePinkSuperSheep();
+    }
+    public void DamageEnclos(int degats)
+    {
+        // takes no damage if protected by a super sheep
+        if (_superSheeps.Count > 0)
+            return;
+        Health -= degats;
+        if (Health == 0)
         {
-            _gameManager.TotalSheeps += _sheeps.Count;
-            Health = 0;
-            if (_superSheeps.Count > 0)
-                RemovePinkSuperSheep();
-        }
-        public void DamageEnclos(int degats)
-        {
-            // takes no damage if protected by a super sheep
-            if (_superSheeps.Count > 0)
-                return;
-            Health -= degats;
-            if (Health == 0)
-            {
-                Health = 0; //santé min
-                Debug.Log("Enclos Mort");
-                OnTriggerDead.Invoke();
-                OnTriggerDead = null; //On reset le delegate
-            }
-
+            Health = 0; //santé min
+            Debug.Log("Enclos Mort");
+            OnTriggerDead.Invoke();
+            OnTriggerDead = null; //On reset le delegate
         }
 
-        public void AddSubscriber(OnDead function)
+    }
+
+    public void AddSubscriber(OnDead function)
+    {
+        OnTriggerDead += function;
+    }
+    public void RemoveSubscriber(OnDead function)
+    {
+        if (function != null)
         {
-            OnTriggerDead += function;
+            OnTriggerDead -= function;
         }
-        public void RemoveSubscriber(OnDead function)
-        {
-            if (function != null)
-            {
-                OnTriggerDead -= function;
-            }
-        }
+    }
 
     }
 }
