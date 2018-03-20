@@ -43,6 +43,7 @@ namespace Assets.Script.Managers
                 {
                     audioS.loop = true;
                     audioS.clip = clip;
+                    audioS.volume = intensity;
                     audioS.Play();
                     break;
                 }

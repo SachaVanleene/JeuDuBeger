@@ -218,4 +218,26 @@
     {
 
     }
+    public static class Sheep
+    {
+        //public static readonly float flyDuration = 20f;
+        public static readonly float flySpeed = 1f;
+        public static readonly float walkSpeed = 20f;
+        public static readonly float distMaxSound = 15f;
+        public static readonly float distMinSound = 5f;
+        public static readonly float volumeSound = .05f;
+        public static readonly float volumeSoundDeath = .15f;
+        public static readonly float volumeMusicSky = 1f;
+        public static readonly string stringSheepSound = "sheepSound";
+        public static readonly string stringSheepSoundDeath = "SheepDeath"; 
+    }
+    public static class Cycle
+    {
+        public static readonly float dayDuration = 300f;
+        public static readonly float nightDuration = 300f;
+        public static readonly float volumeThemes = .2f;
+        public static readonly float volumeEffects = .1f;
+        public static readonly float volumeVoice = .8f;
+        public static readonly float passedCycleSpeed = 50f;
+    }
 }

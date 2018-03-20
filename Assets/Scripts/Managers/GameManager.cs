@@ -78,7 +78,9 @@ namespace Assets.Script.Managers
                 return;
             if (Input.GetKeyUp("n") && IsTheSunAwakeAndTheBirdAreSinging)
             {
-                cycleManager.NextCycle(50f);
+                cycleManager.NextCycle(GameVariables.Cycle.passedCycleSpeed);
+                // destroy flying sheeps
+                _enclosureManager.TakeOffAllSheeps();
             }
 
             if (Input.GetKey(KeyCode.Tab))
@@ -209,27 +211,27 @@ namespace Assets.Script.Managers
         public void DayStart()
         {
             IsTheSunAwakeAndTheBirdAreSinging = true;
-           if(_roundNumber != 0) _enclosureManager.TakeOffAllSheeps();
+           //if(_roundNumber != 0) _enclosureManager.SheepsToTheSky();
             printNbSHeeps();
-            soundManager.PlayAmbuanceMusic("day_theme", 0.2f);
-            soundManager.PlaySound("safe_place_to_rest", 1.5f);
-            soundManager.PlaySound("bird", 0.2f);
+            soundManager.PlayAmbuanceMusic("day_theme", GameVariables.Cycle.volumeThemes);
+            soundManager.PlaySound("safe_place_to_rest", GameVariables.Cycle.volumeVoice);
+            soundManager.PlaySound("bird", GameVariables.Cycle.volumeEffects);
 
             newRound();
             getGoldsRound();
-            cycleManager.GoToAngle(180f/360f, 181); //  takes aprox 5min to end the day
+            cycleManager.GoToAngle(180f/GameVariables.Cycle.dayDuration, 181); //  takes aprox 5min to end the day
         }
         public void NightStart()
         {
             IsTheSunAwakeAndTheBirdAreSinging = false;
-            soundManager.PlayAmbuanceMusic("night_theme", .2f);
-            soundManager.PlaySound("wolf", 0.2f);
-            soundManager.PlaySound("dont_fuck_with_me", 1.5f);
+            soundManager.PlayAmbuanceMusic("night_theme", GameVariables.Cycle.volumeThemes);
+            soundManager.PlaySound("dont_fuck_with_me", GameVariables.Cycle.volumeVoice);
+            soundManager.PlaySound("wolf", GameVariables.Cycle.volumeEffects);
 
             Spawns.GetComponent<Spawn_wolf>().Begin_Night();
 
             _enclosureManager.DefaultFilling();
-            cycleManager.GoToAngle(180f / 600f, 355); //  takes aprox 5min to end the night
+            cycleManager.GoToAngle(180f / GameVariables.Cycle.nightDuration, 355); //  takes aprox 5min to end the night
         }
         public void WaitingAt(int goal, int angle)
         {
@@ -263,7 +265,10 @@ namespace Assets.Script.Managers
             callAchievement(AchievementEvent.wolfDeath);
             Spawns.GetComponent<Spawn_wolf>().WolfDeath(wolf);
             if (!Spawns.GetComponent<Spawn_wolf>().hasWolfAlive())
-                cycleManager.NextCycle(25f);
+            {
+                _enclosureManager.SheepsToTheSky();
+                cycleManager.NextCycle(GameVariables.Cycle.passedCycleSpeed);
+            }
         }
         private void callAchievement(AchievementEvent achEvent, int step = 1)
         {

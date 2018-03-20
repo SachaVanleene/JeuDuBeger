@@ -31,7 +31,7 @@ public class AchievementsManager {
     {
         if (!listeners.ContainsKey(eventAchievement))
         {
-            Debug.LogError("Trying to call a not existing achievement : "
+            Debug.LogError("No achievement is listening to this event : "
                 + eventAchievement);
             return;
         }
