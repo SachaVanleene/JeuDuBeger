@@ -222,7 +222,7 @@
     {
         //public static readonly float flyDuration = 20f;
         public static readonly float flySpeed = 1f;
-        public static readonly float walkSpeed = 20f;
+        public static readonly float walkSpeed = 2f;
         public static readonly float distMaxSound = 15f;
         public static readonly float distMinSound = 5f;
         public static readonly float volumeSound = .05f;

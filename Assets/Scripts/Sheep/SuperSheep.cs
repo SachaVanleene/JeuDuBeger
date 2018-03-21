@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using Assets.Script.Managers;
 using Assets.Script;
 //using Assets.Scripts.Enclosures;
-
+[System.Obsolete]
 public class SuperSheep : MonoBehaviour
 {
     public GameObject PinkSuperSheepPrefab;

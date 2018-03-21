@@ -31,13 +31,18 @@ public class AchievementsManager {
     {
         if (!listeners.ContainsKey(eventAchievement))
         {
-            Debug.LogError("No achievement is listening to this event : "
+            Debug.LogWarning("No achievement is listening (anymore ?) to this event : "
                 + eventAchievement);
             return;
         }
         Completion[eventAchievement] += step;
+        List<AchievementInfo> unsubscribers = new List<AchievementInfo>();
         foreach (var l in listeners[eventAchievement])
-            l.EventNotification(eventAchievement);
+            if(l.EventNotification(eventAchievement))
+                unsubscribers.Add(l);
+
+        foreach (var achInfo in unsubscribers)
+            this.Unsubscribe(eventAchievement, achInfo);
     }
 
     public void Subscribe(AchievementEvent listen, AchievementInfo ach)

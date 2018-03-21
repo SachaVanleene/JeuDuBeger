@@ -29,6 +29,11 @@ namespace Assets.Scripts.Enclosures
         // for the flying sheeps
         private List<GameObject> _flyingSheeps = null; 
 
+        public int getNbSheepFlying()
+        {   // used to know how many sheeps are to be sold
+            return (_flyingSheeps != null)? _flyingSheeps.Count : 0;
+        }
+
         public int SheepNumber
         {
             get { return _sheeps.Count; }

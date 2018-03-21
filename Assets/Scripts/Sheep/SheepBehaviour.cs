@@ -9,16 +9,18 @@ public class SheepBehaviour : MonoBehaviour {
     public List<AudioClip> Clips;
 
     private AudioPlayer audioPlayer;
-    private Vector3 direction = new Vector3(0, 0, 0.1f);
+    private Vector3 direction = new Vector3(0, 0, 1);
     private bool fly = false;
     private GameObject godHaseInstance;
+    private Vector3 startPosition;
 
     private void Start()
     {
+        startPosition = transform.position;
         audioPlayer = gameObject.AddComponent(typeof(AudioPlayer)) as AudioPlayer;
         audioPlayer.Clips = this.Clips;
 
-        StartCoroutine(BeehSound(Random.Range(10, 30)));
+        StartCoroutine(BeehSound(Random.Range(10, 100)));
     }
 
     void Update()
@@ -87,19 +89,21 @@ public class SheepBehaviour : MonoBehaviour {
         }
         transform.rotation = new Quaternion(0,0,0,0);
         direction = new Vector3(0, 1, 0);
-        this.GetComponent<Rigidbody>().useGravity = false;
         godHaseInstance = Instantiate(GodHaseObject, gameObject.transform);
         StopAllCoroutines();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider collider)
     {
         if (fly)
             return;
-        if (other.gameObject.CompareTag("Fences") || other.gameObject.CompareTag("Sheep"))
+        if (collider.gameObject.CompareTag("Fences"))
         {
-            transform.Rotate(0, 180, 0);
-            transform.Translate(direction.x + 0.5f, direction.y, direction.z); //poussé pour éviter problème quand collé à la barrière
+            transform.LookAt(startPosition);
+        }
+        else if(collider.gameObject.CompareTag("Sheep"))
+        {
+            transform.Rotate(0, Random.Range(110, 250), 0);
         }
     }
 }

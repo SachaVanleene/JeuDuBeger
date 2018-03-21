@@ -26,12 +26,11 @@ public class AchievementInfo {
         }
         manager.AddAchievement(this);
     }
-    public void EventNotification(AchievementEvent ev)
-    {
-        if(manager.Completion[ev] >= Aim[ev])
-        {
-            manager.Unsubscribe(ev, this);
-        }
+    public bool EventNotification(AchievementEvent ev)
+    {   // return value indicate if the achievement must unsubscrib from the event
+        if (manager.Completion[ev] >= Aim[ev])
+            return true;
+        return false;
     }
     public bool IsComplete()
     {

@@ -1973,6 +1973,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bf8626bc3b4a3f459f83a9aa1b3253a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SmokeEffect: {fileID: 1754427788705408, guid: c88fb292d4cca9c44bc9eb6e9c8db57c,
+    type: 2}
+  GodHaseObject: {fileID: 1741378729559984, guid: 903abb238691ab644ab2d60743a32289,
+    type: 2}
+  Clips: []
 --- !u!137 &137517424835469928
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

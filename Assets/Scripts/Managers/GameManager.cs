@@ -186,12 +186,14 @@ namespace Assets.Script.Managers
         }
         private void getGoldsRound()
         {
-            foreach (var p in _enclosureManager.EnclosPrefabList)
+            foreach (var p in EnclosureManager.EnclosureList)
             {
-                if (p.SheepNumber <= 0)
+                int nb = p.getNbSheepFlying();
+                if (nb <=  0)
                     continue;
-                int toBeAdded = Mathf.RoundToInt(p.SheepNumber - (2 * Mathf.Log(p.SheepNumber)) * p.SheepNumber);
-                if (toBeAdded != (int)(p.SheepNumber - (2 * Mathf.Log(p.SheepNumber)) * p.GoldReward)) //  round up
+
+                int toBeAdded = Mathf.RoundToInt((nb - (2 * Mathf.Log(nb))) * p.GoldReward);
+                if (toBeAdded != (int)((nb - (2 * Mathf.Log(nb))) * p.GoldReward)) //  round up
                     toBeAdded++;
                 earnGold(toBeAdded);
             }
@@ -211,7 +213,6 @@ namespace Assets.Script.Managers
         public void DayStart()
         {
             IsTheSunAwakeAndTheBirdAreSinging = true;
-           //if(_roundNumber != 0) _enclosureManager.SheepsToTheSky();
             printNbSHeeps();
             soundManager.PlayAmbuanceMusic("day_theme", GameVariables.Cycle.volumeThemes);
             soundManager.PlaySound("safe_place_to_rest", GameVariables.Cycle.volumeVoice);
