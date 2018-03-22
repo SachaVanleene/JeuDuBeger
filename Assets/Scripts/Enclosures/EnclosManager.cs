@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Obsolete("Use EnclosureScript instead")]
 public class EnclosManager : MonoBehaviour {
 
     public GameObject sheep, enclos, panelEnclos;

@@ -658,7 +658,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1789482880989420}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 303, y: 15.5, z: 246}
+  m_LocalPosition: {x: 307.5, y: 15.125427, z: 240.20291}
   m_LocalScale: {x: 20, y: 20, z: 20}
   m_Children:
   - {fileID: 4599294185113532}
@@ -2533,7 +2533,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
 --- !u!114 &114010173616349544
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1789482880989420}
@@ -2724,8 +2724,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33785a562ee1d454898fb54cf9ca7ad5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SmokeEffect: {fileID: 1754427788705408, guid: c88fb292d4cca9c44bc9eb6e9c8db57c,
-    type: 2}
+  Clips:
+  - {fileID: 8300000, guid: 1d8368d17235db642990e01ab8ab00f9, type: 3}
   PinkSuperSheepPrefab: {fileID: 1246015367775400, guid: 68aa04091c5b0664ea9635844819aa4e,
     type: 2}
   SheepPrefab: {fileID: 1905427280360540, guid: 03d759f7c27ea9340875faa4e32b6ccc,
@@ -2734,6 +2734,7 @@ MonoBehaviour:
   DefaultFence: {fileID: 2100000, guid: b7fb79d2e21765d42b0593e82f60242d, type: 2}
   GoldReward: 1
   Distance: 0
+  Order: 0
 --- !u!114 &114741667002121752
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -74,7 +74,6 @@ public class EnclosureManager : MonoBehaviour
         EnclosureList = EnclosureList.OrderBy(o=>o.Distance).ToList();
         foreach (var enclosure in EnclosureList)
         {
-            Debug.Log(enclosure.Distance);
             enclosure.Order = i;
             i++;
         }
@@ -105,11 +104,18 @@ public class EnclosureManager : MonoBehaviour
     }
     public void TakeOffAllSheeps()
     {
-        _gameManager.TotalSheeps = SheepNumberInTheWorld;
-        EnclosurePannel.transform.GetChild(0).GetChild(0).GetComponent<Text>().text ="0";
         foreach (var enclosure in EnclosureList)
         {
             enclosure.RemoveAllSheeps();
+        }
+    }
+    public void SheepsToTheSky()
+    {
+        _gameManager.TotalSheeps = SheepNumberInTheWorld;
+        EnclosurePannel.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = "0";
+        foreach (var enclosure in EnclosureList)
+        {
+            enclosure.MakeSheepsFly();
         }
     }
 }

@@ -36,7 +36,7 @@ public class MiniMap : MonoBehaviour
                 _sheepNumberList.Add(text);
             }
         }
-        Debug.Log(_sheepNumberList);
+        //Debug.Log(_sheepNumberList);
     }
 	public void UpdateEnclosure(int enclosureOrder)
 	{
