@@ -11,23 +11,26 @@ public class UiManager : MonoBehaviour
 		
 	}
 	
-	void Update () {
-	   if (TrapFactory.ClosestTrap != null)
-	    {
-	        transform.GetChild(0).gameObject.SetActive(true);
-	        Vector3 textPosition =
-	        Camera.WorldToScreenPoint(TrapFactory.ClosestTrap.transform.parent.position + new Vector3(0, 2, 0));
-	        transform.GetChild(0).position = textPosition;
-	        transform.GetChild(0).GetComponent<Text>().text = "Level : " + TrapFactory.ClosestTrap.Level +
-	                                                          "\n Durability : " + TrapFactory.ClosestTrap.Durability + "/" + TrapFactory.ClosestTrap.DurabilityMax;
-	        foreach (var rend in TrapFactory.ClosestTrap.transform.parent.GetComponentsInChildren<Renderer>())
-	        {
-	            rend.material.color = Color.white;
-	        }
-        }
-	    else
-	    {
-	        transform.GetChild(0).gameObject.SetActive(false);
-        }
+	void Update ()
+	{
+	    if (TrapFactory.ClosestTrap == null) return;
+	    AdjustPosition();
     }
+
+    public void AdjustPosition()
+    {
+        int levelIndex;
+        Vector3 textPosition =
+            Camera.main.WorldToScreenPoint(TrapFactory.ClosestTrap.transform.parent.position + new Vector3(3, 0.5f, 0));
+        if (TrapFactory.ClosestTrap.Level < 3)
+            levelIndex = TrapFactory.ClosestTrap.Level - 1;
+        else
+            levelIndex = 1;
+
+        GetComponentsInChildren<Text>()[0].text = TrapFactory.ClosestTrap.UpgradeCosts[levelIndex] + " ";
+        GetComponentsInChildren<Text>()[1].text = TrapFactory.ClosestTrap.Durability + "/" + TrapFactory.ClosestTrap.DurabilityMax;
+
+        transform.position = textPosition;
+    }
+
 }

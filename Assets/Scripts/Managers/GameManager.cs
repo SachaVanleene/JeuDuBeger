@@ -250,7 +250,10 @@ namespace Assets.Script.Managers
         public bool SpendGold(int value)
         { //  allow the player to purchase
             if (value > gold)
+            {
+                displayInfo("Not enough gold",1);
                 return false;
+            }
             gold -= value;
             TextGolds.text = gold + " gold";
 

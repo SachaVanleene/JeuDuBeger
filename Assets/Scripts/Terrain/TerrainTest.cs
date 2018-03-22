@@ -17,11 +17,12 @@ namespace Assets.Script
         public static GameObject PlayerGameObject;
         public static GameObject MainCanvasGameObject;
         private GameManager _gameManager;
-
+        public static UiManager TrapLevelUpPannel;
 
 
         public void Start()
         {
+            TrapLevelUpPannel = FindObjectOfType<UiManager>();
             PlayerGameObject = GameObject.FindWithTag("Player");
             _gameManager = GameManager.instance;
             MainCanvasGameObject = GameObject.FindWithTag("MainCanvas");
@@ -58,28 +59,29 @@ namespace Assets.Script
             {
                 TrapFactory.IsInTrapCreationMode = false;
                 ActualSelectedTrapTypes = TrapTypes.None;
-                Destroy(TrapFactory.ActualTrap);
+                Destroy(TrapFactory.ActualTrap.TrapPrefab);
             }
             if (TrapFactory.IsInTrapCreationMode)
             {
                 if (TrapFactory.SelectedTrapType != ActualSelectedTrapTypes)
                 {
-                    Destroy(TrapFactory.ActualTrap);
+                    if(TrapFactory.ActualTrap != null)
+                        Destroy(TrapFactory.ActualTrap.TrapPrefab);
                     CreateTrapPrevu();
                     ActualSelectedTrapTypes = TrapFactory.SelectedTrapType;
                 }
                 Vector3 mousePosition = TrapFactory.GetMousePosition();
                 var normalizedPos = new Vector2(Mathf.InverseLerp(0f, Terrain.terrainData.size.x, mousePosition.x),
                     Mathf.InverseLerp(0, Terrain.terrainData.size.z, mousePosition.z));
-                TrapFactory.ActualTrap.transform.rotation = Quaternion.LookRotation(Terrain.terrainData.GetInterpolatedNormal(normalizedPos.x, normalizedPos.y), Terrain.terrainData.GetInterpolatedNormal(normalizedPos.x, normalizedPos.y));
-                TrapFactory.ActualTrap.transform.position = mousePosition;
-                if (Input.GetMouseButtonDown(0))
+                TrapFactory.ActualTrap.TrapPrefab.transform.rotation = Quaternion.LookRotation(Terrain.terrainData.GetInterpolatedNormal(normalizedPos.x, normalizedPos.y), Terrain.terrainData.GetInterpolatedNormal(normalizedPos.x, normalizedPos.y));
+                TrapFactory.ActualTrap.TrapPrefab.transform.position = mousePosition;
+                if (Input.GetMouseButtonDown(0) && GameManager.instance.SpendGold(TrapFactory.ActualTrap.BuyingCost))
                     CreateTrap();
                 if (Input.GetMouseButtonDown(1))
                 {
                     TrapFactory.IsInTrapCreationMode = false;
                     ActualSelectedTrapTypes = TrapTypes.None;
-                    Destroy(TrapFactory.ActualTrap);
+                    Destroy(TrapFactory.ActualTrap.TrapPrefab);
                 }
             }
             else if (TrapFactory.IsColliding() && _gameManager.IsTheSunAwakeAndTheBirdAreSinging)
@@ -103,11 +105,13 @@ namespace Assets.Script
             trap.IsInPreviewMode = true;
             GameObject trapGameObject = trap.TrapPrefab;
             trapGameObject.transform.position = TrapFactory.GetMousePosition();
-            TrapFactory.ActualTrap = Instantiate(trapGameObject);
+            trapGameObject = Instantiate(trapGameObject);
+            TrapFactory.ActualTrap = trapGameObject.GetComponentInChildren<NeedleTrap>();
+            Debug.Log(trapGameObject.GetComponentInChildren<NeedleTrap>());
         }
         public void CreateTrap()
         {
-            if (Math.Abs(TrapFactory.ActualTrap.GetComponentInChildren<Renderer>().material.color.r - 205) > 0.1)
+            if (Math.Abs(TrapFactory.ActualTrap.TrapPrefab.GetComponentInChildren<Renderer>().material.color.r - 205) > 0.1)
             {
                 Trap t = Traps[(int)TrapFactory.SelectedTrapType];
                 GameObject trap = Instantiate(t.TrapPrefab);

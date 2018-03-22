@@ -60,7 +60,6 @@ namespace Assets.Script.Traps
         {
             if (collider.gameObject.tag != "Terrain" && collider.gameObject.name != "Plane" && collider.gameObject.name != "WaterShower" &&  collider.gameObject.name != "ShootableHitbox")
             {
-                Debug.Log(collider.gameObject);
                 v++;
             }
             if (IsInPreviewMode && collider.tag != "Terrain")
@@ -77,7 +76,12 @@ namespace Assets.Script.Traps
 
         public void LevelUp()
         {
-            if (GameManager.instance.SpendGold(UpgradeCosts[Level - 1]) && Level < 3)
+            int levelIndex;
+            if (TrapFactory.ClosestTrap.Level < 3)
+                levelIndex = TrapFactory.ClosestTrap.Level - 1;
+            else
+                levelIndex = 1;
+            if (GameManager.instance.SpendGold(UpgradeCosts[levelIndex]) && Level < 3)
             {
                 Level++;
             }

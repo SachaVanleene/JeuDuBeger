@@ -11,8 +11,22 @@ namespace Assets.Scripts.Traps
     {
         public static TrapTypes SelectedTrapType = TrapTypes.NeedleTrap;
         public static Boolean IsInTrapCreationMode = false;
-        public static Trap ClosestTrap = null;
-        public static GameObject ActualTrap;
+        private static Trap _closestTrap;
+
+        public static Trap ClosestTrap
+        {
+            get { return _closestTrap; }
+            set
+            {
+                _closestTrap = value;
+                TerrainTest.TrapLevelUpPannel.gameObject.SetActive(false);
+                if (_closestTrap == null) return;
+                TerrainTest.TrapLevelUpPannel.AdjustPosition();
+                TerrainTest.TrapLevelUpPannel.gameObject.SetActive(true);
+            }
+        }
+
+        public static Trap ActualTrap;
         public static int ActionRange = 15;
 
         public static Boolean IsColliding()
