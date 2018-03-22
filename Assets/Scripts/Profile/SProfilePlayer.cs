@@ -60,7 +60,7 @@ public class SProfilePlayer
         new AchievementInfo(
             name: "Fiesta !!!",
             info: "Tuez 10 loups, mourez 5 fois et perdez 10 moutons",
-            events: new List<AchievementEvent>() { AchievementEvent.sheepDeath },
+            events: new List<AchievementEvent>() { AchievementEvent.sheepDeath, AchievementEvent.playerDeath, AchievementEvent.wolfDeath },
             aim: new System.Collections.Generic.Dictionary<AchievementEvent, int>() { { AchievementEvent.sheepDeath, 10 },
                                                                                 { AchievementEvent.playerDeath, 10 },
                                                                                 { AchievementEvent.wolfDeath, 10 }},
