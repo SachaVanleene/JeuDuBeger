@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0003188706, g: 0.0000044807925, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.00010126327, g: 0.00000064847734, b: 0, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -651,6 +651,7 @@ GameObject:
   - component: {fileID: 100576882}
   - component: {fileID: 100576884}
   - component: {fileID: 100576883}
+  - component: {fileID: 100576885}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -715,6 +716,26 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 100576881}
+--- !u!114 &100576885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 100576881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe18c567ed7a0194aa406239d556c83e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 0}
+  response:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  raiseOnEnable: 1
+  targetString: {fileID: 11400000, guid: 9e0db589b3f7fa44581b91e0350052b6, type: 2}
+  targetText: {fileID: 100576883}
 --- !u!1 &104620973
 GameObject:
   m_ObjectHideFlags: 0
@@ -921,7 +942,7 @@ RectTransform:
   m_Children:
   - {fileID: 1979505859}
   m_Father: {fileID: 1554746470}
-  m_RootOrder: 3
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -1071,7 +1092,7 @@ RectTransform:
   - {fileID: 68452000}
   - {fileID: 1551274217}
   m_Father: {fileID: 1554746470}
-  m_RootOrder: 1
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2393,6 +2414,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 304631830}
+  - component: {fileID: 304631831}
   m_Layer: 5
   m_Name: GoldEarned
   m_TagString: Untagged
@@ -2420,6 +2442,26 @@ RectTransform:
   m_AnchoredPosition: {x: -30, y: 0}
   m_SizeDelta: {x: 80, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &304631831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 304631829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe18c567ed7a0194aa406239d556c83e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 0}
+  response:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  raiseOnEnable: 1
+  targetString: {fileID: 0}
+  targetText: {fileID: 600358031}
 --- !u!1001 &306192938
 Prefab:
   m_ObjectHideFlags: 0
@@ -6416,6 +6458,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 423086669}
+  - component: {fileID: 423086670}
   m_Layer: 5
   m_Name: PlacedTraps
   m_TagString: Untagged
@@ -6443,6 +6486,26 @@ RectTransform:
   m_AnchoredPosition: {x: 30, y: 0}
   m_SizeDelta: {x: 80, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &423086670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 423086668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe18c567ed7a0194aa406239d556c83e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 0}
+  response:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  raiseOnEnable: 1
+  targetString: {fileID: 0}
+  targetText: {fileID: 2099400245}
 --- !u!1 &440955537
 GameObject:
   m_ObjectHideFlags: 0
@@ -6861,7 +6924,7 @@ RectTransform:
   - {fileID: 1049445805}
   - {fileID: 1468961616}
   m_Father: {fileID: 1554746470}
-  m_RootOrder: 6
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7068,7 +7131,7 @@ RectTransform:
   - {fileID: 658351305}
   - {fileID: 2109901615}
   m_Father: {fileID: 1554746470}
-  m_RootOrder: 5
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -7154,6 +7217,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 561479092}
+  - component: {fileID: 561479093}
   m_Layer: 5
   m_Name: PlayerDamageDealt
   m_TagString: Untagged
@@ -7181,6 +7245,26 @@ RectTransform:
   m_AnchoredPosition: {x: 30, y: 10}
   m_SizeDelta: {x: 80, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &561479093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 561479091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe18c567ed7a0194aa406239d556c83e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 0}
+  response:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  raiseOnEnable: 1
+  targetString: {fileID: 0}
+  targetText: {fileID: 288004635}
 --- !u!1 &570099604
 GameObject:
   m_ObjectHideFlags: 0
@@ -7331,7 +7415,6 @@ MonoBehaviour:
   shakeRecoil: 0.05
   shakeMovement: 0.01
   shakeMin: 0.01
-  camCollisionOffsetZ: 5
 --- !u!114 &570099608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7351,6 +7434,11 @@ MonoBehaviour:
   storedSheeps: 0
   spawnPoint: {fileID: 1378439751}
   respawnDelay: 7
+  recoverDelay: 2
+  healTick: 1
+  healPerTick: 0.1
+  isHealing: 0
+  damageGO: {fileID: 1869721330}
   goAttachedToModel: {fileID: 1023803584}
 --- !u!95 &570099609
 Animator:
@@ -7747,7 +7835,7 @@ RectTransform:
   m_Children:
   - {fileID: 2031183895}
   m_Father: {fileID: 1554746470}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -8100,7 +8188,7 @@ RectTransform:
   - {fileID: 890828333}
   - {fileID: 86373273}
   m_Father: {fileID: 1554746470}
-  m_RootOrder: 4
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -8569,6 +8657,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 762902795}
+  - component: {fileID: 762902796}
   m_Layer: 5
   m_Name: TrapsDamageDealt
   m_TagString: Untagged
@@ -8596,6 +8685,26 @@ RectTransform:
   m_AnchoredPosition: {x: 30, y: 10}
   m_SizeDelta: {x: 80, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &762902796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 762902794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe18c567ed7a0194aa406239d556c83e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 0}
+  response:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  raiseOnEnable: 1
+  targetString: {fileID: 0}
+  targetText: {fileID: 1197765283}
 --- !u!1 &818600951
 GameObject:
   m_ObjectHideFlags: 0
@@ -8604,6 +8713,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 818600952}
+  - component: {fileID: 818600953}
   m_Layer: 5
   m_Name: EnclosureGold
   m_TagString: Untagged
@@ -8631,6 +8741,26 @@ RectTransform:
   m_AnchoredPosition: {x: 30, y: 10}
   m_SizeDelta: {x: 80, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &818600953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 818600951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe18c567ed7a0194aa406239d556c83e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 0}
+  response:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  raiseOnEnable: 1
+  targetString: {fileID: 0}
+  targetText: {fileID: 856665201}
 --- !u!1 &836360138
 GameObject:
   m_ObjectHideFlags: 0
@@ -9011,6 +9141,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 876667408}
+  - component: {fileID: 876667409}
   m_Layer: 5
   m_Name: Werewolves
   m_TagString: Untagged
@@ -9038,6 +9169,26 @@ RectTransform:
   m_AnchoredPosition: {x: 30, y: 10}
   m_SizeDelta: {x: 80, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &876667409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 876667407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe18c567ed7a0194aa406239d556c83e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 0}
+  response:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  raiseOnEnable: 1
+  targetString: {fileID: 0}
+  targetText: {fileID: 0}
 --- !u!1 &882884116
 GameObject:
   m_ObjectHideFlags: 0
@@ -9046,6 +9197,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 882884117}
+  - component: {fileID: 882884118}
   m_Layer: 5
   m_Name: WolvesKilledByWeapon
   m_TagString: Untagged
@@ -9073,6 +9225,26 @@ RectTransform:
   m_AnchoredPosition: {x: -30, y: 0}
   m_SizeDelta: {x: 80, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &882884118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 882884116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe18c567ed7a0194aa406239d556c83e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 0}
+  response:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  raiseOnEnable: 1
+  targetString: {fileID: 0}
+  targetText: {fileID: 1540367341}
 --- !u!1 &890828332
 GameObject:
   m_ObjectHideFlags: 0
@@ -9159,6 +9331,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 910284937}
+  - component: {fileID: 910284938}
   m_Layer: 5
   m_Name: FavoriteTrap
   m_TagString: Untagged
@@ -9186,6 +9359,26 @@ RectTransform:
   m_AnchoredPosition: {x: -30, y: 10}
   m_SizeDelta: {x: 80, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &910284938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 910284936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe18c567ed7a0194aa406239d556c83e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 0}
+  response:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  raiseOnEnable: 1
+  targetString: {fileID: 0}
+  targetText: {fileID: 1653910622}
 --- !u!1 &922276725
 GameObject:
   m_ObjectHideFlags: 0
@@ -9331,6 +9524,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 961204537}
+  - component: {fileID: 961204538}
   m_Layer: 5
   m_Name: Wolves
   m_TagString: Untagged
@@ -9359,6 +9553,26 @@ RectTransform:
   m_AnchoredPosition: {x: 30, y: 0}
   m_SizeDelta: {x: 80, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &961204538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 961204536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe18c567ed7a0194aa406239d556c83e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 0}
+  response:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  raiseOnEnable: 1
+  targetString: {fileID: 0}
+  targetText: {fileID: 170466026}
 --- !u!1 &964449539
 GameObject:
   m_ObjectHideFlags: 0
@@ -9398,6 +9612,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 971739386}
+  - component: {fileID: 971739387}
   m_Layer: 5
   m_Name: FavoriteEnclosure
   m_TagString: Untagged
@@ -9425,6 +9640,26 @@ RectTransform:
   m_AnchoredPosition: {x: -40, y: 0}
   m_SizeDelta: {x: 80, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &971739387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 971739385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe18c567ed7a0194aa406239d556c83e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 0}
+  response:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  raiseOnEnable: 1
+  targetString: {fileID: 0}
+  targetText: {fileID: 1675339078}
 --- !u!1 &988444400
 GameObject:
   m_ObjectHideFlags: 0
@@ -10260,6 +10495,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1078003334}
+  - component: {fileID: 1078003335}
   m_Layer: 5
   m_Name: DeathCount
   m_TagString: Untagged
@@ -10287,6 +10523,26 @@ RectTransform:
   m_AnchoredPosition: {x: 30, y: 0}
   m_SizeDelta: {x: 80, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1078003335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1078003333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe18c567ed7a0194aa406239d556c83e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 0}
+  response:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  raiseOnEnable: 1
+  targetString: {fileID: 0}
+  targetText: {fileID: 100576883}
 --- !u!1 &1079071701
 GameObject:
   m_ObjectHideFlags: 0
@@ -13774,7 +14030,7 @@ RectTransform:
   m_Children:
   - {fileID: 933926405}
   m_Father: {fileID: 1554746470}
-  m_RootOrder: 8
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -15262,6 +15518,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1383646335}
+  - component: {fileID: 1383646336}
   m_Layer: 5
   m_Name: WolvesGold
   m_TagString: Untagged
@@ -15289,6 +15546,26 @@ RectTransform:
   m_AnchoredPosition: {x: 30, y: 0}
   m_SizeDelta: {x: 80, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1383646336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1383646334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe18c567ed7a0194aa406239d556c83e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 0}
+  response:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  raiseOnEnable: 1
+  targetString: {fileID: 0}
+  targetText: {fileID: 475692880}
 --- !u!1 &1385006922
 GameObject:
   m_ObjectHideFlags: 0
@@ -15659,6 +15936,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1458989952}
+  - component: {fileID: 1458989953}
   m_Layer: 5
   m_Name: TotalSheeps
   m_TagString: Untagged
@@ -15686,6 +15964,26 @@ RectTransform:
   m_AnchoredPosition: {x: -30, y: 10}
   m_SizeDelta: {x: 80, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1458989953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1458989951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe18c567ed7a0194aa406239d556c83e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 0}
+  response:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  raiseOnEnable: 1
+  targetString: {fileID: 0}
+  targetText: {fileID: 1824670514}
 --- !u!1 &1468961615
 GameObject:
   m_ObjectHideFlags: 0
@@ -16411,6 +16709,9 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
+  - {fileID: 1869721331}
+  - {fileID: 1086565499}
+  - {fileID: 1581862531}
   - {fileID: 1786576982}
   - {fileID: 137626551}
   - {fileID: 1732771770}
@@ -16419,8 +16720,6 @@ RectTransform:
   - {fileID: 537688238}
   - {fileID: 490388954}
   - {fileID: 1791846842}
-  - {fileID: 1086565499}
-  - {fileID: 1581862531}
   - {fileID: 619063271}
   - {fileID: 1515334023}
   - {fileID: 1707148233}
@@ -16592,7 +16891,7 @@ RectTransform:
   - {fileID: 842572648}
   - {fileID: 704057189}
   m_Father: {fileID: 1554746470}
-  m_RootOrder: 9
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -16607,6 +16906,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1597543525}
+  - component: {fileID: 1597543526}
   m_Layer: 5
   m_Name: GoldSpent
   m_TagString: Untagged
@@ -16634,6 +16934,26 @@ RectTransform:
   m_AnchoredPosition: {x: -30, y: 0}
   m_SizeDelta: {x: 80, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1597543526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1597543524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe18c567ed7a0194aa406239d556c83e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 0}
+  response:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  raiseOnEnable: 1
+  targetString: {fileID: 0}
+  targetText: {fileID: 1450104321}
 --- !u!1 &1631032270
 GameObject:
   m_ObjectHideFlags: 0
@@ -17676,7 +17996,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1554746470}
-  m_RootOrder: 2
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -17795,6 +18115,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1752869743}
+  - component: {fileID: 1752869744}
   m_Layer: 5
   m_Name: WolvesKilledByTrap
   m_TagString: Untagged
@@ -17822,6 +18143,26 @@ RectTransform:
   m_AnchoredPosition: {x: -30, y: 10}
   m_SizeDelta: {x: 80, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1752869744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1752869742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe18c567ed7a0194aa406239d556c83e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 0}
+  response:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  raiseOnEnable: 1
+  targetString: {fileID: 0}
+  targetText: {fileID: 353536138}
 --- !u!1 &1755766678
 GameObject:
   m_ObjectHideFlags: 0
@@ -18094,7 +18435,7 @@ RectTransform:
   - {fileID: 169925073}
   - {fileID: 468561987}
   m_Father: {fileID: 1554746470}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -18109,6 +18450,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1791846842}
+  - component: {fileID: 1791846843}
   m_Layer: 5
   m_Name: GameOverChart
   m_TagString: Untagged
@@ -18133,13 +18475,39 @@ RectTransform:
   - {fileID: 1518156935}
   - {fileID: 2014528809}
   m_Father: {fileID: 1554746470}
-  m_RootOrder: 7
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 440, y: 260}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1791846843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1791846841}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ce03e0d7d81095439dd5a4c7eef68b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DeathCount: {fileID: 0}
+  PlayerDamageDealt: {fileID: 0}
+  GoldEarned: {fileID: 0}
+  TotalSheeps: {fileID: 0}
+  PlacedTraps: {fileID: 0}
+  TrapsDamageDealt: {fileID: 0}
+  GoldSpent: {fileID: 0}
+  FavoriteTrap: {fileID: 0}
+  Wolves: {fileID: 0}
+  Werewolves: {fileID: 0}
+  WolvesKilledByWeapon: {fileID: 0}
+  WolvesKilledByTrap: {fileID: 0}
+  WolvesGold: {fileID: 0}
+  EnclosureGold: {fileID: 0}
+  FavoriteEnclosure: {fileID: 0}
 --- !u!1 &1795099338
 GameObject:
   m_ObjectHideFlags: 0
@@ -18940,6 +19308,74 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1852295889}
+--- !u!1 &1869721330
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1869721331}
+  - component: {fileID: 1869721333}
+  - component: {fileID: 1869721332}
+  m_Layer: 5
+  m_Name: Damage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1869721331
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1869721330}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1554746470}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1869721332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1869721330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 0
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: d2825badd6f443644b65833c5aa3813e, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &1869721333
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1869721330}
 --- !u!1 &1892245857
 GameObject:
   m_ObjectHideFlags: 0
@@ -19217,13 +19653,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 457ef317daf6da64099f69e8cb5287bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 570099611}
+  target: {fileID: 0}
   autoTargetPlayer: 1
   moveSpeed: 15
   turnSpeed: 1.5
   turnsmoothing: 0.1
   tiltMax: 35
-  tiltMin: 30
+  tiltMin: 15
   lockCursor: 0
   crosshairOffsetWiggle: 0.2
 --- !u!4 &1930441035

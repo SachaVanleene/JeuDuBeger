@@ -45,7 +45,7 @@ public class ShowDescription : MonoBehaviour
         {
             if (Input.GetAxis("Mouse X") < 0.01 && Input.GetAxis("Mouse Y") < 0.01)
             {
-                timer -= Time.deltaTime;
+                timer -= Time.unscaledDeltaTime;
             }
             else
             {
