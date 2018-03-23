@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
 
@@ -44,6 +45,24 @@ public class Player : MonoBehaviour {
     public float respawnDelay;
     WaitForSeconds respawnWait;
 
+    [Space]
+    [Header("Heal")]
+    [Tooltip("Delay during which the player must not receive damage to start healing.")]
+    public float recoverDelay;
+    [Tooltip("Delay between each tick of heal.")]
+    public float healTick;
+    [Tooltip("Percent health regen between 0 and 1.")]
+    public float healPerTick;
+    WaitForSeconds healTickWait;
+    [SerializeField]
+    bool isHealing;
+    float recoverTimer;
+
+    public GameObject damageGO;
+    Image damageImage;
+    Color temp;
+    float imageTimer;
+
     Animator anim;
     TPC.StateManager states;
     TPC.HandleMovement_Player hMove;
@@ -73,6 +92,7 @@ public class Player : MonoBehaviour {
     Color32 normalColor = new Color32(255, 255, 255, 255);
 
     //Reference To Change Color Of The Player
+    [Space]
     public GameObject goAttachedToModel;
 
     public void Init()
@@ -80,6 +100,7 @@ public class Player : MonoBehaviour {
         maxHealth = 100;
         actualHealth = maxHealth;
         respawnWait = new WaitForSeconds(respawnDelay);
+        healTickWait = new WaitForSeconds(healTick);
         spawnPoint.position.Set(spawnPoint.position.x, 1.72f, spawnPoint.position.z);
 
         anim = GetComponent<Animator>();
@@ -87,6 +108,12 @@ public class Player : MonoBehaviour {
 
         Alive = true;
         hMove = GetComponent<TPC.HandleMovement_Player>();
+
+        damageImage = damageGO.GetComponent<Image>();
+        recoverTimer = 0.0f;
+        isHealing = false;
+
+        temp = damageImage.color;
     }
 
     //FreezingHandler
@@ -107,6 +134,7 @@ public class Player : MonoBehaviour {
         timeNeededToDodgeFreeze = 1f;
 
     }
+
 
     public void Freezing()
     {
@@ -163,13 +191,27 @@ public class Player : MonoBehaviour {
             Debug.LogError("Remise à 0 du freeze");
         }
 
-            if(timer >= timeNeededForBeingFrozen && canBeFrozen && isFreezing) // Si on a dépassé la liite sous le gel on se freeze
-            {
-                canBeFrozen = false;
-                froze = true;
-                isFreezing = false;
-                Frozen();
-            }
+        if(timer >= timeNeededForBeingFrozen && canBeFrozen && isFreezing) // Si on a dépassé la liite sous le gel on se freeze
+        {
+            canBeFrozen = false;
+            froze = true;
+            isFreezing = false;
+            Frozen();
+        }
+
+        recoverTimer -= Time.deltaTime;
+        
+        if (recoverTimer  + recoverDelay < 0 && actualHealth < maxHealth && !isHealing)
+        {
+            StartCoroutine(Recover());
+            imageTimer = 0;
+        }
+
+        if (isHealing)
+        {
+            imageTimer += Time.deltaTime / healTick;
+            damageImage.color = Color.Lerp(damageImage.color, temp, imageTimer);
+        }
     }
 
 
@@ -177,6 +219,12 @@ public class Player : MonoBehaviour {
     public void takeDamage(float dps)
     {
         actualHealth -= dps;
+
+        temp = damageImage.color;
+        temp.a = 1 - (actualHealth / maxHealth);
+        damageImage.color = temp;
+
+        recoverTimer = recoverDelay;
 
         if (actualHealth <= 0 && Alive)
         {
@@ -206,6 +254,26 @@ public class Player : MonoBehaviour {
         anim.SetTrigger("respawn");
     }
 
+    IEnumerator Recover()
+    {
+        isHealing = true;
+        while (actualHealth < maxHealth)
+        {
+            yield return healTickWait;
+            if (recoverTimer - Time.deltaTime < 0)
+            {
+                actualHealth += maxHealth * healPerTick;
+                actualHealth = Mathf.Clamp(actualHealth, 0, maxHealth);
+                temp.a = Mathf.Clamp(1 - (actualHealth / maxHealth), 0, 1);
+                imageTimer = 0;
+            }
+            else
+            {
+                break;
+            }
+        }
+        isHealing = false;
+    }
     #region IA Subscribers
     public void AddSubscriber(Player.onDead function)
     {
