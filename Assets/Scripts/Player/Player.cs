@@ -57,8 +57,11 @@ public class Player : MonoBehaviour {
     [SerializeField]
     bool isHealing;
     float recoverTimer;
+
     public GameObject damageGO;
     Image damageImage;
+    Color temp;
+    float imageTimer;
 
     Animator anim;
     TPC.StateManager states;
@@ -109,6 +112,8 @@ public class Player : MonoBehaviour {
         damageImage = damageGO.GetComponent<Image>();
         recoverTimer = 0.0f;
         isHealing = false;
+
+        temp = damageImage.color;
     }
 
     //FreezingHandler
@@ -201,11 +206,18 @@ public class Player : MonoBehaviour {
             Debug.Log(recoverTimer + recoverDelay - Time.deltaTime);
 
         recoverTimer -= Time.deltaTime;
-
+        
         if (recoverTimer  + recoverDelay < 0 && actualHealth < maxHealth && !isHealing)
         {
             Debug.Log("Recover");
             StartCoroutine(Recover());
+            imageTimer = 0;
+        }
+
+        if (isHealing)
+        {
+            imageTimer += Time.deltaTime / healTick;
+            damageImage.color = Color.Lerp(damageImage.color, temp, imageTimer);
         }
     }
 
@@ -215,7 +227,7 @@ public class Player : MonoBehaviour {
     {
         actualHealth -= dps;
 
-        Color temp = damageImage.color;
+        temp = damageImage.color;
         temp.a = 1 - (actualHealth / maxHealth);
         damageImage.color = temp;
 
@@ -259,7 +271,8 @@ public class Player : MonoBehaviour {
             {
                 actualHealth += maxHealth * healPerTick;
                 actualHealth = Mathf.Clamp(actualHealth, 0, maxHealth);
-                Debug.Log(actualHealth);
+                temp.a = Mathf.Clamp(1 - (actualHealth / maxHealth), 0, 1);
+                imageTimer = 0;
             }
             else
             {
