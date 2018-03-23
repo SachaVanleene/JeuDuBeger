@@ -199,17 +199,10 @@ public class Player : MonoBehaviour {
             Frozen();
         }
 
-        if (Input.GetKeyUp(KeyCode.H))
-            takeDamage(20);
-
-        if (Time.deltaTime % 2.0f == 0)
-            Debug.Log(recoverTimer + recoverDelay - Time.deltaTime);
-
         recoverTimer -= Time.deltaTime;
         
         if (recoverTimer  + recoverDelay < 0 && actualHealth < maxHealth && !isHealing)
         {
-            Debug.Log("Recover");
             StartCoroutine(Recover());
             imageTimer = 0;
         }
