@@ -18,7 +18,7 @@ public class WolfHealth : MonoBehaviour
         alive = true;
     }
 
-    public void takeDamage(int damage)
+    public void takeDamage(int damage, bool killedByWeapon = false)
     {
         health -= damage;
         //anim.SetTrigger("Hit");
