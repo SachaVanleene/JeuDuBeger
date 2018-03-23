@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.0003188706, g: 0.0000044807925, b: 0, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -2568,6 +2568,20 @@ Prefab:
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: f6e999359d202f6408dc1a03aed6dbc3, type: 3}
   m_PrefabInternal: {fileID: 323687045}
+--- !u!64 &323687047
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 323687046}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: f6e999359d202f6408dc1a03aed6dbc3, type: 3}
 --- !u!1 &324777179
 GameObject:
   m_ObjectHideFlags: 0
@@ -7317,6 +7331,7 @@ MonoBehaviour:
   shakeRecoil: 0.05
   shakeMovement: 0.01
   shakeMin: 0.01
+  camCollisionOffsetZ: 5
 --- !u!114 &570099608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7446,6 +7461,24 @@ Transform:
   m_Father: {fileID: 1896502966}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!1 &573278069 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 6783a94fbec42ea42817f01231ee7565, type: 3}
+  m_PrefabInternal: {fileID: 2067055799}
+--- !u!64 &573278071
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 573278069}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300002, guid: 6783a94fbec42ea42817f01231ee7565, type: 3}
 --- !u!1 &579783439
 GameObject:
   m_ObjectHideFlags: 0
@@ -17667,7 +17700,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1786576979
 MonoBehaviour:
   m_ObjectHideFlags: 0
