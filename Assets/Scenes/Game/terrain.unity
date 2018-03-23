@@ -7197,6 +7197,7 @@ GameObject:
   - component: {fileID: 570099606}
   - component: {fileID: 570099605}
   - component: {fileID: 570099612}
+  - component: {fileID: 570099613}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -7415,6 +7416,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &570099613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 570099604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 651e282ed6da0b649b7429c95d7576e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  common_wolf: {fileID: 1686558373017650, guid: 376ff07ef6aba754b85dbdaede9fbfb8,
+    type: 2}
+  water_wolf: {fileID: 1571391436042830, guid: 247bea815d5d5224f97192dae9cb228e, type: 2}
+  mountain_wolf: {fileID: 1275376277946524, guid: 990a98fe4a6477244b361577d5c75a8b,
+    type: 2}
+  boss_wolf: {fileID: 1544962999945422, guid: 22ebf380539d3a0479f2045671a89d9e, type: 2}
 --- !u!1 &573020339
 GameObject:
   m_ObjectHideFlags: 0

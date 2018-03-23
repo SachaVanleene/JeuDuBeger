@@ -105,6 +105,7 @@ public class Player : MonoBehaviour {
         freezingCoolDown = 7f;
         timeNeededForBeingFrozen = 2f;
         timeNeededToDodgeFreeze = 1f;
+
     }
 
     public void Freezing()
@@ -120,9 +121,13 @@ public class Player : MonoBehaviour {
     void Frozen()
     {
         Debug.LogError("Frozen");
-        hMove.AddVelocity(Vector3.zero, freezingDUration, 0, true);
-        goAttachedToModel.GetComponent<Renderer>().material.SetColor("_Color", frozenColor);
-        StartCoroutine(WaitForEndOfFreeze());
+        if(alive)
+        {
+            anim.speed = 0;
+            hMove.AddVelocity(Vector3.zero, freezingDUration, 0, true);
+            goAttachedToModel.GetComponent<Renderer>().material.SetColor("_Color", frozenColor);
+            StartCoroutine(WaitForEndOfFreeze());
+        }
     }
 
     IEnumerator WaitForBeingFrozeOnceAgain()
@@ -140,6 +145,7 @@ public class Player : MonoBehaviour {
 
     void UnFrozen()
     {
+        anim.speed = 1f;
         Debug.LogError("UnFrozen");
         goAttachedToModel.GetComponent<Renderer>().material.SetColor("_Color", normalColor);
         froze = false;
@@ -175,6 +181,11 @@ public class Player : MonoBehaviour {
         if (actualHealth <= 0 && Alive)
         {
             Alive = false;
+            if(froze)
+            {
+                anim.speed = 1f;
+                goAttachedToModel.GetComponent<Renderer>().material.SetColor("_Color", normalColor);
+            }
             anim.SetTrigger("dead");
             onTriggerDead.Invoke();
             StartCoroutine(Respawn());
