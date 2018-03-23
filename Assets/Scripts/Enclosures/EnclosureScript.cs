@@ -153,6 +153,9 @@ namespace Assets.Scripts.Enclosures
             Health -= degats;
             if (Health == 0)
             {
+                Health = 0; //santé min
+                OnTriggerDead.Invoke();
+                OnTriggerDead = null; //On reset le delegate
                 if (_superSheeps.Count < 1 && _gameManager.TotalSuperSheeps >= 1)
                 {
                     AddPinkSuperSheep();
@@ -262,7 +265,6 @@ namespace Assets.Scripts.Enclosures
             if (Health == 0)
             {
                 Health = 0; //santé min
-                Debug.Log("Enclos Mort");
                 OnTriggerDead.Invoke();
                 OnTriggerDead = null; //On reset le delegate
             }
