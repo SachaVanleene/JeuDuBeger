@@ -212,6 +212,12 @@ public class Player : MonoBehaviour {
             imageTimer += Time.deltaTime / healTick;
             damageImage.color = Color.Lerp(damageImage.color, temp, imageTimer);
         }
+
+        if (!Alive)
+        {
+            imageTimer += Time.deltaTime / respawnDelay;
+            damageImage.color = Color.Lerp(damageImage.color, temp, imageTimer);
+        }
     }
 
 
@@ -242,6 +248,7 @@ public class Player : MonoBehaviour {
 
     IEnumerator Respawn()
     {
+        temp.a = 0;
         yield return respawnWait;
         Alive = true;
         actualHealth = maxHealth;
