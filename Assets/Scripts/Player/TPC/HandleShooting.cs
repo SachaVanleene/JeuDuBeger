@@ -132,7 +132,7 @@ namespace TPC
                         {
                             if (target.GetComponent<WolfHealth>())
                             {
-                                target.GetComponent<WolfHealth>().takeDamage(20);
+                                target.GetComponent<WolfHealth>().takeDamage(20, true);
                                 if (!target.GetComponent<WolfHealth>().alive)
                                     StartCoroutine(KillFeedBack());
                             }
