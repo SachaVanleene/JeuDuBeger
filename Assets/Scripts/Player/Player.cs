@@ -124,10 +124,10 @@ public class Player : MonoBehaviour {
         if(alive)
         {
             anim.speed = 0;
+            hMove.AddVelocity(Vector3.zero, freezingDUration, 0, true);
+            goAttachedToModel.GetComponent<Renderer>().material.SetColor("_Color", frozenColor);
+            StartCoroutine(WaitForEndOfFreeze());
         }
-        hMove.AddVelocity(Vector3.zero, freezingDUration, 0, true);
-        goAttachedToModel.GetComponent<Renderer>().material.SetColor("_Color", frozenColor);
-        StartCoroutine(WaitForEndOfFreeze());
     }
 
     IEnumerator WaitForBeingFrozeOnceAgain()
