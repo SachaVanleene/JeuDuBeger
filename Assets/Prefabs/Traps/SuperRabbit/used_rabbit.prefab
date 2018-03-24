@@ -319,7 +319,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1665235231180150}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 272.82953, y: 15.3965645, z: 235.61725}
+  m_LocalPosition: {x: 256.00687, y: 15.073265, z: 273}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 4436412795879272}
@@ -566,10 +566,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DurabilityMax: 100
   Durability: 100
-  BuyingCost: 0
   TrapPrefab: {fileID: 1665235231180150}
   UpgradeCosts: 
-  Damages: 
+  Pows: 
   IsActive: 1
 --- !u!137 &137665921382610890
 SkinnedMeshRenderer:

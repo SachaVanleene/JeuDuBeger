@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GameOverManager : MonoBehaviour {
 
-    public SO.StringVariable DeathCount;
+  /**  public SO.StringVariable DeathCount;
     public SO.StringVariable PlayerDamageDealt;
     public SO.StringVariable GoldEarned;
     public SO.StringVariable TotalSheeps;
@@ -28,5 +28,5 @@ public class GameOverManager : MonoBehaviour {
     private void OnEnable()
     {
         DeathCount.Set(a++);
-    }
+    }**/
 }

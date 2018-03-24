@@ -1,4 +1,6 @@
-﻿public static class GameVariables
+﻿using System.Collections.Generic;
+
+public static class GameVariables
 {
     public static class Wolf
     {
@@ -43,56 +45,20 @@
     {
         public static class NeedleTrap
         {
-            public static class Lv1
-            {
-                public static readonly int durability = 100;
-                public static readonly int wolfDamage = 1;
-                public static readonly int playerDamage = 1;
-                public static readonly int upgradePrice = 100;
-            }
 
-            public static class Lv2
-            {
-                public static readonly int durability = 100;
-                public static readonly int wolfDamage = 1;
-                public static readonly int playerDamage = 1;
-                public static readonly int upgradePrice = 100;
-            }
-
-            public static class Lv3
-            {
-                public static readonly int durability = 100;
-                public static readonly int wolfDamage = 1;
-                public static readonly int playerDamage = 1;
-                public static readonly int upgradePrice = 100;
-            }
+            public static readonly int durability = 100;
+            public static readonly int wolfDamage = 1;
+            public static readonly List<int> playerDamage = new List<int>() { 5, 10, 20 };
+            public static readonly List<int> upgradePrice = new List<int>() {20, 50, 100};
+            
         }
 
         public static class LandMine
         {
-            public static class Lv1
-            {
-                public static readonly float radius = 1.0f;
-                public static readonly int wolfDamage = 1;
-                public static readonly int playerDamage = 1;
-                public static readonly int upgradePrice = 100;
-            }
-
-            public static class Lv2
-            {
-                public static readonly float radius = 1.0f;
-                public static readonly int wolfDamage = 1;
-                public static readonly int playerDamage = 1;
-                public static readonly int upgradePrice = 100;
-            }
-
-            public static class Lv3
-            {
-                public static readonly float radius = 1.0f;
-                public static readonly int wolfDamage = 1;
-                public static readonly int playerDamage = 1;
-                public static readonly int upgradePrice = 100;
-            }
+            public static readonly List<float> radius = new List<float>(){10, 15, 20};
+            public static readonly int wolfDamage = 1;
+            public static readonly List<int> playerDamage = new List<int>(){ 50, 75, 100 };
+            public static readonly List<int> upgradePrice = new List<int>() { 5, 10, 20 };
         }
 
         public static class Decoy
@@ -124,29 +90,11 @@
 
         public static class Mud
         {
-            public static class Lv1
-            {
                 public static readonly int durability = 100;
-                public static readonly int wolfSlow = 10;
+                public static readonly List<int> wolfSlow = new List<int>(){10, 20, 40 };
                 public static readonly int playerSlow = 10;
-                public static readonly int upgradePrice = 100;
-            }
+                public static readonly List<int> upgradePrice = new List<int>(){ 20, 50, 100 };
 
-            public static class Lv2
-            {
-                public static readonly int durability = 100;
-                public static readonly int wolfSlow = 10;
-                public static readonly int playerSlow = 10;
-                public static readonly int upgradePrice = 100;
-            }
-
-            public static class Lv3
-            {
-                public static readonly int durability = 100;
-                public static readonly int wolfSlow = 10;
-                public static readonly int playerSlow = 10;
-                public static readonly int upgradePrice = 100;
-            }
         }
     }
 
