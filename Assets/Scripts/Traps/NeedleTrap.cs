@@ -8,10 +8,10 @@ namespace Assets.Script.Traps
     public class NeedleTrap : Trap {
         public NeedleTrap()
         {
-            DurabilityMax = 100;
+            Pows = GameVariables.Trap.NeedleTrap.playerDamage;
+            DurabilityMax = GameVariables.Trap.NeedleTrap.durability;
             Durability = DurabilityMax;
-            Damages = new List<int>() { 5, 10, 20 };
-
+            UpgradeCosts = GameVariables.Trap.NeedleTrap.upgradePrice;
         }
 
         public override IEnumerator Activate(GameObject go)
@@ -27,7 +27,7 @@ namespace Assets.Script.Traps
                 {**/
                     WolfHealth wolf = (WolfHealth)go.GetComponent<WolfHealth>();
                     Debug.Log(wolf.getHealth());
-                    wolf.takeDamage(Damages[Level-1]);
+                    wolf.takeDamage(Pows[Level-1]);
                     Debug.Log(wolf.getHealth());
                 // }
                 yield return new WaitForSeconds(2f);

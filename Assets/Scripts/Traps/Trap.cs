@@ -11,13 +11,12 @@ namespace Assets.Script.Traps
 {
     public abstract class Trap : MonoBehaviour
     {
-        public int DurabilityMax, Durability, BuyingCost;
+        public int DurabilityMax, Durability;
         public GameObject TrapPrefab;
-        public List<int> UpgradeCosts, Damages;
+        public List<int> UpgradeCosts, Pows;
         public Boolean IsActive = false;
 
         private Boolean _isInPreviewMode = true;
-
         public Boolean IsInPreviewMode
         {
             get { return _isInPreviewMode; }
@@ -76,12 +75,7 @@ namespace Assets.Script.Traps
 
         public void LevelUp()
         {
-            int levelIndex;
-            if (TrapFactory.ClosestTrap.Level < 3)
-                levelIndex = TrapFactory.ClosestTrap.Level - 1;
-            else
-                levelIndex = 1;
-            if (GameManager.instance.SpendGold(UpgradeCosts[levelIndex]) && Level < 3)
+            if (GameManager.instance.SpendGold(UpgradeCosts[Level - 1]) && Level < 3)
             {
                 Level++;
             }
@@ -89,7 +83,7 @@ namespace Assets.Script.Traps
 
         public void Deselect()
         {
-            foreach (var rend in TrapFactory.ClosestTrap.transform.parent
+            foreach (var rend in TrapCreator.TargetedTrap.transform.parent
                 .GetComponentsInChildren<Renderer>())
             {
                 rend.material.color = new Color(0.3f, 0.3f, 0.3f, 1f);
@@ -98,7 +92,7 @@ namespace Assets.Script.Traps
 
         public void Select()
         {
-            foreach (var rend in TrapFactory.ClosestTrap.transform.parent
+            foreach (var rend in TrapCreator.TargetedTrap.transform.parent
                 .GetComponentsInChildren<Renderer>())
             {
                 rend.material.color = Color.white;
@@ -112,7 +106,12 @@ namespace Assets.Script.Traps
 
         public void OnTriggerExit(Collider collider)
         {
+            Debug.Log(collider.transform.parent);
             if (collider.tag != "Terrain" && collider.name != "Plane") v--;
+            if (collider.tag == "Fences" &&
+                Vector3.Distance(transform.position, collider.transform.parent.position) <
+                Vector3.Distance(collider.transform.position,
+                    collider.transform.parent.position)) return;
             if (IsInPreviewMode && collider.tag != "Terrain" && v == 0)
             {
                 foreach (var rend in TrapPrefab.GetComponentsInChildren<Renderer>())

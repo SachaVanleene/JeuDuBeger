@@ -13,7 +13,7 @@ namespace Assets.Script.Traps
         private int j = 0;
         public void Start()
         {
-            Damages = new List<int>() {40, 50, 60};
+            Pows = new List<int>() {40, 50, 60};
             DurabilityMax = 100;
             Durability = DurabilityMax;            
         }
@@ -24,21 +24,21 @@ namespace Assets.Script.Traps
             if (go.tag.Contains("Wolf"))
             {
                 var rb = go.GetComponent<NavMeshAgent>();
-                if (Damages.Count > Level)
+                if (Pows.Count > Level)
                 {
                     Debug.Log(rb.velocity);
-                    rb.speed = rb.speed*(Damages[Level]/100f);
+                    rb.speed = rb.speed*(Pows[Level]/100f);
                 }
                 yield break;
             }    
         }
 
-        public void OnTriggerExit(Collider collider)
+       public new void OnTriggerExit(Collider collider)
         {
             if (collider.gameObject.tag == "Wolf")
             {   
                 var rb = collider.gameObject.GetComponent<NavMeshAgent>();
-                if (Damages.Count > Level) rb.speed = 10f;
+                if (Pows.Count > Level) rb.speed = 10f;
             }
             if (collider.gameObject.tag != "Terrain" && collider.gameObject.name != "Plane") j--;
             Debug.Log(j);

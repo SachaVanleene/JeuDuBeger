@@ -27,7 +27,9 @@ namespace Assets.Scripts.Enclosures
         private List<GameObject> _sheeps = new List<GameObject>();
         private List<GameObject> _superSheeps = new List<GameObject>();
         // for the flying sheeps
-        private List<GameObject> _flyingSheeps = null; 
+        private List<GameObject> _flyingSheeps = null;
+
+        private GameObject _player;
 
         public int getNbSheepFlying()
         {   // used to know how many sheeps are to be sold
@@ -89,7 +91,7 @@ namespace Assets.Scripts.Enclosures
         {
             Distance = Vector3.Distance(EnclosureManager.HousePosition, this.transform.position);
             _gameManager = GameManager.instance;
-
+            _player = GameObject.FindGameObjectWithTag("Player");
             audioPlayer = gameObject.AddComponent(typeof(AudioPlayerEnclosure)) as AudioPlayerEnclosure;
             audioPlayer.ownerObject = this.gameObject;
             audioPlayer.Clips = this.Clips;
@@ -103,7 +105,7 @@ namespace Assets.Scripts.Enclosures
 
         private void ShowPanel()
         {
-            Vector3 distPlayertoEnclos = TerrainTest.PlayerGameObject.transform.position - transform.position;
+            Vector3 distPlayertoEnclos = _player.transform.position - transform.position;
 
             if (distPlayertoEnclos.magnitude < 25 && _gameManager.IsTheSunAwakeAndTheBirdAreSinging && !_gameManager.IsPaused)
             {

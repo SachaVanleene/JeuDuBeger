@@ -16,8 +16,8 @@ namespace Assets.Script.Traps
         {
             DurabilityMax = 1;
             Durability = 1;
-            Damages = new List<int>() {20, 27, 35};
-            UpgradeCosts = new List<int>() {100, 200, 300};
+            Pows = GameVariables.Trap.LandMine.playerDamage;
+            UpgradeCosts = GameVariables.Trap.LandMine.upgradePrice;
         }
 
         public override IEnumerator Activate(GameObject go)
@@ -26,12 +26,13 @@ namespace Assets.Script.Traps
             {
                 GameObject boom = CFX_SpawnSystem.GetNextObject(ExplosionEffect);
                 boom.transform.position = gameObject.transform.position;
+
                 foreach (var superTarget in Physics
-                    .OverlapSphere(GetComponent<BoxCollider>().center, 2)
-                    .Where(T => T.gameObject.tag == "Wolf"))
+                    .OverlapSphere(transform.position, GameVariables.Trap.LandMine.radius[Level - 1])
+                    .Where(T => T.gameObject.tag.Contains("Wolf")))
                 {
                     WolfHealth wolf = (WolfHealth) superTarget.GetComponent<WolfHealth>();
-                    wolf.takeDamage(Damages[Level]);
+                    wolf.takeDamage(Pows[Level]);
                 }
                 Durability--;
                 if (Durability == 0)

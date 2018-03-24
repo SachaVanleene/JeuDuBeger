@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Traps
 {
-    static class TrapFactory
+   /** static class TrapFactory
     {
         public static TrapTypes SelectedTrapType = TrapTypes.NeedleTrap;
         public static Boolean IsInTrapCreationMode = false;
@@ -72,5 +72,5 @@ namespace Assets.Scripts.Traps
         }
 
 
-    }
+    }**/
 }
