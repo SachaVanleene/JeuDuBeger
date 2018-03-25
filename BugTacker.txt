@@ -1,0 +1,3 @@
+    *   ghost profiles when deleted after coming back from a game
+    *   minimap script crash after coming back in game from menu (scene order to reproduce : (menu-> ) game -> menu -> game x crash)
+    *   difficulty can't be found in SO when game is launch from menu

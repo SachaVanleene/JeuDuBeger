@@ -52,6 +52,7 @@ public class ListBehaviour : MonoBehaviour {
 
             GameObject r = Instantiate(DetailPrefab, ListProfiles.transform);
             elements.Add(r);
+            r.GetComponent<ScriptLoadProfile>().manager = ObjectMainMenu.GetComponent<ProfileManager>();
             r.GetComponent<ScriptLoadProfile>().fullName = data[0] + "-" + data[1] + ".save";
             r.GetComponent<Button>().onClick.AddListener(r.GetComponent<ScriptLoadProfile>().Load);
             r.GetComponent<Button>().onClick.AddListener(ObjectMainMenu.GetComponent<MainMenu>().HideLogPanel);

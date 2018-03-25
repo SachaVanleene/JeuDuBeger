@@ -18,6 +18,7 @@ namespace Assets.Script.Managers
         public GameObject Spawns;
         public GameObject PanelBackToMenu;
         public GameObject GameOverChart;
+        public GameObject AchievementPopUp;
                 
         public int TotalSheeps { get; set; }    // player inventory relativ
         public int TotalSuperSheeps { get; set; }
@@ -159,7 +160,8 @@ namespace Assets.Script.Managers
         }
         public void BackToMenu()
         {
-            callAchievement(AchievementEvent.quit);
+            if(!gameOver)
+                callAchievement(AchievementEvent.quit);
             SceneManager.LoadScene("MainMenu");
         }
         public void KillSheep()
@@ -219,10 +221,12 @@ namespace Assets.Script.Managers
         }
         private void newRound()
         {
+            if (_roundNumber != 0)
+                callAchievement(AchievementEvent.cycleEnd);
             Spawns.GetComponent<Spawn_wolf>().Cycle = ++_roundNumber;
             TextRounds.text = "ROUND " + _roundNumber;
             displayInfo("Round " + _roundNumber + " begin \n Press n to pass directly to the night", 5);
-            callAchievement(AchievementEvent.cycleEnd);
+            
         }
         public void DayStart()
         {
@@ -296,7 +300,14 @@ namespace Assets.Script.Managers
         }
         private void callAchievement(AchievementEvent achEvent, int step = 1)
         {
-            SProfilePlayer.getInstance().AchievementsManager.AddStepAchievement(achEvent, step);
+            List<AchievementInfo> endedAchievements = SProfilePlayer.getInstance().AchievementsManager.AddStepAchievement(achEvent, step);
+            if(endedAchievements != null)
+            {
+                foreach(var achInfo in endedAchievements)
+                {
+                    AchievementPopUp.GetComponent<AchievementPopUpScript>().AddAchievement(achInfo);
+                }
+            }
         }
     }
 }

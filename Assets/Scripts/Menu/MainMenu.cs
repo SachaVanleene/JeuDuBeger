@@ -68,9 +68,9 @@ public class MainMenu : MonoBehaviour {
     public void CreateProfile()
     {
         if (NewPlayerName.text.Equals(""))
-            ProfileManager.CreateProfile("UnknownPlayer");
+            GetComponent<ProfileManager>().CreateProfile("UnknownPlayer");
         else
-            ProfileManager.CreateProfile(NewPlayerName.text);
+            GetComponent<ProfileManager>().CreateProfile(NewPlayerName.text);
         NewPlayerName.text = "";
         HideLogPanel();
     }

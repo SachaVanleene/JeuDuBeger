@@ -208,10 +208,18 @@
         }
     }
 
-    //Player multiplier
-    public static class AchievementBonus
+    public static class Achievements
     {
+        public static class Bonus
+        {   //  players boosts 
 
+        }
+        public static class PopUp
+        {
+            public static readonly float speedCome = 45f;
+            public static readonly float speedBack = 35f;
+            public static readonly float timeStay = 2f;
+        }
     }
 
     public static class Round
