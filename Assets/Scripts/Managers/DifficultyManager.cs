@@ -13,7 +13,6 @@ public class DifficultyManager : MonoBehaviour
     {
         foreach (SO.WolfStats wolfStats in wolvesStats)
         {
-            Debug.Log("allo");
             wolfStats.SetDifficulty(difficultySettings, selectedDifficulty);
         }
     }
