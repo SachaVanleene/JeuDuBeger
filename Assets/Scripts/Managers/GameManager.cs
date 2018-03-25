@@ -148,6 +148,9 @@ namespace Assets.Script.Managers
             Time.timeScale = 0;
             PanelBackToMenu.SetActive(true);
 
+            GameOverManager.instance.SetFavoriteEnclosure();
+            GameOverManager.instance.SetFavoriteTrap();
+
             GameOverChart.SetActive(true);
             
             PanelBackToMenu.GetComponent<ScriptBackToMenuPanel>().Pause(gameOver : true);
@@ -199,7 +202,12 @@ namespace Assets.Script.Managers
                     toBeAdded++;
                 earnGold(toBeAdded, true);
 
-
+                if (p.GoldReward == GameVariables.EnclosureGold.close)
+                    GameOverManager.instance.goldPerEnclosure[0] += toBeAdded;
+                else if (p.GoldReward == GameVariables.EnclosureGold.medium)
+                    GameOverManager.instance.goldPerEnclosure[1] += toBeAdded;
+                else
+                    GameOverManager.instance.goldPerEnclosure[2] += toBeAdded;
             }
             TextGolds.text = gold + " gold";
         }

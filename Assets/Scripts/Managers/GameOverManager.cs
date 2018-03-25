@@ -1,14 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using System.Linq;
 
 public class GameOverManager : MonoBehaviour {
 
     public static GameOverManager instance = null;
 
-    [Header("Variables references")]
+    [HideInInspector]
+    public List<int> goldPerEnclosure = new List<int>(3);
+    [HideInInspector]
+    public List<int> goldPerTrap = new List<int>(4);
 
+    [Header("Variables references")]
     public SO.IntVariable DeathCount;
     public SO.IntVariable PlayerDamageDealt;
     public SO.IntVariable GoldEarned;
@@ -58,5 +62,31 @@ public class GameOverManager : MonoBehaviour {
         WolvesGold.Set(0);
         EnclosureGold.Set(0);
         FavoriteEnclosure.Set("None");
+    }
+
+    public void SetFavoriteEnclosure()
+    {
+        int maxIndex = goldPerEnclosure.IndexOf(goldPerEnclosure.Max());
+
+        if (maxIndex == 0)
+            FavoriteEnclosure.Set("Close");
+        else if (maxIndex == 1)
+            FavoriteEnclosure.Set("Medium");
+        else
+            FavoriteEnclosure.Set("Far");
+    }
+
+    public void SetFavoriteTrap()
+    {
+        int maxIndex = goldPerTrap.IndexOf(goldPerTrap.Max());
+
+        if (maxIndex == 0)
+            FavoriteTrap.Set("Needle");
+        else if (maxIndex == 1)
+            FavoriteTrap.Set("Bait");
+        else if (maxIndex == 2)
+            FavoriteTrap.Set("Mud");
+        else
+            FavoriteTrap.Set("Landmine");
     }
 }
