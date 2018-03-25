@@ -8,7 +8,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab39a636d4f0663428eac4ac930687d7, type: 3}
-  m_Name: FavoriteTrap
+  m_Script: {fileID: 11500000, guid: 20963f5639930a04bb33e952d9105db1, type: 3}
+  m_Name: Lake
   m_EditorClassIdentifier: 
-  value: 
+  life: 0
+  enclosureDamage: 0
+  farmerDamage: 0
+  goldReward: 0
+  range: 0

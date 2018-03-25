@@ -59,6 +59,8 @@ namespace Assets.Script.Managers
                 TotalSuperSheeps = 0;
             DayStart();
             Cursor.visible = false;
+
+            GetComponent<DifficultyManager>().SetDiffilculty();
         }
 
         private void Update()

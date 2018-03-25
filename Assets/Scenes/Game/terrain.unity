@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.00007877025, g: 0.00000042345133, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -19462,6 +19462,7 @@ GameObject:
   - component: {fileID: 1958775831}
   - component: {fileID: 1958775830}
   - component: {fileID: 1958775834}
+  - component: {fileID: 1958775835}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -19539,6 +19540,8 @@ MonoBehaviour:
   PanelBackToMenu: {fileID: 1786576978}
   GameOverChart: {fileID: 1791846841}
   gameOver: 0
+  difficultySO: {fileID: 11400000, guid: cc190e2fa446ab442a5d774a304c0b69, type: 2}
+  selectedDifficulty: 0
 --- !u!4 &1958775833
 Transform:
   m_ObjectHideFlags: 0
@@ -19565,6 +19568,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ce03e0d7d81095439dd5a4c7eef68b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  goldPerEnclosure: 
+  goldPerTrap: 
   DeathCount: {fileID: 11400000, guid: 1416ed1105375b4468f965db31727859, type: 2}
   PlayerDamageDealt: {fileID: 11400000, guid: 8376c293c9ed4a24ab0ecd3bae3b50e7, type: 2}
   GoldEarned: {fileID: 11400000, guid: 5fb85c8c621659c45bdffa71e4a612a4, type: 2}
@@ -19581,6 +19586,24 @@ MonoBehaviour:
   WolvesGold: {fileID: 11400000, guid: aee9cb5eaff47a941af0ba65f71c8458, type: 2}
   EnclosureGold: {fileID: 11400000, guid: db9ad47f5936c3e4baf83661437d0b6d, type: 2}
   FavoriteEnclosure: {fileID: 11400000, guid: 06c838530de9cd54293255bea128cd17, type: 2}
+--- !u!114 &1958775835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1958775829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91c916d6dd00d214699291c5ccd6d03b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  difficultySettings: {fileID: 11400000, guid: cc190e2fa446ab442a5d774a304c0b69, type: 2}
+  wolvesStats:
+  - {fileID: 11400000, guid: 5e3fe05da282975478606d0759346626, type: 2}
+  - {fileID: 11400000, guid: 6c5809573b907e645817efdd6d81e933, type: 2}
+  - {fileID: 11400000, guid: beb6041ab1cf5824eb8b463e08aae652, type: 2}
+  - {fileID: 11400000, guid: 560180555ec1afb48b09e921493cdc56, type: 2}
+  selectedDifficulty: 0
 --- !u!1 &1966945985
 GameObject:
   m_ObjectHideFlags: 0
