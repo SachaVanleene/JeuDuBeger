@@ -61,6 +61,7 @@ public class ProfileManager : MonoBehaviour {
         else
         {
             Debug.LogWarning("file not found");
+            CreateProfile("Lost Save");
         }
     }
     static public void SaveProfile()

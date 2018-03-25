@@ -78,9 +78,9 @@ public class MainMenu : MonoBehaviour {
     {
         HideAllPanels();
         ProfileManager.RetreiveSaves();
+        LogPanel.SetActive(true);
         LogPanel.GetComponent<ListBehaviour>().CreateListPanel();
         LogButton.SetActive(false);
-        LogPanel.SetActive(true);
         DeleteButton.SetActive(false);
     }
     public void HideLogPanel()

@@ -301,6 +301,9 @@ namespace Assets.Script.Managers
         private void callAchievement(AchievementEvent achEvent, int step = 1)
         {
             List<AchievementInfo> endedAchievements = SProfilePlayer.getInstance().AchievementsManager.AddStepAchievement(achEvent, step);
+            // hack fix to prevent bug when quitting the game
+            if (achEvent == AchievementEvent.quit)
+                return;
             if(endedAchievements != null)
             {
                 foreach(var achInfo in endedAchievements)
