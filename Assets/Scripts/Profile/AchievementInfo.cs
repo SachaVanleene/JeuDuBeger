@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Script.Managers;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,7 +30,9 @@ public class AchievementInfo {
     public bool EventNotification(AchievementEvent ev)
     {   // return value indicate if the achievement must unsubscrib from the event
         if (manager.Completion[ev] >= Aim[ev])
+        {
             return true;
+        }
         return false;
     }
     public bool IsComplete()

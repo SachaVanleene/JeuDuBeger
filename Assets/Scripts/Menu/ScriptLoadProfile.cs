@@ -5,8 +5,9 @@ using UnityEngine;
 public class ScriptLoadProfile : MonoBehaviour {
 
     public string fullName;
+    public ProfileManager manager;
     public void Load()
     {
-        ProfileManager.LoadProfile(fullName);
+        manager.LoadProfile(fullName);
     }
 }

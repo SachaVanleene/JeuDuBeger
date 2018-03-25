@@ -16,6 +16,20 @@ public class AchievementsManager {
         this.listeners = new Dictionary<AchievementEvent, List<AchievementInfo>>();
         this.Completion = new Dictionary<AchievementEvent, int>();
     }
+
+    override public string ToString()
+    {
+        string str = "Achievement Manager :";
+        foreach(var ev in listeners.Keys)
+        {
+            str += "\nkey " + ev + " : ";
+            foreach(var achInfo in listeners[ev])
+            {
+                str += achInfo.Name;
+            }
+        }
+        return str;
+    }
     
     public AchievementInfo GetAchievementByName(string name)
     {
@@ -27,22 +41,32 @@ public class AchievementsManager {
         return null;
     }
 
-    public void AddStepAchievement(AchievementEvent eventAchievement, int step = 1)
+    public List<AchievementInfo> AddStepAchievement(AchievementEvent eventAchievement, int step = 1)
     {
-        if (!listeners.ContainsKey(eventAchievement))
+        if (!listeners.ContainsKey(eventAchievement) || listeners[eventAchievement].Count <= 0)
         {
             Debug.LogWarning("No achievement is listening (anymore ?) to this event : "
                 + eventAchievement);
-            return;
+            return null;
         }
         Completion[eventAchievement] += step;
         List<AchievementInfo> unsubscribers = new List<AchievementInfo>();
         foreach (var l in listeners[eventAchievement])
-            if(l.EventNotification(eventAchievement))
+        {
+            if (l.EventNotification(eventAchievement))
                 unsubscribers.Add(l);
-
+        }
+            
+        List<AchievementInfo> returnValue = new List<AchievementInfo>();
         foreach (var achInfo in unsubscribers)
+        {
+            if(achInfo.IsComplete())
+            {
+                returnValue.Add(achInfo);
+            }
             this.Unsubscribe(eventAchievement, achInfo);
+        }
+        return (returnValue.Count > 0) ? returnValue : null;
     }
 
     public void Subscribe(AchievementEvent listen, AchievementInfo ach)
@@ -51,7 +75,6 @@ public class AchievementsManager {
         {
             listeners.Add(listen, new List<AchievementInfo>());
             Completion.Add(listen, 0);
-            return;
         }
         listeners[listen].Add(ach);
     }
