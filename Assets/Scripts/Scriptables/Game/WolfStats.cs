@@ -12,28 +12,29 @@ namespace SO
         public float goldReward;
         public float range;
 
-        private float currentLife;
-        private float currentEnclosureDamage;
-        private float currentPlayerDamage;
-        private float currentGoldReward;
-        private float currentRange;
+        
+        public float CurrentLife { get; set; }
+        public float CurrentEnclosureDamage { get; set; }
+        public float CurrentPlayerDamage { get; set; }
+        public  float CurrentGoldReward { get; set; }
+        public float CurrentRange { get; set; }
 
         public void SetDifficulty(SO.Difficulty difficultySettings, int selectedDifficulty)
         {
-            currentLife = life;
-            currentEnclosureDamage = enclosureDamage;
-            currentPlayerDamage = playerDamage;
-            currentGoldReward = goldReward;
+            CurrentLife = life;
+            CurrentEnclosureDamage = enclosureDamage;
+            CurrentPlayerDamage = playerDamage;
+            CurrentGoldReward = goldReward;
 
-            currentEnclosureDamage *= difficultySettings.enclosureDamage[selectedDifficulty];
-            currentPlayerDamage *= difficultySettings.playerDamage[selectedDifficulty];
-            currentLife *= difficultySettings.wolfLife[selectedDifficulty];
-            currentGoldReward *= difficultySettings.gold[selectedDifficulty];
+            CurrentEnclosureDamage *= difficultySettings.enclosureDamage[selectedDifficulty];
+            CurrentPlayerDamage *= difficultySettings.playerDamage[selectedDifficulty];
+            CurrentLife *= difficultySettings.wolfLife[selectedDifficulty];
+            CurrentGoldReward *= difficultySettings.gold[selectedDifficulty];
         }
 
         public void IncreaseLife(float multiplier)
         {
-            currentLife += life * multiplier;
+            CurrentLife += life * multiplier;
         }
     }
 }
