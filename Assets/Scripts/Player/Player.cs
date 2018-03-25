@@ -28,7 +28,8 @@ public class Player : MonoBehaviour {
             if (!alive)
             {
                 hMove.AddVelocity(Vector3.zero, respawnDelay, 0, true);
-                anim.SetTrigger("deathMoment");  
+                anim.SetTrigger("deathMoment");
+                GameOverManager.instance.DeathCount.Add(1);
             }
 
         }

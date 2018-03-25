@@ -18,12 +18,17 @@ public class WolfHealth : MonoBehaviour
         alive = true;
     }
 
-    public void takeDamage(int damage, bool killedByWeapon = false)
+    public void takeDamage(int damage, bool hitByWeapon = false)
     {
         health -= damage;
         //anim.SetTrigger("Hit");
 
-        if (health < 0 && alive)
+        if (hitByWeapon)
+            GameOverManager.instance.PlayerDamageDealt.Add((health < 0) ? damage + health : damage);
+        else
+            GameOverManager.instance.TrapsDamageDealt.Add((health < 0) ? damage + health : damage);
+
+        if (health <= 0 && alive)
         {
             alive = false;
             if (gameObject.tag == "CommonWolf")
@@ -41,6 +46,14 @@ public class WolfHealth : MonoBehaviour
             anim.SetTrigger("dead");
             Destroy(gameObject, 2.5f);
             Assets.Script.Managers.GameManager.instance.DeathWolf(this.gameObject);
+
+
+            GameOverManager.instance.Wolves.Add(1);
+
+            if (hitByWeapon)
+                GameOverManager.instance.WolvesKilledByWeapon.Add(1);
+            else
+                GameOverManager.instance.WolvesKilledByTrap.Add(1);
         }
     }
 

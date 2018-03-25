@@ -147,7 +147,9 @@ namespace Assets.Script.Managers
             Cursor.visible = true;
             Time.timeScale = 0;
             PanelBackToMenu.SetActive(true);
+
             GameOverChart.SetActive(true);
+            
             PanelBackToMenu.GetComponent<ScriptBackToMenuPanel>().Pause(gameOver : true);
         }
         public void BackToMenu()
@@ -195,7 +197,9 @@ namespace Assets.Script.Managers
                 int toBeAdded = Mathf.RoundToInt((nb - (2 * Mathf.Log(nb))) * p.GoldReward);
                 if (toBeAdded != (int)((nb - (2 * Mathf.Log(nb))) * p.GoldReward)) //  round up
                     toBeAdded++;
-                earnGold(toBeAdded);
+                earnGold(toBeAdded, true);
+
+
             }
             TextGolds.text = gold + " gold";
         }
@@ -241,11 +245,18 @@ namespace Assets.Script.Managers
             if(goal == 355 && Spawns.GetComponent<Spawn_wolf>().hasWolfAlive())
                 displayInfo("The Night will end only when the wolfs are dead", 4);
         }
-        private void earnGold(int value)
+        private void earnGold(int value, bool enclosureGold = false)
         {
             gold += value;
             TextGolds.text = gold + " gold";
             callAchievement(AchievementEvent.goldEarn, value);
+
+            GameOverManager.instance.GoldEarned.Add(value);
+
+            if (enclosureGold)
+                GameOverManager.instance.EnclosureGold.Add(value);
+            else
+                GameOverManager.instance.WolvesGold.Add(value);
         }
         public bool SpendGold(int value)
         { //  allow the player to purchase
@@ -253,6 +264,8 @@ namespace Assets.Script.Managers
                 return false;
             gold -= value;
             TextGolds.text = gold + " gold";
+
+            GameOverManager.instance.GoldSpent.value -= value;
 
             callAchievement(AchievementEvent.goldSpent, value);
             return true;

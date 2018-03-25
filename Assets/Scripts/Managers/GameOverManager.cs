@@ -5,28 +5,58 @@ using UnityEngine.UI;
 
 public class GameOverManager : MonoBehaviour {
 
-    public SO.StringVariable DeathCount;
-    public SO.StringVariable PlayerDamageDealt;
-    public SO.StringVariable GoldEarned;
-    public SO.StringVariable TotalSheeps;
+    public static GameOverManager instance = null;
 
-    public SO.StringVariable PlacedTraps;
-    public SO.StringVariable TrapsDamageDealt;
-    public SO.StringVariable GoldSpent;
+    [Header("Variables references")]
+
+    public SO.IntVariable DeathCount;
+    public SO.IntVariable PlayerDamageDealt;
+    public SO.IntVariable GoldEarned;
+    public SO.IntVariable TotalSheeps;
+
+    public SO.IntVariable PlacedTraps;
+    public SO.IntVariable TrapsDamageDealt;
+    public SO.IntVariable GoldSpent;
     public SO.StringVariable FavoriteTrap;
 
-    public SO.StringVariable Wolves;
-    public SO.StringVariable Werewolves;
-    public SO.StringVariable WolvesKilledByWeapon;
-    public SO.StringVariable WolvesKilledByTrap;
+    public SO.IntVariable Wolves;
+    public SO.IntVariable Werewolves;
+    public SO.IntVariable WolvesKilledByWeapon;
+    public SO.IntVariable WolvesKilledByTrap;
 
-    public SO.StringVariable WolvesGold;
-    public SO.StringVariable EnclosureGold;
+    public SO.IntVariable WolvesGold;
+    public SO.IntVariable EnclosureGold;
     public SO.StringVariable FavoriteEnclosure;
 
-    int a = 0;
-    private void OnEnable()
+    private void Awake()
     {
-        DeathCount.Set(a++);
+        if (instance == null)
+            instance = this;
+        else if (instance != this)
+            Destroy(gameObject);
+
+        RefreshVariables();
+    }    
+
+    public void RefreshVariables()
+    {
+        DeathCount.Set(0);
+        PlayerDamageDealt.Set(0);
+        GoldEarned.Set(0);
+        TotalSheeps.Set(0);
+
+        PlacedTraps.Set(0);
+        TrapsDamageDealt.Set(0);
+        GoldSpent.Set(0);
+        FavoriteTrap.Set("None");
+
+        Wolves.Set(0);
+        Werewolves.Set(0);
+        WolvesKilledByWeapon.Set(0);
+        WolvesKilledByTrap.Set(0);
+
+        WolvesGold.Set(0);
+        EnclosureGold.Set(0);
+        FavoriteEnclosure.Set("None");
     }
 }

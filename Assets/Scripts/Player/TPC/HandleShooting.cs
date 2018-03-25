@@ -141,7 +141,9 @@ namespace TPC
                         {
                             if (target.GetComponent<WolfBossHealth>())
                             {
-                                target.GetComponent<WolfBossHealth>().takeDamage(20);
+                                target.GetComponent<WolfBossHealth>().takeDamage(20, true);
+                                if (!target.GetComponent<WolfBossHealth>().alive)
+                                    StartCoroutine(KillFeedBack());
                             }
                         }
                         //Focusing Player, no need for boss cause he will focus player whenever he is alive
