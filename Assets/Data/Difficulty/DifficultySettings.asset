@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
-  m_Name: DifficulySettings
+  m_Name: DifficultySettings
   m_EditorClassIdentifier: Assembly-CSharp:SO:Difficulty
   wolfLife:
   - 0.5
@@ -17,8 +17,8 @@ MonoBehaviour:
   - 1.5
   enclosureDamage:
   - 0.5
-  - 0.5
-  - 0.5
+  - 1
+  - 1.5
   playerDamage:
   - 0.5
   - 1
