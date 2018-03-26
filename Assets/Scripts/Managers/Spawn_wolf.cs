@@ -20,7 +20,7 @@ namespace Assets.Script.Managers
         public void Begin_Night()
         {
             int number_wolf;
-            Cycle = gameManager.GetCycle();
+            Cycle = GameManager.instance.GetCycle();
             // + 5 loups à chaque vagues
             if (Cycle <= 20)
             {
