@@ -11,13 +11,13 @@ namespace SO
         public float playerDamage;
         public float goldReward;
         public float range;
+        public float delay;
 
         
         public float CurrentLife { get; set; }
         public float CurrentEnclosureDamage { get; set; }
         public float CurrentPlayerDamage { get; set; }
         public  float CurrentGoldReward { get; set; }
-        public float CurrentRange { get; set; }
 
         public void SetDifficulty(SO.Difficulty difficultySettings, int selectedDifficulty)
         {

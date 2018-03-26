@@ -10,9 +10,11 @@ public class WolfBossHealth : MonoBehaviour
     private int health;
     public bool alive;
 
+    public SO.WolfStats wolfStats;
+
     private void Awake()
     {
-        health = 300;
+        health = (int) wolfStats.CurrentLife;
         anim = GetComponent<Animator>();
         cloud = GetComponentInChildren<ParticleSystem>();
         alive = true;
