@@ -8,9 +8,9 @@ public class GameOverManager : MonoBehaviour {
     public static GameOverManager instance = null;
 
     [HideInInspector]
-    public List<int> goldPerEnclosure = new List<int>(3);
+    public List<int> goldPerEnclosure;
     [HideInInspector]
-    public List<int> goldPerTrap = new List<int>(4);
+    public List<int> goldPerTrap;
 
     [Header("Variables references")]
     public SO.IntVariable DeathCount;
@@ -37,13 +37,19 @@ public class GameOverManager : MonoBehaviour {
         if (instance == null)
             instance = this;
         else if (instance != this)
+        {
             Destroy(gameObject);
+            return;
+        }
 
         RefreshVariables();
     }    
 
     public void RefreshVariables()
     {
+        goldPerTrap = new List<int>(new int[] {0,0,0,0});
+        goldPerEnclosure = new List<int>(new int[] { 0, 0, 0 });
+
         DeathCount.Set(0);
         PlayerDamageDealt.Set(0);
         GoldEarned.Set(0);

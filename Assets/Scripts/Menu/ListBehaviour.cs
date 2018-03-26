@@ -22,14 +22,12 @@ public class ListBehaviour : MonoBehaviour {
     }
     public void ResetList()
     {
-        Debug.Log("reset");
         if (elements != null)
             foreach (var go in elements)
             {
                 UnityEngine.Object.DestroyImmediate(go);
             }
         else
-            Debug.Log("nothing to delete");
         elements = new List<GameObject>();
     }
     public void CreateListPanel() {
@@ -52,7 +50,6 @@ public class ListBehaviour : MonoBehaviour {
         ListProfiles.GetComponent<RectTransform>().sizeDelta = new Vector2(220f * ProfileManager.ProfilesFound.Count, 0);
         ListProfiles.transform.localPosition += new Vector3((ProfileManager.ProfilesFound.Count * 220f) / 2, 0, 0);
         float x = (ProfileManager.ProfilesFound.Count * 220f) / 2 + 110f;
-        Debug.Log(ProfileManager.ProfilesFound.Count);
         foreach(var data in ProfileManager.ProfilesFound)
         {
             x -= 220;
