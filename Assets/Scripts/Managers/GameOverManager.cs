@@ -79,7 +79,7 @@ public class GameOverManager : MonoBehaviour {
     public void SetFavoriteTrap()
     {
         int maxIndex = goldPerTrap.IndexOf(goldPerTrap.Max());
-
+        //c'est plus joli les switch :p
         if (maxIndex == 0)
             FavoriteTrap.Set("Needle");
         else if (maxIndex == 1)

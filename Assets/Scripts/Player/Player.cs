@@ -92,6 +92,9 @@ public class Player : MonoBehaviour {
     Color32 frozenColor = new Color32(54, 167, 204, 255);
     Color32 normalColor = new Color32(255, 255, 255, 255);
 
+    //Audio
+    AudioManagerPlayer script_audio;
+
     //Reference To Change Color Of The Player
     [Space]
     public GameObject goAttachedToModel;
@@ -134,6 +137,7 @@ public class Player : MonoBehaviour {
         timeNeededForBeingFrozen = 2f;
         timeNeededToDodgeFreeze = 1f;
 
+        script_audio = GetComponent<AudioManagerPlayer>();
     }
 
 
@@ -142,6 +146,7 @@ public class Player : MonoBehaviour {
         timerForLastCallingFreeze = 0f;
         if (!isFreezing && canBeFrozen)
         {
+            script_audio.PlayFreeze();
             isFreezing = true;
             timer = 0f;
         }
@@ -188,6 +193,7 @@ public class Player : MonoBehaviour {
         timerForLastCallingFreeze += Time.deltaTime;
         if(timerForLastCallingFreeze >= timeNeededToDodgeFreeze && isFreezing)
         {
+            script_audio.StopFreeze();
             isFreezing = false;
             Debug.LogError("Remise à 0 du freeze");
         }
@@ -202,13 +208,12 @@ public class Player : MonoBehaviour {
 
         recoverTimer -= Time.deltaTime;
         
-        if (recoverTimer  + recoverDelay < 0 && actualHealth < maxHealth && !isHealing)
+        if (recoverTimer  + recoverDelay < 0 && actualHealth < maxHealth && !isHealing && Alive)
         {
             StartCoroutine(Recover());
-            imageTimer = 0;
         }
 
-        if (isHealing)
+        if (isHealing && !Alive)
         {
             imageTimer += Time.deltaTime / healTick;
             damageImage.color = Color.Lerp(damageImage.color, temp, imageTimer);
@@ -216,6 +221,7 @@ public class Player : MonoBehaviour {
 
         if (!Alive)
         {
+            Debug.Log(temp.a);
             imageTimer += Time.deltaTime / respawnDelay;
             damageImage.color = Color.Lerp(damageImage.color, temp, imageTimer);
         }
@@ -250,6 +256,7 @@ public class Player : MonoBehaviour {
     IEnumerator Respawn()
     {
         temp.a = 0;
+        imageTimer = 0;
         yield return respawnWait;
         Alive = true;
         actualHealth = maxHealth;

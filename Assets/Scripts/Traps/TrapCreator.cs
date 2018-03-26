@@ -155,6 +155,7 @@ namespace Assets.Scripts.Traps
                     Quaternion.LookRotation(Terrain.terrainData.GetInterpolatedNormal(normalizedPos.x, normalizedPos.y),
                         Terrain.terrainData.GetInterpolatedNormal(normalizedPos.x, normalizedPos.y));
                 trap.transform.position = GetCursorPosition();
+                GameOverManager.instance.PlacedTraps.Add(1);
             }
         }
 

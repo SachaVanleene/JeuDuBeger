@@ -48,7 +48,7 @@ namespace Assets.Scripts
                 public static readonly int durability = 100;
                 public static readonly int wolfDamage = 1;
                 public static readonly List<int> playerDamage = new List<int>() {5, 10, 20};
-                public static readonly List<int> p = new List<int>() {20, 20, 10, 100};
+                public static readonly List<int> upgradePrice = new List<int>() {20, 50, 100};
             }
 
             public static class LandMine

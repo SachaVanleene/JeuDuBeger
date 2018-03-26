@@ -24,6 +24,11 @@ namespace Assets.Script.Traps
             UpgradeCosts = new List<int>(GameVariables.Trap.LandMine.upgradePrice);
         }
 
+        public override void LevelUp ()
+        {
+            base.LevelUp();
+
+        }
 
         public override IEnumerator Activate(GameObject go)
         {

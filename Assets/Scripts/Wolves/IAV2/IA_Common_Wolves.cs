@@ -37,6 +37,9 @@ public class IA_Common_Wolves : MonoBehaviour {
     private Vector3 direction;
     float rotationSpeed;
 
+    //audio
+    AudioManagerWolves script_audio;
+
     private void Awake()
     {
         timer = 0f;
@@ -67,6 +70,7 @@ public class IA_Common_Wolves : MonoBehaviour {
         NavMesh.pathfindingIterationsPerFrame = 500;
         enclos = GameObject.FindGameObjectsWithTag("Enclos");
         GetTargetEnclos();
+        script_audio = GetComponent<AudioManagerWolves>();
     }
 
     public void updateTarget(Transform target)
@@ -333,6 +337,7 @@ public class IA_Common_Wolves : MonoBehaviour {
 
     void Attack()
     {
+        script_audio.PlayAttackCommonWolvesSound();
         if (targetTag == "Player")
         {
             targetTransform.gameObject.GetComponent<Player>().takeDamage(playerDamage);

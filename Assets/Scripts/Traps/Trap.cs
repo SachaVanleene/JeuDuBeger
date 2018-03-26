@@ -76,9 +76,9 @@ namespace Assets.Script.Traps
 
         }
 
-        public void LevelUp()
+        public virtual void LevelUp()
         {
-            if (GameManager.instance.SpendGold(UpgradeCosts[Level - 1]) && Level < 3)
+            if (GameManager.instance.SpendGold(UpgradeCosts[Level-1]))
             {
                 Level++;
             }

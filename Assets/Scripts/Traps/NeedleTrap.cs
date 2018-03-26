@@ -15,7 +15,7 @@ namespace Assets.Script.Traps
             Pows = GameVariables.Trap.NeedleTrap.playerDamage;
             DurabilityMax = GameVariables.Trap.NeedleTrap.durability;
             Durability = DurabilityMax;
-            UpgradeCosts = new List<int>(GameVariables.Trap.NeedleTrap.p);
+            UpgradeCosts = new List<int>(GameVariables.Trap.NeedleTrap.upgradePrice);
         }
 
 

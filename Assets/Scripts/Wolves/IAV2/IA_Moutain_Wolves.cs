@@ -42,6 +42,9 @@ public class IA_Moutain_Wolves : MonoBehaviour {
     private ParticleSystem waterJet;
     public GameObject jets;
 
+    //Audio
+    AudioManagerWolves script_audio;
+
     private void Awake()
     {
         timer = 0f;
@@ -69,6 +72,8 @@ public class IA_Moutain_Wolves : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+
+        script_audio = GetComponent<AudioManagerWolves>();
         waterJet = jets.GetComponentInChildren<ParticleSystem>();
         anim = GetComponent<Animator>();
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
@@ -82,6 +87,7 @@ public class IA_Moutain_Wolves : MonoBehaviour {
     {
         agent.updateRotation = true;
         waterJet.Stop();
+        script_audio.StopMountainAttack();
         RealaseBarrer();
         RealeaseDlegate();
         targetInRange = false; // Si nouvelle target supposé qu'elle n'est pas en rnage sinon bug dans les invoke
@@ -325,6 +331,7 @@ public class IA_Moutain_Wolves : MonoBehaviour {
             {
                 enclosFound = true;
                 GetTargetEnclos();
+                //focusPlayer();
             }
         }
         timer += Time.deltaTime;
@@ -354,12 +361,14 @@ public class IA_Moutain_Wolves : MonoBehaviour {
                 // Debug.LogError("Attaque");
                 anim.SetBool("attaque", true);
                 waterJet.Play();
+                script_audio.PlayAttackMountainWolvesSound();
                 agent.updateRotation = false;
             }
             if (!targetInRange)
             {
                 anim.SetBool("attaque", false);
                 waterJet.Stop();
+                script_audio.StopMountainAttack();
             }
         }
     }

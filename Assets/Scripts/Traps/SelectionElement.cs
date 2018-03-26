@@ -15,7 +15,7 @@ namespace Assets.Scripts.Traps
             switch (name)
             {
                 case "Needle":
-                    value = GameVariables.Trap.NeedleTrap.p[0];
+                    value = GameVariables.Trap.NeedleTrap.upgradePrice[0];
                     break;
                 case "Bait":
                     value = GameVariables.Trap.Decoy.upgradePrice[0];
