@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.0009849524, g: 0.000029672015, b: 6.589647e-10, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -20325,7 +20325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91c916d6dd00d214699291c5ccd6d03b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  difficultySettings: {fileID: 11400000, guid: 061d7e0431aa73b46bf59eb87eae3bc8, type: 2}
+  difficultySettings: {fileID: 11400000, guid: d4ad8276721db3a4581b1dee0076e0ae, type: 2}
   wolvesStats:
   - {fileID: 11400000, guid: 5e3fe05da282975478606d0759346626, type: 2}
   - {fileID: 11400000, guid: 6c5809573b907e645817efdd6d81e933, type: 2}
