@@ -9,10 +9,18 @@ public class DifficultyManager : MonoBehaviour
     public List<SO.WolfStats> wolvesStats;
     public int selectedDifficulty;
 
+    private void Start()
+    {
+
+        SetDiffilculty();
+    }
+
     public void SetDiffilculty()
     {
         
         selectedDifficulty = SProfilePlayer.getInstance().Difficulty;
+        Debug.Log(selectedDifficulty);
+        Debug.Log(difficultySettings.gold[0]);
         foreach (SO.WolfStats wolfStats in wolvesStats)
         {
             wolfStats.SetDifficulty(difficultySettings, selectedDifficulty);
