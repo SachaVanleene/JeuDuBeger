@@ -1619,6 +1619,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alive: 0
+  wolfStats: {fileID: 11400000, guid: 6c5809573b907e645817efdd6d81e933, type: 2}
 --- !u!114 &114313188842531928
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1632,7 +1633,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetTransform: {fileID: 0}
   targetTag: 
-  fakenclos: {fileID: 0}
+  stats: {fileID: 11400000, guid: 6c5809573b907e645817efdd6d81e933, type: 2}
 --- !u!137 &137759366394475324
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

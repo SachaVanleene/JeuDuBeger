@@ -6,41 +6,39 @@ namespace Assets.Scripts
     {
         public static class Wolf
         {
-            public static class Forest
-            {
-                public static readonly int life = 100;
-                public static readonly int enclosureDamage = 1;
-                public static readonly int farmerDamage = 1;
-                public static readonly int gold = 30;
-                public static readonly float range = 1.0f;
-            }
 
-            public static class Water
-            {
-                public static readonly int life = 100;
-                public static readonly int enclosureDamage = 1;
-                public static readonly int farmerDamage = 1;
-                public static readonly int gold = 30;
-                public static readonly float range = 1.0f;
-            }
+            public static readonly int life = 100;
+            public static readonly int enclosureDamage = 10;
+            public static readonly int farmerDamage = 10;
+            public static readonly int gold = 30;
+            public static readonly float range = 1.0f;
+        }
 
-            public static class Mountain
-            {
-                public static readonly int life = 100;
-                public static readonly int enclosureDamage = 1;
-                public static readonly int farmerDamage = 1;
-                public static readonly int gold = 30;
-                public static readonly float range = 1.0f;
-            }
+        public static class Water
+        {
+            public static readonly int life = 100;
+            public static readonly float enclosureDamage = 0.1f;
+            public static readonly float farmerDamage = 0.1f;
+            public static readonly int gold = 30;
+            public static readonly float range = 1.0f;
+        }
 
-            public static class Boss
-            {
-                public static readonly int life = 100;
-                public static readonly int enclosureDamage = 1;
-                public static readonly int farmerDamage = 1;
-                public static readonly int gold = 30;
-                public static readonly float range = 1.0f;
-            }
+        public static class Mountain
+        {
+            public static readonly int life = 100;
+            public static readonly float enclosureDamage = 0.1f;
+            public static readonly float farmerDamage = 0.1f;
+            public static readonly int gold = 30;
+            public static readonly float range = 1.0f;
+        }
+
+        public static class Boss
+        {
+            public static readonly int life = 100;
+            public static readonly int enclosureDamage = 10;
+            public static readonly int farmerDamage = 10;
+            public static readonly int gold = 30;
+            public static readonly float range = 1.0f;
         }
 
         public static class Trap
@@ -49,32 +47,32 @@ namespace Assets.Scripts
             {
                 public static readonly int durability = 100;
                 public static readonly int wolfDamage = 1;
-                public static readonly List<int> playerDamage = new List<int>() { 5, 10, 20 };
-                public static readonly List<int> p = new List<int>(){20, 20, 10, 100};            
+                public static readonly List<int> playerDamage = new List<int>() {5, 10, 20};
+                public static readonly List<int> p = new List<int>() {20, 20, 10, 100};
             }
 
             public static class LandMine
             {
-                public static readonly List<float> radius = new List<float>(){10, 15, 20};
+                public static readonly List<float> radius = new List<float>() {10, 15, 20};
                 public static readonly int wolfDamage = 1;
-                public static readonly List<int> playerDamage = new List<int>(){ 50, 75, 100 };
-                public static readonly List<int> upgradePrice = new List<int>(){ 5, 10, 20 };
+                public static readonly List<int> playerDamage = new List<int>() {50, 75, 100};
+                public static readonly List<int> upgradePrice = new List<int>() {5, 10, 20};
             }
 
             public static class Decoy
             {
                 public static readonly int life = 100;
-                public static readonly List<float> speed = new List<float>(){0.8f, 0.6f, 0.4f};
+                public static readonly List<float> speed = new List<float>() {0.8f, 0.6f, 0.4f};
                 public static readonly float radius = 1.0f;
-                public static readonly List<int> upgradePrice = new List<int>() { 20, 50, 100 };
+                public static readonly List<int> upgradePrice = new List<int>() {20, 50, 100};
             }
 
             public static class Mud
             {
                 public static readonly int durability = 100;
-                public static readonly List<int> wolfSlow = new List<int>(){10, 20, 40 };
+                public static readonly List<int> wolfSlow = new List<int>() {10, 20, 40};
                 public static readonly int playerSlow = 10;
-                public static readonly List<int> upgradePrice = new List<int>(){ 20, 50, 100 };
+                public static readonly List<int> upgradePrice = new List<int>() {20, 50, 100};
             }
         }
 
@@ -136,20 +134,32 @@ namespace Assets.Scripts
             }
         }
 
-        //Player multiplier
-        public static class AchievementBonus
+        public static class Achievements
         {
+            public static class Bonus
+            {
+                //  players boosts 
 
+            }
+
+            public static class PopUp
+            {
+                public static readonly float speedCome = 45f;
+                public static readonly float speedBack = 35f;
+                public static readonly float timeStay = 2f;
+            }
         }
 
         public static class Round
         {
 
         }
+
         public static class Sheep
         {
             //public static readonly float flyDuration = 20f;
             public static readonly float flySpeed = 1f;
+
             public static readonly float walkSpeed = 2f;
             public static readonly float distMaxSound = 15f;
             public static readonly float distMinSound = 5f;
@@ -157,8 +167,9 @@ namespace Assets.Scripts
             public static readonly float volumeSoundDeath = .15f;
             public static readonly float volumeMusicSky = 1f;
             public static readonly string stringSheepSound = "sheepSound";
-            public static readonly string stringSheepSoundDeath = "SheepDeath"; 
+            public static readonly string stringSheepSoundDeath = "SheepDeath";
         }
+
         public static class Cycle
         {
             public static readonly float dayDuration = 300f;
@@ -170,3 +181,4 @@ namespace Assets.Scripts
         }
     }
 }
+

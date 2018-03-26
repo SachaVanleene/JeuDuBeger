@@ -20,7 +20,8 @@ namespace Assets.Script.Managers
         public GameObject PanelBackToMenu;
         public GameObject GameOverChart;
         public GameObject TrapsCreationPannel;
-
+        public GameObject AchievementPopUp;
+                
         public int TotalSheeps { get; set; }    // player inventory relativ
         public int TotalSuperSheeps { get; set; }
         public bool IsTheSunAwakeAndTheBirdAreSinging { get; set; }
@@ -61,6 +62,8 @@ namespace Assets.Script.Managers
                 TotalSuperSheeps = 0;
             DayStart();
             Cursor.visible = false;
+
+            GetComponent<DifficultyManager>().SetDiffilculty();
         }
 
         private void Update()
@@ -149,12 +152,18 @@ namespace Assets.Script.Managers
             Cursor.visible = true;
             Time.timeScale = 0;
             PanelBackToMenu.SetActive(true);
+
+            GameOverManager.instance.SetFavoriteEnclosure();
+            GameOverManager.instance.SetFavoriteTrap();
+
             GameOverChart.SetActive(true);
+            
             PanelBackToMenu.GetComponent<ScriptBackToMenuPanel>().Pause(gameOver : true);
         }
         public void BackToMenu()
         {
-            callAchievement(AchievementEvent.quit);
+            if(!gameOver)
+                callAchievement(AchievementEvent.quit);
             SceneManager.LoadScene("MainMenu");
         }
         public void KillSheep()
@@ -197,7 +206,14 @@ namespace Assets.Script.Managers
                 int toBeAdded = Mathf.RoundToInt((nb - (2 * Mathf.Log(nb))) * p.GoldReward);
                 if (toBeAdded != (int)((nb - (2 * Mathf.Log(nb))) * p.GoldReward)) //  round up
                     toBeAdded++;
-                earnGold(toBeAdded);
+                earnGold(toBeAdded, true);
+
+                if (p.GoldReward == GameVariables.EnclosureGold.close)
+                    GameOverManager.instance.goldPerEnclosure[0] += toBeAdded;
+                else if (p.GoldReward == GameVariables.EnclosureGold.medium)
+                    GameOverManager.instance.goldPerEnclosure[1] += toBeAdded;
+                else
+                    GameOverManager.instance.goldPerEnclosure[2] += toBeAdded;
             }
             TextGolds.text = gold + " gold";
         }
@@ -207,10 +223,12 @@ namespace Assets.Script.Managers
         }
         private void newRound()
         {
+            if (_roundNumber != 0)
+                callAchievement(AchievementEvent.cycleEnd);
             Spawns.GetComponent<Spawn_wolf>().Cycle = ++_roundNumber;
             TextRounds.text = "ROUND " + _roundNumber;
             displayInfo("Round " + _roundNumber + " begin \n Press n to pass directly to the night", 5);
-            callAchievement(AchievementEvent.cycleEnd);
+            
         }
         public void DayStart()
         {
@@ -246,11 +264,18 @@ namespace Assets.Script.Managers
             if(goal == 355 && Spawns.GetComponent<Spawn_wolf>().hasWolfAlive())
                 displayInfo("The Night will end only when the wolfs are dead", 4);
         }
-        private void earnGold(int value)
+        private void earnGold(int value, bool enclosureGold = false)
         {
             gold += value;
             TextGolds.text = gold + " gold";
             callAchievement(AchievementEvent.goldEarn, value);
+
+            GameOverManager.instance.GoldEarned.Add(value);
+
+            if (enclosureGold)
+                GameOverManager.instance.EnclosureGold.Add(value);
+            else
+                GameOverManager.instance.WolvesGold.Add(value);
         }
         public bool SpendGold(int value)
         { //  allow the player to purchase
@@ -261,6 +286,8 @@ namespace Assets.Script.Managers
             }
             gold -= value;
             TextGolds.text = gold + " gold";
+
+            GameOverManager.instance.GoldSpent.value -= value;
 
             callAchievement(AchievementEvent.goldSpent, value);
             return true;
@@ -281,7 +308,17 @@ namespace Assets.Script.Managers
         }
         private void callAchievement(AchievementEvent achEvent, int step = 1)
         {
-            SProfilePlayer.getInstance().AchievementsManager.AddStepAchievement(achEvent, step);
+            List<AchievementInfo> endedAchievements = SProfilePlayer.getInstance().AchievementsManager.AddStepAchievement(achEvent, step);
+            // hack fix to prevent bug when quitting the game
+            if (achEvent == AchievementEvent.quit)
+                return;
+            if(endedAchievements != null)
+            {
+                foreach(var achInfo in endedAchievements)
+                {
+                    AchievementPopUp.GetComponent<AchievementPopUpScript>().AddAchievement(achInfo);
+                }
+            }
         }
     }
 }

@@ -9,7 +9,11 @@ public class SProfilePlayer
     public string Name { get; set; }
     public int Difficulty { get; set; }
     public AchievementsManager AchievementsManager { get; set; }
-    
+    [NonSerialized]
+    public List<Texture2D> SpritesAchievements;
+    [NonSerialized]
+    public Texture2D DefaultSprite;
+
     public SProfilePlayer(string name = "<Default>")
     {
         this.Name = name;

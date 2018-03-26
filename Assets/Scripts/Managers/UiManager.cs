@@ -21,8 +21,9 @@ public class UiManager : MonoBehaviour
     public void AdjustPosition()
     {
         int levelIndex;
-        Vector3 textPosition =
-            Camera.main.WorldToScreenPoint(TrapCreator.TargetedTrap.transform.parent.position + new Vector3(3, 0.5f, 0));
+        Vector3 trapPositionToScreenPoint =
+            Camera.main.WorldToScreenPoint(TrapCreator.TargetedTrap.transform.parent.position);
+        Vector3 textPosition = trapPositionToScreenPoint + new Vector3(3, 0.5f, 0);
         if (TrapCreator.TargetedTrap.Level < 3)
             levelIndex = TrapCreator.TargetedTrap.Level - 1;
         else
@@ -31,7 +32,7 @@ public class UiManager : MonoBehaviour
         GetComponentsInChildren<Text>()[0].text = TrapCreator.TargetedTrap.UpgradeCosts[levelIndex] + " ";
         GetComponentsInChildren<Text>()[1].text = TrapCreator.TargetedTrap.Durability + "/" + TrapCreator.TargetedTrap.DurabilityMax;
 
-        transform.position = textPosition;
+        transform.localPosition = textPosition;
     }
 
 }

@@ -141,21 +141,26 @@ namespace TPC
                         {
                             if (target.GetComponent<WolfBossHealth>())
                             {
-                                target.GetComponent<WolfBossHealth>().takeDamage(20);
+                                target.GetComponent<WolfBossHealth>().takeDamage(20, true);
+                                if (!target.GetComponent<WolfBossHealth>().alive)
+                                    StartCoroutine(KillFeedBack());
                             }
                         }
                         //Focusing Player, no need for boss cause he will focus player whenever he is alive
                         if (target.tag == "WaterWolf")
                         {
-                            target.GetComponent<IA_Water_Wolves>().focusPlayer();
+                            if (target.GetComponent<WolfHealth>().alive)
+                                target.GetComponent<IA_Water_Wolves>().focusPlayer();
                         }
                         if (target.tag == "MoutainWolf")
                         {
-                            target.GetComponent<IA_Moutain_Wolves>().focusPlayer();
+                            if (target.GetComponent<WolfHealth>().alive)
+                                target.GetComponent<IA_Moutain_Wolves>().focusPlayer();
                         }
                         if (target.tag == "CommonWolf")
                         {
-                            target.GetComponent<IA_Common_Wolves>().focusPlayer();
+                            if (target.GetComponent<WolfHealth>().alive)
+                                target.GetComponent<IA_Common_Wolves>().focusPlayer();
                         }
                     }
                 }

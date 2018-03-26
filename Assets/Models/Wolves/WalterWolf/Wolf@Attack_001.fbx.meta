@@ -317,7 +317,27 @@ ModelImporter:
     13700008: Teeth_Upper
     13700010: Tongue
     13700012: Wolf_Geo
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CoffeCup_Material
+    second: {fileID: 2100000, guid: 2e910cbc079c0d54fa39632cea041972, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert3
+    second: {fileID: 2100000, guid: 33afe52311ceb77419c1f92cb630bf19, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert5
+    second: {fileID: 2100000, guid: 05cb659627bc40d4e9236d3520b1f6f2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert7
+    second: {fileID: 2100000, guid: 627eb97a584128f4ea37dc827edf16bd, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

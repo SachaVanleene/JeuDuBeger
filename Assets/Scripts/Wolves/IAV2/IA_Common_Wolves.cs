@@ -6,45 +6,44 @@ using UnityEngine.AI;
 
 public class IA_Common_Wolves : MonoBehaviour {
 
+    //Variable using for anim management and attack system
     private Animator anim;
+    bool moving;
+    bool isAttacking;
+    bool targetAlive;
+    float anim_time; // time of anim where it attack
+    float timer;
+    bool focusingPlayer;
+    GameObject player;
+
+    //IA variable
     private NavMeshAgent agent;
 
-
+    //Variables for target detection system, and target management
+    GameObject[] enclos;
+    bool enclosFound;
     public Transform targetTransform; //Wolf target
     public string targetTag;
     private bool targetInRange;
-    float timer;
 
+    //Variable describing stats of the wolf
+    public SO.WolfStats stats;
     float timeBetweenAttacks;
-    float damage;
+    float playerDamage;
+    float enclosureDamage;
 
-    bool moving;
-
-    GameObject[] enclos;
-
-    bool isAttacking;
-    //Variable pour regarder l'objet
+    //Variable for looking to target
     private Quaternion lookRotation;
     private Vector3 direction;
-
-    bool targetAlive;
-
-
-    public GameObject fakenclos;
-
     float rotationSpeed;
-    float anim_time; // time of anim where it attack
-
-    bool focusingPlayer;
-    GameObject player;
-    bool enclosFound;
 
     private void Awake()
     {
         timer = 0f;
         //Characteristics of Common WOlves
         timeBetweenAttacks = 0.834f; // time between attack 
-        damage = 10f;
+        playerDamage = stats.CurrentPlayerDamage;
+        enclosureDamage = stats.CurrentEnclosureDamage;
         anim_time = 0.5f;
         rotationSpeed = 2f;
 
@@ -64,7 +63,6 @@ public class IA_Common_Wolves : MonoBehaviour {
     {
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
-        //updateTarget(fakenclos.transform);
         agent.Warp(this.gameObject.transform.position);
         NavMesh.pathfindingIterationsPerFrame = 500;
         enclos = GameObject.FindGameObjectsWithTag("Enclos");
@@ -73,11 +71,6 @@ public class IA_Common_Wolves : MonoBehaviour {
 
     public void updateTarget(Transform target)
     {
-        //Debug.LogError("Je change de target");
-        if (target != null)
-        {
-            // Debug.LogError("Position target : " + target.position);
-        }
         RealaseBarrer();
         RealeaseDlegate();
         targetInRange = false; // Si nouvelle target supposé qu'elle n'est pas en rnage sinon bug dans les invoke
@@ -108,7 +101,7 @@ public class IA_Common_Wolves : MonoBehaviour {
             anim.SetBool("Moving", moving);
             if (targetTag == "Fences")
             {
-                Vector3 position = targetTransform.position - 2.3f * targetTransform.right; // Sinon le pathfinding ne larchera pas car la zone est no walkabme
+                Vector3 position = targetTransform.position - 2.3f * targetTransform.right; // Sinon le pathfinding ne marchera pas car la zone est no walkabme
                 agent.SetDestination(position);
             }
             else
@@ -169,7 +162,6 @@ public class IA_Common_Wolves : MonoBehaviour {
             current_enclos = enclos[i];
             if (current_enclos.GetComponent<EnclosureScript>().Health > 0)
             {
-                //Debug.Log(current_enclos);
                 current_distance = Vector3.Distance(current_enclos.transform.position, this.gameObject.transform.position);
                 if (current_distance < dist_to_target)
                 {
@@ -295,7 +287,6 @@ public class IA_Common_Wolves : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-
         if (!enclosFound)
         {
             enclos = GameObject.FindGameObjectsWithTag("Enclos");
@@ -306,7 +297,6 @@ public class IA_Common_Wolves : MonoBehaviour {
             }
         }
         timer += Time.deltaTime;
-
         if (true & targetTransform != null)
         {
             //look at target
@@ -318,17 +308,12 @@ public class IA_Common_Wolves : MonoBehaviour {
 
             //rotate us over time according to speed until we are in the required rotation
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
-        }
 
-        if (targetTransform != null)
-        {
             if (isAttacking && anim.GetCurrentAnimatorStateInfo(0).IsName("Wolf_Layer.Attack Jump") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > anim_time) // attaquer au bon moment de l'naimation
             {
-                //Debug.LogError("J attaque");
                 Attack();
                 isAttacking = false;
             }
-            // si tmeps danimations poche de 99 % is attacking devient false
             if (targetTag == "Fences")
             {
                 targetAlive = (targetTransform.parent.gameObject.GetComponent<EnclosureScript>().Health > 0);
@@ -339,24 +324,22 @@ public class IA_Common_Wolves : MonoBehaviour {
             }
             if ((timer >= timeBetweenAttacks) && targetInRange && !isAttacking && targetTag != "Aucune" && targetAlive)
             {
-                //Debug.LogError("J attaque");
                 anim.SetTrigger("attack");
                 isAttacking = true;
                 timer = 0f;
             }
         }
-
     }
 
     void Attack()
     {
         if (targetTag == "Player")
         {
-            targetTransform.gameObject.GetComponent<Player>().takeDamage(damage);
+            targetTransform.gameObject.GetComponent<Player>().takeDamage(playerDamage);
         }
         if (targetTag == "Fences")
         {
-            targetTransform.parent.gameObject.GetComponent<EnclosureScript>().DamageEnclos(damage);
+            targetTransform.parent.gameObject.GetComponent<EnclosureScript>().DamageEnclos(enclosureDamage);
         }
     }
 

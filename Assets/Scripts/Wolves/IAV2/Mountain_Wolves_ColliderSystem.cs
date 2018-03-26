@@ -5,11 +5,17 @@ using UnityEngine;
 
 public class Mountain_Wolves_ColliderSystem : MonoBehaviour {
 
+    IA_Moutain_Wolves script_ia;
+
+    //Variable (some are shared with script_ia) of target system
     string targetTag;
     Transform targetTransform;
-    IA_Moutain_Wolves script_ia;
     bool targetInRange;
-    float damage;
+
+    //Stats of wolf
+    float playerDamage;
+    float enclosureDamage;
+
     // Use this for initialization
     void Start()
     {
@@ -17,7 +23,8 @@ public class Mountain_Wolves_ColliderSystem : MonoBehaviour {
         {
             // Debug.LogError("linked");
         }
-        damage = script_ia.getDamage();
+        playerDamage = script_ia.getPlayerDamage();
+        enclosureDamage = script_ia.getEnclosureDamage();
     }
 
     private void Awake()
@@ -35,27 +42,15 @@ public class Mountain_Wolves_ColliderSystem : MonoBehaviour {
 
     void OnTriggerExit(Collider other)
     {
-        //Debug.LogError("Not in range");
         if (targetTransform != null)
         {
             if (other.gameObject.tag == targetTag)
             {
-                if (targetTag == "Player")
+                if (targetTag == "Player") //Seul le joueur ets une cible mouvante
                 {
                     targetInRange = false;
                     script_ia.updateRange(targetInRange);
                 }
-                else // fences case
-                {
-                    /*if (GameObject.ReferenceEquals(targetTransform.gameObject, other.gameObject))
-                    {
-                       Debug.LogError("Not in range");
-                        targetInRange = false;
-                        script_ia.updateRange(targetInRange);
-                        //alreadyFocusingAFence = false;
-                    }*/
-                }
-
             }
         }
     }
@@ -68,29 +63,17 @@ public class Mountain_Wolves_ColliderSystem : MonoBehaviour {
 
     void OnParticleCollision(GameObject other)
     {
-        //Debug.LogError("Coollide");
         if (targetTag == "Player")
         {
-            targetTransform.gameObject.GetComponent<Player>().takeDamage(damage);
+            targetTransform.gameObject.GetComponent<Player>().takeDamage(playerDamage);
             targetTransform.gameObject.GetComponent<Player>().Freezing();
-            //Debug.LogError("Attaque joueur");
-            /* if (!targetTransform.gameObject.GetComponent<Player>().Alive)
-             {
-                 targetInRange = false;
-             }*/
         }
         if (targetTag == "Fences")
         {
             if (other.transform.IsChildOf(targetTransform.parent))
             {
-                //Debug.LogError("Collision particle");
-                targetTransform.parent.gameObject.GetComponent<EnclosureScript>().DamageEnclos(damage);
-                //Debug.LogError("Attaque enclos");
+                targetTransform.parent.gameObject.GetComponent<EnclosureScript>().DamageEnclos(enclosureDamage);
             }
-            /*if (targetTransform.parent.gameObject.GetComponent<EnclosureScript>().Health <= 0)
-            {
-                targetInRange = false;
-            }*/
         }
     }
 }

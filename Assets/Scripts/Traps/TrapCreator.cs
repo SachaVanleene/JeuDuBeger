@@ -26,6 +26,8 @@ namespace Assets.Scripts.Traps
             get { return _targetedTrap; }
             set
             {
+                if (_targetedTrap != null)
+                    _targetedTrap.Deselect();
                 _targetedTrap = value;
                 TrapLevelUpPannel.gameObject.SetActive(false);
                 if (_targetedTrap == null) return;
@@ -79,6 +81,7 @@ namespace Assets.Scripts.Traps
             }
             if (IsInTrapCreationMode)
             {
+                TargetedTrap = null;
                 if (SelectedTrapType != ActualSelectedTrapTypes)
                 {
                     if(ActualTrap != null)
@@ -167,8 +170,6 @@ namespace Assets.Scripts.Traps
                 TargetedTrap.Select();
                 return true;
             }
-            if (TargetedTrap != null)
-                TargetedTrap.Deselect();
             TargetedTrap = null;
             return false;
         }

@@ -28,7 +28,8 @@ public class Player : MonoBehaviour {
             if (!alive)
             {
                 hMove.AddVelocity(Vector3.zero, respawnDelay, 0, true);
-                anim.SetTrigger("deathMoment");  
+                anim.SetTrigger("deathMoment");
+                GameOverManager.instance.DeathCount.Add(1);
             }
 
         }
@@ -212,6 +213,12 @@ public class Player : MonoBehaviour {
             imageTimer += Time.deltaTime / healTick;
             damageImage.color = Color.Lerp(damageImage.color, temp, imageTimer);
         }
+
+        if (!Alive)
+        {
+            imageTimer += Time.deltaTime / respawnDelay;
+            damageImage.color = Color.Lerp(damageImage.color, temp, imageTimer);
+        }
     }
 
 
@@ -242,6 +249,7 @@ public class Player : MonoBehaviour {
 
     IEnumerator Respawn()
     {
+        temp.a = 0;
         yield return respawnWait;
         Alive = true;
         actualHealth = maxHealth;

@@ -5,56 +5,49 @@ using UnityEngine;
 
 public class IA_Moutain_Wolves : MonoBehaviour {
 
+    //Variable for anim management and attack system
     private Animator anim;
+    float anim_time; // time of anim where it attack
+    bool moving;
+    bool isAttacking;
+    bool targetAlive;
+    bool alreadyFocusingAFence;
+    bool focusingPlayer;
+    GameObject player;
+    SphereCollider firstSPhere;
+
+    //IA variables
     private UnityEngine.AI.NavMeshAgent agent;
 
-
+    //Variable for target management
+    GameObject[] enclos;
+    bool enclosFound;
     public Transform targetTransform; //Wolf target
     public string targetTag;
     private bool targetInRange;
     float timer;
 
+    //Variable for wolf stats
+    public SO.WolfStats stats;
     float timeBetweenAttacks;
-    float damage;
+    float Playerdamage;
+    float enclosureDamage;
 
-    bool moving;
-
-    GameObject[] enclos;
-
-    bool isAttacking;
-    //Variable pour regarder l'objet
+    //Variable for looking to target
     private Quaternion lookRotation;
     private Vector3 direction;
-
-    bool targetAlive;
-
-
-    public GameObject fakenclos;
-
     float rotationSpeed;
-    float anim_time; // time of anim where it attack
 
-    //ParticleSystem
+    //Variable for particle system
     private ParticleSystem waterJet;
     public GameObject jets;
-
-
-    bool alreadyFocusingAFence;
-
-    SphereCollider firstSPhere;
-
-    bool focusingPlayer;
-
-    GameObject player;
-
-    bool enclosFound;
 
     private void Awake()
     {
         timer = 0f;
-        //Characteristics of Common WOlves
+        //Characteristics of wolf
         timeBetweenAttacks = 0.833f; // time between attack 
-        damage = 0.5f;
+        Playerdamage = 0.5f;
         anim_time = 0.5f;
         rotationSpeed = 4f;
 
@@ -79,20 +72,14 @@ public class IA_Moutain_Wolves : MonoBehaviour {
         waterJet = jets.GetComponentInChildren<ParticleSystem>();
         anim = GetComponent<Animator>();
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-        //updateTarget(fakenclos.transform);
         agent.Warp(this.gameObject.transform.position);
         UnityEngine.AI.NavMesh.pathfindingIterationsPerFrame = 500;
         enclos = GameObject.FindGameObjectsWithTag("Enclos");
         GetTargetEnclos();
-        //focusPlayer();
     }
 
     public void updateTarget(Transform target)
     {
-        if (target != null)
-        {
-            // Debug.LogError("Position target : " + target.position);
-        }
         agent.updateRotation = true;
         waterJet.Stop();
         RealaseBarrer();
@@ -158,8 +145,6 @@ public class IA_Moutain_Wolves : MonoBehaviour {
         moveToTarget();
 
     }
-
-
 
     // Get a tagret from an enclos which is alive
     public void GetTargetEnclos()
@@ -291,12 +276,9 @@ public class IA_Moutain_Wolves : MonoBehaviour {
                     if (other.transform.IsChildOf(targetTransform.parent))
                     {
                         targetTransform = other.transform;
-                        //Debug.LogError("In Range");
                         targetInRange = true;
                         HandleMove();
                         firstSPhere.enabled = false;
-                        /*targetTransform = other.transform;
-                        alreadyFocusingAFence = true;*/
                     }
                 }
 
@@ -325,8 +307,6 @@ public class IA_Moutain_Wolves : MonoBehaviour {
                         targetInRange = true;
                         HandleMove();
                         firstSPhere.enabled = false;
-                        /*targetTransform = other.transform;
-                        alreadyFocusingAFence = true;*/
                     }
                 }
 
@@ -349,7 +329,7 @@ public class IA_Moutain_Wolves : MonoBehaviour {
         }
         timer += Time.deltaTime;
 
-        if (true & targetTransform != null)
+        if (targetTransform != null)
         {
             //look at target
             //find the vector pointing from our position to the target
@@ -360,16 +340,7 @@ public class IA_Moutain_Wolves : MonoBehaviour {
 
             //rotate us over time according to speed until we are in the required rotation
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
-        }
 
-        if (targetTransform != null)
-        {
-            /*if (isAttacking && anim.GetCurrentAnimatorStateInfo(0).IsName("Wolf_Layer.Attack Jump") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > anim_time) // attaquer au bon moment de l'naimation
-            {
-                Attack();
-                isAttacking = false;
-            }*/
-            // si tmeps danimations poche de 99 % is attacking devient false
             if (targetTag == "Fences")
             {
                 targetAlive = (targetTransform.parent.gameObject.GetComponent<EnclosureScript>().Health > 0);
@@ -391,7 +362,6 @@ public class IA_Moutain_Wolves : MonoBehaviour {
                 waterJet.Stop();
             }
         }
-
     }
 
     public void focusPlayer()
@@ -418,9 +388,14 @@ public class IA_Moutain_Wolves : MonoBehaviour {
         return targetTag;
     }
 
-    public float getDamage()
+    public float getEnclosureDamage()
     {
-        return damage;
+        return enclosureDamage;
+    }
+
+    public float getPlayerDamage()
+    {
+        return Playerdamage;
     }
 
     public void EnableFirstSPhere()
