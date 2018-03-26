@@ -56,7 +56,9 @@ public class ProfileManager : MonoBehaviour {
             FileStream file = File.Open("./saves/" + fullName, FileMode.Open);
             SProfilePlayer.setInstance((SProfilePlayer) bf.Deserialize(file));
             file.Close();
-            SProfilePlayer.getInstance().AchievementsManager.ResetManagerOnAchievementInfos();            
+            SProfilePlayer.getInstance().AchievementsManager.ResetManagerOnAchievementInfos();
+            SProfilePlayer.getInstance().SpritesAchievements = SpritesAchievements;
+            SProfilePlayer.getInstance().DefaultSprite = DefaultSprite;
         }
         else
         {

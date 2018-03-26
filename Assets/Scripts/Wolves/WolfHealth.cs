@@ -17,6 +17,7 @@ public class WolfHealth : MonoBehaviour
     private void Awake()
     {
         health = (int) wolfStats.CurrentLife;
+        //health = 100;
         anim = GetComponent<Animator>();
         cloud = GetComponentInChildren<ParticleSystem>();
         alive = true;

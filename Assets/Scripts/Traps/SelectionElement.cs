@@ -10,7 +10,7 @@ namespace Assets.Scripts.Traps
         // Use this for initialization
         void Start ()
         {
-            transform.localScale = Vector3.one * 0.8f;
+            transform.localScale = Vector3.one * 0.9f;
             int value = 0;
             switch (name)
             {
