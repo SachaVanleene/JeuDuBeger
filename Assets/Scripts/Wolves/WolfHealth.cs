@@ -12,16 +12,21 @@ public class WolfHealth : MonoBehaviour
 
     public SO.WolfStats wolfStats;
 
+    AudioManagerWolves script_audio;
+
     private void Awake()
     {
         health = (int) wolfStats.CurrentLife;
         anim = GetComponent<Animator>();
         cloud = GetComponentInChildren<ParticleSystem>();
         alive = true;
+        script_audio = GetComponent<AudioManagerWolves>();
     }
 
     public void takeDamage(int damage, bool hitByWeapon = false)
     {
+        script_audio.PlayHitSound();
+
         health -= damage;
         //anim.SetTrigger("Hit");
 
