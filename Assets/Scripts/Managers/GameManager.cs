@@ -53,15 +53,15 @@ namespace Assets.Script.Managers
             cycleManager.SubscribCycle(this);
             cycleManager.GoToAngle(1, 30);
             TotalSheeps = 15;
-            
-            if(SProfilePlayer.getInstance().AchievementsManager.GetAchievementByName("Player").IsComplete())
+
+            GetComponent<DifficultyManager>().SetDiffilculty();
+            Cursor.visible = false;
+
+            if (SProfilePlayer.getInstance().AchievementsManager.GetAchievementByName("Player").IsComplete())
                 TotalSuperSheeps = 1;
             else
                 TotalSuperSheeps = 0;
             DayStart();
-            Cursor.visible = false;
-
-            GetComponent<DifficultyManager>().SetDiffilculty();
         }
 
         private void Update()
