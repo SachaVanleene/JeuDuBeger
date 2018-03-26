@@ -11,8 +11,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20963f5639930a04bb33e952d9105db1, type: 3}
   m_Name: Boss
   m_EditorClassIdentifier: 
-  life: 0
+  life: 100
   enclosureDamage: 0
-  farmerDamage: 0
+  playerDamage: 0
   goldReward: 0
   range: 0
+  delay: 0
