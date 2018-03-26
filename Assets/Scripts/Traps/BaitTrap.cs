@@ -16,6 +16,8 @@ namespace Assets.Script.Traps
         public BaitTrap()
         {
             UpgradeCosts = new List<int>(GameVariables.Trap.Decoy.upgradePrice);
+            SellingPrice = (int)(UpgradeCosts[0] * 0.75f);
+
         }
         public override void LevelUp()
         {

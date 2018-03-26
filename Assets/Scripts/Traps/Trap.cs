@@ -12,7 +12,7 @@ namespace Assets.Script.Traps
         public int DurabilityMax, Durability;
         public GameObject TrapPrefab;
         public Boolean IsActive = false;
-
+        protected int SellingPrice; 
         private int i = 0;
         private int v;
 
@@ -32,9 +32,6 @@ namespace Assets.Script.Traps
                 }
             }
         }
-
-
-      
 
         private int _level = 1;
         public int Level
@@ -78,14 +75,11 @@ namespace Assets.Script.Traps
 
         public virtual void LevelUp()
         {
-                int levelIndex;
-                if (TrapCreator.TargetedTrap.Level < 3)
-                    levelIndex = TrapCreator.TargetedTrap.Level;
-                else
-                    levelIndex = 2;
+            var levelIndex = TrapCreator.TargetedTrap.Level < 3 ? TrapCreator.TargetedTrap.Level : 2;
 
-                if (GameManager.instance.SpendGold(UpgradeCosts[levelIndex]))
+            if (GameManager.instance.SpendGold(UpgradeCosts[levelIndex]))
             {
+                SellingPrice += (int) (UpgradeCosts[levelIndex] * 0.75f);
                 Level++;
             }
         }
@@ -110,6 +104,7 @@ namespace Assets.Script.Traps
 
         public void Destroy()
         {
+            GameManager.instance.EarnGold(SellingPrice);
             Destroy(TrapPrefab);
         }
 

@@ -22,6 +22,8 @@ namespace Assets.Script.Traps
             Durability = 1;
             Pows = new List<int>(GameVariables.Trap.LandMine.playerDamage);
             UpgradeCosts = new List<int>(GameVariables.Trap.LandMine.upgradePrice);
+            SellingPrice = (int)(UpgradeCosts[0] * 0.75f);
+
         }
 
         public override void LevelUp ()

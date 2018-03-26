@@ -19,6 +19,7 @@ namespace Assets.Script.Traps
         {
             Pows = new List<int>(GameVariables.Trap.Mud.wolfSlow);
             UpgradeCosts = new List<int>(GameVariables.Trap.Mud.upgradePrice);
+            SellingPrice = (int)(UpgradeCosts[0] * 0.75f);
             DurabilityMax = 100;
             Durability = DurabilityMax;            
         }

@@ -16,6 +16,7 @@ namespace Assets.Script.Traps
             DurabilityMax = GameVariables.Trap.NeedleTrap.durability;
             Durability = DurabilityMax;
             UpgradeCosts = new List<int>(GameVariables.Trap.NeedleTrap.upgradePrice);
+            SellingPrice = (int) (UpgradeCosts[0] * 0.75f);
         }
 
         public override void LevelUp()
