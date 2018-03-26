@@ -28,7 +28,7 @@ namespace Assets.Script.Managers
         private EnclosureManager _enclosureManager;
         private SoundManager soundManager;
         private CycleManager cycleManager;
-        private int _roundNumber = 0;
+             int _roundNumber = 0;
         private bool cheatsActivated = false;
         
         public bool gameOver = false;
@@ -311,6 +311,11 @@ namespace Assets.Script.Managers
                     AchievementPopUp.GetComponent<AchievementPopUpScript>().AddAchievement(achInfo);
                 }
             }
+        }
+
+        public int GetCycle()
+        {
+            return _roundNumber;
         }
     }
 }
