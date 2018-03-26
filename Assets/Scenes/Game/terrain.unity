@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.041979037, g: 0.007983926, b: 0.00030219258, a: 1}
+  m_IndirectSpecularColor: {r: 0.029239558, g: 0.0054657813, b: 0.0001420199, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -9565,6 +9565,36 @@ Prefab:
         type: 2}
       propertyPath: m_FontData.m_Alignment
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224017622273227324, guid: 74070dca21fc5f946a7a55778ef7924b,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 2.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224633389528243002, guid: 74070dca21fc5f946a7a55778ef7924b,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 98.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 224633389528243002, guid: 74070dca21fc5f946a7a55778ef7924b,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -14.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 224219924397122548, guid: 74070dca21fc5f946a7a55778ef7924b,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 74.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 224608534108477178, guid: 74070dca21fc5f946a7a55778ef7924b,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 27.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 224608534108477178, guid: 74070dca21fc5f946a7a55778ef7924b,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 68.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 74070dca21fc5f946a7a55778ef7924b, type: 2}
@@ -19595,6 +19625,8 @@ MonoBehaviour:
   - {fileID: 1057496766}
   spawnLac: {fileID: 1255194461}
   spawnMountain: {fileID: 1755766678}
+  gameManager: {fileID: 0}
+  Cycle: 0
 --- !u!114 &1896502965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19612,6 +19644,7 @@ MonoBehaviour:
   - {fileID: 2082711823}
   - {fileID: 573020340}
   - {fileID: 1057496766}
+  gameManager: {fileID: 0}
 --- !u!4 &1896502966
 Transform:
   m_ObjectHideFlags: 0

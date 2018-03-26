@@ -18,6 +18,11 @@ namespace Assets.Script.Traps
             UpgradeCosts = new List<int>(GameVariables.Trap.NeedleTrap.upgradePrice);
         }
 
+        public override void LevelUp()
+        {
+            base.LevelUp();
+            GameOverManager.instance.goldPerTrap[0] += UpgradeCosts[Level - 1];
+        }
 
         public override IEnumerator Activate(GameObject go)
         {

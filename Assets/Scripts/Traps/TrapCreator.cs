@@ -156,6 +156,7 @@ namespace Assets.Scripts.Traps
                         Terrain.terrainData.GetInterpolatedNormal(normalizedPos.x, normalizedPos.y));
                 trap.transform.position = GetCursorPosition();
                 GameOverManager.instance.PlacedTraps.Add(1);
+                GameOverManager.instance.goldPerTrap[(int) SelectedTrapType] += ActualTrap.UpgradeCosts[0];
             }
         }
 

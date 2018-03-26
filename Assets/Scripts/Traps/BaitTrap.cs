@@ -17,6 +17,11 @@ namespace Assets.Script.Traps
         {
             UpgradeCosts = new List<int>(GameVariables.Trap.Decoy.upgradePrice);
         }
+        public override void LevelUp()
+        {
+            base.LevelUp();
+            GameOverManager.instance.goldPerTrap[1] += UpgradeCosts[Level - 1];
+        }
         public override IEnumerator Activate(GameObject go)
         {
             yield break;

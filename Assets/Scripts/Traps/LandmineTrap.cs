@@ -27,7 +27,7 @@ namespace Assets.Script.Traps
         public override void LevelUp ()
         {
             base.LevelUp();
-
+            GameOverManager.instance.goldPerTrap[3] += UpgradeCosts[Level - 1];
         }
 
         public override IEnumerator Activate(GameObject go)

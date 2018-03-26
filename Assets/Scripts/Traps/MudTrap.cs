@@ -23,7 +23,11 @@ namespace Assets.Script.Traps
             Durability = DurabilityMax;            
         }
 
-
+        public override void LevelUp()
+        {
+            base.LevelUp();
+            GameOverManager.instance.goldPerTrap[2] += UpgradeCosts[Level - 1];
+        }
         public override IEnumerator Activate(GameObject go)
         {
             if (go.tag != "Terrain" && go.name != "Plane") j++;
