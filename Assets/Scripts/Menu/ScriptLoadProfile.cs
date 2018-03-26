@@ -5,8 +5,11 @@ using UnityEngine;
 public class ScriptLoadProfile : MonoBehaviour {
 
     public string fullName;
+    public ProfileManager manager;
+    public ListBehaviour list;
     public void Load()
     {
-        ProfileManager.LoadProfile(fullName);
+        list.ResetList();
+        manager.LoadProfile(fullName);
     }
 }

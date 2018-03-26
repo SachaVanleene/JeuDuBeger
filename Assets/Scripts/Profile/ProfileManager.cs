@@ -41,12 +41,14 @@ public class ProfileManager : MonoBehaviour {
         }
     }
 
-    static public void CreateProfile(string name)
+    public void CreateProfile(string name)
     {
         SProfilePlayer.setInstance(new SProfilePlayer(name));
         SProfilePlayer.getInstance().AchievementsManager.AddStepAchievement(AchievementEvent.createProfile);
+        SProfilePlayer.getInstance().SpritesAchievements = SpritesAchievements;
+        SProfilePlayer.getInstance().DefaultSprite = DefaultSprite;
     }
-    static public void LoadProfile(string fullName)
+    public void LoadProfile(string fullName)
     {
         if (File.Exists("./saves/" + fullName))
         {
@@ -59,6 +61,7 @@ public class ProfileManager : MonoBehaviour {
         else
         {
             Debug.LogWarning("file not found");
+            CreateProfile("Lost Save");
         }
     }
     static public void SaveProfile()

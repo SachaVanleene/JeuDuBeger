@@ -16,17 +16,24 @@ public class ListBehaviour : MonoBehaviour {
 
     public void Start()
     {
-        elements = new List<GameObject>();
+        if(elements == null)
+            elements = new List<GameObject>();
         CreateListPanel();
     }
-
-    public void CreateListPanel() {
-        if(elements != null)
-            foreach(var go in elements)
+    public void ResetList()
+    {
+        Debug.Log("reset");
+        if (elements != null)
+            foreach (var go in elements)
             {
-                UnityEngine.Object.Destroy(go);
+                UnityEngine.Object.DestroyImmediate(go);
             }
+        else
+            Debug.Log("nothing to delete");
         elements = new List<GameObject>();
+    }
+    public void CreateListPanel() {
+        ResetList();
 
         if(ProfileManager.ProfilesFound.Count <= 0)
         {
@@ -45,24 +52,24 @@ public class ListBehaviour : MonoBehaviour {
         ListProfiles.GetComponent<RectTransform>().sizeDelta = new Vector2(220f * ProfileManager.ProfilesFound.Count, 0);
         ListProfiles.transform.localPosition += new Vector3((ProfileManager.ProfilesFound.Count * 220f) / 2, 0, 0);
         float x = (ProfileManager.ProfilesFound.Count * 220f) / 2 + 110f;
-
+        Debug.Log(ProfileManager.ProfilesFound.Count);
         foreach(var data in ProfileManager.ProfilesFound)
         {
             x -= 220;
-
-            GameObject r = Instantiate(DetailPrefab, ListProfiles.transform);
-            elements.Add(r);
-            r.GetComponent<ScriptLoadProfile>().fullName = data[0] + "-" + data[1] + ".save";
-            r.GetComponent<Button>().onClick.AddListener(r.GetComponent<ScriptLoadProfile>().Load);
-            r.GetComponent<Button>().onClick.AddListener(ObjectMainMenu.GetComponent<MainMenu>().HideLogPanel);
-            r.transform.localScale = new Vector3(1f, 1f, 1f);
-            r.transform.localPosition = new Vector3(x, 0, 0);
+            GameObject profileDetail = Instantiate(DetailPrefab, ListProfiles.transform);
+            
+            elements.Add(profileDetail);
+            profileDetail.GetComponent<ScriptLoadProfile>().manager = ObjectMainMenu.GetComponent<ProfileManager>();
+            profileDetail.GetComponent<ScriptLoadProfile>().list = this;
+            profileDetail.GetComponent<ScriptLoadProfile>().fullName = data[0] + "-" + data[1] + ".save";
+            profileDetail.GetComponent<Button>().onClick.AddListener(profileDetail.GetComponent<ScriptLoadProfile>().Load);
+            profileDetail.GetComponent<Button>().onClick.AddListener(ObjectMainMenu.GetComponent<MainMenu>().HideLogPanel);
+            profileDetail.transform.localScale = new Vector3(1f, 1f, 1f);
+            profileDetail.transform.localPosition = new Vector3(x, 0, 0);
                 
             //set attributes
-            Text name = r.transform.Find("Name").GetComponent<Text>();
-            Text lastDate = r.transform.Find("LastSave").GetComponent<Text>();
-            name.text = data[0];
-            lastDate.text = data[1];
+            profileDetail.transform.Find("Name").GetComponent<Text>().text = data[0];
+            profileDetail.transform.Find("LastSave").GetComponent<Text>().text = data[1];
         }
     }    
 }

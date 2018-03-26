@@ -68,9 +68,9 @@ public class MainMenu : MonoBehaviour {
     public void CreateProfile()
     {
         if (NewPlayerName.text.Equals(""))
-            ProfileManager.CreateProfile("UnknownPlayer");
+            GetComponent<ProfileManager>().CreateProfile("UnknownPlayer");
         else
-            ProfileManager.CreateProfile(NewPlayerName.text);
+            GetComponent<ProfileManager>().CreateProfile(NewPlayerName.text);
         NewPlayerName.text = "";
         HideLogPanel();
     }
@@ -78,9 +78,9 @@ public class MainMenu : MonoBehaviour {
     {
         HideAllPanels();
         ProfileManager.RetreiveSaves();
+        LogPanel.SetActive(true);
         LogPanel.GetComponent<ListBehaviour>().CreateListPanel();
         LogButton.SetActive(false);
-        LogPanel.SetActive(true);
         DeleteButton.SetActive(false);
     }
     public void HideLogPanel()

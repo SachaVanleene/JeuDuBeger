@@ -5,48 +5,46 @@ using UnityEngine;
 
 public class IA_Boss_Wolves : MonoBehaviour {
 
+    //Variable using for anim management and attack system
     private Animator anim;
-    private UnityEngine.AI.NavMeshAgent agent;
-
-
-    public Transform targetTransform; //Wolf target
-    public string targetTag;
-    private bool targetInRange;
-    float timer;
-
-    float timeBetweenAttacks;
-    float damage;
-
-    bool moving;
-
-    GameObject[] enclos;
-
-    bool isAttacking;
-    //Variable pour regarder l'objet
-    private Quaternion lookRotation;
-    private Vector3 direction;
-
-    bool targetAlive;
-
-
-    public GameObject fakenclos;
-
-    float rotationSpeed;
     float anim_time; // time of anim where it attack
-
+    float timer;
+    bool moving;
+    bool targetAlive;
+    bool isAttacking;
     bool focusingPlayer;
     GameObject player;
 
-    BoxCollider collider;
+    //IA variable
+    private UnityEngine.AI.NavMeshAgent agent;
 
+    //Variables for target detection system, and target management
+    GameObject[] enclos;
     bool enclosFound;
+    public Transform targetTransform; //Wolf target
+    public string targetTag;
+    private bool targetInRange;
+
+    //Variable describing stats of the wolf
+    public SO.WolfStats stats;
+    float timeBetweenAttacks;
+    float playerDamage;
+    float enclosureDamage;
+
+    //Variable for looking to target
+    private Quaternion lookRotation;
+    private Vector3 direction;
+    float rotationSpeed;
+
+    BoxCollider collider;
 
     private void Awake()
     {
         timer = 0f;
-        //Characteristics of Common WOlves
+        //Characteristics of the wolf
         timeBetweenAttacks = 0.833f; // time between attack 
-        damage = 10f;
+        playerDamage = stats.CurrentPlayerDamage;
+        enclosureDamage = stats.CurrentEnclosureDamage;
         anim_time = 0.5f;
         rotationSpeed = 2f;
 
@@ -80,11 +78,6 @@ public class IA_Boss_Wolves : MonoBehaviour {
 
     public void updateTarget(Transform target)
     {
-
-        if (target != null)
-        {
-            // Debug.LogError("Position target : " + target.position);
-        }
         RealaseBarrer();
         RealeaseDlegate();
         targetInRange = false; // Si nouvelle target supposé qu'elle n'est pas en rnage sinon bug dans les invoke
@@ -307,7 +300,6 @@ public class IA_Boss_Wolves : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-
         if (!enclosFound)
         {
             enclos = GameObject.FindGameObjectsWithTag("Enclos");
@@ -318,7 +310,7 @@ public class IA_Boss_Wolves : MonoBehaviour {
         }
         timer += Time.deltaTime;
 
-        if (true & targetTransform != null)
+        if (targetTransform != null)
         {
             //look at target
             //find the vector pointing from our position to the target
@@ -329,13 +321,9 @@ public class IA_Boss_Wolves : MonoBehaviour {
 
             //rotate us over time according to speed until we are in the required rotation
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
-        }
 
-        if (targetTransform != null)
-        {
             if (isAttacking && anim.GetCurrentAnimatorStateInfo(1).IsName("Wolf_Left_Arm_Layer.Attack") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > anim_time) // attaquer au bon moment de l'naimation
             {
-                Debug.LogError("Lance attaque");
                 Attack();
                 isAttacking = false;
             }
@@ -355,19 +343,17 @@ public class IA_Boss_Wolves : MonoBehaviour {
                 timer = 0f;
             }
         }
-
     }
 
     void Attack()
     {
         if (targetTag == "Player")
         {
-            targetTransform.gameObject.GetComponent<Player>().takeDamage(damage);
+            targetTransform.gameObject.GetComponent<Player>().takeDamage(playerDamage);
         }
         if (targetTag == "Fences")
         {
-            //Debug.LogError("Attaque enclos");
-            targetTransform.parent.gameObject.GetComponent<EnclosureScript>().DamageEnclos(damage);
+            targetTransform.parent.gameObject.GetComponent<EnclosureScript>().DamageEnclos(enclosureDamage);
         }
     }
 
