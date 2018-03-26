@@ -205,7 +205,7 @@ GameObject:
   - component: {fileID: 136914691853795570}
   m_Layer: 0
   m_Name: Rabbit-handpainted
-  m_TagString: Untagged
+  m_TagString: Trap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -321,7 +321,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1665235231180150}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 264.4367, y: 15.802447, z: 231.66628}
+  m_LocalPosition: {x: 262.55515, y: 15.01989, z: 260.36923}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 4436412795879272}
