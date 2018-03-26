@@ -5,56 +5,51 @@ using UnityEngine;
 
 public class IA_Water_Wolves : MonoBehaviour {
 
+    //Variable for anim management and attack system
     private Animator anim;
+    float anim_time; // time of anim where it attack
+    float timer;
+    bool moving;
+    bool isAttacking;
+    bool targetAlive;
+    bool alreadyFocusingAFence;
+    SphereCollider firstSPhere;
+    bool focusingPlayer;
+    GameObject player;
+
+    //IA variables
     private UnityEngine.AI.NavMeshAgent agent;
 
-
+    //Variable for target management
+    GameObject[] enclos;
+    bool enclosFound;
+    public GameObject fakenclos;
     public Transform targetTransform; //Wolf target
     public string targetTag;
     private bool targetInRange;
-    float timer;
 
+    //Variable for wolf stats
+    public SO.WolfStats stats;
     float timeBetweenAttacks;
-    float damage;
+    float Playerdamage;
+    float enclosureDamage;
 
-    bool moving;
-
-    GameObject[] enclos;
-
-    bool isAttacking;
-    //Variable pour regarder l'objet
+    //Variable for looking to target
     private Quaternion lookRotation;
     private Vector3 direction;
-
-    bool targetAlive;
-
-
-    public GameObject fakenclos;
-
     float rotationSpeed;
-    float anim_time; // time of anim where it attack
 
-    //ParticleSystem
+    //Variables for particle system
     private ParticleSystem waterJet;
     public GameObject jets;
-
-
-    bool alreadyFocusingAFence;
-
-    SphereCollider firstSPhere;
-
-    bool focusingPlayer;
-
-    GameObject player;
-
-    bool enclosFound;
 
     private void Awake()
     {
         timer = 0f;
-        //Characteristics of Common WOlves
+        //Characteristics of wolf
         timeBetweenAttacks = 0.833f; // time between attack 
-        damage = 0.5f;
+        Playerdamage = stats.CurrentPlayerDamage;
+        enclosureDamage = stats.CurrentEnclosureDamage;
         anim_time = 0.5f;
         rotationSpeed = 4f;
 
@@ -72,14 +67,12 @@ public class IA_Water_Wolves : MonoBehaviour {
         enclosFound = false;
     }
 
-
     // Use this for initialization
     void Start()
     {
         waterJet = jets.GetComponentInChildren<ParticleSystem>();
         anim = GetComponent<Animator>();
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-        //updateTarget(fakenclos.transform);
         agent.Warp(this.gameObject.transform.position);
         UnityEngine.AI.NavMesh.pathfindingIterationsPerFrame = 500;
         enclos = GameObject.FindGameObjectsWithTag("Enclos");
@@ -88,10 +81,6 @@ public class IA_Water_Wolves : MonoBehaviour {
 
     public void updateTarget(Transform target)
     {
-        if (target != null)
-        {
-            // Debug.LogError("Position target : " + target.position);
-        }
         agent.updateRotation = true;
         waterJet.Stop();
         RealaseBarrer();
@@ -151,14 +140,11 @@ public class IA_Water_Wolves : MonoBehaviour {
         }
     }
 
-
     void FixedUpdate()
     {
         moveToTarget();
 
     }
-
-
 
     // Get a tagret from an enclos which is alive
     public void GetTargetEnclos()
@@ -200,7 +186,6 @@ public class IA_Water_Wolves : MonoBehaviour {
         }
         return enclos_target;
     }
-
 
     // Get a barreer from the preivous enclos found and lock this bareer if it is free. If every barreer are not availbale get one using random way
     public GameObject GetBareerFromEnclos(GameObject enclos)
@@ -290,12 +275,9 @@ public class IA_Water_Wolves : MonoBehaviour {
                     if (other.transform.IsChildOf(targetTransform.parent))
                     {
                         targetTransform = other.transform;
-                        //Debug.LogError("In Range");
                         targetInRange = true;
                         HandleMove();
                         firstSPhere.enabled = false;
-                        /*targetTransform = other.transform;
-                        alreadyFocusingAFence = true;*/
                     }
                 }
 
@@ -324,8 +306,6 @@ public class IA_Water_Wolves : MonoBehaviour {
                         targetInRange = true;
                         HandleMove();
                         firstSPhere.enabled = false;
-                        /*targetTransform = other.transform;
-                        alreadyFocusingAFence = true;*/
                     }
                 }
 
@@ -359,16 +339,7 @@ public class IA_Water_Wolves : MonoBehaviour {
 
             //rotate us over time according to speed until we are in the required rotation
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
-        }
 
-        if (targetTransform != null)
-        {
-            /*if (isAttacking && anim.GetCurrentAnimatorStateInfo(0).IsName("Wolf_Layer.Attack Jump") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > anim_time) // attaquer au bon moment de l'naimation
-            {
-                Attack();
-                isAttacking = false;
-            }*/
-            // si tmeps danimations poche de 99 % is attacking devient false
             if (targetTag == "Fences")
             {
                 targetAlive = (targetTransform.parent.gameObject.GetComponent<EnclosureScript>().Health > 0);
@@ -377,9 +348,9 @@ public class IA_Water_Wolves : MonoBehaviour {
             {
                 targetAlive = targetTransform.gameObject.GetComponent<Player>().Alive;
             }
-            if (targetInRange  && targetTag != "Aucune" && targetAlive)
+            if (targetInRange && targetTag != "Aucune" && targetAlive)
             {
-               // Debug.LogError("Attaque");
+                // Debug.LogError("Attaque");
                 anim.SetBool("attaque", true);
                 waterJet.Play();
                 agent.updateRotation = false;
@@ -390,7 +361,6 @@ public class IA_Water_Wolves : MonoBehaviour {
                 waterJet.Stop();
             }
         }
-
     }
 
     public void focusPlayer()
@@ -417,9 +387,14 @@ public class IA_Water_Wolves : MonoBehaviour {
         return targetTag;
     }
 
-    public float getDamage()
+    public float getEnclosureDamage()
     {
-        return damage;
+        return enclosureDamage;
+    }
+
+    public float getPlayerDamage()
+    {
+        return Playerdamage;
     }
 
     public void EnableFirstSPhere()

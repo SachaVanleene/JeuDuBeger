@@ -2198,9 +2198,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae86110558c05f04ab457d74ed3f7222, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fakenclos: {fileID: 0}
   targetTransform: {fileID: 0}
   targetTag: 
-  fakenclos: {fileID: 0}
+  stats: {fileID: 11400000, guid: beb6041ab1cf5824eb8b463e08aae652, type: 2}
   jets: {fileID: 1297808052732046}
 --- !u!114 &114907861967884206
 MonoBehaviour:

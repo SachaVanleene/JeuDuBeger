@@ -5,8 +5,8 @@
         public static class Forest
         {
             public static readonly int life = 100;
-            public static readonly int enclosureDamage = 1;
-            public static readonly int farmerDamage = 1;
+            public static readonly int enclosureDamage = 10;
+            public static readonly int farmerDamage = 10;
             public static readonly int gold = 30;
             public static readonly float range = 1.0f;
         }
@@ -14,8 +14,8 @@
         public static class Water
         {
             public static readonly int life = 100;
-            public static readonly int enclosureDamage = 1;
-            public static readonly int farmerDamage = 1;
+            public static readonly float enclosureDamage = 0.1f;
+            public static readonly float farmerDamage = 0.1f;
             public static readonly int gold = 30;
             public static readonly float range = 1.0f;
         }
@@ -23,8 +23,8 @@
         public static class Mountain
         {
             public static readonly int life = 100;
-            public static readonly int enclosureDamage = 1;
-            public static readonly int farmerDamage = 1;
+            public static readonly float enclosureDamage = 0.1f;
+            public static readonly float farmerDamage = 0.1f;
             public static readonly int gold = 30;
             public static readonly float range = 1.0f;
         }
@@ -32,8 +32,8 @@
         public static class Boss
         {
             public static readonly int life = 100;
-            public static readonly int enclosureDamage = 1;
-            public static readonly int farmerDamage = 1;
+            public static readonly int enclosureDamage = 10;
+            public static readonly int farmerDamage = 10;
             public static readonly int gold = 30;
             public static readonly float range = 1.0f;
         }

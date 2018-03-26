@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Name: Boss
   m_EditorClassIdentifier: 
   life: 100
-  enclosureDamage: 0
-  playerDamage: 0
+  enclosureDamage: 10
+  playerDamage: 10
   goldReward: 0
   range: 0
   delay: 0
