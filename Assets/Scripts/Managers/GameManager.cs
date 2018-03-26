@@ -56,7 +56,7 @@ namespace Assets.Script.Managers
             cycleManager.GoToAngle(1, 30);
             TotalSheeps = 15;
 
-            GetComponent<DifficultyManager>().SetDiffilculty();
+            //GetComponent<DifficultyManager>().SetDiffilculty();
             Cursor.visible = false;
 
             if (SProfilePlayer.getInstance().AchievementsManager.GetAchievementByName("Player").IsComplete())
