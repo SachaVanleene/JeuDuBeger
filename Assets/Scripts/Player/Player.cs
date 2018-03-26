@@ -213,7 +213,7 @@ public class Player : MonoBehaviour {
             StartCoroutine(Recover());
         }
 
-        if (isHealing && !Alive)
+        if (isHealing && Alive)
         {
             imageTimer += Time.deltaTime / healTick;
             damageImage.color = Color.Lerp(damageImage.color, temp, imageTimer);
@@ -221,7 +221,6 @@ public class Player : MonoBehaviour {
 
         if (!Alive)
         {
-            Debug.Log(temp.a);
             imageTimer += Time.deltaTime / respawnDelay;
             damageImage.color = Color.Lerp(damageImage.color, temp, imageTimer);
         }
