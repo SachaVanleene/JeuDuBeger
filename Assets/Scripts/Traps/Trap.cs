@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Remoting;
 using Assets.Script.Managers;
 using Assets.Scripts.Traps;
 using UnityEngine;
@@ -13,8 +11,10 @@ namespace Assets.Script.Traps
     {
         public int DurabilityMax, Durability;
         public GameObject TrapPrefab;
-        public List<int> UpgradeCosts, Pows;
         public Boolean IsActive = false;
+
+        private int i = 0;
+        private int v;
 
         private Boolean _isInPreviewMode = true;
         public Boolean IsInPreviewMode
@@ -33,10 +33,13 @@ namespace Assets.Script.Traps
             }
         }
 
+
+      
+
         private int _level = 1;
         public int Level
         {
-            get { return this._level; }
+            get { return _level; }
             set
             {
                 if (value <= 3)
@@ -51,12 +54,12 @@ namespace Assets.Script.Traps
             }
         }
 
+        public abstract List<int> UpgradeCosts { get; set; }
+        public abstract List<int> Pows { get; set; }
         public abstract IEnumerator Activate(GameObject go);
-        private int i = 0;
-        private int v = 0;
-
+        
         public void OnTriggerEnter(Collider collider)
-        {
+        {   
             if (collider.gameObject.tag != "Terrain" && collider.gameObject.name != "Plane" && collider.gameObject.name != "WaterShower" &&  collider.gameObject.name != "ShootableHitbox")
             {
                 v++;
@@ -106,12 +109,10 @@ namespace Assets.Script.Traps
 
         public void OnTriggerExit(Collider collider)
         {
-            Debug.Log(collider.transform.parent);
             if (collider.tag != "Terrain" && collider.name != "Plane") v--;
             if (collider.tag == "Fences" &&
                 Vector3.Distance(transform.position, collider.transform.parent.position) <
-                Vector3.Distance(collider.transform.position,
-                    collider.transform.parent.position)) return;
+                collider.transform.localPosition.magnitude) return;
             if (IsInPreviewMode && collider.tag != "Terrain" && v == 0)
             {
                 foreach (var rend in TrapPrefab.GetComponentsInChildren<Renderer>())

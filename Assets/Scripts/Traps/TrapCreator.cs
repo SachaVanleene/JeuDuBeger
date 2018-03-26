@@ -15,7 +15,7 @@ namespace Assets.Scripts.Traps
         public static GameObject PlayerGameObject;
         public static GameObject MainCanvasGameObject;
         public static UiManager TrapLevelUpPannel;
-        public static TrapTypes SelectedTrapType = TrapTypes.NeedleTrap;
+        public static TrapTypes SelectedTrapType = TrapTypes.None;
         public static Boolean IsInTrapCreationMode = false;
         public static Trap ActualTrap;
         public static int ActionRange = 15;
@@ -45,7 +45,6 @@ namespace Assets.Scripts.Traps
             Terrain = Terrain.activeTerrain;
             ActualSelectedTrapTypes = TrapTypes.None;
         }
-
         public void Update()
         {
             if (_gameManager.IsTheSunAwakeAndTheBirdAreSinging)
@@ -92,6 +91,7 @@ namespace Assets.Scripts.Traps
                     Mathf.InverseLerp(0, Terrain.terrainData.size.z, cursorPosition.z));
                 ActualTrap.TrapPrefab.transform.rotation = Quaternion.LookRotation(Terrain.terrainData.GetInterpolatedNormal(normalizedPos.x, normalizedPos.y), Terrain.terrainData.GetInterpolatedNormal(normalizedPos.x, normalizedPos.y));
                 ActualTrap.TrapPrefab.transform.position = cursorPosition;
+
                 if (Input.GetMouseButtonDown(0) && GameManager.instance.SpendGold(ActualTrap.UpgradeCosts[0]))
                     CreateTrap();
                 if (Input.GetMouseButtonDown(1))
@@ -115,6 +115,13 @@ namespace Assets.Scripts.Traps
                     cl.Destroy();
                 }
             }
+        }
+        void OnDisable()
+        {
+            IsInTrapCreationMode = false;
+            ActualSelectedTrapTypes = TrapTypes.None;
+            if (ActualTrap != null)
+                Destroy(ActualTrap.TrapPrefab);
         }
         public void CreateTrapPrevu()
         {

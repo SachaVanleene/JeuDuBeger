@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -18,7 +19,8 @@ namespace Assets.Script.Managers
         public GameObject Spawns;
         public GameObject PanelBackToMenu;
         public GameObject GameOverChart;
-                
+        public GameObject TrapsCreationPannel;
+
         public int TotalSheeps { get; set; }    // player inventory relativ
         public int TotalSuperSheeps { get; set; }
         public bool IsTheSunAwakeAndTheBirdAreSinging { get; set; }
@@ -221,6 +223,7 @@ namespace Assets.Script.Managers
             newRound();
             getGoldsRound();
             cycleManager.GoToAngle(180f/GameVariables.Cycle.dayDuration, 181); //  takes aprox 5min to end the day
+            TrapsCreationPannel.SetActive(true);
         }
         public void NightStart()
         {
@@ -233,6 +236,8 @@ namespace Assets.Script.Managers
 
             _enclosureManager.DefaultFilling();
             cycleManager.GoToAngle(180f / GameVariables.Cycle.nightDuration, 355); //  takes aprox 5min to end the night
+            TrapsCreationPannel.SetActive(false);
+
         }
         public void WaitingAt(int goal, int angle)
         {

@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+﻿using Assets.Script.Managers;
+using UnityEngine;
+using UnityEngine.UI;
 
-namespace Assets
+namespace Assets.Scripts.Traps
 {
     public class SelectionElement : MonoBehaviour
     {
@@ -9,6 +11,23 @@ namespace Assets
         void Start ()
         {
             transform.localScale = Vector3.one * 0.8f;
+            int value = 0;
+            switch (name)
+            {
+                case "Needle":
+                    value = GameVariables.Trap.NeedleTrap.p[0];
+                    break;
+                case "Bait":
+                    value = GameVariables.Trap.Decoy.upgradePrice[0];
+                    break;
+                case "Mud":
+                    value = GameVariables.Trap.Mud.upgradePrice[0];
+                    break;
+                case "LandMine":
+                    value = GameVariables.Trap.LandMine.upgradePrice[0];
+                    break;                    
+            }
+            GetComponentInChildren<Text>().text = value.ToString();
         }
 	
         // Update is called once per frame
@@ -18,13 +37,13 @@ namespace Assets
 
         public void Select()
         {
-           // transform.GetChild(0).gameObject.SetActive(true);
+            transform.GetChild(1).gameObject.SetActive(true);
             transform.localScale = Vector3.one;
         }
         public void Unselect()
         {
-            transform.GetChild(0).gameObject.SetActive(false);
-            transform.localScale = Vector3.one * 0.8f;
+            transform.GetChild(1).gameObject.SetActive(false);
+            transform.localScale = Vector3.one * 0.9f;
         }
     }
 }

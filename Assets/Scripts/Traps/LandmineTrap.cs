@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Assets.Scripts;
 using UnityEngine;
 
 namespace Assets.Script.Traps
@@ -10,15 +11,19 @@ namespace Assets.Script.Traps
     class LandmineTrap : Trap
 
     {
+        public sealed override List<int> UpgradeCosts { get; set; }
+        public sealed override List<int> Pows { get; set; }
+
         public GameObject ExplosionEffect;
 
         public LandmineTrap()
         {
             DurabilityMax = 1;
             Durability = 1;
-            Pows = GameVariables.Trap.LandMine.playerDamage;
-            UpgradeCosts = GameVariables.Trap.LandMine.upgradePrice;
+            Pows = new List<int>(GameVariables.Trap.LandMine.playerDamage);
+            UpgradeCosts = new List<int>(GameVariables.Trap.LandMine.upgradePrice);
         }
+
 
         public override IEnumerator Activate(GameObject go)
         {
