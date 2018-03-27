@@ -32,7 +32,7 @@ namespace Assets.Script.Managers
         private EnclosureManager _enclosureManager;
         private SoundManager soundManager;
         private CycleManager cycleManager;
-             int _roundNumber = 0;
+        private int _roundNumber = 0;
         private bool cheatsActivated = false;
         
         public bool gameOver = false;
@@ -56,7 +56,7 @@ namespace Assets.Script.Managers
             cycleManager = CycleManagerObject.GetComponent<CycleManager>();
             cycleManager.SubscribCycle(this);
             cycleManager.GoToAngle(1, 30);
-            TotalSheeps = 15;
+            TotalSheeps = GameVariables.Initialisation.numberSheeps;
             Time.timeScale = 1;
             //GetComponent<DifficultyManager>().SetDiffilculty();
             Cursor.visible = false;
@@ -85,9 +85,7 @@ namespace Assets.Script.Managers
                 return;
             if (Input.GetKeyUp("n") && IsTheSunAwakeAndTheBirdAreSinging)
             {
-                cycleManager.NextCycle(GameVariables.Cycle.passedCycleSpeed);
-                // destroy flying sheeps
-                _enclosureManager.TakeOffAllSheeps();
+                cycleManager.NextCycle(GameVariables.Cycle.passedCycleSpeed);                
             }
 
             if (Input.GetKey(KeyCode.Tab))
@@ -228,6 +226,8 @@ namespace Assets.Script.Managers
             if (_roundNumber != 0)
                 callAchievement(AchievementEvent.cycleEnd);
             Spawns.GetComponent<Spawn_wolf>().Cycle = ++_roundNumber;
+            if (_roundNumber % GameVariables.Round.periodicityEarnSheep == 0)
+                TotalSheeps += GameVariables.Round.quantityEarnSheepPeriodically;
             TextRounds.text = "ROUND " + _roundNumber;
             displayInfo("Round " + _roundNumber + " begin \n Press n to pass directly to the night", 5);
             
@@ -235,14 +235,14 @@ namespace Assets.Script.Managers
         public void DayStart()
         {
             IsTheSunAwakeAndTheBirdAreSinging = true;
-            printNbSHeeps();
+            newRound();
             soundManager.PlayAmbuanceMusic("day_theme", GameVariables.Cycle.volumeThemes);
             soundManager.PlaySound("safe_place_to_rest", GameVariables.Cycle.volumeVoice);
             soundManager.PlaySound("bird", GameVariables.Cycle.volumeEffects);
-
-            newRound();
+            printNbSHeeps();
             getGoldsRound();
-            cycleManager.GoToAngle(180f/GameVariables.Cycle.dayDuration, 181); //  takes aprox 5min to end the day
+            cycleManager.GoToAngle((GameVariables.Cycle.duskAngle - cycleManager.GetCurentCycle()) / GameVariables.Cycle.dayDuration, 
+                (int)GameVariables.Cycle.duskAngle);
             TrapsCreationPannel.SetActive(true);
             PanelWolvesAliveInRound.SetActive(false);
             SheepsInInventory.SetActive(true);
@@ -250,24 +250,27 @@ namespace Assets.Script.Managers
         public void NightStart()
         {
             IsTheSunAwakeAndTheBirdAreSinging = false;
+            // destroy flying sheeps
+            _enclosureManager.TakeOffAllSheeps();
+
             soundManager.PlayAmbuanceMusic("night_theme", GameVariables.Cycle.volumeThemes);
             soundManager.PlaySound("dont_fuck_with_me", GameVariables.Cycle.volumeVoice);
             soundManager.PlaySound("wolf", GameVariables.Cycle.volumeEffects);
-
             Spawns.GetComponent<Spawn_wolf>().Begin_Night();
-
             _enclosureManager.DefaultFilling();
-            cycleManager.GoToAngle(180f / GameVariables.Cycle.nightDuration, 355); //  takes aprox 5min to end the night
+            cycleManager.GoToAngle((GameVariables.Cycle.dawnAngle - cycleManager.GetCurentCycle()) / GameVariables.Cycle.nightDuration, 
+                (int)GameVariables.Cycle.dawnAngle); 
             TrapsCreationPannel.SetActive(false);
             PanelWolvesAliveInRound.SetActive(true);
             SheepsInInventory.SetActive(false);
         }
         public void WaitingAt(int goal, int angle)
         {
-            Debug.Log("cycle waiting at " + angle + ", while aiming " + goal);
+            if(goal != angle)
+                Debug.Log("cycle waiting at " + angle + ", while aiming " + goal);
             // can do some verification, start a new wave, etc.
             if(goal == 355 && Spawns.GetComponent<Spawn_wolf>().hasWolfAlive())
-                displayInfo("The Night will end only when the wolfs are dead", 4);
+                displayInfo("The Night will only end when all the wolfs are dead", 4);
         }
         public void EarnGold(int value, bool enclosureGold = false)
         {

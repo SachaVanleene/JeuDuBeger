@@ -64,6 +64,8 @@ namespace Assets.Scripts.Enclosures
                 if (value < 0)
                 {
                     value = 0;
+                    if (_health <= 0)
+                        return;
                 }
                 if (value > 100)
                 {
@@ -78,6 +80,10 @@ namespace Assets.Scripts.Enclosures
                 if (_health < value && (_health % 10) + (value - _health) >= 10 && value != 0)
                 {
                     int sheepToAdd = (int)Math.Truncate((double)value / 10) - SheepNumber;
+                    if (GameManager.instance.TotalSheeps < sheepToAdd)
+                        sheepToAdd = GameManager.instance.TotalSheeps;
+                    if (sheepToAdd <= 0)
+                        return;
                     for (var i = 0; i < sheepToAdd; i++)
                     {
                         AddSheep();

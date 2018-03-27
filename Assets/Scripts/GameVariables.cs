@@ -152,6 +152,13 @@ namespace Assets.Scripts
 
         public static class Round
         {
+            public static readonly int periodicityEarnSheep = 3;
+            public static readonly int quantityEarnSheepPeriodically = 5;
+
+        }
+        public static class Initialisation
+        {
+            public static readonly int numberSheeps = 15;
 
         }
 
@@ -172,8 +179,10 @@ namespace Assets.Scripts
 
         public static class Cycle
         {
-            public static readonly float dayDuration = 300f;
-            public static readonly float nightDuration = 300f;
+            public static readonly float dayDuration = 15f;//300f;
+            public static readonly float nightDuration = 15f;//300f;
+            public static readonly float dawnAngle = 355f;
+            public static readonly float duskAngle = 180f;
             public static readonly float volumeThemes = .2f;
             public static readonly float volumeEffects = .1f;
             public static readonly float volumeVoice = .8f;
