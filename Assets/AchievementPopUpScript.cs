@@ -32,10 +32,15 @@ public class AchievementPopUpScript : MonoBehaviour {
             AchievementInfo achInfo = queue.Peek();
             Text.text = achInfo.Name;
             Texture2D texture = SProfilePlayer.getInstance().DefaultSprite;
-            foreach (var t in SProfilePlayer.getInstance().SpritesAchievements)
+            if(SProfilePlayer.getInstance().SpritesAchievements != null)
+                foreach (var t in SProfilePlayer.getInstance().SpritesAchievements)
+                {
+                    if (t.name.Equals(achInfo.Name))
+                        texture = t;
+                }
+            else
             {
-                if (t.name.Equals(achInfo.Name))
-                    texture = t;
+                Debug.LogError("Lance la scene depuis le menu !");
             }
             Image.texture = texture;
             speed = -GameVariables.Achievements.PopUp.speedCome;

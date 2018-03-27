@@ -179,7 +179,7 @@ public class CycleManager : MonoBehaviour
     {
         return (currentAngle >= 180);
     }
-    public int GetPercentCycle()
+    public int GetCurentCycle()
     {
         return currentAngle;
     }
