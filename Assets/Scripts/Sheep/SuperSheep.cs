@@ -52,7 +52,7 @@ public class SuperSheep : MonoBehaviour
 
     private void ShowPanel()
     {
-        Vector3 distPlayertoEnclos = TerrainTest.PlayerGameObject.transform.position - transform.position;
+       /** Vector3 distPlayertoEnclos = TerrainTest.PlayerGameObject.transform.position - transform.position;
 
         if (distPlayertoEnclos.magnitude < 25 && _gameManager.IsTheSunAwakeAndTheBirdAreSinging)
         {
@@ -69,7 +69,7 @@ public class SuperSheep : MonoBehaviour
                 _isDisplayingPanel = false;
                 EnclosureManager.EnclosurePannel.SetActive(false);
             }
-        }
+        }**/
     }
     private void HandleInputs()
     {

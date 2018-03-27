@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Assets.Script.Managers;
+using Assets.Scripts;
 using Assets.Scripts.Enclosures;
 //using Assets.Scripts.Enclosures;
 using UnityEngine;
@@ -25,7 +26,7 @@ public class EnclosureManager : MonoBehaviour
     public static MiniMap MiniMap;
     public static int SheepNumberInTheWorld;
 
-    public  static List<EnclosureScript> EnclosureList = new List<EnclosureScript>();
+    public  static List<EnclosureScript> EnclosureList;
     private GameManager _gameManager;
     private void Awake()
     {
@@ -38,6 +39,7 @@ public class EnclosureManager : MonoBehaviour
 
     void Start () {
         //EnclosurePannel = GameObject.FindWithTag("EnclosurePannel");
+        EnclosureList = new List<EnclosureScript>();
         EnclosurePannel = enclosurePanel;
         int i = 0;
 

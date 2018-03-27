@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Remoting;
 using Assets.Script.Managers;
 using Assets.Scripts.Traps;
 using UnityEngine;
@@ -11,13 +9,14 @@ namespace Assets.Script.Traps
 {
     public abstract class Trap : MonoBehaviour
     {
-        public int DurabilityMax, Durability, BuyingCost;
+        public int DurabilityMax, Durability;
         public GameObject TrapPrefab;
-        public List<int> UpgradeCosts, Damages;
         public Boolean IsActive = false;
+        protected int SellingPrice; 
+        private int i = 0;
+        private int v;
 
         private Boolean _isInPreviewMode = true;
-
         public Boolean IsInPreviewMode
         {
             get { return _isInPreviewMode; }
@@ -37,7 +36,7 @@ namespace Assets.Script.Traps
         private int _level = 1;
         public int Level
         {
-            get { return this._level; }
+            get { return _level; }
             set
             {
                 if (value <= 3)
@@ -52,15 +51,14 @@ namespace Assets.Script.Traps
             }
         }
 
+        public abstract List<int> UpgradeCosts { get; set; }
+        public abstract List<int> Pows { get; set; }
         public abstract IEnumerator Activate(GameObject go);
-        private int i = 0;
-        private int v = 0;
-
+        
         public void OnTriggerEnter(Collider collider)
-        {
+        {   
             if (collider.gameObject.tag != "Terrain" && collider.gameObject.name != "Plane" && collider.gameObject.name != "WaterShower" &&  collider.gameObject.name != "ShootableHitbox")
             {
-                Debug.Log(collider.gameObject);
                 v++;
             }
             if (IsInPreviewMode && collider.tag != "Terrain")
@@ -75,17 +73,20 @@ namespace Assets.Script.Traps
 
         }
 
-        public void LevelUp()
+        public virtual void LevelUp()
         {
-            if (GameManager.instance.SpendGold(UpgradeCosts[Level - 1]) && Level < 3)
+            var levelIndex = TrapCreator.TargetedTrap.Level < 3 ? TrapCreator.TargetedTrap.Level : 2;
+
+            if (GameManager.instance.SpendGold(UpgradeCosts[levelIndex]))
             {
+                SellingPrice += (int) (UpgradeCosts[levelIndex] * 0.75f);
                 Level++;
             }
         }
 
         public void Deselect()
         {
-            foreach (var rend in TrapFactory.ClosestTrap.transform.parent
+            foreach (var rend in TrapCreator.TargetedTrap.transform.parent
                 .GetComponentsInChildren<Renderer>())
             {
                 rend.material.color = new Color(0.3f, 0.3f, 0.3f, 1f);
@@ -94,7 +95,7 @@ namespace Assets.Script.Traps
 
         public void Select()
         {
-            foreach (var rend in TrapFactory.ClosestTrap.transform.parent
+            foreach (var rend in TrapCreator.TargetedTrap.transform.parent
                 .GetComponentsInChildren<Renderer>())
             {
                 rend.material.color = Color.white;
@@ -103,12 +104,16 @@ namespace Assets.Script.Traps
 
         public void Destroy()
         {
+            GameManager.instance.EarnGold(SellingPrice);
             Destroy(TrapPrefab);
         }
 
         public void OnTriggerExit(Collider collider)
         {
             if (collider.tag != "Terrain" && collider.name != "Plane") v--;
+            if (collider.tag == "Fences" &&
+                Vector3.Distance(transform.position, collider.transform.parent.position) <
+                collider.transform.localPosition.magnitude) return;
             if (IsInPreviewMode && collider.tag != "Terrain" && v == 0)
             {
                 foreach (var rend in TrapPrefab.GetComponentsInChildren<Renderer>())

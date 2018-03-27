@@ -14,10 +14,12 @@ public class MiniMap : MonoBehaviour
     public List<EnclosureScript> EnclosureList;
     public Image Farmer;
 
+    private GameObject _player;
     private List<Text> _sheepNumberList = new List<Text>();
 	// Use this for initialization
 	void Start ()
-	{       
+	{
+        _player = GameObject.FindGameObjectWithTag("Player");
 	}
 
     public void InstantiateText()
@@ -29,8 +31,8 @@ public class MiniMap : MonoBehaviour
             {
                 var normalizedPos = new Vector2(Mathf.InverseLerp(0f, Terrain.activeTerrain.terrainData.size.x, enclosure.transform.position.x),
                     Mathf.InverseLerp(0, Terrain.activeTerrain.terrainData.size.z, enclosure.transform.position.z));
-                text = Instantiate(SheepNumberPrefab);
-                text.transform.SetParent(this.transform);
+                text = Instantiate(SheepNumberPrefab,transform);
+
                 text.transform.localPosition = new Vector2(normalizedPos.x * 100 - 50, normalizedPos.y * 100 - 50);
                 text.GetComponent<Text>().text = enclosure.SheepNumber.ToString();
                 _sheepNumberList.Add(text);
@@ -45,8 +47,8 @@ public class MiniMap : MonoBehaviour
 	}
 	// Update is called once per frame
 	void Update () {
-	    var normalizedPos = new Vector2(Mathf.InverseLerp(0f, Terrain.activeTerrain.terrainData.size.x, TerrainTest.PlayerGameObject.transform.position.x),
-	        Mathf.InverseLerp(0, Terrain.activeTerrain.terrainData.size.z, TerrainTest.PlayerGameObject.transform.position.z));
+	    var normalizedPos = new Vector2(Mathf.InverseLerp(0f, Terrain.activeTerrain.terrainData.size.x, _player.transform.position.x),
+	        Mathf.InverseLerp(0, Terrain.activeTerrain.terrainData.size.z, _player.transform.position.z));
 	    Farmer.transform.localPosition = new Vector2(normalizedPos.x * 100 - 50, normalizedPos.y * 100 - 50);
 
     }

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Assets.Script;
 using Assets.Scripts.Traps;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,23 +12,40 @@ public class UiManager : MonoBehaviour
 		
 	}
 	
-	void Update () {
-	   if (TrapFactory.ClosestTrap != null)
-	    {
-	        transform.GetChild(0).gameObject.SetActive(true);
-	        Vector3 textPosition =
-	        Camera.WorldToScreenPoint(TrapFactory.ClosestTrap.transform.parent.position + new Vector3(0, 2, 0));
-	        transform.GetChild(0).position = textPosition;
-	        transform.GetChild(0).GetComponent<Text>().text = "Level : " + TrapFactory.ClosestTrap.Level +
-	                                                          "\n Durability : " + TrapFactory.ClosestTrap.Durability + "/" + TrapFactory.ClosestTrap.DurabilityMax;
-	        foreach (var rend in TrapFactory.ClosestTrap.transform.parent.GetComponentsInChildren<Renderer>())
-	        {
-	            rend.material.color = Color.white;
-	        }
-        }
-	    else
-	    {
-	        transform.GetChild(0).gameObject.SetActive(false);
-        }
+	void Update ()
+	{
+	    if (TrapCreator.TargetedTrap == null) return;
+	    AdjustPosition();
     }
+
+    public void AdjustPosition()
+    {
+        var levelIndex = TrapCreator.TargetedTrap.Level < 3 ? TrapCreator.TargetedTrap.Level : 2;
+
+        if (TrapCreator.TargetedTrap.Level >= 3)
+        {
+            transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+            transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
+            Color green = new Color(6 / 255f, 201 / 255f, 24 / 255f);
+            foreach (var text in GetComponentsInChildren<Text>())
+            {
+                text.color = green;
+            }
+        }
+        else
+        {
+            transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
+            transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
+            foreach (var text in GetComponentsInChildren<Text>())
+            {
+                text.color = Color.red;
+            }
+        }
+
+        GetComponentsInChildren<Text>()[0].text = TrapCreator.TargetedTrap.UpgradeCosts[levelIndex] + " ";
+        GetComponentsInChildren<Text>()[1].text = TrapCreator.TargetedTrap.Durability + "/" + TrapCreator.TargetedTrap.DurabilityMax;
+        GetComponentsInChildren<Text>()[2].text = "Level " + TrapCreator.TargetedTrap.Level;
+
+    }
+
 }

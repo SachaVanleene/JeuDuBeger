@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -18,6 +19,7 @@ namespace Assets.Script.Managers
         public GameObject Spawns;
         public GameObject PanelBackToMenu;
         public GameObject GameOverChart;
+        public GameObject TrapsCreationPannel;
         public GameObject AchievementPopUp;
                 
         public int TotalSheeps { get; set; }    // player inventory relativ
@@ -103,7 +105,7 @@ namespace Assets.Script.Managers
             if (Input.GetKeyUp("e"))
             {
                 callAchievement(AchievementEvent.cheat);
-                earnGold(150);
+                EarnGold(150);
             }
             if (Input.GetKeyUp("l"))
             {
@@ -204,7 +206,7 @@ namespace Assets.Script.Managers
                 int toBeAdded = Mathf.RoundToInt((nb - (2 * Mathf.Log(nb))) * p.GoldReward);
                 if (toBeAdded != (int)((nb - (2 * Mathf.Log(nb))) * p.GoldReward)) //  round up
                     toBeAdded++;
-                earnGold(toBeAdded, true);
+                EarnGold(toBeAdded, true);
 
                 if (p.GoldReward == GameVariables.EnclosureGold.close)
                     GameOverManager.instance.goldPerEnclosure[0] += toBeAdded;
@@ -239,6 +241,7 @@ namespace Assets.Script.Managers
             newRound();
             getGoldsRound();
             cycleManager.GoToAngle(180f/GameVariables.Cycle.dayDuration, 181); //  takes aprox 5min to end the day
+            TrapsCreationPannel.SetActive(true);
         }
         public void NightStart()
         {
@@ -251,15 +254,17 @@ namespace Assets.Script.Managers
 
             _enclosureManager.DefaultFilling();
             cycleManager.GoToAngle(180f / GameVariables.Cycle.nightDuration, 355); //  takes aprox 5min to end the night
+            TrapsCreationPannel.SetActive(false);
+
         }
         public void WaitingAt(int goal, int angle)
         {
-            TextRounds.text = "waiting at " + angle + ", while aiming " + goal;
+            Debug.Log("cycle waiting at " + angle + ", while aiming " + goal);
             // can do some verification, start a new wave, etc.
             if(goal == 355 && Spawns.GetComponent<Spawn_wolf>().hasWolfAlive())
                 displayInfo("The Night will end only when the wolfs are dead", 4);
         }
-        private void earnGold(int value, bool enclosureGold = false)
+        public void EarnGold(int value, bool enclosureGold = false)
         {
             gold += value;
             TextGolds.text = gold + " gold";
@@ -275,7 +280,10 @@ namespace Assets.Script.Managers
         public bool SpendGold(int value)
         { //  allow the player to purchase
             if (value > gold)
+            {
+                displayInfo("Not enough gold",1);
                 return false;
+            }
             gold -= value;
             TextGolds.text = gold + " gold";
 
