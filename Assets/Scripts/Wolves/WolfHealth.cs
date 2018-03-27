@@ -79,6 +79,9 @@ public class WolfHealth : MonoBehaviour
                     GameOverManager.instance.WolvesKilledByTrap.Add(1);
 
                 GameOverManager.instance.WolvesAliveInRound.Add(-1);
+
+                Assets.Script.Managers.GameManager.instance.EarnGold((int) wolfStats.CurrentGoldReward);
+
                 killWolf.Raise();
 
                 DisableComponent();
