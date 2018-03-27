@@ -137,7 +137,7 @@ public class IA_Moutain_Wolves : MonoBehaviour {
             anim.SetBool("Moving", moving);
             agent.SetDestination(transform.position);
         }
-        if (targetTag == "Aucune")// SI aucune target
+        if (targetTag == "Aucune" && GetComponent<WolfHealth>().alive)// SI aucune target
         {
             moving = false;
             anim.SetBool("Moving", moving);
@@ -352,7 +352,7 @@ public class IA_Moutain_Wolves : MonoBehaviour {
             {
                 targetAlive = (targetTransform.parent.gameObject.GetComponent<EnclosureScript>().Health > 0);
             }
-            else
+            else if (targetTag == "Player")
             {
                 targetAlive = targetTransform.gameObject.GetComponent<Player>().Alive;
             }

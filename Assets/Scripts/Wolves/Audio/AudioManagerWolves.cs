@@ -11,6 +11,7 @@ public class AudioManagerWolves : AudioPlayer {
 
     //SpecificForMountainOrWater
     bool jetSoundPlaying;
+    AudioSource jetSound;
 
     private void Awake()
     {
@@ -37,7 +38,13 @@ public class AudioManagerWolves : AudioPlayer {
                 audioSource.spatialBlend = 1f;
                 audioSource.PlayOneShot(clip, vol);
                 clipLength = clip.length;
-                Destroy(audioSource, clipLength);
+                if(clipName == "blizzard")
+                {
+                    jetSound = audioSource;
+                }else
+                {
+                    Destroy(audioSource, clipLength);
+                }
                 //StartCoroutine(DelayedCallback());
                 return;
             }
@@ -66,7 +73,11 @@ public class AudioManagerWolves : AudioPlayer {
 
     public void StopMountainAttack()
     {
-        Stop();
-        jetSoundPlaying = false;
+        if(jetSoundPlaying && jetSound != null)
+        {
+            jetSound.Stop();
+            Destroy(jetSound);
+            jetSoundPlaying = false;
+        }
     }
 }

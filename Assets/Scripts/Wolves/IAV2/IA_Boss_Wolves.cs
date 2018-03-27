@@ -332,7 +332,7 @@ public class IA_Boss_Wolves : MonoBehaviour {
             {
                 targetAlive = (targetTransform.parent.gameObject.GetComponent<EnclosureScript>().Health > 0);
             }
-            else
+            else if(targetTag =="Player")
             {
                 targetAlive = targetTransform.gameObject.GetComponent<Player>().Alive;
             }
