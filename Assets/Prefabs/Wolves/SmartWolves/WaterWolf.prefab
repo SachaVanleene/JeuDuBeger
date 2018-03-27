@@ -2213,6 +2213,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alive: 0
   wolfStats: {fileID: 11400000, guid: beb6041ab1cf5824eb8b463e08aae652, type: 2}
+  killWolf: {fileID: 11400000, guid: bff2b7925b7f5004b8e5491970befbff, type: 2}
 --- !u!114 &114953969198562348
 MonoBehaviour:
   m_ObjectHideFlags: 1

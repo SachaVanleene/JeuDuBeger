@@ -26,7 +26,6 @@ namespace Assets.Script.Managers
             {
                 number_wolf = Cycle * 5;
             }
-
             //Quand 100 loup spawn, augmenter leur vie a chaque cycle
             else
             {
@@ -35,6 +34,9 @@ namespace Assets.Script.Managers
                 //wolf_lac_healt += 10
                 //wolf_lac_healt += 10
             }
+
+            GameOverManager.instance.WolvesAliveInRound.Set(number_wolf);
+
             Spawn(number_wolf);
             /*
             int i = 0;

@@ -12,7 +12,7 @@ public class GameOverManager : MonoBehaviour {
     [HideInInspector]
     public List<int> goldPerTrap;
 
-    [Header("Variables references")]
+    [Header("Game over Variables references")]
     public SO.IntVariable DeathCount;
     public SO.IntVariable PlayerDamageDealt;
     public SO.IntVariable GoldEarned;
@@ -31,6 +31,12 @@ public class GameOverManager : MonoBehaviour {
     public SO.IntVariable WolvesGold;
     public SO.IntVariable EnclosureGold;
     public SO.StringVariable FavoriteEnclosure;
+
+    [Space]
+    [Header("Variable references")]
+    public SO.IntVariable WolvesAliveInRound;
+    public SO.IntVariable WerewolvesAliveInRound;
+
 
     private void Awake()
     {

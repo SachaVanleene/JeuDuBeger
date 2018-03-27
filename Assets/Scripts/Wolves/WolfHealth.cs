@@ -11,6 +11,7 @@ public class WolfHealth : MonoBehaviour
     public bool alive;
 
     public SO.WolfStats wolfStats;
+    public SO.GameEvent killWolf;
 
     AudioManagerWolves script_audio;
 
@@ -38,6 +39,8 @@ public class WolfHealth : MonoBehaviour
 
         if (health <= 0 && alive)
         {
+            
+
             alive = false;
             if (gameObject.tag == "CommonWolf")
             {
@@ -62,6 +65,9 @@ public class WolfHealth : MonoBehaviour
                 GameOverManager.instance.WolvesKilledByWeapon.Add(1);
             else
                 GameOverManager.instance.WolvesKilledByTrap.Add(1);
+
+            GameOverManager.instance.WolvesAliveInRound.Add(-1);
+            killWolf.Raise();
         }
     }
 

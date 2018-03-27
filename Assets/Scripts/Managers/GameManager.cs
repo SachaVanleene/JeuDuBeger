@@ -21,7 +21,8 @@ namespace Assets.Script.Managers
         public GameObject GameOverChart;
         public GameObject TrapsCreationPannel;
         public GameObject AchievementPopUp;
-                
+        public GameObject PanelWolvesAliveInRound;
+        
         public int TotalSheeps { get; set; }    // player inventory relativ
         public int TotalSuperSheeps { get; set; }
         public bool IsTheSunAwakeAndTheBirdAreSinging { get; set; }
@@ -242,6 +243,7 @@ namespace Assets.Script.Managers
             getGoldsRound();
             cycleManager.GoToAngle(180f/GameVariables.Cycle.dayDuration, 181); //  takes aprox 5min to end the day
             TrapsCreationPannel.SetActive(true);
+            PanelWolvesAliveInRound.SetActive(false);
         }
         public void NightStart()
         {
@@ -255,7 +257,7 @@ namespace Assets.Script.Managers
             _enclosureManager.DefaultFilling();
             cycleManager.GoToAngle(180f / GameVariables.Cycle.nightDuration, 355); //  takes aprox 5min to end the night
             TrapsCreationPannel.SetActive(false);
-
+            PanelWolvesAliveInRound.SetActive(true);
         }
         public void WaitingAt(int goal, int angle)
         {
