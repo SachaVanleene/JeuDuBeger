@@ -84,7 +84,7 @@ namespace TPC
             float x = Input.GetAxis("Mouse X") + offsetX;
             float y = Input.GetAxis("Mouse Y") + offsetY;
 
-            if (turnsmoothing > 0)
+            if (turnsmoothing > 0 && smoothY != 0)
             {
                 smoothX = Mathf.SmoothDamp(smoothX, x, ref smoothXvelocity, turnsmoothing);
                 smoothY = Mathf.SmoothDamp(smoothY, y, ref smoothYvelocity, turnsmoothing);
