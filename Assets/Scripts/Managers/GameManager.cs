@@ -259,7 +259,7 @@ namespace Assets.Script.Managers
         }
         public void WaitingAt(int goal, int angle)
         {
-            TextRounds.text = "waiting at " + angle + ", while aiming " + goal;
+            Debug.Log("cycle waiting at " + angle + ", while aiming " + goal);
             // can do some verification, start a new wave, etc.
             if(goal == 355 && Spawns.GetComponent<Spawn_wolf>().hasWolfAlive())
                 displayInfo("The Night will end only when the wolfs are dead", 4);

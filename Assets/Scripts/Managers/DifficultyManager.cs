@@ -19,8 +19,8 @@ public class DifficultyManager : MonoBehaviour
     {
         
         selectedDifficulty = SProfilePlayer.getInstance().Difficulty;
-        Debug.Log(selectedDifficulty);
-        Debug.Log(difficultySettings.gold[0]);
+        //Debug.Log(selectedDifficulty);
+        //Debug.Log(difficultySettings.gold[0]);
         foreach (SO.WolfStats wolfStats in wolvesStats)
         {
             wolfStats.SetDifficulty(difficultySettings, selectedDifficulty);
