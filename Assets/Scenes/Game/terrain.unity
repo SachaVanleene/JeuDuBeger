@@ -20582,6 +20582,8 @@ MonoBehaviour:
   GameOverChart: {fileID: 1791846841}
   TrapsCreationPannel: {fileID: 962133771}
   AchievementPopUp: {fileID: 125595889}
+  PanelWolvesAliveInRound: {fileID: 2049250242}
+  SheepsInInventory: {fileID: 537688237}
   gameOver: 0
 --- !u!4 &1958775833
 Transform:
