@@ -1692,6 +1692,7 @@ MonoBehaviour:
   alive: 0
   wolfStats: {fileID: 11400000, guid: 6c5809573b907e645817efdd6d81e933, type: 2}
   killWolf: {fileID: 11400000, guid: bff2b7925b7f5004b8e5491970befbff, type: 2}
+  emptyGoWhoContainBoxCollider: {fileID: 0}
 --- !u!114 &114350582921068572
 MonoBehaviour:
   m_ObjectHideFlags: 1
