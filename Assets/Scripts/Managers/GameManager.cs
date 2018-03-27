@@ -53,7 +53,7 @@ namespace Assets.Script.Managers
             cycleManager.SubscribCycle(this);
             cycleManager.GoToAngle(1, 30);
             TotalSheeps = 15;
-
+            Time.timeScale = 1;
             //GetComponent<DifficultyManager>().SetDiffilculty();
             Cursor.visible = false;
 
