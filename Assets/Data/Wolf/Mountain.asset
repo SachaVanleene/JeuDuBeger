@@ -14,6 +14,6 @@ MonoBehaviour:
   life: 100
   enclosureDamage: 0.1
   playerDamage: 0.1
-  goldReward: 0
+  goldReward: 10
   range: 0
   delay: 0

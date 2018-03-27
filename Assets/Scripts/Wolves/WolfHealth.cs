@@ -81,6 +81,9 @@ public class WolfHealth : MonoBehaviour
                 GameOverManager.instance.WolvesAliveInRound.Add(-1);
                 killWolf.Raise();
 
+                Assets.Script.Managers.GameManager.instance.EarnGold((int)wolfStats.CurrentGoldReward);
+
+
                 DisableComponent();
             }
 
