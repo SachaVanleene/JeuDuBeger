@@ -19,6 +19,8 @@ public class WolfHealth : MonoBehaviour
 
     UI_Health_Wolves ui_healt;
 
+    public GameObject emptyGoWhoContainBoxCollider;
+
     private void Awake()
     {
         health = (int) wolfStats.CurrentLife;
@@ -106,6 +108,13 @@ public class WolfHealth : MonoBehaviour
         if(transform.tag == "CommonWolf")
         {
             GetComponent<BoxCollider>().enabled = false;
+        }
+        else
+        {
+            if(emptyGoWhoContainBoxCollider != null)
+            {
+                emptyGoWhoContainBoxCollider.GetComponent<BoxCollider>().enabled = false;
+            }
         }
     }
 }
