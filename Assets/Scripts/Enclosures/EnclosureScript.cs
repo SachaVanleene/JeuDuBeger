@@ -27,13 +27,13 @@ namespace Assets.Scripts.Enclosures
         private List<GameObject> _sheeps = new List<GameObject>();
         private List<GameObject> _superSheeps = new List<GameObject>();
         // for the flying sheeps
-        private List<GameObject> _flyingSheeps = null;
+        public List<GameObject> FlyingSheeps = null;
 
         private GameObject _player;
 
         public int getNbSheepFlying()
         {   // used to know how many sheeps are to be sold
-            return (_flyingSheeps != null)? _flyingSheeps.Count : 0;
+            return (FlyingSheeps != null)? FlyingSheeps.Count : 0;
         }
 
         public int SheepNumber
@@ -166,7 +166,7 @@ namespace Assets.Scripts.Enclosures
         }
         public void AddSheep()
         {
-            if (_gameManager.TotalSheeps <= 0)
+            if (_gameManager.TotalSheeps < 0)
                 return;
             if (SheepNumber < 10)
             {
@@ -232,14 +232,14 @@ namespace Assets.Scripts.Enclosures
         }
         public void RemoveAllSheeps()
         {
-           if(_flyingSheeps != null)
+           if(FlyingSheeps != null)
             {
                 audioPlayer.Stop();
-                foreach (var sheep in _flyingSheeps)
+                foreach (var sheep in FlyingSheeps)
                 {
                     sheep.GetComponent<SheepBehaviour>().DestroyMe();
                 }
-                _flyingSheeps = null;
+                FlyingSheeps = null;
             }
         }
         public void MakeSheepsFly()
@@ -251,11 +251,13 @@ namespace Assets.Scripts.Enclosures
             {
                 sheep.GetComponent<SheepBehaviour>().SpiritInTheSky();
             }
-            _flyingSheeps = _sheeps;
-            if(_flyingSheeps.Count > 0)
+            FlyingSheeps = _sheeps;
+            if(FlyingSheeps.Count > 0)
                 audioPlayer.PlaySound("spirit", GameVariables.Sheep.volumeMusicSky);
             _sheeps = new List<GameObject>();
             _health = 0;
+            EnclosureManager.MiniMap.UpdateEnclosure(Order);
+
         }
 
         public void DamageEnclos(int degats)
