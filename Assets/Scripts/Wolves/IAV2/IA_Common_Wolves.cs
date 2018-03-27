@@ -15,6 +15,7 @@ public class IA_Common_Wolves : MonoBehaviour {
     float timer;
     bool focusingPlayer;
     GameObject player;
+    bool currentTargetDiedWhenAttacking;
 
     //IA variable
     private NavMeshAgent agent;
@@ -75,6 +76,10 @@ public class IA_Common_Wolves : MonoBehaviour {
 
     public void updateTarget(Transform target)
     {
+        if (isAttacking)
+        {
+            currentTargetDiedWhenAttacking = true;
+        }
         RealaseBarrer();
         RealeaseDlegate();
         targetInRange = false; // Si nouvelle target supposé qu'elle n'est pas en rnage sinon bug dans les invoke
@@ -337,15 +342,23 @@ public class IA_Common_Wolves : MonoBehaviour {
 
     void Attack()
     {
-        script_audio.PlayAttackCommonWolvesSound();
-        if (targetTag == "Player")
+        if (!currentTargetDiedWhenAttacking)
         {
-            targetTransform.gameObject.GetComponent<Player>().takeDamage(playerDamage);
+            script_audio.PlayAttackCommonWolvesSound();
+            if (targetTag == "Player")
+            {
+                targetTransform.gameObject.GetComponent<Player>().takeDamage(playerDamage);
+            }
+            if (targetTag == "Fences")
+            {
+                targetTransform.parent.gameObject.GetComponent<EnclosureScript>().DamageEnclos(enclosureDamage);
+            }
         }
-        if (targetTag == "Fences")
+        else
         {
-            targetTransform.parent.gameObject.GetComponent<EnclosureScript>().DamageEnclos(enclosureDamage);
+            currentTargetDiedWhenAttacking = false;
         }
+
     }
 
     public void focusPlayer()

@@ -13,6 +13,7 @@ public class IA_Boss_Wolves : MonoBehaviour {
     bool targetAlive;
     bool isAttacking;
     bool focusingPlayer;
+    bool currentTargetDiedWhenAttacking;
     GameObject player;
 
     //IA variable
@@ -78,6 +79,10 @@ public class IA_Boss_Wolves : MonoBehaviour {
 
     public void updateTarget(Transform target)
     {
+        if (isAttacking)
+        {
+            currentTargetDiedWhenAttacking = true;
+        }
         RealaseBarrer();
         RealeaseDlegate();
         targetInRange = false; // Si nouvelle target supposé qu'elle n'est pas en rnage sinon bug dans les invoke
@@ -347,13 +352,20 @@ public class IA_Boss_Wolves : MonoBehaviour {
 
     void Attack()
     {
-        if (targetTag == "Player")
+        if (!currentTargetDiedWhenAttacking)
         {
-            targetTransform.gameObject.GetComponent<Player>().takeDamage(playerDamage);
+            if (targetTag == "Player")
+            {
+                targetTransform.gameObject.GetComponent<Player>().takeDamage(playerDamage);
+            }
+            if (targetTag == "Fences")
+            {
+                targetTransform.parent.gameObject.GetComponent<EnclosureScript>().DamageEnclos(enclosureDamage);
+            }
         }
-        if (targetTag == "Fences")
+        else
         {
-            targetTransform.parent.gameObject.GetComponent<EnclosureScript>().DamageEnclos(enclosureDamage);
+            currentTargetDiedWhenAttacking = false;
         }
     }
 
