@@ -36,7 +36,7 @@ namespace Assets.Script.Managers
         private bool cheatsActivated = false;
         
         public bool gameOver = false;
-        private int gold = 0;   // player inventory relativ
+        private int gold = 30;   // player inventory relativ
 
 
         private void Awake()
