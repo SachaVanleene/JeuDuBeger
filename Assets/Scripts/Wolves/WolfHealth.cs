@@ -84,6 +84,9 @@ public class WolfHealth : MonoBehaviour
 
                 killWolf.Raise();
 
+                Assets.Script.Managers.GameManager.instance.EarnGold((int)wolfStats.CurrentGoldReward);
+
+
                 DisableComponent();
             }
 

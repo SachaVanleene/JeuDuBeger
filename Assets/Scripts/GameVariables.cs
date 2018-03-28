@@ -179,8 +179,8 @@ namespace Assets.Scripts
 
         public static class Cycle
         {
-            public static readonly float dayDuration = 15f;//300f;
-            public static readonly float nightDuration = 15f;//300f;
+            public static readonly float dayDuration = 300f;//300f;
+            public static readonly float nightDuration = 300f;//300f;
             public static readonly float dawnAngle = 355f;
             public static readonly float duskAngle = 180f;
             public static readonly float volumeThemes = .2f;
