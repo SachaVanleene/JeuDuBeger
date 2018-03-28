@@ -156,18 +156,22 @@ namespace Assets.Scripts.Enclosures
                 }
             }
         }
+
         public void DamageEnclos(float degats)
         {
+            if (_superSheeps.Count > 0)
+                return;
+            if (Health - degats < 10 && _superSheeps.Count < 1 && _gameManager.TotalSuperSheeps >= 1)
+            {
+                AddPinkSuperSheep();
+                return;
+            }
             Health -= degats;
             if (Health == 0)
             {
                 Health = 0; //santé min
                 OnTriggerDead.Invoke();
                 OnTriggerDead = null; //On reset le delegate
-                if (_superSheeps.Count < 1 && _gameManager.TotalSuperSheeps >= 1)
-                {
-                    AddPinkSuperSheep();
-                }
             }
         }
         public void AddSheep()
@@ -266,20 +270,6 @@ namespace Assets.Scripts.Enclosures
 
         }
 
-        public void DamageEnclos(int degats)
-        {
-            // takes no damage if protected by a super sheep
-            if (_superSheeps.Count > 0)
-                return;
-            Health -= degats;
-            if (Health == 0)
-            {
-                Health = 0; //santé min
-                OnTriggerDead.Invoke();
-                OnTriggerDead = null; //On reset le delegate
-            }
-
-        }
 
         public void AddSubscriber(OnDead function)
         {

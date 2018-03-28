@@ -44,7 +44,7 @@ namespace Assets.Script.Traps
                     .Where(T => T.gameObject.tag.Contains("Wolf")))
                 {
                     WolfHealth wolf = (WolfHealth) superTarget.GetComponent<WolfHealth>();
-                    wolf.takeDamage(Pows[Level]);
+                    wolf.takeDamage(Pows[Level-1]);
                 }
                 Durability--;
                 if (Durability == 0)
