@@ -6,12 +6,20 @@ namespace Assets.Scripts
     {
         public static class Wolf
         {
-
             public static readonly int life = 100;
             public static readonly int enclosureDamage = 10;
             public static readonly int farmerDamage = 10;
             public static readonly int gold = 30;
             public static readonly float range = 1.0f;
+
+
+            public static readonly float distMaxSound = 30f;
+            public static readonly float volumeSoundDeath = .1f; 
+            public static readonly float volumeSoundAttack = .5f;
+            public static readonly string stringSoundHit = "hit";
+            public static readonly int NbDifferentSoundAttack = 3; 
+            public static readonly string stringSoundAttack = "attack"; 
+            public static readonly string stringSoundBlizzard = "blizzard";
         }
 
         public static class Water
@@ -161,31 +169,39 @@ namespace Assets.Scripts
             public static readonly int numberSheeps = 15;
 
         }
-
+        public static class Enclosure
+        {
+            public static readonly float distMaxSound = 45f;
+            public static readonly float distMinSound = 0f;
+            public static readonly float volumeMusicSky = 1f;
+            public static readonly string stringEnclosureMusicFly = "spirit";
+        }
         public static class Sheep
         {
-            //public static readonly float flyDuration = 20f;
             public static readonly float flySpeed = 1f;
-
             public static readonly float walkSpeed = 2f;
-            public static readonly float distMaxSound = 15f;
-            public static readonly float distMinSound = 5f;
-            public static readonly float volumeSound = .05f;
-            public static readonly float volumeSoundDeath = .15f;
-            public static readonly float volumeMusicSky = 1f;
+            public static readonly float distMaxSound = 30f;
+            public static readonly float volumeSound = 1f;
+            public static readonly float volumeSoundDeath = .1f;
             public static readonly string stringSheepSound = "sheepSound";
             public static readonly string stringSheepSoundDeath = "SheepDeath";
         }
 
+        public static class Player
+        {
+            public static readonly float distMaxSound = 30f;
+            public static readonly string stringSoundFreezing = "freezing";
+        }
+
         public static class Cycle
         {
-            public static readonly float dayDuration = 300f;//300f;
-            public static readonly float nightDuration = 300f;//300f;
+            public static readonly float dayDuration = 300f;
+            public static readonly float nightDuration = 300f;
             public static readonly float dawnAngle = 355f;
             public static readonly float duskAngle = 180f;
-            public static readonly float volumeThemes = .2f;
-            public static readonly float volumeEffects = .1f;
-            public static readonly float volumeVoice = .8f;
+            public static readonly float volumeThemes = .1f;
+            public static readonly float volumeEffects = .05f;
+            public static readonly float volumeVoice = .6f;
             public static readonly float passedCycleSpeed = 50f;
         }
     }

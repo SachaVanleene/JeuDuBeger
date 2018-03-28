@@ -29,8 +29,9 @@ public class AudioPlayerEnclosure : AudioPlayer
             if (clip.name.Equals(clipName))
             {
                 audioSource = ownerObject.AddComponent<AudioSource>();
-                audioSource.maxDistance = GameVariables.Sheep.distMaxSound;
-                audioSource.minDistance = GameVariables.Sheep.distMinSound;
+                audioSource.rolloffMode = AudioRolloffMode.Linear;
+                audioSource.maxDistance = GameVariables.Enclosure.distMaxSound;
+                audioSource.minDistance = GameVariables.Enclosure.distMinSound;
                 audioSource.spatialBlend = 1f;
                 audioSource.PlayOneShot(clip, vol);
                 clipLength = clip.length;

@@ -263,7 +263,7 @@ namespace Assets.Scripts.Enclosures
             }
             FlyingSheeps = _sheeps;
             if(FlyingSheeps.Count > 0)
-                audioPlayer.PlaySound("spirit", GameVariables.Sheep.volumeMusicSky);
+                audioPlayer.PlaySound(GameVariables.Enclosure.stringEnclosureMusicFly, GameVariables.Enclosure.volumeMusicSky);
             _sheeps = new List<GameObject>();
             _health = 0;
             EnclosureManager.MiniMap.UpdateEnclosure(Order);

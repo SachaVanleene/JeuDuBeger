@@ -25,6 +25,7 @@ public class AudioManagerWolves : AudioPlayer {
 
     public new void PlaySound(string clipName, float vol = 1)
     {
+        Debug.Log(clipName);
         if (audioSource != null)
             audioSource.Stop();
 
@@ -32,20 +33,20 @@ public class AudioManagerWolves : AudioPlayer {
         {
             if (clip.name.Equals(clipName))
             {
+                Debug.Log("play");
+
                 audioSource = ownerObject.AddComponent<AudioSource>();
-                audioSource.maxDistance = GameVariables.Sheep.distMaxSound;
-                audioSource.minDistance = GameVariables.Sheep.distMinSound;
                 audioSource.spatialBlend = 1f;
+                audioSource.maxDistance = GameVariables.Wolf.distMaxSound;
                 audioSource.PlayOneShot(clip, vol);
                 clipLength = clip.length;
-                if(clipName == "blizzard")
+                if(clipName.Equals(GameVariables.Wolf.stringSoundBlizzard))
                 {
                     jetSound = audioSource;
                 }else
                 {
                     Destroy(audioSource, clipLength);
                 }
-                //StartCoroutine(DelayedCallback());
                 return;
             }
         }
@@ -53,20 +54,20 @@ public class AudioManagerWolves : AudioPlayer {
 
     public void PlayHitSound()
     {
-        PlaySound("hit");
+        PlaySound(GameVariables.Wolf.stringSoundHit);
     }
 
     public void PlayAttackCommonWolvesSound()
     {
-        int nb_sound = Random.Range(1, 3);
-        PlaySound("attack" + nb_sound,0.5f);
+        int nb_sound = Random.Range(1, GameVariables.Wolf.NbDifferentSoundAttack);
+        PlaySound(GameVariables.Wolf.stringSoundAttack + nb_sound, GameVariables.Wolf.volumeSoundAttack);
     }
 
     public void PlayAttackMountainWolvesSound()
     {
         if (!jetSoundPlaying)
         {
-            PlaySound("blizzard");
+            PlaySound(GameVariables.Wolf.stringSoundBlizzard);
             jetSoundPlaying = true;
         }
     }
