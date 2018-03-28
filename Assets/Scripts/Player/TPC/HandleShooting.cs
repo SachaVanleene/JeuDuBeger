@@ -9,7 +9,6 @@ namespace TPC
 
         StateManager states;
         public Animator weaponAnim;
-        public float fireRate;
         float timer;
         public Transform bulletSpawnPoint;
         public GameObject smokeParticle;
@@ -20,6 +19,22 @@ namespace TPC
         public int curBullets = 3;
         public bool infiniteBullets = true;
 
+        public SO.GunStats gunStats;
+
+        private int level;
+        public int Level
+        {
+            get
+            {
+                return level;
+            }
+
+            set
+            {
+                level = value;
+                gunStats.SetValues(level);
+            }
+        }
 
         bool shoot;
         bool dontShoot;
@@ -33,6 +48,7 @@ namespace TPC
             states = GetComponent<StateManager>();
             timer = 1;
             killGo.SetActive(false);
+            gunStats.Init();
         }
 
         // Update is called once per frame
@@ -66,7 +82,7 @@ namespace TPC
                             emptyGun = true;
                         }
                     }
-                    timer = fireRate;
+                    timer = gunStats.CurrentFireRate;
                 }
                 else
                 {
@@ -132,7 +148,7 @@ namespace TPC
                         {
                             if (target.GetComponent<WolfHealth>())
                             {
-                                target.GetComponent<WolfHealth>().takeDamage(20, true);
+                                target.GetComponent<WolfHealth>().takeDamage((int) gunStats.CurrentDamage, true);
                                 if (!target.GetComponent<WolfHealth>().alive)
                                     StartCoroutine(KillFeedBack());
                             }
@@ -141,7 +157,7 @@ namespace TPC
                         {
                             if (target.GetComponent<WolfBossHealth>())
                             {
-                                target.GetComponent<WolfBossHealth>().takeDamage(20, true);
+                                target.GetComponent<WolfBossHealth>().takeDamage((int) gunStats.CurrentDamage, true);
                                 if (!target.GetComponent<WolfBossHealth>().alive)
                                     StartCoroutine(KillFeedBack());
                             }

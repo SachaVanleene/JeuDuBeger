@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.0005455809, g: 0.0000110300425, b: 0, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -7500,7 +7500,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponAnim: {fileID: 1010833404}
-  fireRate: 0.5
   bulletSpawnPoint: {fileID: 1748057704}
   smokeParticle: {fileID: 100002, guid: 6890a03af913b874092fbb1e8337747d, type: 2}
   muzzle:
@@ -7509,6 +7508,7 @@ MonoBehaviour:
   caseSpawn: {fileID: 110281970}
   curBullets: 3
   infiniteBullets: 1
+  gunStats: {fileID: 11400000, guid: 4099c16f97495ca4697b2859a8d5623b, type: 2}
   killGo: {fileID: 1581862530}
 --- !u!114 &570099606
 MonoBehaviour:
