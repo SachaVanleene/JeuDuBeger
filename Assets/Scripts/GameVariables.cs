@@ -71,6 +71,8 @@ namespace Assets.Scripts
             {
                 public static readonly int life = 100;
                 public static readonly List<float> speed = new List<float>() {0.8f, 0.6f, 0.4f};
+                public static readonly List<int> pows = new List<int>() {1, 2, 3 };
+
                 public static readonly float radius = 1.0f;
                 public static readonly List<int> upgradePrice = new List<int>() {20, 50, 100};
             }
