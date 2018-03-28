@@ -21,6 +21,7 @@ namespace TPC
 
         public SO.GunStats gunStats;
 
+        [SerializeField]
         private int level;
         public int Level
         {

@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class DifficultyManager : MonoBehaviour
 {
+    [Header("Difficulty")]
     public SO.Difficulty difficultySettings;
+    public int selectedDifficulty;
 
     public List<SO.WolfStats> wolvesStats;
-    public int selectedDifficulty;
+
+    [Space]
+    [Header("Player & Gun stats")]
+    public SO.PlayerStats playerStats;
+    public SO.GunStats gunStats;
 
     private void Start()
     {
@@ -21,5 +27,25 @@ public class DifficultyManager : MonoBehaviour
         {
             wolfStats.SetDifficulty(difficultySettings, selectedDifficulty);
         }
+    }
+
+    public void SetCurrentGunStats()
+    {
+        gunStats.DamageMultiplier = 1f;
+        gunStats.FireRateMultiplier = 1f;
+
+        if (SProfilePlayer.getInstance().AchievementsManager.GetAchievementByName("Shoot").IsComplete())
+        {
+            gunStats.DamageMultiplier = 1.1f;
+        }
+        
+        // ...
+
+        gunStats.Init();
+    }
+
+    public void SetCurrentPlayerStats()
+    {
+        playerStats.Init();
     }
 }

@@ -19,14 +19,14 @@ namespace SO
 
         public void Init()
         {
-            CurrentFireRate = fireRate[0];
-            CurrentDamage = damage[0];
+            CurrentFireRate = fireRate[0] * FireRateMultiplier;
+            CurrentDamage = damage[0] * DamageMultiplier;
         }
 
         public void SetValues(int level)
         {
-            CurrentFireRate = fireRate[level];
-            CurrentDamage = damage[level];
+            CurrentFireRate = fireRate[level] * FireRateMultiplier;
+            CurrentDamage = damage[level] * DamageMultiplier;
         }
 
     }
