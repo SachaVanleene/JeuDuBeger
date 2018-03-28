@@ -40,7 +40,8 @@ public class SheepBehaviour : MonoBehaviour {
     private IEnumerator BeehSound(float seconds)
     {
         yield return new WaitForSeconds(seconds/10f);
-        audioPlayer.PlaySound(GameVariables.Sheep.stringSheepSound, GameVariables.Sheep.volumeSound);
+        audioPlayer.PlaySound(GameVariables.Sheep.stringSheepSound, GameVariables.Sheep.volumeSound, 
+            0, GameVariables.Sheep.distMaxSound, true);
         StartCoroutine(BeehSound(Random.Range(50, 300)));
     }
     private IEnumerator KillAfterScream(float seconds)
@@ -58,7 +59,8 @@ public class SheepBehaviour : MonoBehaviour {
         }
         else
         {
-            audioPlayer.PlaySound(GameVariables.Sheep.stringSheepSoundDeath, GameVariables.Sheep.volumeSoundDeath);
+            audioPlayer.PlaySound(GameVariables.Sheep.stringSheepSoundDeath, GameVariables.Sheep.volumeSoundDeath,
+                0, GameVariables.Sheep.distMaxSound);
             StopAllCoroutines();
             bool killNow = true;
             foreach(var clip in Clips)

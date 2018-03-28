@@ -24,13 +24,11 @@ public class AudioManagerPlayer : AudioPlayer {
             if (clip.name.Equals(clipName))
             {
                 audioSource = ownerObject.AddComponent<AudioSource>();
-                audioSource.maxDistance = GameVariables.Sheep.distMaxSound;
-                audioSource.minDistance = GameVariables.Sheep.distMinSound;
+                audioSource.maxDistance = GameVariables.Player.distMaxSound;
                 audioSource.spatialBlend = 1f;
                 audioSource.PlayOneShot(clip, vol);
                 clipLength = clip.length;
                 Destroy(audioSource, clipLength);
-                //StartCoroutine(DelayedCallback());
                 return;
             }
         }
@@ -38,7 +36,7 @@ public class AudioManagerPlayer : AudioPlayer {
 
     public void PlayFreeze()
     {
-        PlaySound("freezing");
+        PlaySound(GameVariables.Player.stringSoundFreezing);
     }
 
     public void StopFreeze()
