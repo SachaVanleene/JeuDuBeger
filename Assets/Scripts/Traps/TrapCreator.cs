@@ -166,7 +166,7 @@ namespace Assets.Scripts.Traps
             Ray ray = Camera.main.ScreenPointToRay(new Vector2(Camera.main.pixelWidth / 2f, Camera.main.pixelHeight / 2f));
             Physics.Raycast(ray, out hitInfo, 100);
             float distance = Vector3.Distance(hitInfo.point, PlayerGameObject.transform.position);
-            if (distance <= ActionRange && hitInfo.collider.tag == "Trap" && GameManager.instance.IsTheSunAwakeAndTheBirdAreSinging)
+            if (distance <= ActionRange && (hitInfo.collider.tag == "Trap" || hitInfo.collider.tag == "Leurre") && GameManager.instance.IsTheSunAwakeAndTheBirdAreSinging)
             {
                 TargetedTrap = hitInfo.collider.gameObject.GetComponentInChildren<Trap>();
                 TargetedTrap.Select();

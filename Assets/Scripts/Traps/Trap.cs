@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Assets.Script.Managers;
+using Assets.Scripts;
 using Assets.Scripts.Traps;
 using UnityEngine;
 
@@ -9,14 +10,17 @@ namespace Assets.Script.Traps
 {
     public abstract class Trap : MonoBehaviour
     {
-        public int DurabilityMax, Durability;
+        public int DurabilityMax  = GameVariables.Trap.durability;
+        public int Durability;
         public GameObject TrapPrefab;
         public Boolean IsActive = false;
         protected int SellingPrice; 
         private int i = 0;
         private int v;
+        private List<String> _ignoreList = new List<string>(){ "Terrain", "Plane", "WaterShower", "ShootableHitbox" };
 
         private Boolean _isInPreviewMode = true;
+
         public Boolean IsInPreviewMode
         {
             get { return _isInPreviewMode; }
@@ -56,12 +60,12 @@ namespace Assets.Script.Traps
         public abstract IEnumerator Activate(GameObject go);
         
         public void OnTriggerEnter(Collider collider)
-        {   
-            if (collider.gameObject.tag != "Terrain" && collider.gameObject.name != "Plane" && collider.gameObject.name != "WaterShower" &&  collider.gameObject.name != "ShootableHitbox")
+        {
+            if (!_ignoreList.Contains(collider.name) && !collider.CompareTag("Leurre"))
             {
                 v++;
             }
-            if (IsInPreviewMode && collider.tag != "Terrain")
+            if (IsInPreviewMode && !_ignoreList.Contains(collider.name))
             {
                 foreach (var rend in TrapPrefab.GetComponentsInChildren<Renderer>())
                 {
@@ -76,12 +80,13 @@ namespace Assets.Script.Traps
         public virtual void LevelUp()
         {
             var levelIndex = TrapCreator.TargetedTrap.Level < 3 ? TrapCreator.TargetedTrap.Level : 2;
+            if(TrapCreator.TargetedTrap.Level == 3)
+                if (Durability == DurabilityMax)
+                    return;
+            if (!GameManager.instance.SpendGold(UpgradeCosts[levelIndex])) return;
 
-            if (GameManager.instance.SpendGold(UpgradeCosts[levelIndex]))
-            {
-                SellingPrice += (int) (UpgradeCosts[levelIndex] * 0.75f);
-                Level++;
-            }
+            SellingPrice += (int) (UpgradeCosts[levelIndex] * 0.75f);
+            Level++;
         }
 
         public void Deselect()
@@ -110,7 +115,7 @@ namespace Assets.Script.Traps
 
         public void OnTriggerExit(Collider collider)
         {
-            if (collider.tag != "Terrain" && collider.name != "Plane") v--;
+            if (!_ignoreList.Contains(collider.gameObject.name) && !collider.CompareTag("Leurre")) v--;
             if (collider.tag == "Fences" &&
                 Vector3.Distance(transform.position, collider.transform.parent.position) <
                 collider.transform.localPosition.magnitude) return;

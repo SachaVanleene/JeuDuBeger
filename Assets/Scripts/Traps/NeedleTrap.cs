@@ -10,10 +10,10 @@ namespace Assets.Script.Traps
         public sealed override List<int> UpgradeCosts { get; set; }
         public sealed override List<int> Pows { get; set; }
 
+
         public NeedleTrap()
         {
             Pows = GameVariables.Trap.NeedleTrap.playerDamage;
-            DurabilityMax = GameVariables.Trap.NeedleTrap.durability;
             Durability = DurabilityMax;
             UpgradeCosts = new List<int>(GameVariables.Trap.NeedleTrap.upgradePrice);
             SellingPrice = (int) (UpgradeCosts[0] * 0.75f);
@@ -27,19 +27,17 @@ namespace Assets.Script.Traps
 
         public override IEnumerator Activate(GameObject go)
         {
-            TrapPrefab.GetComponent<Animation>().Play();
             if (go.tag.Contains("Wolf"))
             {
+               
                 TrapPrefab.GetComponent<Animation>().Play();
                 IsActive = true;
                 foreach (var superTarget in Physics
-                    .OverlapBox(GetComponent<BoxCollider>().center, GetComponent<BoxCollider>().size / 2)
-                    .Where(T => T.gameObject.tag == "Wolf"))
+                    .OverlapBox(TrapPrefab.transform.position, GetComponent<BoxCollider>().bounds.size)
+                    .Where(T => T.gameObject.tag.Contains("Wolf")))
                 {
                     WolfHealth wolf = (WolfHealth)go.GetComponent<WolfHealth>();
-                    Debug.Log(wolf.getHealth());
                     wolf.takeDamage(Pows[Level-1]);
-                    Debug.Log(wolf.getHealth());
                 }
                 yield return new WaitForSeconds(2f);
                 Durability--;

@@ -34,7 +34,7 @@ namespace Assets.Script.Traps
             if (go.tag != "Terrain" && go.name != "Plane") j++;
             if (!go.tag.Contains("Wolf")) yield break;
             var rb = go.GetComponent<NavMeshAgent>();
-            rb.speed = rb.speed * ((1 - Pows[Level - 1] / 100f));
+            rb.speed = rb.speed * ( 1 - Pows[Level - 1] / 100f);
             yield break;
         }
 

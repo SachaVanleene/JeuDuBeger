@@ -51,11 +51,11 @@ namespace Assets.Scripts
 
         public static class Trap
         {
+            public static readonly int durability = 100;
             public static class NeedleTrap
             {
-                public static readonly int durability = 100;
                 public static readonly int wolfDamage = 1;
-                public static readonly List<int> playerDamage = new List<int>() {5, 10, 20};
+                public static readonly List<int> playerDamage = new List<int>() {30, 45, 60};
                 public static readonly List<int> upgradePrice = new List<int>() {20, 50, 100};
             }
 
@@ -70,7 +70,7 @@ namespace Assets.Scripts
             public static class Decoy
             {
                 public static readonly int life = 20;
-                public static readonly List<float> speed = new List<float>() {0.8f, 0.6f, 0.4f};
+                public static readonly List<float> speed = new List<float>() {0.2f, 0.5f, 0.8f};
                 public static readonly List<int> pows = new List<int>() {1, 2, 3 };
 
                 public static readonly float radius = 1.0f;
@@ -80,7 +80,7 @@ namespace Assets.Scripts
             public static class Mud
             {
                 public static readonly int durability = 100;
-                public static readonly List<int> wolfSlow = new List<int>() {10, 20, 40};
+                public static readonly List<int> wolfSlow = new List<int>() {30, 50, 80};
                 public static readonly int playerSlow = 10;
                 public static readonly List<int> upgradePrice = new List<int>() {20, 50, 100};
             }

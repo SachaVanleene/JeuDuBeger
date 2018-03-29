@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 65586528555024122}
   - component: {fileID: 23181949123570374}
   - component: {fileID: 114027383516172796}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Cube
   m_TagString: Trap
   m_Icon: {fileID: 0}
@@ -167,8 +167,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DurabilityMax: 0
   Durability: 0
-  BuyingCost: 0
   TrapPrefab: {fileID: 1292374910278948}
-  UpgradeCosts: 3200000064000000
-  Damages: 
   IsActive: 0

@@ -119,7 +119,8 @@ namespace TPC
             gameObject.layer = 8;
             ignoreLayers = ~(1 << LayerMask.NameToLayer("Player") |
                 1 << LayerMask.NameToLayer("Wolf") |
-                1 << LayerMask.NameToLayer("Leurre"));
+                1 << LayerMask.NameToLayer("Leurre") |
+                1 << LayerMask.NameToLayer("Trap"));
         }
 
         void CreateModel()

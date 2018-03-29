@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 65839513014440600}
   - component: {fileID: 114644300071532264}
   - component: {fileID: 54206680206904992}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Needle
   m_TagString: Trap
   m_Icon: {fileID: 0}
@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 4460350081575186}
   - component: {fileID: 33742181212810678}
   - component: {fileID: 23876856562091082}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Trap_Needle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1464578403803410}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 258.2252, y: 15.044832, z: 268.84683}
+  m_LocalPosition: {x: 255.66843, y: 14.997253, z: 266.07965}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4488746463642534}
@@ -244,6 +244,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DurabilityMax: 100
-  Durability: 1
+  Durability: 100
   TrapPrefab: {fileID: 1464578403803410}
   IsActive: 0

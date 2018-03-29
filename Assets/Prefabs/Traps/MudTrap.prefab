@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 23645653840578658}
   - component: {fileID: 114009363486418920}
   - component: {fileID: 54581072007046840}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Mud
   m_TagString: Trap
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1903951027442256}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 260.05792, y: 14.997253, z: 262.1003}
+  m_LocalPosition: {x: 257.76303, y: 14.997253, z: 264.50543}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4729972767750160}
@@ -139,7 +139,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 5, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114009363486418920
 MonoBehaviour:

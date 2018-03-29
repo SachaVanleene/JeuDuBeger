@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Assets.Script.Managers;
 using Assets.Scripts;
 using Assets.Scripts.Traps;
 using UnityEngine;
@@ -23,10 +24,14 @@ namespace Assets.Script.Traps
         public override void LevelUp()
         {
             var levelIndex = Level < 3 ? TrapCreator.TargetedTrap.Level : 2;
-            DurabilityMax = GameVariables.Trap.Decoy.life;// * GameVariables.Trap.Decoy.pows[levelIndex];
 
-            base.LevelUp();
-            GameOverManager.instance.goldPerTrap[1] += UpgradeCosts[Level - 1];
+            if (TrapCreator.TargetedTrap.Level == 3)
+                if (Durability == DurabilityMax)
+                    return;
+            if (!GameManager.instance.SpendGold(UpgradeCosts[levelIndex])) return;
+            DurabilityMax = GameVariables.Trap.Decoy.life * GameVariables.Trap.Decoy.pows[levelIndex];
+            SellingPrice += (int)(UpgradeCosts[levelIndex] * 0.75f);
+            Level++; GameOverManager.instance.goldPerTrap[1] += UpgradeCosts[Level - 1];
             
         }
         public override IEnumerator Activate(GameObject go)
