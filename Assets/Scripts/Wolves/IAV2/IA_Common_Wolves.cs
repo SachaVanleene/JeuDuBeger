@@ -392,7 +392,6 @@ public class IA_Common_Wolves : MonoBehaviour {
         {
             focusingLeurre = false;
             focusingPlayer = true;
-            Debug.LogError("focus player");
             updateTarget(player.transform);
         }
     }
@@ -401,7 +400,6 @@ public class IA_Common_Wolves : MonoBehaviour {
     {
         if (!focusingLeurre && !focusingPlayer)
         {
-            Debug.LogError("Focus Leurre");
             focusingLeurre = true;
             updateTarget(leurre.transform);
         }
