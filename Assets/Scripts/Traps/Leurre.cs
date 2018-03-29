@@ -20,7 +20,7 @@ public class Leurre : MonoBehaviour {
     void Start () {
         actualHealth = GameVariables.Trap.Decoy.life;
         alive = true;
-        rabbit.transform.localPosition = new Vector3(0, 0, 0);
+        rabbit.transform.localPosition = new Vector3(0, 0, 0.64f);
 	}
 
     public void takeDamage(float dps)
@@ -32,7 +32,7 @@ public class Leurre : MonoBehaviour {
             alive = false;
             //anim.SetTrigger("dead");
             onTriggerDead.Invoke();
-            Destroy(this.transform.parent.gameObject);
+            Destroy(gameObject);
         }
     }
 

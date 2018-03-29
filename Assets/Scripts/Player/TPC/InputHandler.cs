@@ -346,7 +346,7 @@ namespace TPC
             actualZ = targetZ;
 
             //If an obstacle is found
-            if (Physics.Raycast(origin, direction, out hit, Mathf.Abs(targetZ), layerMask))
+            if (Physics.Raycast(origin, direction, out hit,Mathf.Abs(targetZ), layerMask))
             {
                 if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Enclos"))
                 {
