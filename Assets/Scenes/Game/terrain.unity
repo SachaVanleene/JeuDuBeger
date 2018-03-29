@@ -38,8 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0014009712, g: 0.000053515072, b: 0.0000000072127837,
-    a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -15316,13 +15315,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1255194461}
-  m_LocalRotation: {x: -0.35355338, y: 0.35355338, z: 0.1464466, w: 0.8535535}
-  m_LocalPosition: {x: -135.01, y: -9.71, z: -135.01}
+  m_LocalRotation: {x: -0.20030427, y: 0.7872144, z: 0.32607487, w: 0.4835773}
+  m_LocalPosition: {x: -135.01, y: -1.0670004, z: -108.30499}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1896502966}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: -45, y: 45, z: 0}
+  m_LocalEulerAnglesHint: {x: -45.000004, y: 116.87601, z: 0}
 --- !u!1 &1266717006
 GameObject:
   m_ObjectHideFlags: 0
@@ -19870,7 +19869,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1896502966}
-  - component: {fileID: 1896502965}
   - component: {fileID: 1896502964}
   m_Layer: 0
   m_Name: SpawnPoint
@@ -19895,33 +19893,18 @@ MonoBehaviour:
   enemy_water: {fileID: 1413995551780448, guid: 247bea815d5d5224f97192dae9cb228e,
     type: 2}
   enemy_ice: {fileID: 1159100528177586, guid: 990a98fe4a6477244b361577d5c75a8b, type: 2}
+  boss: {fileID: 1544962999945422, guid: 22ebf380539d3a0479f2045671a89d9e, type: 2}
   spawnPoints:
   - {fileID: 868670337}
   - {fileID: 2082711823}
   - {fileID: 573020340}
   - {fileID: 1057496766}
-  spawnLac: {fileID: 1255194461}
-  spawnMountain: {fileID: 1755766678}
+  spawnLac:
+  - {fileID: 1255194462}
+  spawnMountain:
+  - {fileID: 1755766679}
   gameManager: {fileID: 1958775832}
   Cycle: 0
---- !u!114 &1896502965
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1896502963}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 632cd0b92ef9fa84289325baeb324390, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemy: {fileID: 1544962999945422, guid: 22ebf380539d3a0479f2045671a89d9e, type: 2}
-  spawnPoints:
-  - {fileID: 868670337}
-  - {fileID: 2082711823}
-  - {fileID: 573020340}
-  - {fileID: 1057496766}
-  gameManager: {fileID: 1958775832}
 --- !u!4 &1896502966
 Transform:
   m_ObjectHideFlags: 0
