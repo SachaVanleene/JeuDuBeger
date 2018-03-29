@@ -65,8 +65,9 @@ namespace Assets.Script.Traps
             {
                 v++;
             }
-            if (IsInPreviewMode && !_ignoreList.Contains(collider.name))
+            if (IsInPreviewMode && !_ignoreList.Contains(collider.name) && !collider.CompareTag("Leurre"))
             {
+                Debug.Log(collider.gameObject.name + this.gameObject.name);
                 foreach (var rend in TrapPrefab.GetComponentsInChildren<Renderer>())
                 {
                     rend.sharedMaterial.color = new Color(205, 0, 0, 0.02f);
@@ -80,11 +81,11 @@ namespace Assets.Script.Traps
         public virtual void LevelUp()
         {
             var levelIndex = TrapCreator.TargetedTrap.Level < 3 ? TrapCreator.TargetedTrap.Level : 2;
-            if(TrapCreator.TargetedTrap.Level == 3)
+            if(TrapCreator.TargetedTrap.Level < 3)
                 if (Durability == DurabilityMax)
                     return;
-            if (!GameManager.instance.SpendGold(UpgradeCosts[levelIndex])) return;
 
+            if (!GameManager.instance.SpendGold(UpgradeCosts[levelIndex])) return;
             SellingPrice += (int) (UpgradeCosts[levelIndex] * 0.75f);
             Level++;
         }
@@ -115,6 +116,7 @@ namespace Assets.Script.Traps
 
         public void OnTriggerExit(Collider collider)
         {
+            Debug.Log(v);
             if (!_ignoreList.Contains(collider.gameObject.name) && !collider.CompareTag("Leurre")) v--;
             if (collider.tag == "Fences" &&
                 Vector3.Distance(transform.position, collider.transform.parent.position) <
