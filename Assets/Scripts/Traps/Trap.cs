@@ -110,7 +110,7 @@ namespace Assets.Script.Traps
 
         public void Destroy()
         {
-            GameManager.instance.EarnGold(SellingPrice);
+            GameManager.instance.EarnGold(SellingPrice, false, false, false);
             Destroy(TrapPrefab);
         }
 

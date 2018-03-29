@@ -79,11 +79,12 @@ public class WolfHealth : MonoBehaviour
 
                 GameOverManager.instance.WolvesAliveInRound.Add(-1);
 
-                Assets.Script.Managers.GameManager.instance.EarnGold((int) wolfStats.CurrentGoldReward);
+                Assets.Script.Managers.GameManager.instance.EarnGold((int) wolfStats.CurrentGoldReward, false, true);
 
                 killWolf.Raise();
 
-                Assets.Script.Managers.GameManager.instance.EarnGold((int)wolfStats.CurrentGoldReward);
+                // doubled ?
+                //Assets.Script.Managers.GameManager.instance.EarnGold((int)wolfStats.CurrentGoldReward, false, true);
 
 
                 DisableComponent();

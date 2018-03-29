@@ -49,7 +49,7 @@ public class WolfBossHealth : MonoBehaviour
 
                 GameOverManager.instance.Werewolves.Add(1);
 
-                Assets.Script.Managers.GameManager.instance.EarnGold((int)wolfStats.CurrentGoldReward);
+                Assets.Script.Managers.GameManager.instance.EarnGold((int)wolfStats.CurrentGoldReward, false, true);
 
                 if (hitByWeapon)
                     GameOverManager.instance.WolvesKilledByWeapon.Add(1);
