@@ -105,7 +105,7 @@ namespace Assets.Script.Managers
             if (Input.GetKeyUp("e"))
             {
                 callAchievement(AchievementEvent.cheat);
-                EarnGold(150);
+                EarnGold(150, false);
             }
             if (Input.GetKeyUp("l"))
             {
@@ -206,7 +206,7 @@ namespace Assets.Script.Managers
                 int toBeAdded = Mathf.RoundToInt((nb - (2 * Mathf.Log(nb))) * p.GoldReward);
                 if (toBeAdded != (int)((nb - (2 * Mathf.Log(nb))) * p.GoldReward)) //  round up
                     toBeAdded++;
-                EarnGold(toBeAdded, true);
+                EarnGold(toBeAdded);
 
                 if (p.GoldReward == GameVariables.EnclosureGold.close)
                     GameOverManager.instance.goldPerEnclosure[0] += toBeAdded;
@@ -272,17 +272,18 @@ namespace Assets.Script.Managers
             if(goal == 355 && Spawns.GetComponent<Spawn_wolf>().hasWolfAlive())
                 displayInfo("The Night will only end when all the wolfs are dead", 4);
         }
-        public void EarnGold(int value, bool enclosureGold = false)
+        public void EarnGold(int value, bool enclosureGold = true, bool wolfGold = false, bool callAch = true)
         {
             gold += value;
             TextGolds.text = gold + " gold";
-            callAchievement(AchievementEvent.goldEarn, value);
+            if(callAch)
+                callAchievement(AchievementEvent.goldEarn, value);
 
             GameOverManager.instance.GoldEarned.Add(value);
 
             if (enclosureGold)
                 GameOverManager.instance.EnclosureGold.Add(value);
-            else
+            if(wolfGold)
                 GameOverManager.instance.WolvesGold.Add(value);
         }
         public bool SpendGold(int value)
