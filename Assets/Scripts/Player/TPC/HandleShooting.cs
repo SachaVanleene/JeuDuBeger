@@ -121,6 +121,12 @@ namespace TPC
 
         void RaycastShoot()
         {
+            AudioSource gunsound = GetComponent<AudioSource>();
+            if (gunsound.isPlaying)
+            {
+                gunsound.Stop();
+            }
+            gunsound.Play();
             GameObject target = null;
             Vector3 direction = states.lookHitPosition - bulletSpawnPoint.position;
             RaycastHit hit;
