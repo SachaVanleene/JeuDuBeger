@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Assets.Script.Traps;
 using UnityEngine;
 using Assets.Scripts;
 
@@ -10,7 +11,20 @@ public class Leurre : MonoBehaviour {
     public onDead onTriggerDead; //Prévenir touts les loups que je suis mort
 
     //Health variables
-    float actualHealth;
+    public float actualHealth
+    {
+        get
+        {
+            return GetComponentInChildren<BaitTrap>().Durability;
+
+        }
+        set
+        {
+            GetComponentInChildren<BaitTrap>().Durability = (int)value; 
+            
+        }
+    }
+
     public bool alive;
 
     //Reference to real target
@@ -90,7 +104,7 @@ public class Leurre : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update () {
-		
-	}
+    void Update ()
+    {
+    }
 }
