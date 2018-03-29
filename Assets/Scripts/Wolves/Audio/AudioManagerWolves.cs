@@ -25,7 +25,6 @@ public class AudioManagerWolves : AudioPlayer {
 
     public new void PlaySound(string clipName, float vol = 1)
     {
-        Debug.Log(clipName);
         if (audioSource != null)
             audioSource.Stop();
 
@@ -33,8 +32,6 @@ public class AudioManagerWolves : AudioPlayer {
         {
             if (clip.name.Equals(clipName))
             {
-                Debug.Log("play");
-
                 audioSource = ownerObject.AddComponent<AudioSource>();
                 audioSource.spatialBlend = 1f;
                 audioSource.maxDistance = GameVariables.Wolf.distMaxSound;
