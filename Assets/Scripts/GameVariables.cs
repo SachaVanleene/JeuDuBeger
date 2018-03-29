@@ -69,7 +69,7 @@ namespace Assets.Scripts
 
             public static class Decoy
             {
-                public static readonly int life = 100;
+                public static readonly int life = 20;
                 public static readonly List<float> speed = new List<float>() {0.8f, 0.6f, 0.4f};
                 public static readonly List<int> pows = new List<int>() {1, 2, 3 };
 

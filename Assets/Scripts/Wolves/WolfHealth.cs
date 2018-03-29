@@ -41,7 +41,6 @@ public class WolfHealth : MonoBehaviour
 
             health -= damage;
             //anim.SetTrigger("Hit");
-
             ui_healt.OnHit();
 
             if (hitByWeapon)

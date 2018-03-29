@@ -12,7 +12,8 @@ public class IA_Boss_Wolves : MonoBehaviour {
     bool moving;
     bool targetAlive;
     bool isAttacking;
-    bool focusingPlayer;
+    public bool focusingPlayer;
+    bool focusingLeurre;
     bool currentTargetDiedWhenAttacking;
     GameObject player;
 
@@ -54,6 +55,7 @@ public class IA_Boss_Wolves : MonoBehaviour {
         moving = false;
         isAttacking = false; ;
 
+        focusingLeurre = false;
         focusingPlayer = false;
         player = GameObject.FindGameObjectWithTag("Player");
 
@@ -236,9 +238,13 @@ public class IA_Boss_Wolves : MonoBehaviour {
             {
                 targetTransform.gameObject.GetComponent<Player>().RemoveSubscriber(GetTargetEnclos);
             }
-            else
+            else if (targetTag == "Fences")
             {
                 targetTransform.parent.gameObject.GetComponent<EnclosureScript>().RemoveSubscriber(GetTargetEnclos);
+            }
+            else if (targetTag == "Leurre")
+            {
+                targetTransform.parent.gameObject.GetComponent<Leurre>().RemoveSubscriber(GetTargetEnclos);
             }
         }
     }
@@ -252,9 +258,13 @@ public class IA_Boss_Wolves : MonoBehaviour {
             {
                 targetTransform.gameObject.GetComponent<Player>().AddSubscriber(GetTargetEnclos);
             }
-            else
+            else if (targetTag == "Fences")
             {
                 targetTransform.parent.gameObject.GetComponent<EnclosureScript>().AddSubscriber(GetTargetEnclos);
+            }
+            else if (targetTag == "Leurre")
+            {
+                targetTransform.parent.gameObject.GetComponent<Leurre>().AddSubscriber(GetTargetEnclos);
             }
         }
     }
@@ -337,9 +347,13 @@ public class IA_Boss_Wolves : MonoBehaviour {
             {
                 targetAlive = (targetTransform.parent.gameObject.GetComponent<EnclosureScript>().Health > 0);
             }
-            else if(targetTag =="Player")
+            else if (targetTag == "Player")
             {
                 targetAlive = targetTransform.gameObject.GetComponent<Player>().Alive;
+            }
+            else if (targetTag == "Leurre")
+            {
+                targetAlive = targetTransform.parent.gameObject.GetComponent<Leurre>().alive;
             }
             if ((timer >= timeBetweenAttacks) && targetInRange && !isAttacking && targetTag != "Aucune" && targetAlive)
             {
@@ -362,6 +376,10 @@ public class IA_Boss_Wolves : MonoBehaviour {
             {
                 targetTransform.parent.gameObject.GetComponent<EnclosureScript>().DamageEnclos(enclosureDamage);
             }
+            if (targetTag == "Leurre")
+            {
+                targetTransform.parent.gameObject.GetComponent<Leurre>().takeDamage(enclosureDamage);
+            }
         }
         else
         {
@@ -373,8 +391,18 @@ public class IA_Boss_Wolves : MonoBehaviour {
     {
         if (!focusingPlayer)
         {
+            focusingLeurre = false;
             focusingPlayer = true;
             updateTarget(player.transform);
+        }
+    }
+
+    public void focusLeurre(GameObject leurre)
+    {
+        if (!focusingLeurre && !focusingPlayer)
+        {
+            focusingLeurre = true;
+            updateTarget(leurre.transform);
         }
     }
 

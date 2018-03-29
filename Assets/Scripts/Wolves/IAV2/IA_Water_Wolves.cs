@@ -14,7 +14,8 @@ public class IA_Water_Wolves : MonoBehaviour {
     bool targetAlive;
     bool alreadyFocusingAFence;
     SphereCollider firstSPhere;
-    bool focusingPlayer;
+    public bool focusingPlayer;
+    bool focusingLeurre;
     GameObject player;
 
     //IA variables
@@ -62,6 +63,7 @@ public class IA_Water_Wolves : MonoBehaviour {
         alreadyFocusingAFence = false;
         firstSPhere = GetComponent<SphereCollider>();
         focusingPlayer = false;
+        focusingLeurre = false;
 
         player = GameObject.FindGameObjectWithTag("Player");
         enclosFound = false;
@@ -149,7 +151,14 @@ public class IA_Water_Wolves : MonoBehaviour {
     // Get a tagret from an enclos which is alive
     public void GetTargetEnclos()
     {
-        focusingPlayer = false;
+        if (focusingPlayer)
+        {
+            focusingPlayer = false;
+        }
+        if (focusingLeurre)
+        {
+            focusingLeurre = false;
+        }
         GameObject closest_enclos = DetectCLosestEnclos();
         if (closest_enclos != null)
         {
@@ -234,9 +243,13 @@ public class IA_Water_Wolves : MonoBehaviour {
             {
                 targetTransform.gameObject.GetComponent<Player>().RemoveSubscriber(GetTargetEnclos);
             }
-            else
+            else if (targetTag == "Fences")
             {
                 targetTransform.parent.gameObject.GetComponent<EnclosureScript>().RemoveSubscriber(GetTargetEnclos);
+            }
+            else if (targetTag == "Leurre")
+            {
+                targetTransform.parent.gameObject.GetComponent<Leurre>().RemoveSubscriber(GetTargetEnclos);
             }
         }
     }
@@ -250,9 +263,13 @@ public class IA_Water_Wolves : MonoBehaviour {
             {
                 targetTransform.gameObject.GetComponent<Player>().AddSubscriber(GetTargetEnclos);
             }
-            else
+            else if (targetTag == "Fences")
             {
                 targetTransform.parent.gameObject.GetComponent<EnclosureScript>().AddSubscriber(GetTargetEnclos);
+            }
+            else if (targetTag == "Leurre")
+            {
+                targetTransform.parent.gameObject.GetComponent<Leurre>().AddSubscriber(GetTargetEnclos);
             }
         }
     }
@@ -272,9 +289,15 @@ public class IA_Water_Wolves : MonoBehaviour {
                 }
                 else // fences case
                 {
-                    if (other.transform.IsChildOf(targetTransform.parent))
+                    if (other.transform.IsChildOf(targetTransform.parent) && targetTag == "Fences")
                     {
                         targetTransform = other.transform;
+                        targetInRange = true;
+                        HandleMove();
+                        firstSPhere.enabled = false;
+                    }
+                    if (targetTag == "Leurre")
+                    {
                         targetInRange = true;
                         HandleMove();
                         firstSPhere.enabled = false;
@@ -299,10 +322,15 @@ public class IA_Water_Wolves : MonoBehaviour {
                 }
                 else // fences case
                 {
-                    if (other.transform.IsChildOf(targetTransform.parent))
+                    if (other.transform.IsChildOf(targetTransform.parent) && targetTag == "Fences")
                     {
                         targetTransform = other.transform;
-                        Debug.LogError("In Range");
+                        targetInRange = true;
+                        HandleMove();
+                        firstSPhere.enabled = false;
+                    }
+                    if (targetTag == "Leurre")
+                    {
                         targetInRange = true;
                         HandleMove();
                         firstSPhere.enabled = false;
@@ -320,7 +348,7 @@ public class IA_Water_Wolves : MonoBehaviour {
         if (!enclosFound)
         {
             enclos = GameObject.FindGameObjectsWithTag("Enclos");
-            if(enclos != null)
+            if(enclos != null && !focusingLeurre && !focusingPlayer)
             {
                 enclosFound = true;
                 GetTargetEnclos();
@@ -348,6 +376,10 @@ public class IA_Water_Wolves : MonoBehaviour {
             {
                 targetAlive = targetTransform.gameObject.GetComponent<Player>().Alive;
             }
+            else if (targetTag == "Leurre")
+            {
+                targetAlive = targetTransform.parent.gameObject.GetComponent<Leurre>().alive;
+            }
             if (targetInRange && targetTag != "Aucune" && targetAlive)
             {
                 // Debug.LogError("Attaque");
@@ -367,10 +399,23 @@ public class IA_Water_Wolves : MonoBehaviour {
     {
         if (!focusingPlayer)
         {
+            focusingLeurre = false;
             focusingPlayer = true;
+            Debug.LogError("focus player");
             updateTarget(player.transform);
         }
     }
+
+    public void focusLeurre(GameObject leurre)
+    {
+        if (!focusingLeurre && !focusingPlayer)
+        {
+            Debug.LogError("Focus Leurre");
+            focusingLeurre = true;
+            updateTarget(leurre.transform);
+        }
+    }
+
 
     public void updateRange(bool r)
     {

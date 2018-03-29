@@ -143,13 +143,13 @@ namespace TPC
                         {
                             target = hit.collider.transform.gameObject.transform.parent.gameObject;
                         }
-                        //Debug.LogError("Okay");
                         //Apply damage
                         if (hit.collider.tag == "CommonWolf" || hit.collider.tag == "WaterWolf" || hit.collider.tag == "MoutainWolf")
                         {
                             if (target.GetComponent<WolfHealth>())
                             {
-                                target.GetComponent<WolfHealth>().takeDamage((int) gunStats.CurrentDamage, true);
+                                //target.GetComponent<WolfHealth>().takeDamage(Mathf.FloorToInt(gunStats.CurrentDamage), true);
+                                target.GetComponent<WolfHealth>().takeDamage(20, true);
                                 if (!target.GetComponent<WolfHealth>().alive)
                                     StartCoroutine(KillFeedBack());
                             }
@@ -158,7 +158,8 @@ namespace TPC
                         {
                             if (target.GetComponent<WolfBossHealth>())
                             {
-                                target.GetComponent<WolfBossHealth>().takeDamage((int) gunStats.CurrentDamage, true);
+                                //target.GetComponent<WolfHealth>().takeDamage(Mathf.FloorToInt(gunStats.CurrentDamage), true);
+                                target.GetComponent<WolfBossHealth>().takeDamage(20, true);
                                 if (!target.GetComponent<WolfBossHealth>().alive)
                                     StartCoroutine(KillFeedBack());
                             }

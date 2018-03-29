@@ -60,6 +60,10 @@ public class Water_Wolves_ColliderSystem : MonoBehaviour {
         {
             targetTransform.gameObject.GetComponent<Player>().takeDamage(playerDamage);
         }
+        if (targetTag == "Leurre")
+        {
+            targetTransform.parent.gameObject.GetComponent<Leurre>().takeDamage(enclosureDamage);
+        }
         if (targetTag == "Fences")
         {
             if (other.transform.IsChildOf(targetTransform.parent))
