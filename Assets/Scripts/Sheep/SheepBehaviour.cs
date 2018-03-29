@@ -23,9 +23,13 @@ public class SheepBehaviour : MonoBehaviour {
 
         StartCoroutine(BeehSound(Random.Range(10, 100)));
     }
-
     void Update()
     {
+        // hack fix
+        if (Vector3.Distance(startPosition, transform.position) > GameVariables.Sheep.maxDistanceBeforReturningToStartPosition)
+        {
+            transform.position = startPosition;
+        }
         Vector3 dir = direction * Time.deltaTime;
         if (fly)
         {
@@ -95,6 +99,8 @@ public class SheepBehaviour : MonoBehaviour {
         godHaseInstance = Instantiate(GodHaseObject, gameObject.transform);
         StopAllCoroutines();
     }
+
+    private float ignoreCollisionSheep = 1;
 
     private void OnTriggerEnter(Collider collider)
     {

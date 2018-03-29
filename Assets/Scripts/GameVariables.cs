@@ -180,8 +180,9 @@ namespace Assets.Scripts
         }
         public static class Sheep
         {
+            public static readonly float maxDistanceBeforReturningToStartPosition = 25; // hackfix to prevent sheep from running away from enclosure
             public static readonly float flySpeed = 1f;
-            public static readonly float walkSpeed = 2f;
+            public static readonly float walkSpeed = 1.5f;
             public static readonly float distMaxSound = 30f;
             public static readonly float volumeSound = 1f;
             public static readonly float volumeSoundDeath = .1f;
