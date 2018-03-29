@@ -19,6 +19,11 @@ namespace SO
 
         public void Init()
         {
+            if (FireRateMultiplier == 0)
+                FireRateMultiplier = 1;
+
+            if (DamageMultiplier == 0)
+                DamageMultiplier = 1;
             CurrentFireRate = fireRate[0] * FireRateMultiplier;
             CurrentDamage = damage[0] * DamageMultiplier;
         }

@@ -47,9 +47,9 @@ namespace TPC
         void Start()
         {
             states = GetComponent<StateManager>();
-            timer = 1;
             killGo.SetActive(false);
             gunStats.Init();
+            timer = gunStats.fireRate[level];
         }
 
         // Update is called once per frame
@@ -83,7 +83,7 @@ namespace TPC
                             emptyGun = true;
                         }
                     }
-                    timer = gunStats.CurrentFireRate;
+                    timer = gunStats.fireRate[level];
                 }
                 else
                 {
@@ -149,7 +149,7 @@ namespace TPC
                             if (target.GetComponent<WolfHealth>())
                             {
                                 //target.GetComponent<WolfHealth>().takeDamage(Mathf.FloorToInt(gunStats.CurrentDamage), true);
-                                target.GetComponent<WolfHealth>().takeDamage(20, true);
+                                target.GetComponent<WolfHealth>().takeDamage((int) gunStats.damage[level], true);
                                 if (!target.GetComponent<WolfHealth>().alive)
                                     StartCoroutine(KillFeedBack());
                             }
@@ -159,7 +159,7 @@ namespace TPC
                             if (target.GetComponent<WolfBossHealth>())
                             {
                                 //target.GetComponent<WolfHealth>().takeDamage(Mathf.FloorToInt(gunStats.CurrentDamage), true);
-                                target.GetComponent<WolfBossHealth>().takeDamage(20, true);
+                                target.GetComponent<WolfBossHealth>().takeDamage((int) gunStats.damage[level], true);
                                 if (!target.GetComponent<WolfBossHealth>().alive)
                                     StartCoroutine(KillFeedBack());
                             }
