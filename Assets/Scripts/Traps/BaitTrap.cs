@@ -31,8 +31,8 @@ namespace Assets.Script.Traps
             if (!GameManager.instance.SpendGold(UpgradeCosts[levelIndex])) return;
             DurabilityMax = GameVariables.Trap.Decoy.life * GameVariables.Trap.Decoy.pows[levelIndex];
             SellingPrice += (int)(UpgradeCosts[levelIndex] * 0.75f);
-            Level++; GameOverManager.instance.goldPerTrap[1] += UpgradeCosts[Level - 1];
-            
+            Level++;
+            GameOverManager.instance.goldPerTrap[1] += UpgradeCosts[Level - 1];
         }
         public override IEnumerator Activate(GameObject go)
         {

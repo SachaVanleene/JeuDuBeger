@@ -86,14 +86,16 @@ namespace TPC
             shotLayerMask = ~(1 << gameObject.layer | 
                 1 << LayerMask.NameToLayer("Enclos") |
                 1 << LayerMask.NameToLayer("Wolf") |
-                1 << LayerMask.NameToLayer("Leurre"));
+                1 << LayerMask.NameToLayer("Leurre") |
+                1 << LayerMask.NameToLayer("Trap")) ;
 
             states.shotLayerMask = shotLayerMask;
 
             camLayerMask = ~(1 << gameObject.layer | 
                 1 << LayerMask.NameToLayer("Terrain") |
                 1 << LayerMask.NameToLayer("Wolf") |
-                1 << LayerMask.NameToLayer("Leurre"));
+                1 << LayerMask.NameToLayer("Leurre") | 
+                1 << LayerMask.NameToLayer("Trap"));
 
             fenceCollision = false;
 
