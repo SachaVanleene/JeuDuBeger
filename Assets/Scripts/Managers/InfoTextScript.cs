@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class InfoTextScript : MonoBehaviour
 {
+    public GameObject Parent;
 
     private Text text;
     private int duration = 2;
@@ -12,14 +13,18 @@ public class InfoTextScript : MonoBehaviour
     {
         text = gameObject.GetComponent<Text>();
         text.text = "";
+        Parent.SetActive(false);
     }
     public void Clear()
     {
-        StopAllCoroutines();
         text.text = "";
+        Parent.SetActive(false);
+        StopAllCoroutines();
     }
     public void DisplayInfo(string msg, int duration)
     {
+        Parent.SetActive(true);
+
         text.text = msg;
         this.duration = duration;
         StopAllCoroutines();
@@ -28,6 +33,6 @@ public class InfoTextScript : MonoBehaviour
     private IEnumerator clearMessage()
     {
         yield return new WaitForSeconds(duration);
-        text.text = "";
+        Clear();
     }
 }
