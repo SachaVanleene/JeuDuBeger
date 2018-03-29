@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20963f5639930a04bb33e952d9105db1, type: 3}
   m_Name: Lake
   m_EditorClassIdentifier: 
-  life: 100
+  life: 2500
   enclosureDamage: 0.1
   playerDamage: 0.1
   goldReward: 10
