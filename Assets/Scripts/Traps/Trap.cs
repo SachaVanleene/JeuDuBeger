@@ -81,7 +81,7 @@ namespace Assets.Script.Traps
         public virtual void LevelUp()
         {
             var levelIndex = TrapCreator.TargetedTrap.Level < 3 ? TrapCreator.TargetedTrap.Level : 2;
-            if(TrapCreator.TargetedTrap.Level < 3)
+            if(TrapCreator.TargetedTrap.Level == 3)
                 if (Durability == DurabilityMax)
                     return;
 
