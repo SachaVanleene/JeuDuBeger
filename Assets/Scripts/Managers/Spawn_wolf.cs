@@ -22,9 +22,16 @@ namespace Assets.Script.Managers
         private int number_wolf_classic;
         private int number_wolf_water = 0;
         private int number_wolf_ice = 0;
+
+        bool spawnboss;
+
+        private void Awake()
+        {
+            spawnboss = false;
+        }
         public void Begin_Night()
         {
-            bool spawnboss = false;
+            spawnboss = false;
             Cycle = GameManager.instance.GetCycle();
             // + 5 loups à chaque vagues
             if (Cycle <= 20)
@@ -44,15 +51,20 @@ namespace Assets.Script.Managers
             {
                 number_wolf_ice ++;
             }
-            if(Cycle % 10 == 0)
+            if((Cycle % 10) == 0)
             {
+                Debug.LogError("SPawn bosse");
                 spawnboss = true;
             }
             number_wolf = number_wolf_classic + number_wolf_ice + number_wolf_water;
+            if (spawnboss)
+            {
+                number_wolf = number_wolf + 1;
+            }
 
             GameOverManager.instance.WolvesAliveInRound.Set(number_wolf);
 
-            Spawn(number_wolf_classic, number_wolf_water, number_wolf_ice, boss);
+            Spawn(number_wolf_classic, number_wolf_water, number_wolf_ice, spawnboss);
         }
         public void WolfDeath(GameObject wolf = null)
         {
