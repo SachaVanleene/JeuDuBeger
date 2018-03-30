@@ -14,6 +14,8 @@ public class MainMenu : MonoBehaviour {
     public GameObject LogPanel;
     public GameObject LogButton;
     public GameObject DeleteButton;
+    public GameObject ExitGameButton;
+    public GameObject ExitAchievementsButton;
     public Text LoadingText;
     public Text PlayerNameText;
     public InputField NewPlayerName;
@@ -48,11 +50,13 @@ public class MainMenu : MonoBehaviour {
     public void ShowDifficultyPanel()
     {
         HideAllPanels();
+        ExitGameButton.SetActive(false);
         DifficultyPanel.SetActive(true);
     }
 
     public void HideDifficultyPanel()
     {
+        ExitGameButton.SetActive(true);
         DifficultyPanel.SetActive(false);
     }
     public void DeleteCurrentProfile()
@@ -79,6 +83,7 @@ public class MainMenu : MonoBehaviour {
         HideAllPanels();
         ProfileManager.RetreiveSaves();
         LogPanel.SetActive(true);
+        ExitGameButton.SetActive(true);
         LogPanel.GetComponent<ListBehaviour>().CreateListPanel();
         LogButton.SetActive(false);
         DeleteButton.SetActive(false);
@@ -93,12 +98,15 @@ public class MainMenu : MonoBehaviour {
     public void ShowAchievementsPanel()
     {
         HideAllPanels();
+        ExitAchievementsButton.SetActive(true);
+        ExitGameButton.SetActive(false);
         AchievementsPanel.GetComponent<ListBehaviourAchievements>().CreateListPanel();
         AchievementsPanel.SetActive(true);
     }
     public void HideAchievementsPanel()
     {
         AchievementsPanel.SetActive(false);
+        ExitGameButton.SetActive(true);
     }
     public void ExitGame()
     {
@@ -107,12 +115,14 @@ public class MainMenu : MonoBehaviour {
     }
     public void DisplayAchievementInfo(AchievementInfo achievement)
     {
+        ExitAchievementsButton.SetActive(false);
         AchievementInfoPanel.SetActive(true);
         AchievementInfoPanel.GetComponent<ScriptAchievementInfo>().DisplayAchievementInfo(achievement, this.GetComponent<ProfileManager>());
     }
     public void HideAchievementInfo()
     {
         AchievementInfoPanel.SetActive(false);
+        ExitAchievementsButton.SetActive(true);
     }
     public void HideAllPanels()
     {
