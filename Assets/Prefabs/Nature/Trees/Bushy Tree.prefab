@@ -10,6 +10,7 @@ GameObject:
   - component: {fileID: 410720}
   - component: {fileID: 3314674}
   - component: {fileID: 2329442}
+  - component: {fileID: 136987233670927622}
   m_Layer: 0
   m_Name: Bushy Tree
   m_TagString: Untagged
@@ -24,8 +25,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 142926}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 263.78802, y: 15.23527, z: 273.86682}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -82,3 +83,16 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 142926}
   m_IsPrefabParent: 1
+--- !u!136 &136987233670927622
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 142926}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 6
+  m_Height: 40
+  m_Direction: 1
+  m_Center: {x: -1.48, y: 10, z: 1.52}
