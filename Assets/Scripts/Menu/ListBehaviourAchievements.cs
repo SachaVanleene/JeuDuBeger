@@ -21,7 +21,7 @@ public class ListBehaviourAchievements : MonoBehaviour {
                 UnityEngine.Object.Destroy(go);
             }
         elements = new List<GameObject>();
-        float padding = 100f;
+        float padding = 150f;
         int sizeList =  SProfilePlayer.getInstance().AchievementsManager.getAchivements().Count;
         if (sizeList % 2 != 0)
             sizeList++;
@@ -35,7 +35,7 @@ public class ListBehaviourAchievements : MonoBehaviour {
         foreach(var achInfo in SProfilePlayer.getInstance().AchievementsManager.getAchivements())
         {
             x -= (createBottom)? 0 : padding * 2f;
-            int y = (createBottom) ? 97 : -100;
+            int y = (int) ((createBottom) ? padding : -padding);
             createBottom = !createBottom;
 
             GameObject r = Instantiate(AchievementPrefab, ListAchievements.transform);

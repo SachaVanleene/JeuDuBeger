@@ -46,13 +46,13 @@ public class ListBehaviour : MonoBehaviour {
             TextLogPanel.SetActive(true);
             TextNoProfileFound.SetActive(false);
         }
-
-        ListProfiles.GetComponent<RectTransform>().sizeDelta = new Vector2(220f * ProfileManager.ProfilesFound.Count, 0);
-        ListProfiles.transform.localPosition += new Vector3((ProfileManager.ProfilesFound.Count * 220f) / 2, 0, 0);
-        float x = (ProfileManager.ProfilesFound.Count * 220f) / 2 + 110f;
+        float padding = 330f;
+        ListProfiles.GetComponent<RectTransform>().sizeDelta = new Vector2(padding * ProfileManager.ProfilesFound.Count, 0);
+        ListProfiles.transform.localPosition += new Vector3((ProfileManager.ProfilesFound.Count * padding) / 2, 0, 0);
+        float x = (ProfileManager.ProfilesFound.Count * padding) / 2 + padding/2;
         foreach(var data in ProfileManager.ProfilesFound)
         {
-            x -= 220;
+            x -= padding;
             GameObject profileDetail = Instantiate(DetailPrefab, ListProfiles.transform);
             
             elements.Add(profileDetail);

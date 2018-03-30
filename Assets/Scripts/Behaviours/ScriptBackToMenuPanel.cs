@@ -16,7 +16,7 @@ public class ScriptBackToMenuPanel : MonoBehaviour {
         ButtonCancel.SetActive(!gameOver);
         ButtonLose.SetActive(gameOver);
         TextDisplayed.text = (gameOver)? 
-            "Vous avez perdu tout vos moutons !"
+            "Vous avez perdu tous vos moutons !"
             : "Pause. \n Abandonner cette partie ?";
     }
 }

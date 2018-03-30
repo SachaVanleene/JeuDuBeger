@@ -154,8 +154,8 @@ namespace Assets.Scripts
 
             public static class PopUp
             {
-                public static readonly float speedCome = 45f;
-                public static readonly float speedBack = 35f;
+                public static readonly float speedCome = 120f;
+                public static readonly float speedBack = 100f;
                 public static readonly float timeStay = 2f;
             }
         }
