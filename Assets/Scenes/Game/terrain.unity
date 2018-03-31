@@ -38,7 +38,8 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.004461587, g: 0.0003696792, b: 0.00000057349183,
+    a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -6559,6 +6560,39 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 423345749}
+--- !u!1 &436532008
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 436532009}
+  m_Layer: 5
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &436532009
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 436532008}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1455207876}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 188}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &440955537
 GameObject:
   m_ObjectHideFlags: 0
@@ -16343,6 +16377,65 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1450104319}
+--- !u!1 &1455207875
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1455207876}
+  - component: {fileID: 1455207877}
+  m_Layer: 5
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1455207876
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1455207875}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 436532009}
+  m_Father: {fileID: 1554746470}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 150, y: 129}
+  m_SizeDelta: {x: 300, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1455207877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1455207875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5c59f7dbe13e984aa88733add817c8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: c9ac04ec93384364b879d28771d49529, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  raiseOnEnable: 0
+  panelPrefab: {fileID: 1405761545070210, guid: b19e0b8f5b53b03449a3f36004f45266,
+    type: 2}
+  targetTransform: {fileID: 436532009}
+  fadeDuration: 2
+  panelsCount: 3
+  targetString: {fileID: 0}
 --- !u!1 &1458989951
 GameObject:
   m_ObjectHideFlags: 0
@@ -17352,6 +17445,7 @@ RectTransform:
   - {fileID: 1641797848}
   - {fileID: 545793578}
   - {fileID: 1641213781}
+  - {fileID: 1455207876}
   m_Father: {fileID: 1958775833}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -20914,6 +21008,7 @@ MonoBehaviour:
   AchievementPopUp: {fileID: 125595889}
   PanelWolvesAliveInRound: {fileID: 2049250242}
   SheepsInInventory: {fileID: 537688237}
+  goldChange: {fileID: 11400000, guid: c9ac04ec93384364b879d28771d49529, type: 2}
   gameOver: 0
 --- !u!4 &1958775833
 Transform:
@@ -20945,7 +21040,7 @@ MonoBehaviour:
   goldPerTrap: 
   DeathCount: {fileID: 11400000, guid: 1416ed1105375b4468f965db31727859, type: 2}
   PlayerDamageDealt: {fileID: 11400000, guid: 8376c293c9ed4a24ab0ecd3bae3b50e7, type: 2}
-  GoldEarned: {fileID: 11400000, guid: 5fb85c8c621659c45bdffa71e4a612a4, type: 2}
+  TotalGoldEarned: {fileID: 11400000, guid: 5fb85c8c621659c45bdffa71e4a612a4, type: 2}
   TotalSheeps: {fileID: 11400000, guid: cc19a8600ee098d4995f54b05e83db1a, type: 2}
   PlacedTraps: {fileID: 11400000, guid: fc6b491d6053302448e4309d2b344077, type: 2}
   TrapsDamageDealt: {fileID: 11400000, guid: 4892797bc29751c429090ef2a803e666, type: 2}
@@ -20961,6 +21056,7 @@ MonoBehaviour:
   FavoriteEnclosure: {fileID: 11400000, guid: 06c838530de9cd54293255bea128cd17, type: 2}
   WolvesAliveInRound: {fileID: 11400000, guid: 6216f785623f74f45b7a447d7599a536, type: 2}
   WerewolvesAliveInRound: {fileID: 0}
+  GoldChange: {fileID: 11400000, guid: f9f9c7d32ea782c4285a4d563d8c6864, type: 2}
 --- !u!114 &1958775835
 MonoBehaviour:
   m_ObjectHideFlags: 0
