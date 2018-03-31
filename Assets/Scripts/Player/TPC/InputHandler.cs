@@ -295,11 +295,11 @@ namespace TPC
         {
             if (states.aiming)
             {
-                crosshair.defaultSpread = 0.6f;
+                crosshair.defaultSpread = 2.4f;
             }
             else
             {
-                crosshair.defaultSpread = 1.2f;
+                crosshair.defaultSpread = 3.6f;
             }
 
             if (states.shoot && states.canShoot && states.alive)
@@ -307,13 +307,13 @@ namespace TPC
                 if (states.aiming)
                 {
                     targetShake = shakeRecoil;
-                    camProperties.WiggleCrosshairAndCamera(0.1f);
+                    camProperties.WiggleCrosshairAndCamera(0.15f);
                     targetFov += 3;
                 }
                 else
                 {
                     targetShake = shakeRecoil;
-                    camProperties.WiggleCrosshairAndCamera(0.2f);
+                    camProperties.WiggleCrosshairAndCamera(0.25f);
                     targetFov += 5;
                 }
             }
