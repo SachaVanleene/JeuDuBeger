@@ -5,15 +5,19 @@ using Assets.Script.Managers;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
+using System.Linq;
 
 namespace Assets.Scripts.Enclosures
 {
     public class EnclosureScript : MonoBehaviour
     {
         public List<AudioClip> Clips;
+        public GameObject ExplosionEffect;
         public GameObject PinkSuperSheepPrefab;
+        public GameObject BlackSuperSheepPrefab;
         public GameObject SheepPrefab;
         public Material PinkFence;
+        public Material BlackFence;
         public Material DefaultFence;
         public int GoldReward = GameVariables.EnclosureGold.close;
         public float Distance;
@@ -25,7 +29,8 @@ namespace Assets.Scripts.Enclosures
         private bool _isDisplayingPanel = false;
         private GameManager _gameManager;
         private List<GameObject> _sheeps = new List<GameObject>();
-        private List<GameObject> _superSheeps = new List<GameObject>();
+        private List<GameObject> _superSheepsPink = new List<GameObject>();
+        private List<GameObject> _superSheepsBlack = new List<GameObject>();
         // for the flying sheeps
         public List<GameObject> FlyingSheeps = null;
 
@@ -150,23 +155,38 @@ namespace Assets.Scripts.Enclosures
             }
             if (Input.GetKeyDown(KeyCode.KeypadMultiply))
             {
-                if (_superSheeps.Count < 1 && _gameManager.TotalSuperSheeps >= 1)
+                if (_superSheepsPink.Count < 1 && _gameManager.TotalSuperSheepsPink >= 1)
                 {
                     AddPinkSuperSheep();
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.KeypadDivide))
+            {
+                if (_superSheepsBlack.Count < 1 && _gameManager.TotalSuperSheepsBlack >= 1)
+                {
+                    AddBlackSuperSheep();
                 }
             }
         }
 
         public void DamageEnclos(float degats)
         {
-            if (_superSheeps.Count > 0)
+            if (_superSheepsPink.Count > 0)
                 return;
-            if (Health - degats < 10 && _superSheeps.Count < 1 && _gameManager.TotalSuperSheeps >= 1)
+            if (Health - degats < 10 && _superSheepsPink.Count < 1 && _gameManager.TotalSuperSheepsPink >= 1)
             {
                 AddPinkSuperSheep();
                 return;
             }
             Health -= degats;
+            
+            if (Health == 0 && _superSheepsBlack.Count > 0)
+            {
+                Health = 0; //santé min
+                OnTriggerDead.Invoke();
+                OnTriggerDead = null; //On reset le delegate
+                RemoveBlackSuperSheepByKill();
+            }
             if (Health == 0)
             {
                 Health = 0; //santé min
@@ -190,9 +210,9 @@ namespace Assets.Scripts.Enclosures
         }
         public void RemovePinkSuperSheep()
         {
-            var SuperSheep = _superSheeps[_superSheeps.Count - 1];
+            var SuperSheep = _superSheepsPink[_superSheepsPink.Count - 1];
             SuperSheep.GetComponent<SheepBehaviour>().Kill();
-            _superSheeps.Remove(SuperSheep);
+            _superSheepsPink.Remove(SuperSheep);
 
             foreach (Transform child in transform)
             {
@@ -204,13 +224,55 @@ namespace Assets.Scripts.Enclosures
             }
         }
 
+        public void RemoveBlackSuperSheepByKill()
+        {
+            var SuperSheep = _superSheepsBlack[_superSheepsBlack.Count - 1];
+            SuperSheep.GetComponent<SheepBehaviour>().Kill();
+            _superSheepsBlack.Remove(SuperSheep);
+
+            foreach (Transform child in transform)
+            {
+                if (child.tag == "Fences")
+                {
+                    Renderer r = child.GetComponent<Renderer>();
+                    r.material = DefaultFence;
+                    //On creer l'explosion
+                    GameObject boom = CFX_SpawnSystem.GetNextObject(ExplosionEffect);
+                    boom.transform.position = r.transform.position;
+                    foreach (var superTarget in Physics
+                    .OverlapSphere(transform.position,25)
+                    .Where(T => T.gameObject.tag.Contains("Wolf")))
+                    {
+                        WolfHealth wolf = (WolfHealth)superTarget.GetComponent<WolfHealth>();
+                        wolf.takeDamage(50);
+                    }
+                }
+            }
+        }
+
+        public void RemoveBlackSuperSheep()
+        {
+            var SuperSheep = _superSheepsBlack[_superSheepsBlack.Count - 1];
+            SuperSheep.GetComponent<SheepBehaviour>().Kill();
+            _superSheepsBlack.Remove(SuperSheep);
+
+            foreach (Transform child in transform)
+            {
+                if (child.tag == "Fences")
+                {
+                    Renderer r = child.GetComponent<Renderer>();
+                    r.material = DefaultFence;
+                   
+                }
+            }
+        }
         public void AddPinkSuperSheep()
         {
             var SuperSheep = Instantiate(PinkSuperSheepPrefab, this.transform); //crée un clone mouton
             SuperSheep.transform.position = this.transform.position; //le place dans l'enclos
             SuperSheep.transform.Rotate(0, Random.Range(0, 360), 0);
 
-            _superSheeps.Add(SuperSheep);
+            _superSheepsPink.Add(SuperSheep);
 
             _gameManager.PlaceSuperSheep();
 
@@ -220,6 +282,26 @@ namespace Assets.Scripts.Enclosures
                 {
                     Renderer r = child.GetComponent<Renderer>();
                     r.material = PinkFence;
+                }
+            }
+        }
+
+        public void AddBlackSuperSheep()
+        {
+            var SuperSheep = Instantiate(BlackSuperSheepPrefab, this.transform); //crée un clone mouton
+            SuperSheep.transform.position = this.transform.position; //le place dans l'enclos
+            SuperSheep.transform.Rotate(0, Random.Range(0, 360), 0);
+
+            _superSheepsBlack.Add(SuperSheep);
+
+            _gameManager.PlaceSuperSheepBlack();
+
+            foreach (Transform child in transform)
+            {
+                if (child.tag == "Fences")
+                {
+                    Renderer r = child.GetComponent<Renderer>();
+                    r.material = BlackFence;
                 }
             }
         }
@@ -255,9 +337,11 @@ namespace Assets.Scripts.Enclosures
         public void MakeSheepsFly()
         {
             _gameManager.TotalSheeps += _sheeps.Count;
-            if (_superSheeps.Count > 0)
+            if (_superSheepsPink.Count > 0)
                 RemovePinkSuperSheep();
-            foreach(var sheep in _sheeps)
+            if (_superSheepsBlack.Count > 0)
+                RemoveBlackSuperSheep();
+            foreach (var sheep in _sheeps)
             {
                 sheep.GetComponent<SheepBehaviour>().SpiritInTheSky();
             }

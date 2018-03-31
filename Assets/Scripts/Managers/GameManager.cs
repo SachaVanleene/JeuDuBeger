@@ -25,7 +25,8 @@ namespace Assets.Script.Managers
         public GameObject SheepsInInventory;
         
         public int TotalSheeps { get; set; }    // player inventory relativ
-        public int TotalSuperSheeps { get; set; }
+        public int TotalSuperSheepsPink { get; set; }
+        public int TotalSuperSheepsBlack { get; set; }
         public bool IsTheSunAwakeAndTheBirdAreSinging { get; set; }
         public bool IsPaused { get; set; }
 
@@ -62,9 +63,9 @@ namespace Assets.Script.Managers
             Cursor.visible = false;
 
             if (SProfilePlayer.getInstance().AchievementsManager.GetAchievementByName("Player").IsComplete())
-                TotalSuperSheeps = 1;
+                TotalSuperSheepsPink = 1;
             else
-                TotalSuperSheeps = 0;
+                TotalSuperSheepsPink = 0;
             DayStart();
         }
 
@@ -121,7 +122,13 @@ namespace Assets.Script.Managers
             if (Input.GetKeyUp("m"))
             {
                 callAchievement(AchievementEvent.cheat);
-                TotalSuperSheeps++;
+                TotalSuperSheepsPink++;
+                printNbSHeeps();
+            }
+            if (Input.GetKeyUp("w"))
+            {
+                callAchievement(AchievementEvent.cheat);
+                TotalSuperSheepsBlack++;
                 printNbSHeeps();
             }
         }
@@ -185,13 +192,22 @@ namespace Assets.Script.Managers
         }
         public void PlaceSuperSheep()
         {
-            TotalSuperSheeps--;
+            TotalSuperSheepsPink--;
+            printNbSHeeps();
+        }
+        public void PlaceSuperSheepBlack()
+        {
+            TotalSuperSheepsBlack--;
             printNbSHeeps();
         }
         private void printNbSHeeps()
         {
-            if (TotalSuperSheeps > 0)
-                TextSheeps.text = TotalSheeps + " Sheeps in Inventory and " + TotalSuperSheeps + " Super.";
+            if (TotalSuperSheepsPink > 0 && TotalSuperSheepsBlack > 0)
+                TextSheeps.text = TotalSheeps + " Sheeps in Inventory, " + TotalSuperSheepsPink + " Super Pink sheeps and " + TotalSuperSheepsBlack + " Super Black sheeps.";
+            else if (TotalSuperSheepsPink > 0 )
+                TextSheeps.text = TotalSheeps + " Sheeps in Inventory, " + TotalSuperSheepsPink + " Super Pink sheeps. ";
+            else if (TotalSuperSheepsBlack > 0)
+                TextSheeps.text = TotalSheeps + " Sheeps in Inventory, " + TotalSuperSheepsBlack + " Super Black sheeps.";
             else
                 TextSheeps.text = TotalSheeps + " Sheeps in Inventory.";
         }

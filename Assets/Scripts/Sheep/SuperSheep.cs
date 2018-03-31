@@ -9,11 +9,12 @@ using Assets.Script;
 public class SuperSheep : MonoBehaviour
 {
     public GameObject PinkSuperSheepPrefab;
+    public GameObject BlackSuperSheepPrefab;
     private bool _isDisplayingPanel = false;
-    private int nbSuperSheep;
-
+    private int nbSuperSheepPink;
+    private int nbSuperSheepBlack;
     public Material pinkFence;
-
+    public Material blackFence;
     private GameManager _gameManager;
 
 
@@ -34,9 +35,27 @@ public class SuperSheep : MonoBehaviour
         }
     }
 
+    public void AddBlackSuperSheep()
+    {
+        var sheep = Instantiate(BlackSuperSheepPrefab, this.transform); //crée un clone mouton
+        sheep.transform.position = this.transform.position; //le place dans l'enclos
+        sheep.transform.Rotate(0, Random.Range(0, 360), 0);
+
+        foreach (Transform child in transform)
+        {
+            if (child.tag == "Fences")
+            {
+                Renderer r = child.GetComponent<Renderer>();
+                r.material = blackFence;
+            }
+
+        }
+    }
+
     private void Awake()
     {
-        nbSuperSheep = 0;
+        nbSuperSheepPink = 0;
+        nbSuperSheepBlack = 0;
     }
 
     void Start()
@@ -76,14 +95,24 @@ public class SuperSheep : MonoBehaviour
         //appuie touche astérisk
         if (Input.GetKeyDown(KeyCode.KeypadMultiply))
         {
-            if (nbSuperSheep < 1 && _gameManager.TotalSuperSheeps == 1)
+            if (nbSuperSheepPink < 1 && _gameManager.TotalSuperSheepsPink == 1)
             {
                 AddPinkSuperSheep();
-                nbSuperSheep++;
+                nbSuperSheepPink++;
               //  this.GetComponent<EnclosureScript>().setHealth(50);
                 _gameManager.PlaceSuperSheep();
             } 
         }
-        
+        if (Input.GetKeyDown(KeyCode.KeypadDivide))
+        {
+            if (nbSuperSheepBlack < 1 && _gameManager.TotalSuperSheepsPink == 1)
+            {
+                AddBlackSuperSheep();
+                nbSuperSheepBlack++;
+                //  this.GetComponent<EnclosureScript>().setHealth(50);
+                _gameManager.PlaceSuperSheep();
+            }
+        }
+
     }
 }
