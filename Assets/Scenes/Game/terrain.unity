@@ -2353,7 +2353,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   raiseOnEnable: 1
-  targetString: {fileID: 11400000, guid: b2657130f2c8aac498133f6823889108, type: 2}
+  targetString: {fileID: 0}
   targetInt: {fileID: 0}
   targetText: {fileID: 0}
 --- !u!114 &298468053
@@ -7641,8 +7641,8 @@ MonoBehaviour:
   groundDistance: 0.7
   groundOffset: 0
   distanceToCheckForward: 1.3
-  runSpeed: 8
-  walkSpeed: 4
+  runSpeed: 16
+  walkSpeed: 8
   jumpForce: 6
   airTimeTreshold: 0.8
   horizontal: 0
@@ -15848,9 +15848,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CrosshairName: Cross
-  defaultSpread: 1
-  maxSpread: 2.5
-  wiggleSpread: 2
+  defaultSpread: 3.2
+  maxSpread: 6.4
+  wiggleSpread: 5.2
   wiggleSpreadMaxTimer: 60
   currentSpread: 0
   spreadSpeed: 0.18
@@ -21279,6 +21279,7 @@ MonoBehaviour:
   AchievementPopUp: {fileID: 125595889}
   PanelWolvesAliveInRound: {fileID: 2049250242}
   SheepsInInventory: {fileID: 537688237}
+  goldChange: {fileID: 11400000, guid: c9ac04ec93384364b879d28771d49529, type: 2}
   gameOver: 0
 --- !u!4 &1958775833
 Transform:
@@ -21310,7 +21311,7 @@ MonoBehaviour:
   goldPerTrap: 
   DeathCount: {fileID: 11400000, guid: 1416ed1105375b4468f965db31727859, type: 2}
   PlayerDamageDealt: {fileID: 11400000, guid: 8376c293c9ed4a24ab0ecd3bae3b50e7, type: 2}
-  GoldEarned: {fileID: 11400000, guid: 5fb85c8c621659c45bdffa71e4a612a4, type: 2}
+  TotalGoldEarned: {fileID: 11400000, guid: 5fb85c8c621659c45bdffa71e4a612a4, type: 2}
   TotalSheeps: {fileID: 11400000, guid: cc19a8600ee098d4995f54b05e83db1a, type: 2}
   PlacedTraps: {fileID: 11400000, guid: fc6b491d6053302448e4309d2b344077, type: 2}
   TrapsDamageDealt: {fileID: 11400000, guid: 4892797bc29751c429090ef2a803e666, type: 2}
@@ -21326,6 +21327,7 @@ MonoBehaviour:
   FavoriteEnclosure: {fileID: 11400000, guid: 06c838530de9cd54293255bea128cd17, type: 2}
   WolvesAliveInRound: {fileID: 11400000, guid: 6216f785623f74f45b7a447d7599a536, type: 2}
   WerewolvesAliveInRound: {fileID: 0}
+  GoldChange: {fileID: 11400000, guid: f9f9c7d32ea782c4285a4d563d8c6864, type: 2}
 --- !u!114 &1958775835
 MonoBehaviour:
   m_ObjectHideFlags: 0
