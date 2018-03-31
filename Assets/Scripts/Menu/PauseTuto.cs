@@ -62,6 +62,7 @@ public class PauseTuto : MonoBehaviour {
         }
         Tuto.SetActive(true);
 
+
         //Changement de couleur des boutons
         foreach (Button b in buttons)
         {
