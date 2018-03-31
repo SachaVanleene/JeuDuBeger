@@ -10,9 +10,9 @@ namespace SO.UI
         public float fadeDuration;
         public int panelsCount;
 
-        public SO.IntVariable goldEarned;
+        public SO.StringVariable targetString;
 
-        private Queue<int> panelsQueue;
+        private Queue<string> panelsQueue;
 
 	    // Use this for initialization
 	    void Start ()
@@ -25,16 +25,15 @@ namespace SO.UI
                 panel.SetActive(false);
             }
 
-            panelsQueue = new Queue<int>();
+            panelsQueue = new Queue<string>();
         }
 
         public override void Raise()
         {
-            int i = 0;
+            //Child 0 is the target transform
+            int i = 1;
             while (i < transform.childCount && transform.GetChild(i).gameObject.activeInHierarchy)
                 i++;
-
-            Debug.Log(i);
 
             if (i < transform.childCount)
             {
@@ -46,7 +45,7 @@ namespace SO.UI
             }
             else
             {
-                panelsQueue.Enqueue(goldEarned.value);
+                panelsQueue.Enqueue(targetString.value);
             }
         }
 
@@ -54,7 +53,7 @@ namespace SO.UI
         {
             if (panelsQueue.Count > 0)
             {
-                goldEarned.Set(panelsQueue.Dequeue());
+                targetString.Set(panelsQueue.Dequeue());
                 Raise();
             }    
         }

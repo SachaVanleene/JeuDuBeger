@@ -8,6 +8,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd5d985c973a87d47bde6f4345f7debe, type: 3}
-  m_Name: EarnGold
+  m_Script: {fileID: 11500000, guid: ab39a636d4f0663428eac4ac930687d7, type: 3}
+  m_Name: GoldChange
   m_EditorClassIdentifier: 
+  value: 

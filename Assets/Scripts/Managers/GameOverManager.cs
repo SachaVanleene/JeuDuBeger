@@ -36,7 +36,7 @@ public class GameOverManager : MonoBehaviour {
     [Header("Variable references")]
     public SO.IntVariable WolvesAliveInRound;
     public SO.IntVariable WerewolvesAliveInRound;
-    public SO.IntVariable GoldEarned;
+    public SO.StringVariable GoldChange;
 
 
     private void Awake()

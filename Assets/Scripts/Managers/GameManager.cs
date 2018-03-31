@@ -24,7 +24,7 @@ namespace Assets.Script.Managers
         public GameObject PanelWolvesAliveInRound;
         public GameObject SheepsInInventory;
 
-        public SO.GameEvent earnGold;
+        public SO.GameEvent goldChange;
         public int TotalSheeps { get; set; }    // player inventory relativ
         public int TotalSuperSheeps { get; set; }
         public bool IsTheSunAwakeAndTheBirdAreSinging { get; set; }
@@ -281,8 +281,8 @@ namespace Assets.Script.Managers
                 callAchievement(AchievementEvent.goldEarn, value);
 
             GameOverManager.instance.TotalGoldEarned.Add(value);
-            GameOverManager.instance.GoldEarned.Set(value);
-            earnGold.Raise();
+            GameOverManager.instance.GoldChange.Set("+" + value);
+            goldChange.Raise();
 
             if (enclosureGold)
                 GameOverManager.instance.EnclosureGold.Add(value);
@@ -299,6 +299,8 @@ namespace Assets.Script.Managers
             gold -= value;
             TextGolds.text = gold + " gold";
 
+            GameOverManager.instance.GoldChange.Set("-" + value);
+            goldChange.Raise();
             GameOverManager.instance.GoldSpent.value -= value;
 
             callAchievement(AchievementEvent.goldSpent, value);
