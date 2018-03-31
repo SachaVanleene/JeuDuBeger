@@ -9,6 +9,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e1837463d7b1e5c40940f172250ac2f9, type: 3}
-  m_Name: GoldEarned
+  m_Name: EarnedGold
   m_EditorClassIdentifier: 
-  value: 0
+  value: 150

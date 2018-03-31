@@ -5,36 +5,31 @@ using UnityEngine.UI;
 
 namespace SO.UI
 {
-    public class FadeAwayPanel : UIPropertyUpdater {
-
-        public Transform targetTransform;
-        public float fadeDuration;
+    public class FadeAwayPanel : MonoBehaviour {
 
         public Text targetText;
-        public bool isFading;
 
-        private float timer;
+        private float fadeDuration;
+        private Transform targetTransform;
+        private System.Action callback;
 
-        private Vector3 initialPosition;
-        private Vector3 targetPosition;
-
-        public override void Raise()
+        public void Set(float fadeDuration, Transform targetTransform, System.Action callback)
         {
-            if (!isFading)
-            {
-                targetText.CrossFadeAlpha(0.0f, fadeDuration, true);
-                StartCoroutine(IsFading());
-            }
+            this.fadeDuration = fadeDuration;
+            this.targetTransform = targetTransform;
+            this.callback = callback;
         }
 
-        IEnumerator IsFading()
+
+        public IEnumerator FadePanel()
         {
-            isFading = true;
-            timer = 0;
-            initialPosition = gameObject.transform.position;
-            targetPosition = targetTransform.position;
+            float timer = 0;
+            Vector3 initialPosition = gameObject.transform.position;
+            Vector3 targetPosition = targetTransform.position;
 
             gameObject.SetActive(true);
+            targetText.CrossFadeAlpha(0.0f, fadeDuration, true);
+
             while (timer < fadeDuration)
             { 
                 gameObject.transform.position = Vector3.Lerp(initialPosition, targetPosition, timer / fadeDuration);
@@ -44,9 +39,9 @@ namespace SO.UI
 
             gameObject.SetActive(false);
             gameObject.transform.position = initialPosition;
-            isFading = false;
             targetText.CrossFadeAlpha(1.0f, 0f, true);
             
+            callback();
         }
     }
 }
