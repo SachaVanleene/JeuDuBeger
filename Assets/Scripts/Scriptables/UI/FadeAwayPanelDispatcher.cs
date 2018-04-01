@@ -16,8 +16,8 @@ namespace SO.UI
         public Color textColor;
 
         [Space]
-        [Header("Extra : positive & negative feedback")]
-        public bool enableExtra;
+        [Header("Negative feedback")]
+        public bool enableNegative;
         public string negativeIfStringContains;
         public Transform negativeTargetTransform;
         public Color negativeTextColor;
@@ -31,11 +31,10 @@ namespace SO.UI
             for (int i = 0; i < panelsCount; i++)
             {
                 GameObject panel = Instantiate(panelPrefab, transform);
+                panel.GetComponent<UpdateText>().targetString = targetString;
                 panel.transform.SetParent(transform);
                 panel.GetComponent<FadeAwayPanel>().Set(fadeDuration, CheckQueue, textColor, negativeTextColor);
-                panel.GetComponent<UpdateText>().targetString = targetString;
                 panel.transform.GetChild(0).gameObject.GetComponent<Text>().color = textColor;
-                panel.SetActive(false);
             }
 
             panelsQueue = new Queue<string>();
@@ -43,14 +42,14 @@ namespace SO.UI
 
         public override void Raise()
         {
-            int i = transform.childCount;
-            while (i > transform.childCount - panelsCount && transform.GetChild(i).gameObject.activeInHierarchy)
+            int i = transform.childCount - 1;
+            while (i > transform.childCount - panelsCount - 1 && transform.GetChild(i).gameObject.activeInHierarchy)
                 i--;
 
             Transform currentTargetTransform = targetTransform;
             if (i > transform.childCount - panelsCount)
             {
-                if (enableExtra && !targetString.value.Contains(negativeIfStringContains))
+                if (enableNegative && targetString.value.Contains(negativeIfStringContains))
                 {
                     if (negativeTargetTransform != null)
                         currentTargetTransform = negativeTargetTransform;
