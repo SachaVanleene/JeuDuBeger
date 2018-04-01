@@ -1,18 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace SO.UI
 {
     public class FadeAwayPanelDispatcher : UIPropertyUpdater {
+
+        [Header("Main variables")]
         public GameObject panelPrefab;
         public Transform targetTransform;
         public float fadeDuration;
         public int panelsCount;
-
         public SO.StringVariable targetString;
+        public Color textColor;
+
+        [Space]
+        [Header("Extra : positive & negative feedback")]
+        public bool enableExtra;
+        public string negativeIfStringContains;
+        public Transform negativeTargetTransform;
+        public Color negativeTextColor;
 
         private Queue<string> panelsQueue;
+        private bool isNegative;
 
 	    // Use this for initialization
 	    void Start ()
@@ -21,7 +32,9 @@ namespace SO.UI
             {
                 GameObject panel = Instantiate(panelPrefab, transform);
                 panel.transform.SetParent(transform);
-                panel.GetComponent<FadeAwayPanel>().Set(fadeDuration, targetTransform, CheckQueue);
+                panel.GetComponent<FadeAwayPanel>().Set(fadeDuration, CheckQueue, textColor, negativeTextColor);
+                panel.GetComponent<UpdateText>().targetString = targetString;
+                panel.transform.GetChild(0).gameObject.GetComponent<Text>().color = textColor;
                 panel.SetActive(false);
             }
 
@@ -30,18 +43,29 @@ namespace SO.UI
 
         public override void Raise()
         {
-            //Child 0 is the target transform
-            int i = 1;
-            while (i < transform.childCount && transform.GetChild(i).gameObject.activeInHierarchy)
-                i++;
+            int i = transform.childCount;
+            while (i > transform.childCount - panelsCount && transform.GetChild(i).gameObject.activeInHierarchy)
+                i--;
 
-            if (i < transform.childCount)
+            Transform currentTargetTransform = targetTransform;
+            if (i > transform.childCount - panelsCount)
             {
+                if (enableExtra && !targetString.value.Contains(negativeIfStringContains))
+                {
+                    if (negativeTargetTransform != null)
+                        currentTargetTransform = negativeTargetTransform;
+                    isNegative = true;
+                }
+                else
+                {
+                    isNegative = false;
+                }
+
                 StartCoroutine(transform.
-                    GetChild(i).
-                    gameObject.
-                    GetComponent<FadeAwayPanel>().
-                    FadePanel());
+                        GetChild(i).
+                        gameObject.
+                        GetComponent<FadeAwayPanel>().
+                        FadePanel(currentTargetTransform, isNegative));
             }
             else
             {

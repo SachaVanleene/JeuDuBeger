@@ -10,19 +10,27 @@ namespace SO.UI
         public Text targetText;
 
         private float fadeDuration;
-        private Transform targetTransform;
         private System.Action callback;
 
-        public void Set(float fadeDuration, Transform targetTransform, System.Action callback)
+        private Color textColor;
+        private Color negativeTextColor;
+       
+        public void Set(float fadeDuration, System.Action callback, Color textColor, Color negativeTextColor)
         {
             this.fadeDuration = fadeDuration;
-            this.targetTransform = targetTransform;
             this.callback = callback;
+            this.textColor = textColor;
+            this.negativeTextColor = negativeTextColor;
         }
 
 
-        public IEnumerator FadePanel()
+        public IEnumerator FadePanel(Transform targetTransform, bool isNegative)
         {
+            if (isNegative)
+                targetText.color = negativeTextColor;
+            else
+                targetText.color = textColor;
+
             float timer = 0;
             Vector3 initialPosition = gameObject.transform.position;
             Vector3 targetPosition = targetTransform.position;

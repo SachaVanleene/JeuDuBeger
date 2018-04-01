@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 222969262978081458}
   - component: {fileID: 114536903892881252}
   m_Layer: 5
-  m_Name: TextGolds
+  m_Name: FadingText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 114805128114312342}
   - component: {fileID: 114473635814144030}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: FadingPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,14 +57,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe18c567ed7a0194aa406239d556c83e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: c9ac04ec93384364b879d28771d49529, type: 2}
+  gameEvent: {fileID: 0}
   response:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   raiseOnEnable: 1
-  targetString: {fileID: 11400000, guid: f9f9c7d32ea782c4285a4d563d8c6864, type: 2}
+  targetString: {fileID: 0}
   targetInt: {fileID: 0}
   targetText: {fileID: 114536903892881252}
 --- !u!114 &114536903892881252
@@ -79,7 +79,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.85294116, g: 0.7084775, b: 0.3617647, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
