@@ -23,6 +23,7 @@ namespace Assets.Script.Managers
         public GameObject AchievementPopUp;
         public GameObject PanelWolvesAliveInRound;
         public GameObject SheepsInInventory;
+        public List<GameObject> VisualPanels; // panels to be hidden when in pause
         
         public int TotalSheeps { get; set; }    // player inventory relativ
         public int TotalSuperSheeps { get; set; }
@@ -37,7 +38,7 @@ namespace Assets.Script.Managers
         
         public bool gameOver = false;
         private int gold = 30;   // player inventory relativ
-
+        private Dictionary<GameObject, bool> previousState = new Dictionary<GameObject, bool>();
 
         private void Awake()
         {
@@ -126,10 +127,27 @@ namespace Assets.Script.Managers
             }
         }
 
+        private void hideAllPanels()
+        {
+            foreach(var panel in VisualPanels)
+            {
+                previousState[panel] = panel.activeSelf;
+                panel.SetActive(false);
+            }
+         }
+        private void reEnablePanels()
+        {
+            foreach (var panel in VisualPanels)
+            {
+                panel.SetActive(previousState[panel]);
+            }
+        }
+
         public void UnPauseGame()
         {
             if (gameOver)
                 return;
+            reEnablePanels();
             Cursor.visible = false;
             IsPaused = false;
             Time.timeScale = 1;
@@ -137,6 +155,7 @@ namespace Assets.Script.Managers
         }
         public void PauseGame()
         {
+            hideAllPanels();
             Cursor.visible = true;
             IsPaused = true;
             
@@ -146,6 +165,7 @@ namespace Assets.Script.Managers
         }
         public void GameOver()
         {
+            hideAllPanels();
             callAchievement(AchievementEvent.lose);
             IsPaused = true;
             gameOver = true;

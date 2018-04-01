@@ -6,78 +6,37 @@ using Assets.Script.Managers;
 
 public class PauseTuto : MonoBehaviour {
 
-    public GameObject panelTuto;
-    public List<GameObject> allTutos;
-    public List<Button> buttons;
-    int numBouton;
+    public GameObject PanelTuto;
+    public Text NameCurrentTuto;
+    public List<GameObject> ListPanelsTuto;
+    public List<Texture2D> ImagesTuto;
 
-
-    void Start () {
-        panelTuto.SetActive(false);
-        allTutos[0].SetActive(true);
-        ColorBlock cb = buttons[0].colors;
-        cb.normalColor = Color.gray;
-        cb.highlightedColor = Color.gray;
-        cb.pressedColor = Color.gray;
-        buttons[0].colors = cb;
-    }
-	
-	void Update () {
-        handleInputs();
-    }
-
-
-    public void handleInputs()
+    public void ChangeActivityTutoPanel()
     {
-        //Appuye sur bouton pause
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            //Si le panneau tuto est ouvert
-            if (panelTuto.activeSelf) {
-                GameManager.instance.UnPauseGame();
-                panelTuto.SetActive(false);
+        PanelTuto.SetActive(!PanelTuto.activeSelf);
+    }
 
-            //Si le panneau tuto est fermé : pause
-            } else
+    private void hideAllTutorialPanels()
+    {
+        foreach (var tutoPanel in ListPanelsTuto)
+        {
+            tutoPanel.SetActive(false);
+        }
+    }
+
+    public void ShowTuto(string tutoName)
+    {
+        hideAllTutorialPanels();
+        foreach(var tutoPanel in ListPanelsTuto)
+        {
+            if(tutoPanel.name.Equals(tutoName))
             {
-                GameManager.instance.PauseGame();
-                panelTuto.SetActive(true);
+                tutoPanel.SetActive(true);
+                NameCurrentTuto.text = tutoName;
+                return;
             }
         }
-    
+        NameCurrentTuto.text = "Panel " + tutoName + " non trouvé";
     }
     
-    public void CloseTutoPanel()
-    {
-        GameManager.instance.UnPauseGame();
-        panelTuto.SetActive(false);
-    }
-
-    public void ShowTuto(GameObject Tuto)
-    {
-        //Désactivation des autres tutos + activation de celui cliqué
-        foreach (GameObject tuto in allTutos)
-        {
-            tuto.SetActive(false);
-        }
-        Tuto.SetActive(true);
-
-
-        //Changement de couleur des boutons
-        foreach (Button b in buttons)
-        {
-            ColorBlock cb1 = b.colors;
-            cb1.normalColor = Color.white;
-            b.colors = cb1;
-        }
-        numBouton = int.Parse(Tuto.name[buttons.Count-1].ToString())-1;
-        ColorBlock cb = buttons[numBouton].colors;
-        cb.normalColor = Color.gray;
-        cb.highlightedColor = Color.gray;
-        cb.pressedColor = Color.gray;
-        buttons[numBouton].colors = cb;
-    }
-
-  
-
 }
