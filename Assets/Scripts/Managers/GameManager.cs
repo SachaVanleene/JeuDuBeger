@@ -23,6 +23,7 @@ namespace Assets.Script.Managers
         public GameObject AchievementPopUp;
         public GameObject PanelWolvesAliveInRound;
         public GameObject SheepsInInventory;
+        public List<GameObject> VisualPanels; // panels to be hidden when in pause
 
         public SO.GameEvent goldChange;
         public int TotalSheeps { get; set; }    // player inventory relativ
@@ -35,10 +36,10 @@ namespace Assets.Script.Managers
         private CycleManager cycleManager;
         private int _roundNumber = 0;
         private bool cheatsActivated = false;
-        
+
         public bool gameOver = false;
         private int gold = 30;   // player inventory relativ
-
+        private Dictionary<GameObject, bool> previousState = new Dictionary<GameObject, bool>();
 
         private void Awake()
         {
@@ -86,7 +87,7 @@ namespace Assets.Script.Managers
                 return;
             if (Input.GetKeyUp("n") && IsTheSunAwakeAndTheBirdAreSinging)
             {
-                cycleManager.NextCycle(GameVariables.Cycle.passedCycleSpeed);                
+                cycleManager.NextCycle(GameVariables.Cycle.passedCycleSpeed);
             }
 
             if (Input.GetKey(KeyCode.Tab))
@@ -127,10 +128,27 @@ namespace Assets.Script.Managers
             }
         }
 
+        private void hideAllPanels()
+        {
+            foreach(var panel in VisualPanels)
+            {
+                previousState[panel] = panel.activeSelf;
+                panel.SetActive(false);
+            }
+        }
+        private void reEnablePanels()
+        {
+            foreach (var panel in VisualPanels)
+            {
+                panel.SetActive(previousState[panel]);
+            }
+        }
+
         public void UnPauseGame()
         {
             if (gameOver)
                 return;
+            reEnablePanels();
             Cursor.visible = false;
             IsPaused = false;
             Time.timeScale = 1;
@@ -138,15 +156,17 @@ namespace Assets.Script.Managers
         }
         public void PauseGame()
         {
+            hideAllPanels();
             Cursor.visible = true;
             IsPaused = true;
-            
+
             Time.timeScale = 0;
             PanelBackToMenu.SetActive(true);
             PanelBackToMenu.GetComponent<ScriptBackToMenuPanel>().Pause();
         }
         public void GameOver()
         {
+            hideAllPanels();
             callAchievement(AchievementEvent.lose);
             IsPaused = true;
             gameOver = true;
@@ -158,7 +178,7 @@ namespace Assets.Script.Managers
             GameOverManager.instance.SetFavoriteTrap();
 
             GameOverChart.SetActive(true);
-            
+
             PanelBackToMenu.GetComponent<ScriptBackToMenuPanel>().Pause(gameOver : true);
         }
         public void BackToMenu()
@@ -231,7 +251,7 @@ namespace Assets.Script.Managers
                 TotalSheeps += GameVariables.Round.quantityEarnSheepPeriodically;
             TextRounds.text = "ROUND " + _roundNumber;
             displayInfo("Round " + _roundNumber + " begin \n Press n to pass directly to the night", 5);
-            
+
         }
         public void DayStart()
         {
@@ -242,7 +262,7 @@ namespace Assets.Script.Managers
             soundManager.PlaySound("bird", GameVariables.Cycle.volumeEffects);
             printNbSHeeps();
             getGoldsRound();
-            cycleManager.GoToAngle((GameVariables.Cycle.duskAngle - cycleManager.GetCurentCycle()) / GameVariables.Cycle.dayDuration, 
+            cycleManager.GoToAngle((GameVariables.Cycle.duskAngle - cycleManager.GetCurentCycle()) / GameVariables.Cycle.dayDuration,
                 (int)GameVariables.Cycle.duskAngle);
             TrapsCreationPannel.SetActive(true);
             PanelWolvesAliveInRound.SetActive(false);
@@ -259,8 +279,8 @@ namespace Assets.Script.Managers
             soundManager.PlaySound("wolf", GameVariables.Cycle.volumeEffects);
             Spawns.GetComponent<Spawn_wolf>().Begin_Night();
             _enclosureManager.DefaultFilling();
-            cycleManager.GoToAngle((GameVariables.Cycle.dawnAngle - cycleManager.GetCurentCycle()) / GameVariables.Cycle.nightDuration, 
-                (int)GameVariables.Cycle.dawnAngle); 
+            cycleManager.GoToAngle((GameVariables.Cycle.dawnAngle - cycleManager.GetCurentCycle()) / GameVariables.Cycle.nightDuration,
+                (int)GameVariables.Cycle.dawnAngle);
             TrapsCreationPannel.SetActive(false);
             PanelWolvesAliveInRound.SetActive(true);
             SheepsInInventory.SetActive(false);
