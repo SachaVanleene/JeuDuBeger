@@ -83,11 +83,12 @@ namespace TPC
 
             states = GetComponent<StateManager>();
 
-            shotLayerMask = ~(1 << gameObject.layer | 
+            shotLayerMask = ~(1 << gameObject.layer |
                 1 << LayerMask.NameToLayer("Enclos") |
                 1 << LayerMask.NameToLayer("Wolf") |
                 1 << LayerMask.NameToLayer("Leurre") |
-                1 << LayerMask.NameToLayer("Trap")) ;
+                1 << LayerMask.NameToLayer("Trap") |
+                1 << LayerMask.NameToLayer("ignoreLayer"));
 
             states.shotLayerMask = shotLayerMask;
 
@@ -95,7 +96,8 @@ namespace TPC
                 1 << LayerMask.NameToLayer("Terrain") |
                 1 << LayerMask.NameToLayer("Wolf") |
                 1 << LayerMask.NameToLayer("Leurre") | 
-                1 << LayerMask.NameToLayer("Trap"));
+                1 << LayerMask.NameToLayer("Trap") |
+                1 << LayerMask.NameToLayer("ignoreLayer"));
 
             fenceCollision = false;
 
@@ -295,11 +297,11 @@ namespace TPC
         {
             if (states.aiming)
             {
-                crosshair.defaultSpread = 0.6f;
+                crosshair.defaultSpread = 2.4f;
             }
             else
             {
-                crosshair.defaultSpread = 1.2f;
+                crosshair.defaultSpread = 3.6f;
             }
 
             if (states.shoot && states.canShoot && states.alive)
@@ -307,13 +309,13 @@ namespace TPC
                 if (states.aiming)
                 {
                     targetShake = shakeRecoil;
-                    camProperties.WiggleCrosshairAndCamera(0.1f);
+                    camProperties.WiggleCrosshairAndCamera(0.15f);
                     targetFov += 3;
                 }
                 else
                 {
                     targetShake = shakeRecoil;
-                    camProperties.WiggleCrosshairAndCamera(0.2f);
+                    camProperties.WiggleCrosshairAndCamera(0.25f);
                     targetFov += 5;
                 }
             }

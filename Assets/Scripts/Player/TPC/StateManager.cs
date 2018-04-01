@@ -120,7 +120,8 @@ namespace TPC
             ignoreLayers = ~(1 << LayerMask.NameToLayer("Player") |
                 1 << LayerMask.NameToLayer("Wolf") |
                 1 << LayerMask.NameToLayer("Leurre") |
-                1 << LayerMask.NameToLayer("Trap"));
+                1 << LayerMask.NameToLayer("Trap") |
+                1 << LayerMask.NameToLayer("ignoreLayer"));
         }
 
         void CreateModel()

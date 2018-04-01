@@ -15,7 +15,7 @@ public class GameOverManager : MonoBehaviour {
     [Header("Game over Variables references")]
     public SO.IntVariable DeathCount;
     public SO.IntVariable PlayerDamageDealt;
-    public SO.IntVariable GoldEarned;
+    public SO.IntVariable TotalGoldEarned;
     public SO.IntVariable TotalSheeps;
 
     public SO.IntVariable PlacedTraps;
@@ -36,6 +36,7 @@ public class GameOverManager : MonoBehaviour {
     [Header("Variable references")]
     public SO.IntVariable WolvesAliveInRound;
     public SO.IntVariable WerewolvesAliveInRound;
+    public SO.StringVariable GoldChange;
 
 
     private void Awake()
@@ -58,7 +59,7 @@ public class GameOverManager : MonoBehaviour {
 
         DeathCount.Set(0);
         PlayerDamageDealt.Set(0);
-        GoldEarned.Set(0);
+        TotalGoldEarned.Set(0);
         TotalSheeps.Set(0);
 
         PlacedTraps.Set(0);
