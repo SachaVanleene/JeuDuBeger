@@ -15041,16 +15041,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d86cbb1d8479104781152c26b84a2d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PanelTuto: {fileID: 711569967}
-  NameCurrentTuto: {fileID: 256892317}
-  ListPanelsTuto:
-  - {fileID: 1420424731}
-  - {fileID: 966232630}
-  ImagesTuto:
-  - {fileID: 2800000, guid: b949f2f374d30cc459e1f462cac6559f, type: 3}
-  - {fileID: 2800000, guid: 6a5642f44bbd41b4cbc97bd14c245820, type: 3}
-  - {fileID: 2800000, guid: df86025d9e689aa43938674e826a2e4d, type: 3}
-  - {fileID: 2800000, guid: e46b18e293260cd46b0677b7d6178410, type: 3}
+  PanelTuto: {fileID: 0}
+  NameCurrentTuto: {fileID: 0}
+  ListPanelsTuto: []
+  ImagesTuto: []
 --- !u!1 &1136166347
 GameObject:
   m_ObjectHideFlags: 0
@@ -21748,7 +21742,7 @@ MonoBehaviour:
   goldPerTrap: 
   DeathCount: {fileID: 11400000, guid: 1416ed1105375b4468f965db31727859, type: 2}
   PlayerDamageDealt: {fileID: 11400000, guid: 8376c293c9ed4a24ab0ecd3bae3b50e7, type: 2}
-  TotalGoldEarned: {fileID: 0}
+  TotalGoldEarned: {fileID: 11400000, guid: 5fb85c8c621659c45bdffa71e4a612a4, type: 2}
   TotalSheeps: {fileID: 11400000, guid: cc19a8600ee098d4995f54b05e83db1a, type: 2}
   PlacedTraps: {fileID: 11400000, guid: fc6b491d6053302448e4309d2b344077, type: 2}
   TrapsDamageDealt: {fileID: 11400000, guid: 4892797bc29751c429090ef2a803e666, type: 2}
@@ -21764,7 +21758,7 @@ MonoBehaviour:
   FavoriteEnclosure: {fileID: 11400000, guid: 06c838530de9cd54293255bea128cd17, type: 2}
   WolvesAliveInRound: {fileID: 11400000, guid: 6216f785623f74f45b7a447d7599a536, type: 2}
   WerewolvesAliveInRound: {fileID: 0}
-  GoldChange: {fileID: 0}
+  GoldChange: {fileID: 11400000, guid: f9f9c7d32ea782c4285a4d563d8c6864, type: 2}
 --- !u!114 &1958775835
 MonoBehaviour:
   m_ObjectHideFlags: 0
