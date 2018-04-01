@@ -440,6 +440,11 @@ RectTransform:
   m_AnchoredPosition: {x: -250, y: -150}
   m_SizeDelta: {x: 480, y: 270}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &77585006 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1101082147810032, guid: 74070dca21fc5f946a7a55778ef7924b,
+    type: 2}
+  m_PrefabInternal: {fileID: 1563970217}
 --- !u!1 &86373272
 GameObject:
   m_ObjectHideFlags: 0
@@ -15041,10 +15046,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d86cbb1d8479104781152c26b84a2d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PanelTuto: {fileID: 0}
-  NameCurrentTuto: {fileID: 0}
-  ListPanelsTuto: []
-  ImagesTuto: []
+  PanelTuto: {fileID: 711569967}
+  NameCurrentTuto: {fileID: 256892317}
+  ListPanelsTuto:
+  - {fileID: 1420424731}
+  - {fileID: 966232630}
+  ImagesTuto:
+  - {fileID: 2800000, guid: b949f2f374d30cc459e1f462cac6559f, type: 3}
+  - {fileID: 2800000, guid: 6a5642f44bbd41b4cbc97bd14c245820, type: 3}
+  - {fileID: 2800000, guid: df86025d9e689aa43938674e826a2e4d, type: 3}
+  - {fileID: 2800000, guid: e46b18e293260cd46b0677b7d6178410, type: 3}
 --- !u!1 &1136166347
 GameObject:
   m_ObjectHideFlags: 0
@@ -21709,8 +21720,22 @@ MonoBehaviour:
   AchievementPopUp: {fileID: 125595889}
   PanelWolvesAliveInRound: {fileID: 2049250242}
   SheepsInInventory: {fileID: 537688237}
-  VisualPanels: []
-  goldChange: {fileID: 0}
+  VisualPanels:
+  - {fileID: 1869721330}
+  - {fileID: 1086565498}
+  - {fileID: 1581862530}
+  - {fileID: 121787652}
+  - {fileID: 692700178}
+  - {fileID: 537688237}
+  - {fileID: 490388953}
+  - {fileID: 1791846841}
+  - {fileID: 619063270}
+  - {fileID: 2049250242}
+  - {fileID: 1641797847}
+  - {fileID: 77585006}
+  - {fileID: 962133771}
+  - {fileID: 1786576978}
+  goldChange: {fileID: 11400000, guid: c9ac04ec93384364b879d28771d49529, type: 2}
   gameOver: 0
 --- !u!4 &1958775833
 Transform:
