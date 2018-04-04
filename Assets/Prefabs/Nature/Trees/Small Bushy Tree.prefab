@@ -10,8 +10,9 @@ GameObject:
   - component: {fileID: 410720}
   - component: {fileID: 3314674}
   - component: {fileID: 2329442}
+  - component: {fileID: 65082557754671108}
   m_Layer: 0
-  m_Name: Bushy Tree
+  m_Name: Small Bushy Tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24,7 +25,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 142926}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 263.78802, y: 15.23527, z: 273.86682}
+  m_LocalPosition: {x: 259.7532, y: 15.144517, z: 253.33646}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children: []
   m_Father: {fileID: 0}
@@ -70,7 +71,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 142926}
-  m_Mesh: {fileID: 4300000, guid: 1438fe4789f99c94ca2e4d8bf93562d3, type: 3}
+  m_Mesh: {fileID: 4300000, guid: d1d491b551294864e9810bad0a40bcdc, type: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -82,3 +83,15 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 142926}
   m_IsPrefabParent: 1
+--- !u!65 &65082557754671108
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 142926}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.02, y: 13.075728, z: 5.47}
+  m_Center: {x: -0.4, y: 6.353784, z: 0.6}
