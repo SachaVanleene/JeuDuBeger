@@ -25,13 +25,15 @@ public class MainMenu : MonoBehaviour {
     {
         // hide the panel to select profiles when we come back to this scene (from the scene of the game)
         if (SProfilePlayer.getInstance().Name.Equals("<Default>"))
+        {
             LogPanel.SetActive(true);
+        }
         else
         {
-            PlayerNameText.text = "Hello " + SProfilePlayer.getInstance().Name;
+            PlayerNameText.text = Strings.Menu["Hi"] + SProfilePlayer.getInstance().Name;
             LogButton.SetActive(true);
             DeleteButton.SetActive(true);
-
+            LogPanel.SetActive(false);
         }
     }
 
@@ -72,7 +74,7 @@ public class MainMenu : MonoBehaviour {
     public void CreateProfile()
     {
         if (NewPlayerName.text.Equals(""))
-            GetComponent<ProfileManager>().CreateProfile("UnknownPlayer");
+            GetComponent<ProfileManager>().CreateProfile(Strings.Menu["UnknownPlayer"]);
         else
             GetComponent<ProfileManager>().CreateProfile(NewPlayerName.text);
         NewPlayerName.text = "";
@@ -90,7 +92,7 @@ public class MainMenu : MonoBehaviour {
     }
     public void HideLogPanel()
     {
-        PlayerNameText.text = "Hello " + SProfilePlayer.getInstance().Name;
+        PlayerNameText.text = Strings.Menu["Hi"] + SProfilePlayer.getInstance().Name;
         LogButton.SetActive(true);
         DeleteButton.SetActive(true);
         LogPanel.SetActive(false);

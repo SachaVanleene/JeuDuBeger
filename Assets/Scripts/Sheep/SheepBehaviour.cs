@@ -25,11 +25,7 @@ public class SheepBehaviour : MonoBehaviour {
     }
     void Update()
     {
-        // hack fix
-        if (Vector3.Distance(startPosition, transform.position) > GameVariables.Sheep.maxDistanceBeforReturningToStartPosition)
-        {
-            transform.position = startPosition;
-        }
+        
         Vector3 dir = direction * Time.deltaTime;
         if (fly)
         {
@@ -37,7 +33,14 @@ public class SheepBehaviour : MonoBehaviour {
             dir *= GameVariables.Sheep.flySpeed;
         }
         else
+        {
+            // hack fix
+            if (Vector3.Distance(startPosition, transform.position) > GameVariables.Sheep.maxDistanceBeforReturningToStartPosition)
+            {
+                transform.position = startPosition;
+            }
             dir *= GameVariables.Sheep.walkSpeed;
+        }
 
         transform.Translate(dir.x, dir.y, dir.z);
     }

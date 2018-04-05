@@ -54,14 +54,14 @@ public class CycleManager : MonoBehaviour
         { // day
             currentAngle = (int)(Sun.GetComponent<Transform>().eulerAngles.x);
             // between noon and nightfall
-            if (Mathf.Abs(Sun.GetComponent<Transform>().rotation.x) > 0.71f)
+            if (Mathf.Abs(Sun.GetComponent<Transform>().rotation.x) > 0.7070f) // unity quaterinon magic value (~90°)
                 currentAngle = 90 + (90 - currentAngle);
         }
         else
         { // night
             currentAngle = (int)(360 - Sun.GetComponent<Transform>().eulerAngles.x);
             // between midnight and dawn
-            if (Mathf.Abs(Sun.GetComponent<Transform>().rotation.x) < 0.71f)
+            if (Mathf.Abs(Sun.GetComponent<Transform>().rotation.x) < 0.7070f)
                 currentAngle = 90 + (90 - currentAngle);
             currentAngle = 180 + currentAngle;
         }

@@ -117,6 +117,11 @@ namespace Assets.Scripts.Enclosures
             {
                 if (!EnclosureManager.EnclosurePannel.activeSelf)
                 {
+                    if (GameManager.instance.TotalSuperSheeps <= 0 || _superSheeps.Count > 0)
+                        EnclosureManager.EnclosurePannel.transform.GetChild(1).gameObject.SetActive(false);
+                    else
+                        EnclosureManager.EnclosurePannel.transform.GetChild(1).gameObject.SetActive(true);
+
                     EnclosureManager.EnclosurePannel.transform.GetChild(0).GetChild(0).GetComponent<Text>().text =
                         SheepNumber.ToString();
                     EnclosureManager.EnclosurePannel.SetActive(true);

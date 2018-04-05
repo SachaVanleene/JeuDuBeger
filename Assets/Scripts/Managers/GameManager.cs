@@ -14,6 +14,7 @@ namespace Assets.Script.Managers
         public Text TextRounds;
         public Text TextGolds;
         public Text TextSheeps;
+        public GameObject Canvas;
         public GameObject TextInfo;
         public GameObject CycleManagerObject;
         public GameObject Spawns;
@@ -62,7 +63,7 @@ namespace Assets.Script.Managers
             Time.timeScale = 1;
             //GetComponent<DifficultyManager>().SetDiffilculty();
             Cursor.visible = false;
-
+            Cursor.lockState = CursorLockMode.Locked;
             if (SProfilePlayer.getInstance().AchievementsManager.GetAchievementByName("Player").IsComplete())
                 TotalSuperSheeps = 1;
             else
@@ -92,7 +93,7 @@ namespace Assets.Script.Managers
 
             if (Input.GetKey(KeyCode.Tab))
             {
-                displayInfo("cheats activés", 1);
+                displayInfo(Strings.IngameInterface["ActivatedCheats"], 1);
             }
             else
                 return;
@@ -150,6 +151,7 @@ namespace Assets.Script.Managers
                 return;
             reEnablePanels();
             Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
             IsPaused = false;
             Time.timeScale = 1;
             PanelBackToMenu.SetActive(false);
@@ -158,6 +160,7 @@ namespace Assets.Script.Managers
         {
             hideAllPanels();
             Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
             IsPaused = true;
 
             Time.timeScale = 0;
@@ -167,10 +170,12 @@ namespace Assets.Script.Managers
         public void GameOver()
         {
             hideAllPanels();
+            Canvas.GetComponent<PauseTuto>().GameOver();
             callAchievement(AchievementEvent.lose);
             IsPaused = true;
             gameOver = true;
             Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0;
             PanelBackToMenu.SetActive(true);
 
@@ -190,7 +195,7 @@ namespace Assets.Script.Managers
         public void KillSheep()
         {
             callAchievement(AchievementEvent.sheepDeath);
-            displayInfo("A sheep has been eaten", 2);
+            displayInfo(Strings.IngameInterface["SheepEaten"], 2);
             if (EnclosureManager.NbSheeps() <= 0)
                 GameOver();
         }
@@ -212,9 +217,9 @@ namespace Assets.Script.Managers
         private void printNbSHeeps()
         {
             if (TotalSuperSheeps > 0)
-                TextSheeps.text = TotalSheeps + " Sheeps in Inventory and " + TotalSuperSheeps + " Super.";
+                TextSheeps.text = TotalSheeps + Strings.IngameInterface["SheepsInInventoryAnd"] + TotalSuperSheeps + Strings.IngameInterface["SuperSheeps"];
             else
-                TextSheeps.text = TotalSheeps + " Sheeps in Inventory.";
+                TextSheeps.text = TotalSheeps + Strings.IngameInterface["SheepsInInventory"];
         }
         private void getGoldsRound()
         {
@@ -236,7 +241,7 @@ namespace Assets.Script.Managers
                 else
                     GameOverManager.instance.goldPerEnclosure[2] += toBeAdded;
             }
-            TextGolds.text = gold + " gold";
+            TextGolds.text = gold + Strings.IngameInterface["Gold"];
         }
         private void displayInfo(string msg, int duration)
         {
@@ -249,8 +254,8 @@ namespace Assets.Script.Managers
             Spawns.GetComponent<Spawn_wolf>().Cycle = ++_roundNumber;
             if (_roundNumber % GameVariables.Round.periodicityEarnSheep == 0)
                 TotalSheeps += GameVariables.Round.quantityEarnSheepPeriodically;
-            TextRounds.text = "ROUND " + _roundNumber;
-            displayInfo("Round " + _roundNumber + " begin \n Press n to pass directly to the night", 5);
+            TextRounds.text = Strings.IngameInterface["Round"] + _roundNumber;
+            displayInfo(Strings.IngameInterface["Round"] + _roundNumber + Strings.IngameInterface["PassDay"], 5);
 
         }
         public void DayStart()
@@ -288,15 +293,15 @@ namespace Assets.Script.Managers
         public void WaitingAt(int goal, int angle)
         {
             if(goal != angle)
-                Debug.Log("cycle waiting at " + angle + ", while aiming " + goal);
+                Debug.LogError("cycle waiting at " + angle + ", while aiming " + goal);
             // can do some verification, start a new wave, etc.
             if(goal == 355 && Spawns.GetComponent<Spawn_wolf>().hasWolfAlive())
-                displayInfo("The Night will only end when all the wolfs are dead", 4);
+                displayInfo(Strings.IngameInterface["NightEndCondition"], 4);
         }
         public void EarnGold(int value, bool enclosureGold = true, bool wolfGold = false, bool callAch = true)
         {
             gold += value;
-            TextGolds.text = gold + " gold";
+            TextGolds.text = gold + Strings.IngameInterface["Gold"];
             if(callAch)
                 callAchievement(AchievementEvent.goldEarn, value);
 
@@ -313,11 +318,11 @@ namespace Assets.Script.Managers
         { //  allow the player to purchase
             if (value > gold)
             {
-                displayInfo("Not enough gold",1);
+                displayInfo(Strings.IngameInterface["NotEnoughGold"], 1);
                 return false;
             }
             gold -= value;
-            TextGolds.text = gold + " gold";
+            TextGolds.text = gold + Strings.IngameInterface["Gold"];
 
             GameOverManager.instance.GoldChange.Set("-" + value);
             goldChange.Raise();

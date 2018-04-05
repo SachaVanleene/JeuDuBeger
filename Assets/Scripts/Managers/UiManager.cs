@@ -44,7 +44,7 @@ public class UiManager : MonoBehaviour
 
         GetComponentsInChildren<Text>()[0].text = TrapCreator.TargetedTrap.UpgradeCosts[levelIndex] + " ";
         GetComponentsInChildren<Text>()[1].text = TrapCreator.TargetedTrap.Durability + "/" + TrapCreator.TargetedTrap.DurabilityMax;
-        GetComponentsInChildren<Text>()[2].text = "Level " + TrapCreator.TargetedTrap.Level;
+        GetComponentsInChildren<Text>()[2].text = Strings.TrapPanel["Level"] + TrapCreator.TargetedTrap.Level;
 
     }
 
