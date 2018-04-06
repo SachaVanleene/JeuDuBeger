@@ -27850,6 +27850,7 @@ MonoBehaviour:
   TextRounds: {fileID: 1979505861}
   TextGolds: {fileID: 890828335}
   TextSheeps: {fileID: 658351307}
+  Canvas: {fileID: 0}
   TextInfo: {fileID: 1732771766}
   CycleManagerObject: {fileID: 1228557512}
   Spawns: {fileID: 1896502963}
@@ -28182,7 +28183,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1979121086
 Transform:
   m_ObjectHideFlags: 0
