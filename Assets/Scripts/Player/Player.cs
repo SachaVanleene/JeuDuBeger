@@ -157,6 +157,7 @@ public class Player : MonoBehaviour {
         Debug.LogError("Frozen");
         if(alive)
         {
+            states.reloading = true;
             anim.speed = 0;
             hMove.AddVelocity(Vector3.zero, freezingDUration, 0, true);
             goAttachedToModel.GetComponent<Renderer>().material.SetColor("_Color", frozenColor);
@@ -179,6 +180,7 @@ public class Player : MonoBehaviour {
 
     void UnFrozen()
     {
+        states.reloading = false;
         anim.speed = 1f;
         Debug.LogError("UnFrozen");
         goAttachedToModel.GetComponent<Renderer>().material.SetColor("_Color", normalColor);
