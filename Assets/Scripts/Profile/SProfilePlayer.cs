@@ -9,6 +9,8 @@ public class SProfilePlayer
     public string Name { get; set; }
     public int Difficulty { get; set; }
     public AchievementsManager AchievementsManager { get; set; }
+    public List<string> TutorialsCalled = new List<string>();
+
     [NonSerialized]
     public List<Texture2D> SpritesAchievements;
     [NonSerialized]

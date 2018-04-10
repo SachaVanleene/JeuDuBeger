@@ -115,6 +115,7 @@ namespace Assets.Scripts.Enclosures
 
             if (distPlayertoEnclos.magnitude < 25 && _gameManager.IsTheSunAwakeAndTheBirdAreSinging && !_gameManager.IsPaused)
             {
+                TutorialOpen.instance.OpenTutorial(GameVariables.Tutorials.sheep);
                 if (!EnclosureManager.EnclosurePannel.activeSelf)
                 {
                     if (GameManager.instance.TotalSuperSheeps <= 0 || _superSheeps.Count > 0)
@@ -272,7 +273,6 @@ namespace Assets.Scripts.Enclosures
             _sheeps = new List<GameObject>();
             _health = 0;
             EnclosureManager.MiniMap.UpdateEnclosure(Order);
-
         }
 
 

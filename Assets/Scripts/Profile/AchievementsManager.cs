@@ -45,8 +45,8 @@ public class AchievementsManager {
     {
         if (!listeners.ContainsKey(eventAchievement) || listeners[eventAchievement].Count <= 0)
         {
-            Debug.LogWarning("No achievement is listening (anymore ?) to this event : "
-                + eventAchievement);
+            //Debug.LogWarning("No achievement is listening (anymore ?) to this event : "
+            //    + eventAchievement);
             return null;
         }
         Completion[eventAchievement] += step;

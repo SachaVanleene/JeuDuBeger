@@ -37,12 +37,18 @@ public class PauseTuto : MonoBehaviour
     public void ShowTuto(string tutoName)
     {
         hideAllTutorialPanels();
+        if(!PanelTuto.activeSelf)
+        {
+            PanelTuto.SetActive(true);
+            ButtonPanelTuto.GetComponent<Image>().transform.Rotate(0, 0, 180);
+        }
         foreach (var tutoPanel in ListPanelsTuto)
         {
             if (tutoPanel.name.Equals(tutoName))
             {
                 tutoPanel.SetActive(true);
                 NameCurrentTuto.text = tutoName;
+                TutorialOpen.instance.TutorialCalled(tutoName);
                 return;
             }
         }

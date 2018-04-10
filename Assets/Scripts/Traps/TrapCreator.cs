@@ -80,6 +80,10 @@ namespace Assets.Scripts.Traps
                     Destroy(ActualTrap.TrapPrefab);
             }
             if (IsInTrapCreationMode)
+            {   //  hackfix : avoid allowing traps then put in pause
+                TutorialOpen.instance.OpenTutorial(GameVariables.Tutorials.traps);
+            }
+            if (IsInTrapCreationMode)
             {
                 TargetedTrap = null;
                 if (SelectedTrapType != ActualSelectedTrapTypes)
