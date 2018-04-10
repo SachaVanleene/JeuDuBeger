@@ -272,6 +272,14 @@ namespace Assets.Script.Managers
             TrapsCreationPannel.SetActive(true);
             PanelWolvesAliveInRound.SetActive(false);
             SheepsInInventory.SetActive(true);
+            if (_roundNumber == 1)
+            {
+                TutorialOpen.instance.OpenTutorial(1);
+            }
+            if(_roundNumber == 2)
+            {
+                TutorialOpen.instance.OpenTutorial(3);
+            }
         }
         public void NightStart()
         {
@@ -289,6 +297,7 @@ namespace Assets.Script.Managers
             TrapsCreationPannel.SetActive(false);
             PanelWolvesAliveInRound.SetActive(true);
             SheepsInInventory.SetActive(false);
+            TutorialOpen.instance.OpenTutorial(2);
         }
         public void WaitingAt(int goal, int angle)
         {

@@ -81,6 +81,10 @@ namespace Assets.Scripts.Traps
             }
             if (IsInTrapCreationMode)
             {
+                TutorialOpen.instance.OpenTutorial(4);
+            }
+            if (IsInTrapCreationMode)
+            {
                 TargetedTrap = null;
                 if (SelectedTrapType != ActualSelectedTrapTypes)
                 {

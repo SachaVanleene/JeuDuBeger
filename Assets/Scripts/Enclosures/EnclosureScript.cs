@@ -115,6 +115,7 @@ namespace Assets.Scripts.Enclosures
 
             if (distPlayertoEnclos.magnitude < 25 && _gameManager.IsTheSunAwakeAndTheBirdAreSinging && !_gameManager.IsPaused)
             {
+                TutorialOpen.instance.OpenTutorial(5);
                 if (!EnclosureManager.EnclosurePannel.activeSelf)
                 {
                     if (GameManager.instance.TotalSuperSheeps <= 0 || _superSheeps.Count > 0)
