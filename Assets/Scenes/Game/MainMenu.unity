@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.014861773, g: 0.0026653379, b: 0.000032831784, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -2837,11 +2837,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpritesAchievements:
-  - {fileID: 2800000, guid: 549f8ced5c4cfc44a871d5f1bbedb267, type: 3}
-  - {fileID: 2800000, guid: f66db888455a7cc46920c925930cd3fa, type: 3}
-  - {fileID: 2800000, guid: 09af6cdaf398fff4683fab1c8abc92eb, type: 3}
-  DefaultSprite: {fileID: 2800000, guid: 9b79078faadf20b458ae6eae55714755, type: 3}
-  CompletedSprite: {fileID: 2800000, guid: 70eaf1f6608a99a47b052db2eb798f5d, type: 3}
+  - {fileID: 2800000, guid: 2931332d03188dd47901cfb130ae5d31, type: 3}
+  - {fileID: 2800000, guid: 2b8bb43d4ae2cfa43b63fce8271567c4, type: 3}
+  - {fileID: 2800000, guid: 63dc15bfee90f5f459eab170e416c566, type: 3}
+  - {fileID: 2800000, guid: b4a10e08b940f6d438854538a8cf046b, type: 3}
+  - {fileID: 2800000, guid: d28ece967b9f13f43a145c162de5bf46, type: 3}
+  - {fileID: 2800000, guid: c51eedbcfc3251a4abc0bb0e19459da6, type: 3}
+  - {fileID: 2800000, guid: c69879ced40fd7647a0b4907cc519580, type: 3}
+  - {fileID: 2800000, guid: 92176e3eed23dc248a0fc979cbc464a9, type: 3}
+  - {fileID: 2800000, guid: 71790c61ff2648142b37ebc2b4596637, type: 3}
+  - {fileID: 2800000, guid: 0409a044b676f63458475dc82a6f7122, type: 3}
+  DefaultSprite: {fileID: 2800000, guid: 3c91f7f5427220f47aab15c2cc206f30, type: 3}
+  CompletedSprite: {fileID: 2800000, guid: 1e06f266ed6deb2439d7a39a10f357a5, type: 3}
 --- !u!222 &1108544245
 CanvasRenderer:
   m_ObjectHideFlags: 0

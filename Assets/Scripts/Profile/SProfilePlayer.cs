@@ -36,44 +36,34 @@ public class SProfilePlayer
 
     public void init()
     {  // create void Achievements
-       // Wolf Killer
+        // use cheats in a game
         new AchievementInfo(
-            name : "Tueur",
-            info : "Tuer 10 loups",
-            events : new List<AchievementEvent>() { AchievementEvent.wolfDeath },
-            aim : new System.Collections.Generic.Dictionary<AchievementEvent, int>() { { AchievementEvent.wolfDeath, 10 } },
-            manager : AchievementsManager
-        );
-        // Player Kills
-        new AchievementInfo(
-            name: "Tendances Suicidaires",
-            info: "Le joueur meurt 10 fois",
-            events: new List<AchievementEvent>() { AchievementEvent.playerDeath },
-            aim: new System.Collections.Generic.Dictionary<AchievementEvent, int>() { { AchievementEvent.playerDeath, 10 } },
+            name: "Tricheur",
+            info: "Oh c'est pas bien... Ca arrive plus souvent que vous le pensez",
+            events: new List<AchievementEvent>() { AchievementEvent.cheat },
+            aim: new System.Collections.Generic.Dictionary<AchievementEvent, int>() { { AchievementEvent.cheat, 1 } },
             manager: AchievementsManager
         );
-        // Sheep death
+        // spend 200 golds
         new AchievementInfo(
-            name: "Beeeh",
-            info: "Vous perdez 20 moutons",
-            events: new List<AchievementEvent>() { AchievementEvent.sheepDeath },
-            aim: new System.Collections.Generic.Dictionary<AchievementEvent, int>() { { AchievementEvent.sheepDeath, 20 } },
+            name: "Créateur d’emplois",
+            info: "Vous injectez beaucoup d’argent dans les compagnies locales",
+            events: new List<AchievementEvent>() { AchievementEvent.goldSpent },
+            aim: new System.Collections.Generic.Dictionary<AchievementEvent, int>() { { AchievementEvent.goldSpent, 200 } },
             manager: AchievementsManager
         );
-        // test many inputs
+        // earn 200 golds
         new AchievementInfo(
-            name: "Fiesta !!!",
-            info: "Tuez 10 loups, mourez 5 fois et perdez 10 moutons",
-            events: new List<AchievementEvent>() { AchievementEvent.sheepDeath, AchievementEvent.playerDeath, AchievementEvent.wolfDeath },
-            aim: new System.Collections.Generic.Dictionary<AchievementEvent, int>() { { AchievementEvent.sheepDeath, 10 },
-                                                                                { AchievementEvent.playerDeath, 10 },
-                                                                                { AchievementEvent.wolfDeath, 10 }},
+            name: "Golden Boy",
+            info: "Un berger riche comme vous, c’est pas commun",
+            events: new List<AchievementEvent>() { AchievementEvent.goldEarn },
+            aim: new System.Collections.Generic.Dictionary<AchievementEvent, int>() { { AchievementEvent.goldEarn, 200 } },
             manager: AchievementsManager
         );
         // quit a game
         new AchievementInfo(
-            name: "Quitter",
-            info: "You quit befor losing all your sheep, you coward !",
+            name: "Trouillard",
+            info: "Vous avez quitté la partie en cours, honte à vous...",
             events: new List<AchievementEvent>() { AchievementEvent.quit },
             aim: new System.Collections.Generic.Dictionary<AchievementEvent, int>() { { AchievementEvent.quit, 1 } },
             manager: AchievementsManager
@@ -81,50 +71,60 @@ public class SProfilePlayer
         // lose a game
         new AchievementInfo(
             name: "Looser",
-            info: "You lose a game ... but it's not like you could win one.",
+            info: "Vous avez perdu... En même temps, c’est pas comme si vous pouviez gagner !",
             events: new List<AchievementEvent>() { AchievementEvent.lose },
             aim: new System.Collections.Generic.Dictionary<AchievementEvent, int>() { { AchievementEvent.lose, 1 } },
             manager: AchievementsManager
         );
-        // use cheats in a game
-        new AchievementInfo(
-            name: "Cheater",
-            info: "You cheat ! Yeah that happens more that you could imagine",
-            events: new List<AchievementEvent>() { AchievementEvent.cheat },
-            aim: new System.Collections.Generic.Dictionary<AchievementEvent, int>() { { AchievementEvent.cheat, 1 } },
-            manager: AchievementsManager
-        );
         // passed the first round
         new AchievementInfo(
-            name: "Newbie",
-            info: "You survived your first night out, congrats, more are comming",
+            name: "Noob",
+            info: "Vous avez survécu à la 1ère nuit !! Vous enflammez pas, ce n’est que le début",
             events: new List<AchievementEvent>() { AchievementEvent.cycleEnd },
             aim: new System.Collections.Generic.Dictionary<AchievementEvent, int>() { { AchievementEvent.cycleEnd, 1 } },
             manager: AchievementsManager
         );
-        // created his profile
+        // test many inputs
         new AchievementInfo(
+            name: "Fiesta !!!",
+            info: "Tuer 10 loups, mourir 5 fois et perdre 10 moutons",
+            events: new List<AchievementEvent>() { AchievementEvent.sheepDeath, AchievementEvent.playerDeath, AchievementEvent.wolfDeath },
+            aim: new System.Collections.Generic.Dictionary<AchievementEvent, int>() { { AchievementEvent.sheepDeath, 10 },
+                                                                                { AchievementEvent.playerDeath, 10 },
+                                                                                { AchievementEvent.wolfDeath, 10 }},
+            manager: AchievementsManager
+        );
+        // Sheep death
+        new AchievementInfo(
+            name: "Beeeeeh",
+            info: "Perdre 20 moutons",
+            events: new List<AchievementEvent>() { AchievementEvent.sheepDeath },
+            aim: new System.Collections.Generic.Dictionary<AchievementEvent, int>() { { AchievementEvent.sheepDeath, 20 } },
+            manager: AchievementsManager
+        );
+        // Player Kills
+        new AchievementInfo(
+            name: "Tendances Suicidaires",
+            info: "Mourir 10 fois",
+            events: new List<AchievementEvent>() { AchievementEvent.playerDeath },
+            aim: new System.Collections.Generic.Dictionary<AchievementEvent, int>() { { AchievementEvent.playerDeath, 10 } },
+            manager: AchievementsManager
+        );
+        // Wolf Killer
+        new AchievementInfo(
+            name : "Tueur",
+            info : "Tuer 10 loups",
+            events : new List<AchievementEvent>() { AchievementEvent.wolfDeath },
+            aim : new System.Collections.Generic.Dictionary<AchievementEvent, int>() { { AchievementEvent.wolfDeath, 10 } },
+            manager : AchievementsManager
+        );
+        // created his profile
+        /*new AchievementInfo(
             name: "Player",
             info: "You did it, u successfully created your first profile !!!",
             events: new List<AchievementEvent>() { AchievementEvent.createProfile },
             aim: new System.Collections.Generic.Dictionary<AchievementEvent, int>() { { AchievementEvent.createProfile, 1 } },
             manager: AchievementsManager
-        );
-        // spend 200 golds
-        new AchievementInfo(
-            name: "Jobs maker",
-            info: "You injected a lot of money on local companies",
-            events: new List<AchievementEvent>() { AchievementEvent.goldSpent },
-            aim: new System.Collections.Generic.Dictionary<AchievementEvent, int>() { { AchievementEvent.goldSpent, 200 } },
-            manager: AchievementsManager
-        );
-        // earn 200 golds
-        new AchievementInfo(
-            name: "Riche",
-            info: "You earned a lot of money boy",
-            events: new List<AchievementEvent>() { AchievementEvent.goldEarn },
-            aim: new System.Collections.Generic.Dictionary<AchievementEvent, int>() { { AchievementEvent.goldEarn, 200 } },
-            manager: AchievementsManager
-        );
+        );*/
     }
 }
