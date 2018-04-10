@@ -67,7 +67,6 @@ namespace Assets.Script.Traps
             }
             if (IsInPreviewMode && !_ignoreList.Contains(collider.name) && !collider.CompareTag("Leurre"))
             {
-                Debug.Log(collider.gameObject.name + this.gameObject.name);
                 foreach (var rend in TrapPrefab.GetComponentsInChildren<Renderer>())
                 {
                     rend.sharedMaterial.color = new Color(205, 0, 0, 0.02f);
@@ -116,7 +115,6 @@ namespace Assets.Script.Traps
 
         public void OnTriggerExit(Collider collider)
         {
-            Debug.Log(v);
             if (!_ignoreList.Contains(collider.gameObject.name) && !collider.CompareTag("Leurre")) v--;
             if (collider.tag == "Fences" &&
                 Vector3.Distance(transform.position, collider.transform.parent.position) <

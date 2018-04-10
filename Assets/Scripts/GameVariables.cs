@@ -4,6 +4,14 @@ namespace Assets.Scripts
 {
     public static class GameVariables
     {
+        public static class Tutorials
+        {
+            public static readonly string sheep = "moutons";
+            public static readonly string golds = "monnaie";
+            public static readonly string howToPlay = "deroulement";
+            public static readonly string traps = "pieges";
+            public static readonly string wolfs = "loups";
+        }
         public static class Wolf
         {
             public static readonly int life = 100;

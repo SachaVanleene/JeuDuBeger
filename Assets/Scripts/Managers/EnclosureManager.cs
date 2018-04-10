@@ -26,7 +26,7 @@ public class EnclosureManager : MonoBehaviour
     public static MiniMap MiniMap;
     public static int SheepNumberInTheWorld;
 
-    public  static List<EnclosureScript> EnclosureList;
+    public static List<EnclosureScript> EnclosureList = new List<EnclosureScript>();
     private GameManager _gameManager;
     private void Awake()
     {
