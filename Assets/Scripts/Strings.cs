@@ -32,7 +32,7 @@ public static class Strings
         {"Gold", " or "},
         {"SheepsInInventory", " moutons dans l'inventaire "},
         {"SheepsInInventoryAnd", " moutons dans l'inventaire et "},
-        {"SheepsEaten", " Un mouton a été dévoré "},
+        {"SheepEaten", " Un mouton a été dévoré "},
         {"ActivatedCheats", " cheats activés "},
         {"NightEndCondition", " La nuit ne passera que lorsque tous les loups seront morts "},
         {"NotEnoughGold", " Pas assez d'or "},

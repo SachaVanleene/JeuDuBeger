@@ -45,7 +45,7 @@ public class MainMenu : MonoBehaviour {
         DeleteButton.SetActive(false);
         LoadingScreen.SetActive(true);
         SProfilePlayer.getInstance().Difficulty = difficulty; // to be use in game
-        SceneManager.LoadScene(1);
+        SceneManager.LoadSceneAsync(1);
     }
 
     //On play, show panel to choose difficulty

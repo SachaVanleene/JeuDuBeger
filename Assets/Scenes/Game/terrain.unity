@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4363283, g: 0.47471088, b: 0.5147126, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -14489,6 +14489,46 @@ Prefab:
       propertyPath: House
       value: 
       objectReference: {fileID: 323687046}
+    - target: {fileID: 224483560155561058, guid: 34dbf2a8f844e5b499cec76069b676f8,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 240
+      objectReference: {fileID: 0}
+    - target: {fileID: 224483560155561058, guid: 34dbf2a8f844e5b499cec76069b676f8,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 224474194058881216, guid: 34dbf2a8f844e5b499cec76069b676f8,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 224474194058881216, guid: 34dbf2a8f844e5b499cec76069b676f8,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 114514290636622640, guid: 34dbf2a8f844e5b499cec76069b676f8,
+        type: 2}
+      propertyPath: m_FontData.m_FontSize
+      value: 48
+      objectReference: {fileID: 0}
+    - target: {fileID: 114514290636622640, guid: 34dbf2a8f844e5b499cec76069b676f8,
+        type: 2}
+      propertyPath: m_FontData.m_MaxSize
+      value: 48
+      objectReference: {fileID: 0}
+    - target: {fileID: 114514290636622640, guid: 34dbf2a8f844e5b499cec76069b676f8,
+        type: 2}
+      propertyPath: m_FontData.m_AlignByGeometry
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114514290636622640, guid: 34dbf2a8f844e5b499cec76069b676f8,
+        type: 2}
+      propertyPath: m_FontData.m_BestFit
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 34dbf2a8f844e5b499cec76069b676f8, type: 2}
   m_IsPrefabParent: 0
