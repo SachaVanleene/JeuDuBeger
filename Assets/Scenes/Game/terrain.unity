@@ -7952,6 +7952,11 @@ Transform:
   m_Father: {fileID: 1930441035}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &408584986 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1369428808400234, guid: 34dbf2a8f844e5b499cec76069b676f8,
+    type: 2}
+  m_PrefabInternal: {fileID: 1022985947}
 --- !u!1 &421816880
 GameObject:
   m_ObjectHideFlags: 0
@@ -10298,7 +10303,7 @@ MonoBehaviour:
   infiniteBullets: 1
   gunStats: {fileID: 11400000, guid: 4099c16f97495ca4697b2859a8d5623b, type: 2}
   level: 0
-  killGo: {fileID: 1581862530}
+  killGo: {fileID: 408584986}
 --- !u!114 &570099606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10425,7 +10430,7 @@ MonoBehaviour:
   healTick: 1
   healPerTick: 0.1
   isHealing: 0
-  damageGO: {fileID: 1869721330}
+  damageGO: {fileID: 1309762600}
   goAttachedToModel: {fileID: 1023803584}
 --- !u!95 &570099609
 Animator:
@@ -14835,6 +14840,10 @@ Prefab:
       propertyPath: MiniMapObject
       value: 
       objectReference: {fileID: 809285235}
+    - target: {fileID: 1369428808400234, guid: 34dbf2a8f844e5b499cec76069b676f8, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 34dbf2a8f844e5b499cec76069b676f8, type: 2}
   m_IsPrefabParent: 0
@@ -21456,6 +21465,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: df0603043514e644789fff75848d6c44, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1309762600 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1032337084304538, guid: 34dbf2a8f844e5b499cec76069b676f8,
+    type: 2}
+  m_PrefabInternal: {fileID: 1022985947}
 --- !u!1 &1311867254
 GameObject:
   m_ObjectHideFlags: 0
