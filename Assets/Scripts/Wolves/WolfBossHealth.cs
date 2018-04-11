@@ -16,6 +16,8 @@ public class WolfBossHealth : MonoBehaviour
 
     UI_Health_Boss script_ui;
 
+    AudioManagerWolves script_audio;
+
     private void Awake()
     {
         health = (int) wolfStats.CurrentLife;
@@ -23,6 +25,7 @@ public class WolfBossHealth : MonoBehaviour
         anim = GetComponent<Animator>();
         cloud = GetComponentInChildren<ParticleSystem>();
         script_ui = GetComponent<UI_Health_Boss>();
+        script_audio = GetComponent<AudioManagerWolves>();
         alive = true;
     }
 
@@ -30,6 +33,7 @@ public class WolfBossHealth : MonoBehaviour
     {
         if (alive)
         {
+            script_audio.PlayHitSound();
             health -= damage;
             //anim.SetTrigger("Hit");
             script_ui.OnHit();

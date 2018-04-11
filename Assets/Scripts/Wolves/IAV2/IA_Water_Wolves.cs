@@ -44,6 +44,9 @@ public class IA_Water_Wolves : MonoBehaviour {
     private ParticleSystem waterJet;
     public GameObject jets;
 
+    //Audio
+    AudioManagerWolves script_audio;
+
     private void Awake()
     {
         timer = 0f;
@@ -67,6 +70,8 @@ public class IA_Water_Wolves : MonoBehaviour {
 
         player = GameObject.FindGameObjectWithTag("Player");
         enclosFound = false;
+
+        script_audio = GetComponent<AudioManagerWolves>();
     }
 
     // Use this for initialization
@@ -385,12 +390,14 @@ public class IA_Water_Wolves : MonoBehaviour {
                 // Debug.LogError("Attaque");
                 anim.SetBool("attaque", true);
                 waterJet.Play();
+                script_audio.PlayAttackWaterWolvesSound();
                 agent.updateRotation = false;
             }
             if (!targetInRange)
             {
                 anim.SetBool("attaque", false);
                 waterJet.Stop();
+                script_audio.StopWaternAttack();
             }
         }
     }
