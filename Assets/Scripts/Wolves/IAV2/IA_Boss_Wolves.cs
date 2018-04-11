@@ -40,6 +40,9 @@ public class IA_Boss_Wolves : MonoBehaviour {
 
     BoxCollider collider;
 
+    //Audio
+    AudioManagerWolves script_audio;
+
     private void Awake()
     {
         timer = 0f;
@@ -61,6 +64,8 @@ public class IA_Boss_Wolves : MonoBehaviour {
 
         collider = GetComponent<BoxCollider>();
         enclosFound = true;
+
+        script_audio = GetComponent<AudioManagerWolves>();
     }
 
 
@@ -368,6 +373,7 @@ public class IA_Boss_Wolves : MonoBehaviour {
     {
         if (!currentTargetDiedWhenAttacking)
         {
+            script_audio.PlayAttackBossWolfSound();
             if (targetTag == "Player")
             {
                 targetTransform.gameObject.GetComponent<Player>().takeDamage(playerDamage);
