@@ -255,7 +255,6 @@ namespace Assets.Script.Managers
             if (_roundNumber % GameVariables.Round.periodicityEarnSheep == 0)
                 TotalSheeps += GameVariables.Round.quantityEarnSheepPeriodically;
             TextRounds.text = Strings.IngameInterface["Round"] + _roundNumber;
-            Debug.LogError(Strings.IngameInterface["Round"] + _roundNumber + Strings.IngameInterface["PassDay"]);
             displayInfo(Strings.IngameInterface["Round"] + _roundNumber + Strings.IngameInterface["PassDay"], 5);
 
         }
