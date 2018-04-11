@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.51721734, g: 0.5116122, b: 0.4344585, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -12477,6 +12477,11 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1022985947}
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+--- !u!1 &809285235 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1258781768607854, guid: 34dbf2a8f844e5b499cec76069b676f8,
+    type: 2}
+  m_PrefabInternal: {fileID: 1022985947}
 --- !u!1 &818600951
 GameObject:
   m_ObjectHideFlags: 0
@@ -14825,6 +14830,11 @@ Prefab:
       propertyPath: EnclosurePositionList.Array.data[2].x
       value: 270
       objectReference: {fileID: 0}
+    - target: {fileID: 114985268925654848, guid: 34dbf2a8f844e5b499cec76069b676f8,
+        type: 2}
+      propertyPath: MiniMapObject
+      value: 
+      objectReference: {fileID: 809285235}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 34dbf2a8f844e5b499cec76069b676f8, type: 2}
   m_IsPrefabParent: 0
@@ -14850,6 +14860,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScriptTutoObject: {fileID: 1022985949}
+--- !u!114 &1022985962 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114849127117526648, guid: 34dbf2a8f844e5b499cec76069b676f8,
+    type: 2}
+  m_PrefabInternal: {fileID: 1022985947}
+  m_Script: {fileID: 11500000, guid: 722acb74d42b83640a75826cbbabee58, type: 3}
 --- !u!1 &1023803584
 GameObject:
   m_ObjectHideFlags: 0
@@ -15597,7 +15613,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 862794625
+  randomSeed: -820823741
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -19952,7 +19968,8 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114608642095083882, guid: 247bea815d5d5224f97192dae9cb228e, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 247bea815d5d5224f97192dae9cb228e, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &1152847836
@@ -23072,7 +23089,8 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114515240189798066, guid: 990a98fe4a6477244b361577d5c75a8b, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 990a98fe4a6477244b361577d5c75a8b, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &1465381121
@@ -28048,7 +28066,7 @@ MonoBehaviour:
   - {fileID: 1255194462}
   spawnMountain:
   - {fileID: 1755766679}
-  gameManager: {fileID: 1958775832}
+  gameManager: {fileID: 1022985962}
   Cycle: 0
 --- !u!4 &1896502966
 Transform:
@@ -28593,6 +28611,7 @@ MonoBehaviour:
   - {fileID: 114356100303377954, guid: a5bcdb4de2594014c8f7c7d840cc730a, type: 2}
   - {fileID: 114695632365051304, guid: d5a443be48baa1747b04cccad380aabb, type: 2}
   House: {fileID: 323687046}
+  MiniMapObject: {fileID: 0}
   enclosurePanel: {fileID: 490388953}
 --- !u!114 &1958775831
 MonoBehaviour:

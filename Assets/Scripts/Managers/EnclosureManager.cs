@@ -12,11 +12,10 @@ using UnityEngine.UI;
 
 public class EnclosureManager : MonoBehaviour
 {
-
     public List<Vector3> EnclosurePositionList;
     public List<EnclosureScript> EnclosPrefabList;
     public GameObject House;
-
+    public GameObject MiniMapObject;
 
     public static EnclosureManager Instance = null;
     public static Vector3 HousePosition;
@@ -80,7 +79,7 @@ public class EnclosureManager : MonoBehaviour
             i++;
         }
 
-        MiniMap = FindObjectOfType<MiniMap>();
+        MiniMap = MiniMapObject.GetComponent<MiniMap>();// FindObjectOfType<MiniMap>();
         MiniMap.InstantiateText();
     }
     public void DefaultFilling()

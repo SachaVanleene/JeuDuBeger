@@ -18,7 +18,8 @@ public class MiniMap : MonoBehaviour
     private List<Text> _sheepNumberList = new List<Text>();
     private float deplacementFactor = 300f;
     private float deplacementPadding = 150f;
-	void Start ()
+ 
+    void Start ()
 	{
         _player = GameObject.FindGameObjectWithTag("Player");
 	}
