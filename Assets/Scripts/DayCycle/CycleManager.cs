@@ -33,13 +33,17 @@ public class CycleManager : MonoBehaviour
     { // mask moon/sun/clouds or stars ?
         if (IsNight())
         {
-            foreach(INewCycleListner listner in cycleListners)
+            Sun.GetComponent<Light>().shadows = LightShadows.None;
+
+            foreach (INewCycleListner listner in cycleListners)
             {
                 listner.NightStart();
             }
         }
         if(IsDay())
         {
+            Sun.GetComponent<Light>().shadows = LightShadows.Hard;
+
             foreach (INewCycleListner listner in cycleListners)
             {
                 listner.DayStart();
