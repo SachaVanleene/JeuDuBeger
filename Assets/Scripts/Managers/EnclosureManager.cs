@@ -8,7 +8,7 @@ using Assets.Scripts.Enclosures;
 using UnityEngine;
 using UnityEngine.UI;
 
-//[ExecuteInEditMode]
+[ExecuteInEditMode]
 
 public class EnclosureManager : MonoBehaviour
 {
