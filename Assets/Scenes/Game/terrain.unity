@@ -2140,6 +2140,31 @@ Prefab:
       propertyPath: m_StaticEditorFlags
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 23406990959639208, guid: c7ec0cf439a55fa47bb3d344c1d4616c,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ff20018c63877034094d112b67a4ab7f, type: 2}
+    - target: {fileID: 114725419413362556, guid: c7ec0cf439a55fa47bb3d344c1d4616c,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114725419413362556, guid: c7ec0cf439a55fa47bb3d344c1d4616c,
+        type: 2}
+      propertyPath: foamParameters.x
+      value: 2.1310136
+      objectReference: {fileID: 0}
+    - target: {fileID: 114725419413362556, guid: c7ec0cf439a55fa47bb3d344c1d4616c,
+        type: 2}
+      propertyPath: foamParameters.y
+      value: 1.2786082
+      objectReference: {fileID: 0}
+    - target: {fileID: 114725419413362556, guid: c7ec0cf439a55fa47bb3d344c1d4616c,
+        type: 2}
+      propertyPath: foamParameters.z
+      value: 13.35
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c7ec0cf439a55fa47bb3d344c1d4616c, type: 2}
   m_IsPrefabParent: 0

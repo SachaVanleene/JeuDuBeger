@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Toony_01_Material (64x64px)
+  m_Shader: {fileID: 4800000, guid: 65ae9ae666ea007419d4f36e01d4a819, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 89693c1260379b74fa5fcfd197b79b50, type: 3}
+        m_Scale: {x: 5, y: 5}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _HeightMapMultiply: 0.11428573
+    - _HeightMapStrength: 1.6071428
+    - _HeightMapTile: 1
+    - _MainTexMoveSpeedU: -0.64285713
+    - _MainTexMoveSpeedV: -0.7857142
+    - _MainTexMultiply: 1.1607143
+    - _MainTexRefraction: 1.2375
+    - _MainTexTile: 4
+    - _MoveSpeedU: -0.5
+    - _MoveSpeedV: -0.5
+    - _Multiply: 5
+    m_Colors:
+    - _Color: {r: 0.43382353, g: 0.57829607, b: 1, a: 1}
+    - _MainTexColor: {r: 1, g: 1, b: 1, a: 0.6666667}
