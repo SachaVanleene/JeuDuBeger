@@ -9,7 +9,6 @@ namespace Assets.Script.Managers
 {
     public class GameManager : MonoBehaviour, INewCycleListner
     {
-
         public static GameManager instance = null;
         public Text TextRounds;
         public Text TextGolds;
@@ -61,7 +60,7 @@ namespace Assets.Script.Managers
             cycleManager.GoToAngle(1, 30);
             TotalSheeps = GameVariables.Initialisation.numberSheeps;
             Time.timeScale = 1;
-            //GetComponent<DifficultyManager>().SetDiffilculty();
+            GetComponent<DifficultyManager>().SetDiffilculty();
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
             if (SProfilePlayer.getInstance().AchievementsManager.GetAchievementByName("Player").IsComplete())
