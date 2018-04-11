@@ -38,6 +38,14 @@ public class SProfilePlayer
 
     public void init()
     {  // create void Achievements
+        // created his profile
+        new AchievementInfo(
+            name: "Player",
+            info: "You did it, u successfully created your first profile !!!",
+            events: new List<AchievementEvent>() { AchievementEvent.createProfile },
+            aim: new System.Collections.Generic.Dictionary<AchievementEvent, int>() { { AchievementEvent.createProfile, 1 } },
+            manager: AchievementsManager
+        );
         // use cheats in a game
         new AchievementInfo(
             name: "Tricheur",
@@ -120,13 +128,5 @@ public class SProfilePlayer
             aim : new System.Collections.Generic.Dictionary<AchievementEvent, int>() { { AchievementEvent.wolfDeath, 10 } },
             manager : AchievementsManager
         );
-        // created his profile
-        /*new AchievementInfo(
-            name: "Player",
-            info: "You did it, u successfully created your first profile !!!",
-            events: new List<AchievementEvent>() { AchievementEvent.createProfile },
-            aim: new System.Collections.Generic.Dictionary<AchievementEvent, int>() { { AchievementEvent.createProfile, 1 } },
-            manager: AchievementsManager
-        );*/
     }
 }
