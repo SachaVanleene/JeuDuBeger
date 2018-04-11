@@ -9,9 +9,13 @@ public class InfoTextScript : MonoBehaviour
 
     private Text text;
     private int duration = 2;
-    void Start()
+
+    private void Awake()
     {
         text = gameObject.GetComponent<Text>();
+    }
+    void Start()
+    {     
         text.text = "";
         Parent.SetActive(false);
     }
