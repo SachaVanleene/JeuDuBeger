@@ -34,11 +34,12 @@ public class WalkAndHitAudioPlayer : MonoBehaviour {
         walk_sound.playOnAwake = false;
         walk_sound.clip = walk;
         walk_sound.pitch = walkSpeed;
+        walk_sound.volume = 0.25f;
 
         hit_sound = ownerObject.AddComponent<AudioSource>();
         hit_sound.playOnAwake = false;
         hit_sound.clip = hit;
-        hit_sound.volume = 0.5f;
+        hit_sound.volume = 0.15f;
     }
 	
 
