@@ -47,6 +47,7 @@ namespace Assets.Scripts.Traps
             Terrain = Terrain.activeTerrain;
             ActualSelectedTrapTypes = TrapTypes.None;
         }
+
         public void Update()
         {
             if (_gameManager.IsTheSunAwakeAndTheBirdAreSinging)
@@ -76,7 +77,11 @@ namespace Assets.Scripts.Traps
             {
                 IsInTrapCreationMode = false;
                 ActualSelectedTrapTypes = TrapTypes.None;
-                if(ActualTrap != null)
+                Debug.Log(TargetedTrap);
+                TargetedTrap = null;
+                Debug.Log(TargetedTrap);
+
+                if (ActualTrap != null)
                     Destroy(ActualTrap.TrapPrefab);
             }
             if (IsInTrapCreationMode)
@@ -127,6 +132,7 @@ namespace Assets.Scripts.Traps
         {
             IsInTrapCreationMode = false;
             ActualSelectedTrapTypes = TrapTypes.None;
+            TargetedTrap = null;
             if (ActualTrap != null)
                 Destroy(ActualTrap.TrapPrefab);
         }
