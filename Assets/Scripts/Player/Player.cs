@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Script.Managers;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,6 +30,7 @@ public class Player : MonoBehaviour {
             {
                 hMove.AddVelocity(Vector3.zero, respawnDelay, 0, true);
                 anim.SetTrigger("deathMoment");
+                GameManager.instance.callAchievement(AchievementEvent.playerDeath, 1); 
                 GameOverManager.instance.DeathCount.Add(1);
             }
 
