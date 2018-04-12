@@ -14,6 +14,8 @@ public class AudioManagerWolves : AudioPlayer {
     bool jetSoundPlaying;
     AudioSource jetSound;
 
+    
+
     private void Awake()
     {
         jetSoundPlaying = false;

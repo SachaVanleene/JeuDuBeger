@@ -94,6 +94,7 @@ public class Player : MonoBehaviour {
 
     //Audio
     AudioManagerPlayer script_audio;
+    WalkAndHitAudioPlayer script_hit;
 
     //Reference To Change Color Of The Player
     [Space]
@@ -138,6 +139,7 @@ public class Player : MonoBehaviour {
         timeNeededToDodgeFreeze = 1f;
 
         script_audio = GetComponent<AudioManagerPlayer>();
+        script_hit = GetComponent<WalkAndHitAudioPlayer>();
     }
 
 
@@ -232,6 +234,8 @@ public class Player : MonoBehaviour {
 
     public void takeDamage(float dps)
     {
+
+        script_hit.PlayHitSound();
         actualHealth -= dps;
 
         temp = damageImage.color;
