@@ -89,7 +89,7 @@ namespace TPC
                 1 << LayerMask.NameToLayer("Leurre") |
                 1 << LayerMask.NameToLayer("Trap") |
                 1 << LayerMask.NameToLayer("ignoreLayer"));
-
+            shotLayerMask = shotLayerMask & ~(1 << LayerMask.NameToLayer("Default"));
             states.shotLayerMask = shotLayerMask;
 
             camLayerMask = ~(1 << gameObject.layer | 
