@@ -101,6 +101,11 @@ public class IA_Common_Wolves : MonoBehaviour {
 
     void moveToTarget()
     {
+        if (focusingPlayer && !player.GetComponent<Player>().Alive)
+        {
+            focusingPlayer = false;
+            GetTargetEnclos();
+        }
         HandleMove();
     }
 
