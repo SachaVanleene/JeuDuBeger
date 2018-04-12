@@ -427,7 +427,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1462639398136142
 GameObject:
   m_ObjectHideFlags: 1
@@ -675,7 +675,6 @@ GameObject:
   - component: {fileID: 4867627260374854}
   - component: {fileID: 198492544234429528}
   - component: {fileID: 199767285050572634}
-  - component: {fileID: 114515240189798066}
   m_Layer: 10
   m_Name: Callback Particles
   m_TagString: Untagged
@@ -1734,7 +1733,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1159100528177586}
-  m_LocalRotation: {x: 0, y: 0.98901594, z: -0, w: -0.14780933}
+  m_LocalRotation: {x: -0, y: 0.98901594, z: -0, w: -0.14780933}
   m_LocalPosition: {x: 260.68, y: 15.21, z: 279.53}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
@@ -2302,17 +2301,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114515240189798066
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1751882070773540}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114682186762611900
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2540,7 +2528,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1159100528177586}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 1.2
+  m_Radius: 0.3
   m_Speed: 10
   m_Acceleration: 8
   avoidancePriority: 50
