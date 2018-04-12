@@ -1812,6 +1812,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efa33a9b7c7b7314a8e3d9db2386766f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  focusingPlayer: 0
   targetTransform: {fileID: 0}
   targetTag: 
   stats: {fileID: 11400000, guid: 6c5809573b907e645817efdd6d81e933, type: 2}
