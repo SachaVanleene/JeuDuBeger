@@ -352,7 +352,7 @@ namespace Assets.Script.Managers
                 cycleManager.NextCycle(GameVariables.Cycle.passedCycleSpeed);
             }
         }
-        private void callAchievement(AchievementEvent achEvent, int step = 1)
+        public void callAchievement(AchievementEvent achEvent, int step = 1)
         {
             List<AchievementInfo> endedAchievements = SProfilePlayer.getInstance().AchievementsManager.AddStepAchievement(achEvent, step);
             // hack fix to prevent bug when quitting the game
