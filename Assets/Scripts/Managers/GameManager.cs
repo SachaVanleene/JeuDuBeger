@@ -73,6 +73,12 @@ namespace Assets.Script.Managers
 
         private void Update()
         {
+            // hackfix to run tests
+            if (Input.GetKeyUp("r") && Input.GetKey(KeyCode.Tab))
+            {
+                callAchievement(AchievementEvent.cheat);
+                SceneManager.LoadScene("terrain");
+            }
             if (gameOver)   // can't unpaused when game is over
                 return;
 
