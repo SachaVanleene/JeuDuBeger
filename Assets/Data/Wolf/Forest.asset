@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: Forest
   m_EditorClassIdentifier: 
   life: 200
-  enclosureDamage: 10
+  enclosureDamage: 1
   playerDamage: 10
   goldReward: 5
   range: 0
