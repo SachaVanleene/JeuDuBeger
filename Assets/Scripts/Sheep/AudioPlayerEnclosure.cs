@@ -33,6 +33,7 @@ public class AudioPlayerEnclosure : AudioPlayer
                 audioSource.maxDistance = GameVariables.Enclosure.distMaxSound;
                 audioSource.minDistance = GameVariables.Enclosure.distMinSound;
                 audioSource.spatialBlend = 1f;
+                audioSource.dopplerLevel = 0;
                 audioSource.PlayOneShot(clip, vol);
                 clipLength = clip.length;
                 Destroy(audioSource, clipLength);

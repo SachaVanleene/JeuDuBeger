@@ -51,6 +51,7 @@ public class WolfBossHealth : MonoBehaviour
                 GetComponent<IA_Boss_Wolves>().updateTarget(null);
                 anim.SetTrigger("dead");
                 Destroy(gameObject, 3.75f);
+                Assets.Script.Managers.GameManager.instance.DeathWolf(this.gameObject);
 
                 GameOverManager.instance.WolvesAliveInRound.Add(-1);
                 killWolf.Raise();

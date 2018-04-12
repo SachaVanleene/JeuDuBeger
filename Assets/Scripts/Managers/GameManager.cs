@@ -14,6 +14,7 @@ namespace Assets.Script.Managers
         public Text TextGolds;
         public Text TextSheeps;
         public GameObject Canvas;
+        public GameObject Player;
         public GameObject TextInfo;
         public GameObject CycleManagerObject;
         public GameObject Spawns;
@@ -281,6 +282,7 @@ namespace Assets.Script.Managers
         }
         public void NightStart()
         {
+
             IsTheSunAwakeAndTheBirdAreSinging = false;
             // destroy flying sheeps
             _enclosureManager.TakeOffAllSheeps();
