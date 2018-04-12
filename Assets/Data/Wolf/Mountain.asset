@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Name: Mountain
   m_EditorClassIdentifier: 
   life: 1500
-  enclosureDamage: 2
-  playerDamage: 20
+  enclosureDamage: 0.01
+  playerDamage: 0.1
   goldReward: 15
   range: 0
   delay: 0

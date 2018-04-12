@@ -33,29 +33,44 @@ namespace Assets.Script.Managers
         {
             spawnboss = false;
             Cycle = GameManager.instance.GetCycle();
-            // + 5 loups à chaque vagues
+            // Loup standard : +5 loups à chaque vagues
             if (Cycle <= 20)
             {
                 number_wolf_classic = Cycle * 5;
             }
+            // Max : 100 loups standards
             else
             {
                 number_wolf_classic = 100;
             }
 
-            if (Cycle <= 22 && Cycle >= 3)
+            // Loup lac : égal au cycle en cours (à partir du tour 3)
+            if (Cycle >= 3)
             {
-                number_wolf_water ++;
+                number_wolf_water = Cycle;
             }
-            if (Cycle <= 27 && Cycle >= 8)
+
+            // Loup montagne : égal au cycle en cours / 2 (à partir du tour 8)
+            if (Cycle >= 8)
             {
-                number_wolf_ice ++;
+                if((Cycle % 2) == 0) number_wolf_ice = Cycle/2;
+                else number_wolf_ice = (Cycle/2) - 1;
             }
-            if((Cycle % 5) == 0)
+
+            // Loup boss : toutes les 5 manches (pas d'autres loups spéciaux la 1ère fois)
+            if(Cycle == 5)
             {
                 //Debug.LogError("SPawn bosse");
+                number_wolf_water = 0;
+                number_wolf_ice = 0;
                 spawnboss = true;
             }
+            else if((Cycle % 5) == 0)
+            {
+                spawnboss = true;
+            }
+
+
             number_wolf = number_wolf_classic + number_wolf_ice + number_wolf_water;
             if (spawnboss)
             {

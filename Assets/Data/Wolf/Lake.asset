@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Name: Lake
   m_EditorClassIdentifier: 
   life: 1000
-  enclosureDamage: 5
-  playerDamage: 10
+  enclosureDamage: 0.01
+  playerDamage: 0.1
   goldReward: 10
   range: 0
   delay: 0
