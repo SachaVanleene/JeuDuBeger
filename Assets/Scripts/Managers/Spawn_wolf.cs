@@ -43,17 +43,17 @@ namespace Assets.Script.Managers
                 number_wolf_classic = 100;
             }
 
-            if (Cycle <= 26 && Cycle >= 6)
+            if (Cycle <= 22 && Cycle >= 3)
             {
                 number_wolf_water ++;
             }
-            if (Cycle <= 31 && Cycle >= 11)
+            if (Cycle <= 27 && Cycle >= 8)
             {
                 number_wolf_ice ++;
             }
-            if((Cycle % 10) == 0)
+            if((Cycle % 5) == 0)
             {
-                Debug.LogError("SPawn bosse");
+                //Debug.LogError("SPawn bosse");
                 spawnboss = true;
             }
             number_wolf = number_wolf_classic + number_wolf_ice + number_wolf_water;

@@ -932,6 +932,7 @@ GameObject:
   - component: {fileID: 114495710919341968}
   - component: {fileID: 114711398197964876}
   - component: {fileID: 114684916675242380}
+  - component: {fileID: 114404700601040574}
   m_Layer: 9
   m_Name: Walter Wolf
   m_TagString: BossWolf
@@ -3460,6 +3461,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114404700601040574
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1544962999945422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ac9080f2b4a1ab448e1ea41ce21d8a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Clips:
+  - {fileID: 8300000, guid: 13e118648bd6b3e48bbfc9a4a7d1f004, type: 3}
+  - {fileID: 8300000, guid: 0f06d832f6688da44941d987e77016b0, type: 3}
+  ownerObject: {fileID: 1544962999945422}
 --- !u!114 &114495710919341968
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3471,6 +3487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 836c3428e12aec24e8fba872b6373f68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  focusingPlayer: 0
   targetTransform: {fileID: 0}
   targetTag: 
   stats: {fileID: 11400000, guid: 5e3fe05da282975478606d0759346626, type: 2}

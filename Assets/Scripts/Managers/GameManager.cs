@@ -9,7 +9,6 @@ namespace Assets.Script.Managers
 {
     public class GameManager : MonoBehaviour, INewCycleListner
     {
-
         public static GameManager instance = null;
         public Text TextRounds;
         public Text TextGolds;
@@ -61,7 +60,7 @@ namespace Assets.Script.Managers
             cycleManager.GoToAngle(1, 30);
             TotalSheeps = GameVariables.Initialisation.numberSheeps;
             Time.timeScale = 1;
-            //GetComponent<DifficultyManager>().SetDiffilculty();
+            GetComponent<DifficultyManager>().SetDiffilculty();
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
             if (SProfilePlayer.getInstance().AchievementsManager.GetAchievementByName("Player").IsComplete())
@@ -256,7 +255,6 @@ namespace Assets.Script.Managers
                 TotalSheeps += GameVariables.Round.quantityEarnSheepPeriodically;
             TextRounds.text = Strings.IngameInterface["Round"] + _roundNumber;
             displayInfo(Strings.IngameInterface["Round"] + _roundNumber + Strings.IngameInterface["PassDay"], 5);
-
         }
         public void DayStart()
         {
@@ -354,7 +352,7 @@ namespace Assets.Script.Managers
                 cycleManager.NextCycle(GameVariables.Cycle.passedCycleSpeed);
             }
         }
-        private void callAchievement(AchievementEvent achEvent, int step = 1)
+        public void callAchievement(AchievementEvent achEvent, int step = 1)
         {
             List<AchievementInfo> endedAchievements = SProfilePlayer.getInstance().AchievementsManager.AddStepAchievement(achEvent, step);
             // hack fix to prevent bug when quitting the game

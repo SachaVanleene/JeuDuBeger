@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Script.Managers;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,6 +30,7 @@ public class Player : MonoBehaviour {
             {
                 hMove.AddVelocity(Vector3.zero, respawnDelay, 0, true);
                 anim.SetTrigger("deathMoment");
+                GameManager.instance.callAchievement(AchievementEvent.playerDeath, 1); 
                 GameOverManager.instance.DeathCount.Add(1);
             }
 
@@ -94,6 +96,7 @@ public class Player : MonoBehaviour {
 
     //Audio
     AudioManagerPlayer script_audio;
+    WalkAndHitAudioPlayer script_hit;
 
     //Reference To Change Color Of The Player
     [Space]
@@ -138,6 +141,7 @@ public class Player : MonoBehaviour {
         timeNeededToDodgeFreeze = 1f;
 
         script_audio = GetComponent<AudioManagerPlayer>();
+        script_hit = GetComponent<WalkAndHitAudioPlayer>();
     }
 
 
@@ -232,6 +236,8 @@ public class Player : MonoBehaviour {
 
     public void takeDamage(float dps)
     {
+
+        script_hit.PlayHitSound();
         actualHealth -= dps;
 
         temp = damageImage.color;

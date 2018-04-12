@@ -14,6 +14,8 @@ public class AudioManagerWolves : AudioPlayer {
     bool jetSoundPlaying;
     AudioSource jetSound;
 
+    
+
     private void Awake()
     {
         jetSoundPlaying = false;
@@ -38,7 +40,7 @@ public class AudioManagerWolves : AudioPlayer {
                 audioSource.maxDistance = GameVariables.Wolf.distMaxSound;
                 audioSource.PlayOneShot(clip, vol);
                 clipLength = clip.length;
-                if(clipName.Equals(GameVariables.Wolf.stringSoundBlizzard))
+                if(clipName.Equals(GameVariables.Wolf.stringSoundBlizzard) || clipName.Equals("water_jet"))
                 {
                     jetSound = audioSource;
                 }else
@@ -61,6 +63,11 @@ public class AudioManagerWolves : AudioPlayer {
         PlaySound(GameVariables.Wolf.stringSoundAttack + nb_sound, GameVariables.Wolf.volumeSoundAttack);
     }
 
+    public void PlayAttackBossWolfSound()
+    {
+        PlaySound("boss_attack");
+    }
+
     public void PlayAttackMountainWolvesSound()
     {
         if (!jetSoundPlaying)
@@ -73,6 +80,25 @@ public class AudioManagerWolves : AudioPlayer {
     public void StopMountainAttack()
     {
         if(jetSoundPlaying && jetSound != null)
+        {
+            jetSound.Stop();
+            Destroy(jetSound);
+            jetSoundPlaying = false;
+        }
+    }
+
+    public void PlayAttackWaterWolvesSound()
+    {
+        if (!jetSoundPlaying)
+        {
+            PlaySound("water_jet");
+            jetSoundPlaying = true;
+        }
+    }
+
+    public void StopWaternAttack()
+    {
+        if (jetSoundPlaying && jetSound != null)
         {
             jetSound.Stop();
             Destroy(jetSound);
