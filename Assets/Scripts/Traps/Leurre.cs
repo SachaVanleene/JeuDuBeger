@@ -77,11 +77,11 @@ public class Leurre : MonoBehaviour {
                 other.gameObject.GetComponent<IA_Common_Wolves>().focusLeurre(rabbit);
                 break;
             case "WaterWolf":
-                if (!other.transform.parent.gameObject.GetComponent<IA_Water_Wolves>().focusingPlayer)
+                if (!other.transform.root.gameObject.GetComponent<IA_Water_Wolves>().focusingPlayer)
                     other.transform.parent.gameObject.GetComponent<IA_Water_Wolves>().focusLeurre(rabbit);
                 break;
             case "MoutainWolf":
-                if (!other.transform.parent.gameObject.GetComponent<IA_Moutain_Wolves>().focusingPlayer)
+                if (!other.transform.root.gameObject.GetComponent<IA_Moutain_Wolves>().focusingPlayer)
                     other.transform.parent.gameObject.GetComponent<IA_Moutain_Wolves>().focusLeurre(rabbit);
                 break;
             case "BossWolf":
