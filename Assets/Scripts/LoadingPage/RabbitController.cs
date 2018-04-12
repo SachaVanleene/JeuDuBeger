@@ -12,6 +12,7 @@ public class RabbitController : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
+        Time.timeScale = 1;
         SceneManager.LoadSceneAsync(2);
 
         _isWalking = true;
