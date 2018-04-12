@@ -113,6 +113,11 @@ public class IA_Water_Wolves : MonoBehaviour {
 
     void moveToTarget()
     {
+        if(focusingPlayer && !player.GetComponent<Player>().Alive)
+        {
+            focusingPlayer = false;
+            GetTargetEnclos();
+        }
         HandleMove();
     }
 
@@ -156,6 +161,7 @@ public class IA_Water_Wolves : MonoBehaviour {
     // Get a tagret from an enclos which is alive
     public void GetTargetEnclos()
     {
+        //Debug.LogError("Focusing Enclos Water");
         if (focusingPlayer)
         {
             focusingPlayer = false;

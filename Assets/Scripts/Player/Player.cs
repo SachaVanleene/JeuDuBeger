@@ -236,16 +236,17 @@ public class Player : MonoBehaviour {
 
     public void takeDamage(float dps)
     {
+        if (alive)
+        {
+            script_hit.PlayHitSound();
+            actualHealth -= dps;
 
-        script_hit.PlayHitSound();
-        actualHealth -= dps;
+            temp = damageImage.color;
+            temp.a = 1 - (actualHealth / maxHealth);
+            damageImage.color = temp;
 
-        temp = damageImage.color;
-        temp.a = 1 - (actualHealth / maxHealth);
-        damageImage.color = temp;
-
-        recoverTimer = recoverDelay;
-
+            recoverTimer = recoverDelay;
+        }
         if (actualHealth <= 0 && Alive)
         {
             Alive = false;
