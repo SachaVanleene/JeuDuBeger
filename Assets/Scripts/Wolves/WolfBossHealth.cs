@@ -13,6 +13,7 @@ public class WolfBossHealth : MonoBehaviour
     public bool alive;
 
     public SO.WolfStats wolfStats;
+    public SO.GameEvent killWolf;
 
     UI_Health_Boss script_ui;
 
@@ -50,6 +51,10 @@ public class WolfBossHealth : MonoBehaviour
                 GetComponent<IA_Boss_Wolves>().updateTarget(null);
                 anim.SetTrigger("dead");
                 Destroy(gameObject, 3.75f);
+
+                GameOverManager.instance.WolvesAliveInRound.Add(-1);
+                killWolf.Raise();
+
 
                 GameOverManager.instance.Werewolves.Add(1);
 

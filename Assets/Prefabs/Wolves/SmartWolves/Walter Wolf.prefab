@@ -3519,6 +3519,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alive: 0
   wolfStats: {fileID: 11400000, guid: 5e3fe05da282975478606d0759346626, type: 2}
+  killWolf: {fileID: 11400000, guid: bff2b7925b7f5004b8e5491970befbff, type: 2}
 --- !u!137 &137078410775018842
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

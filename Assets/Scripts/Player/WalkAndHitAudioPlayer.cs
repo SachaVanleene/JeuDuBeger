@@ -23,9 +23,9 @@ public class WalkAndHitAudioPlayer : MonoBehaviour {
     {
         states = GetComponent<StateManager>();
 
-        walkSpeed = 0.9f;
+        walkSpeed = 1.0f;
 
-        runSpeed = 1.35f;
+        runSpeed = 1.6f;
     }
 
     // Use this for initialization
@@ -34,6 +34,7 @@ public class WalkAndHitAudioPlayer : MonoBehaviour {
         walk_sound.playOnAwake = false;
         walk_sound.clip = walk;
         walk_sound.pitch = walkSpeed;
+        walk_sound.volume = 0.2f;
 
         hit_sound = ownerObject.AddComponent<AudioSource>();
         hit_sound.playOnAwake = false;
