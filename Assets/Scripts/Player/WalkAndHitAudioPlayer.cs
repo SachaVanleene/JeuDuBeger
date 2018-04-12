@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Assets.Scripts;
 using TPC;
+using Assets.Script.Managers;
 
 public class WalkAndHitAudioPlayer : MonoBehaviour {
 
@@ -28,7 +29,6 @@ public class WalkAndHitAudioPlayer : MonoBehaviour {
         runSpeed = 1.6f;
     }
 
-    // Use this for initialization
     void Start () {
         walk_sound = ownerObject.AddComponent<AudioSource>();
         walk_sound.playOnAwake = false;
@@ -41,7 +41,6 @@ public class WalkAndHitAudioPlayer : MonoBehaviour {
         hit_sound.clip = hit;
         hit_sound.volume = 0.5f;
     }
-	
 
     public void PlayHitSound()
     {
@@ -51,13 +50,12 @@ public class WalkAndHitAudioPlayer : MonoBehaviour {
         }
     }
 
-	// Update is called once per frame
 	void Update () {
-        if (states.moving && !walk_sound.isPlaying)
+        if (states.moving && !walk_sound.isPlaying && !GameManager.instance.IsPaused)
         {
             walk_sound.Play();
         }
-        if (!states.moving)
+        if (!states.moving || GameManager.instance.IsPaused)
         {
             walk_sound.Stop();
         }
