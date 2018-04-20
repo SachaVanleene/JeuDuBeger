@@ -1,8 +1,9 @@
 # Jeu Du Berger - Tower Defense Game
+Un berger doit défendre ses enclos contre les loups chaque nuit à l’aide de son arme et de pièges posés le jour.
 
 ![A screenshot](screenshot.png)
 
-Un berger doit défendre ses enclos contre les loups chaque nuit à l’aide de son arme et de pièges posés le jour.
+
 
 
 ## Features développé intégralement par moi même 
