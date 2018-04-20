@@ -46,7 +46,7 @@ Un berger doit défendre ses enclos contre les loups chaque nuit à l’aide de 
   - Correction de certains bugs et amélioration du script et des spawn position
 ## Comment jouer ?
 
-Clôner le projet est lancer JeuBerger1.3.exe qui se trouve dans le dossier VersionFinale
+Clôner le projet et lancer JeuBerger1.3.exe qui se trouve dans le dossier VersionFinale
  
 ## Controles
 La plus part des mécaniques sont expliquéEs dans le jeu grâce à des tutoriels qui se déclenchent de manière intelligenteS
