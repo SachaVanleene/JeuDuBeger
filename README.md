@@ -13,7 +13,7 @@ Un berger doit défendre ses enclos contre les loups chaque nuit à l’aide de 
   - Sons
   - Interaction avec les autres entités comme les loups via son arme
 - IA des Loups:
-	- Fonctionnalités communes à tous les loups : 
+  - Fonctionnalités communes à tous les loups : 
     - Algorithme d'attribution de cible, chaque enclos est ocmposé de barrière afin de donner un bon rendu les loups au corps à corps 
     vont essayer de se répartir au mieux au tour de l'enclos tandis que lesl oups à distance vont s'approrpier la barrière la plus
     proche de leurs cercle de rangeIn.
@@ -22,7 +22,7 @@ Un berger doit défendre ses enclos contre les loups chaque nuit à l’aide de 
     - Chaque type de loups a une petite lanterne pour mieux le repérer dans la nuit selon son type et ainsi agir en conséquence.
     - Les loups communiquent entre eux de manière virtuel en s'abonant à la meêm cible , lorsque leurs cible est morte tous les loups
     sont prévneus et cherche une nouvelle cible en conséquences
-  - FOnctionnalités communes aux loups range (Aquatique / Montagne)
+  - Fonctionnalités communes aux loups range (Aquatique / Montagne) :
     - Il dispose de deux cercles , un plus petit pour detecter lorsque leurs cilbe ets assez proche pour la considérer en range
     , un autre pour leur dire quand leurs cible est trop loin et elle devient out of range. L'idée était d'éviter à ce que les loups
     changent continument d'état quitte à ce que leurs portée maximale ne soit pas la même portée qui considére si oui ou non leurs 
@@ -44,11 +44,6 @@ Un berger doit défendre ses enclos contre les loups chaque nuit à l’aide de 
   - Barre de vie des loups qui s'affichent uniquement un petit laps de tmeps lorsqu'ils subissent des dégats
 - Spawn Loups
   - Correction de certains bugs et amélioration du script et des spawn position
-  
-- Débbuggage du fonctionemment des dialogues.
-- Amélioration dans l'affichage de l'UI pour intéragir avec les PNJ ou les portes
-- Amélioration du sytème de mise en pause lors d'intéraction avec les personnages
-- Build Final en corrigeant le fonctionnement des portes et des PNJ
 ## Comment jouer ?
 
 Clôner le projet est lancer JeuBerger1.3.exe qui se trouve dans le dossier VersionFinale
