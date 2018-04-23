@@ -6,7 +6,7 @@ Un berger doit défendre ses enclos contre les loups chaque nuit à l’aide de 
 
 
 
-## Features développé intégralement par moi même 
+## Features développées intégralement par moi même 
 - Statistiques Joueurs : 
 	- Gestion des dégats
 	- Animations
@@ -15,7 +15,7 @@ Un berger doit défendre ses enclos contre les loups chaque nuit à l’aide de 
   - Interaction avec les autres entités comme les loups via son arme
 - IA des Loups:
   - Fonctionnalités communes à tous les loups : 
-    - Algorithme d'attribution de cible, chaque enclos est ocmposé de barrière afin de donner un bon rendu, les loups au corps à corps 
+    - Algorithme d'attribution de cible, chaque enclos est composé de barrière afin de donner un bon rendu, les loups au corps à corps 
     vont essayer de se répartir au mieux autour de l'enclos tandis que les loups à distance vont s'approprier la barrière la plus
     proche de leur cercle de rangeIn.
     - Une fois que le joueur les a attaqués, les loups se mettent à le pourchasser jusqu'à leur mort ou la leur. Attention la condition de défaite n'est pas la mort du berger, qui peut respawn , mais de ses moutons
