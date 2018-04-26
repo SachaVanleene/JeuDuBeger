@@ -57,7 +57,8 @@ et * pour le super mouton qui rendra invulnérable votre enclos pendant une nuit
 Aboutissement d'un vrai projet, jeu selon mon point de vue quasiment livrable, il manquerait peut-être d'équilibrage mais
 c'est un jeu qui demande au joueur de la réflexion et du skill donc assez dur tout de même. Bilan : Très statisfait de ce jeu.
 
-
+## Teaser
+Visible ici : https://youtu.be/cWVmFv02Fbw
 
 ## Authors
 
